@@ -183,3 +183,73 @@ INSERT INTO producto_categorias (producto_id, categoria_id)
 SELECT p.id, c.id
 FROM productos p
 JOIN categorias c ON c.nombre = p.perfil_tueste;
+
+-- Modificación de tu tabla productos
+ALTER TABLE productos
+CHANGE COLUMN precio_eur precio_base_250g DECIMAL(10,2) NOT NULL;
+
+-- Crear tabla VARIANTES
+CREATE TABLE IF NOT EXISTS variantes (
+    sku VARCHAR(50) PRIMARY KEY,
+    producto_id INT NOT NULL,
+    envase ENUM('250g','1kg','2kg') NOT NULL,
+    formato ENUM('grano','molido') NOT NULL,
+    tueste VARCHAR(100) NOT NULL,
+    precio DECIMAL(10,2) NOT NULL,
+    stock INT DEFAULT 0,
+    FOREIGN KEY (producto_id) REFERENCES productos(id)
+);
+
+-- Modificar carrito para usar VARIANTES (no productos)
+ALTER TABLE carrito
+DROP FOREIGN KEY carrito_ibfk_1;
+
+ALTER TABLE carrito
+CHANGE COLUMN producto_id sku VARCHAR(50) NOT NULL;
+
+ALTER TABLE carrito
+ADD FOREIGN KEY (sku) REFERENCES variantes(sku);
+
+-- Modificar pedido_detalles igual (de producto a variante) 
+ALTER TABLE pedido_detalles
+DROP FOREIGN KEY pedido_detalles_ibfk_2;
+
+ALTER TABLE pedido_detalles
+CHANGE COLUMN producto_id sku VARCHAR(50) NOT NULL;
+
+ALTER TABLE pedido_detalles
+ADD FOREIGN KEY (sku) REFERENCES variantes(sku);
+
+-- Insertar variantes automáticamente para todos tus productos
+INSERT INTO variantes (sku, producto_id, envase, formato, tueste, precio, stock)
+SELECT 
+    CONCAT('P', id, '-250'),
+    id,
+    '250g',
+    'grano',
+    perfil_tueste,
+    precio_base_250g,
+    50
+FROM productos;
+
+INSERT INTO variantes (sku, producto_id, envase, formato, tueste, precio, stock)
+SELECT 
+    CONCAT('P', id, '-1KG'),
+    id,
+    '1kg',
+    'grano',
+    perfil_tueste,
+    precio_base_250g * 4,
+    50
+FROM productos;
+
+INSERT INTO variantes (sku, producto_id, envase, formato, tueste, precio, stock)
+SELECT 
+    CONCAT('P', id, '-2KG'),
+    id,
+    '2kg',
+    'grano',
+    perfil_tueste,
+    precio_base_250g * 8,
+    50
+FROM productos;
