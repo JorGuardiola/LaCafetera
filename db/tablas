@@ -1,0 +1,96 @@
+Table usuarios {
+  id int [pk, increment]
+  nombre varchar(100)
+  email varchar(150) [unique]
+  password varchar(255)
+  rol enum('cliente','admin') [default: 'cliente']
+  fecha_registro timestamp
+}
+
+Table categorias {
+  id int [pk, increment]
+  nombre varchar(100)
+  descripcion text
+}
+
+// 1. MODIFICACIÓN: Sólo precio_250g (precio base)
+Table productos {
+  id int [pk, increment]
+  nombre_cafe varchar(150)
+  pais_origen varchar(100)
+  region varchar(150)
+  finca varchar(150)
+  altitud_msnm int
+  variedad varchar(150)
+  proceso enum('Lavado','Natural','Honey')
+  puntuacion_sca decimal(4,1)
+  notas_sabor text
+  presentacion varchar(255)
+  precio_variante250 decimal(10,2) // ÚNICO PRECIO MANTENIDO
+  descripcion text
+  imagen varchar(255)
+  disponible boolean [default: true]
+}
+
+// 2. MODIFICACIÓN: Nuevo campo 'precio'
+Table variantes {
+  sku varchar(50) [pk] 
+  producto_id int 
+  pedido_id int 
+  stock int 
+  precio decimal(10,2) // *** NUEVO: PRECIO DE ESTA VARIANTE/SKU ***
+  formato enum('grano','molido')
+  tueste enum('medio','oscuro')
+  envase enum('250g','1kg','2kg')
+}
+
+Table carrito {
+  id int [pk, increment]
+  usuario_id int
+  producto_detalles_id varchar(50) // FK a variantes.sku
+  cantidad int
+  fecha_agregado timestamp
+}
+
+Table pedidos {
+  id int [pk, increment]
+  usuario_id int
+  total decimal(10,2)
+  estado enum('pendiente','pagado','preparando','enviado','entregado','cancelado') [default: 'pendiente']
+  fecha_pedido timestamp
+}
+
+Table pedido_detalles {
+  id int [pk, increment]
+  pedido_id int
+  producto_id int 
+  cantidad int
+  precio_unitario decimal(10,2)
+}
+
+Table producto_categorias {
+  id int [pk, increment]
+  producto_id int
+  categoria_id int
+}
+
+// ------------------------------------
+//          DEFINICIÓN DE RELACIONES
+// ------------------------------------
+
+// Relaciones de Usuarios (Pedidos y Carrito)
+Ref: carrito.usuario_id > usuarios.id
+Ref: pedidos.usuario_id > usuarios.id
+
+// Relaciones Producto Base y Detalles (Variantes/SKUs)
+Ref: variantes.producto_id > productos.id
+Ref: carrito.producto_detalles_id > variantes.sku 
+
+// Relaciones Pedidos y Detalles
+Ref: pedido_detalles.pedido_id > pedidos.id
+Ref: pedido_detalles.producto_id > productos.id
+Ref: variantes.pedido_id > pedidos.id 
+
+// Relaciones de Categorización (Muchos a Muchos)
+Ref: producto_categorias.producto_id > productos.id
+Ref: producto_categorias.categoria_id > categorias.id
