@@ -1,22 +1,13 @@
-Table usuarios {
-  id int [pk, increment]
-  nombre varchar(100)
-  email varchar(150) [unique]
-  password varchar(255)
-  rol enum('cliente','admin') [default: 'cliente']
-  fecha_registro timestamp
-}
+//////////////////////////////////////////////////////////
+//                ECOMMERCE DE CAFÉ DBML
+//  
+//////////////////////////////////////////////////////////
 
-Table categorias {
-  id int [pk, increment]
-  nombre varchar(100)
-  descripcion text
-}
+// ---  PRODUCTOS y VARIANTES ---
 
-// 1. MODIFICACIÓN: Sólo precio_250g (precio base)
 Table productos {
   id int [pk, increment]
-  nombre_cafe varchar(150)
+  nombre_cafe varchar(150) [not null]
   pais_origen varchar(100)
   region varchar(150)
   finca varchar(150)
@@ -26,71 +17,121 @@ Table productos {
   puntuacion_sca decimal(4,1)
   notas_sabor text
   presentacion varchar(255)
-  precio_variante250 decimal(10,2) // ÚNICO PRECIO MANTENIDO
+  precio_variante250 decimal(10,2) // Precio de referencia
   descripcion text
   imagen varchar(255)
   disponible boolean [default: true]
 }
 
-// 2. MODIFICACIÓN: Nuevo campo 'precio'
-Table variantes {
+Table producto_variantes {
   sku varchar(50) [pk] 
-  producto_id int 
-  pedido_id int 
-  stock int 
-  precio decimal(10,2) // *** NUEVO: PRECIO DE ESTA VARIANTE/SKU ***
-  formato enum('grano','molido')
+  producto_id int // FK
+  stock int [default: 0]
+  precio decimal(10,2) [not null]
+  molienda enum('grano','molido espresso','molido moka', 'molido goteo','molido francesa')
   tueste enum('medio','oscuro')
   envase enum('250g','1kg','2kg')
 }
 
-Table carrito {
-  id int [pk, increment]
-  usuario_id int
-  producto_detalles_id varchar(50) // FK a variantes.sku
-  cantidad int
-  fecha_agregado timestamp
+// ---  USUARIOS y PERFIL ---
+
+Table usuarios {
+  id_usuario int [pk, increment]
+  nombre varchar(150)
+  apellido varchar(150)
+  email varchar(200) [unique, not null]
+  password_hash varchar(255) [not null]
+  telefono varchar(20)
+  rol enum('cliente','admin') [default: 'cliente']
+  fecha_registro datetime
 }
 
-Table pedidos {
-  id int [pk, increment]
-  usuario_id int
+Table direcciones {
+  id_direccion int [pk, increment]
+  id_usuario int // FK
+  direccion varchar(255) [not null]
+  ciudad varchar(150)
+  provincia varchar(150)
+  pais varchar(150)
+  codigo_postal varchar(20)
+  predeterminada boolean [default: false]
+}
+
+// --- CARRITO  ---
+
+Table carritos {
+  id_carrito int [pk, increment]
+  id_usuario int [unique, not null] // FK, Clave para la relación 1:1
+  fecha_creacion datetime
+  fecha_ultima_act datetime
+}
+
+Table carrito_items {
+  id_item int [pk, increment]
+  id_carrito int // FK
+  id_variante_sku varchar(50) // FK
+  cantidad int [not null]
+  fecha_agregado datetime
+  indexes {
+    (id_carrito, id_variante_sku) [unique]
+  }
+}
+
+// --- ÓRDENES Y TRANSACCIONES ---
+
+Table ordenes {
+  id_orden int [pk, increment]
+  id_usuario int // FK
+  id_direccion int // FK
   total decimal(10,2)
   estado enum('pendiente','pagado','preparando','enviado','entregado','cancelado') [default: 'pendiente']
-  fecha_pedido timestamp
+  fecha_orden datetime
+  direccion_envio_snapshot text 
+  ciudad_envio_snapshot varchar(150)
 }
 
-Table pedido_detalles {
-  id int [pk, increment]
-  pedido_id int
-  producto_id int 
-  cantidad int
+Table orden_items {
+  id_item int [pk, increment]
+  id_orden int // FK
+  id_variante_sku varchar(50) // FK
   precio_unitario decimal(10,2)
+  cantidad int
 }
 
-Table producto_categorias {
-  id int [pk, increment]
-  producto_id int
-  categoria_id int
+Table pagos {
+  id_pago int [pk, increment]
+  id_orden int // FK
+  metodo varchar(50) [not null]
+  monto decimal(10,2) [not null]
+  estado varchar(50)
+  fecha_pago datetime
+  referencia_transaccion varchar(255) [unique]
 }
 
-// ------------------------------------
-//          DEFINICIÓN DE RELACIONES
-// ------------------------------------
 
-// Relaciones de Usuarios (Pedidos y Carrito)
-Ref: carrito.usuario_id > usuarios.id
-Ref: pedidos.usuario_id > usuarios.id
+//////////////////////////////////////////////////////////
+//                  RELACIONES (FOREIGN KEYS)
+//   
+//////////////////////////////////////////////////////////
 
-// Relaciones Producto Base y Detalles (Variantes/SKUs)
-Ref: variantes.producto_id > productos.id
-Ref: carrito.producto_detalles_id > variantes.sku 
+// 1. Relaciones de Producto/Variante
+Ref: producto_variantes.producto_id > productos.id
 
-// Relaciones Pedidos y Detalles
-Ref: pedido_detalles.pedido_id > pedidos.id
-Ref: pedido_detalles.producto_id > productos.id
-Ref: variantes.pedido_id > pedidos.id 
+// 2. Relaciones de Usuario/Dirección
+Ref: direcciones.id_usuario > usuarios.id_usuario
 
-// Relaciones de Categorización (Muchos a Muchos)
-Ref: producto_categorias.producto_id > productos.id
-Ref: producto_categorias.categoria_id > categorias.id
+// 3. Relaciones de Carrito
+Ref: carritos.id_usuario > usuarios.id_usuario
+Ref: carrito_items.id_carrito > carritos.id_carrito
+Ref: carrito_items.id_variante_sku > producto_variantes.sku
+
+// 4. Relaciones de Órdenes
+Ref: ordenes.id_usuario > usuarios.id_usuario
+Ref: ordenes.id_direccion > direcciones.id_direccion
+
+// 5. Relaciones de Ítems de Orden
+Ref: orden_items.id_orden > ordenes.id_orden
+Ref: orden_items.id_variante_sku > producto_variantes.sku
+
+// 6. Relaciones de Pago
+Ref: pagos.id_orden > ordenes.id_orden
