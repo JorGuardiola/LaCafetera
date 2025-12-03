@@ -37,7 +37,6 @@ CREATE TABLE productos (
     puntuacion_sca DECIMAL(4,1),
     notas_sabor TEXT,
     presentacion VARCHAR(255),
-    precio_variante250 DECIMAL(10,2),
     descripcion TEXT,
     imagen VARCHAR(255),
     disponible BOOLEAN DEFAULT TRUE
@@ -146,92 +145,89 @@ CREATE TABLE pagos (
     FOREIGN KEY (id_orden) REFERENCES ordenes(id_orden)
 );
 
-
 -- ----------------------------------------------------
 -- 3. INSERCIÓN DE DATOS DE PRODUCTOS (DML)
+--
 -- ----------------------------------------------------
 
 INSERT INTO productos (
     nombre_cafe, pais_origen, region, finca, altitud_msnm, variedad, proceso, 
-    puntuacion_sca, notas_sabor, presentacion, precio_variante250, descripcion, imagen
+    puntuacion_sca, notas_sabor, presentacion, descripcion, imagen
 ) VALUES 
 ('Brasil Sarutaia', 'Brasil', 'Minas Gerais', 'Fazenda Sarutaia', 1100, 'Yellow Bourbon', 'Natural', 84.0, 
-    'Chocolate, nuez, caramelo', 'Espresso, moka', 12.90, 
+    'Chocolate, nuez, caramelo', 'Espresso, moka', 
     'Café brasileño suave y dulce, con cuerpo redondo y acidez baja. Ideal para quienes buscan un perfil clásico y estable.', 
     'brasil_sarutaia.jpg'),
 ('Brasil Vila Boa', 'Brasil', 'Cerrado Mineiro', 'Vila Boa', 1200, 'Catuai', 'Honey', 85.0, 
-    'Cacao, miel, almendra', 'Espresso, V60', 13.50, 
+    'Cacao, miel, almendra', 'Espresso, V60', 
     'Café dulce y equilibrado, con textura melosa y un postgusto prolongado gracias al proceso Honey.', 
     'brasil_vila_boa.jpg'),
 ('Burundi Kawavumera', 'Burundi', 'Kayanza', 'Kawavumera Cooperative', 1800, 'Red Bourbon', 'Lavado', 87.0, 
-    'Frutos rojos, té negro, cítrico', 'V60, Kalita', 15.90, 
+    'Frutos rojos, té negro, cítrico', 'V60, Kalita', 
     'Café vibrante, complejo y brillante con notas intensas a frutos rojos y un final limpio.', 
     'burundi_kawavumera.jpg'),
 ('Colombia Agualinda', 'Colombia', 'Antioquia', 'Finca Agualinda', 1900, 'Caturra', 'Lavado', 86.0, 
-    'Panela, mandarina, floral', 'V60, Aeropress', 14.90, 
+    'Panela, mandarina, floral', 'V60, Aeropress', 
     'Café fresco y floral con acidez cítrica balanceada y dulzor alto, muy típico del perfil colombiano.', 
     'colombia_agualinda.jpg'),
 ('Colombia Bourbon Sidra', 'Colombia', 'Nariño', 'El Silencio', 2050, 'Bourbon Sidra', 'Natural', 89.0, 
-    'Fresa, vino tinto, jazmín', 'V60, Chemex', 22.00, 
+    'Fresa, vino tinto, jazmín', 'V60, Chemex', 
     'Café complejo y aromático con notas florales intensas y un carácter casi vinoso.', 
     'colombia_bourbon_sidra.jpg'),
 ('Colombia Ceiba Honey', 'Colombia', 'Huila', 'La Ceiba', 1750, 'Caturra', 'Honey', 87.0, 
-    'Miel, melocotón, cacao', 'V60, Aeropress', 15.50, 
+    'Miel, melocotón, cacao', 'V60, Aeropress', 
     'Café dulce y jugoso con textura sedosa y excelente equilibrio gracias al proceso Honey.', 
     'colombia_ceiba_honey.jpg'),
 ('Colombia Guayava', 'Colombia', 'Tolima', 'El Vergel', 1500, 'Varietal Blend', 'Natural', 88.0, 
-    'Guayaba, mora, flor blanca', 'V60, Kalita', 16.50, 
+    'Guayaba, mora, flor blanca', 'V60, Kalita', 
     'Café frutal intenso con notas tropicales marcadas y una acidez brillante.', 
     'colombia_guayava.jpg'),
--- Proceso ajustado de 'Hydro Honey' a 'Honey'
 ('Colombia Hydro Honey', 'Colombia', 'Huila', 'Las Flores', 1750, 'Bourbon Rosado', 'Honey', 88.0, 
-    'Uva, miel, flor de cacao', 'V60, Aeropress', 17.90, 
+    'Uva, miel, flor de cacao', 'V60, Aeropress', 
     'Café complejo con proceso Hydro Honey, dulce y limpio con notas a uva y miel.', 
     'colombia_hydro_honey.jpg'),
 ('Colombia Las Garzas Natural', 'Colombia', 'Cauca', 'Las Garzas', 1850, 'Castillo', 'Natural', 86.0, 
-    'Frutos rojos, cacao, especias', 'V60, Chemex', 15.90, 
+    'Frutos rojos, cacao, especias', 'V60, Chemex', 
     'Café afrutado y especiado, con dulzor intenso y gran profundidad.', 
     'colombia_las_garzas.jpg'),
--- Proceso ajustado de 'Lavado Fermentado' a 'Lavado'
 ('Colombia Mango Washed', 'Colombia', 'Antioquia', 'El Recreo', 1600, 'Castillo', 'Lavado', 87.0, 
-    'Mango, cítrico, miel', 'V60, Aeropress', 16.90, 
+    'Mango, cítrico, miel', 'V60, Aeropress', 
     'Café tropical con notas a mango y miel, brillante y expresivo.', 
     'colombia_mango_washed.jpg'),
 ('Ethiopia Aramo Natural', 'Etiopía', 'Yirgacheffe', 'Aramo', 2000, 'Heirloom', 'Natural', 88.0, 
-    'Arándanos, jazmín, miel', 'V60, Chemex', 18.50, 
+    'Arándanos, jazmín, miel', 'V60, Chemex', 
     'Café floral y afrutado, dulce y aromático, ideal para filtrados delicados.', 
     'ethiopia_aramo.jpg'),
 ('Ethiopia Kochere Beloya Oro', 'Etiopía', 'Kochere', 'Beloya', 1950, 'Heirloom', 'Lavado', 87.0, 
-    'Limón, melocotón, té blanco', 'V60, Kalita', 17.90, 
+    'Limón, melocotón, té blanco', 'V60, Kalita', 
     'Café limpio, delicado y floral con acidez refrescante y final suave.', 
     'ethiopia_kochere.jpg'),
--- Proceso ajustado de 'Natural Anaeróbico' a 'Natural'
 ('Ethiopia Yirga Natural Anaerobico', 'Etiopía', 'Yirgacheffe', 'Worka', 2050, 'Heirloom', 'Natural', 89.0, 
-    'Fresa fermentada, flor, vino', 'V60, Chemex', 21.00, 
+    'Fresa fermentada, flor, vino', 'V60, Chemex', 
     'Café explosivo y aromático con notas vinosas gracias al proceso anaeróbico.', 
     'ethiopia_yirga_anaerobico.jpg'),
 ('Etiopía Sidamo Shantawene', 'Etiopía', 'Sidamo', 'Shantawene', 1900, 'Heirloom', 'Lavado', 87.0, 
-    'Bergamota, miel, flor blanca', 'V60, Kalita', 16.90, 
+    'Bergamota, miel, flor blanca', 'V60, Kalita', 
     'Café elegante y floral con acidez refinada y dulzor suave.', 
     'ethiopia_sidamo.jpg'),
 ('Guatemala San Sebastián', 'Guatemala', 'Antigua', 'San Sebastián', 1650, 'Bourbon', 'Lavado', 85.0, 
-    'Chocolate, avellana, cítrico', 'Espresso, Chemex', 14.50, 
+    'Chocolate, avellana, cítrico', 'Espresso, Chemex', 
     'Café equilibrado y suave con notas clásicas a chocolate y cítrico.', 
     'guatemala_san_sebastian.jpg'),
 ('Honduras Los Lirios', 'Honduras', 'Marcala', 'Los Lirios', 1600, 'Catuai', 'Lavado', 84.0, 
-    'Caramelo, nuez, manzana', 'V60, Moka', 13.90, 
+    'Caramelo, nuez, manzana', 'V60, Moka', 
     'Café suave con dulzor a caramelo y acidez frutal ligera.', 
     'honduras_los_lirios.jpg'),
 ('Kenia Gititu AA', 'Kenia', 'Kiambu', 'Gititu', 1900, 'SL28, SL34', 'Lavado', 88.0, 
-    'Grosella negra, pomelo, floral', 'V60, Chemex', 19.00, 
+    'Grosella negra, pomelo, floral', 'V60, Chemex', 
     'Café keniano brillante y jugoso con notas intensas y acidez compleja.', 
     'kenia_gititu.jpg'),
 ('Nicaragua Jinotega', 'Nicaragua', 'Jinotega', 'Buenos Aires', 1400, 'Caturra', 'Lavado', 84.0, 
-    'Chocolate, toffee, cítrico', 'Espresso, V60', 12.90, 
+    'Chocolate, toffee, cítrico', 'Espresso, V60', 
     'Café suave y cremoso con notas cálidas a toffee y cítrico.', 
     'nicaragua_jinotega.jpg'),
 ('Perú Gesha Los quispe', 'Perú', 'Cusco', 'Los Quispe', 1900, 'Gesha', 'Lavado', 89.0, 
-    'Bergamota, jazmín, miel', 'V60, Chemex', 28.00, 
+    'Bergamota, jazmín, miel', 'V60, Chemex', 
     'Café floral y elegante con acidez brillante y dulzor delicado.', 
     'peru_gesha_los_quispe.jpg');
 
@@ -252,4 +248,5 @@ VALUES ('AGUAL_1KG_E', 4, 50, 49.90, 'molido espresso', 'medio', '1kg');
 -- El tueste se ajusta a 'medio'
 INSERT INTO producto_variantes (sku, producto_id, stock, precio, molienda, tueste, envase)
 VALUES ('ARAMO_250_V', 11, 80, 18.50, 'molido goteo', 'medio', '250g');
+
 
