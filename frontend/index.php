@@ -20,8 +20,14 @@ $card_html = [
 
 <main>
 
- <?php include __DIR__ . '/templates/hero.php'; ?> 
-  
+ <?php
+$bgClass = "bg-home";
+$heroTitle = "Llevamos el café de especialidad del campo a la taza";
+$heroSubtitle = "Desde 1994 seleccionando los mejores cafés del mundo para llevarlos a tu taza.";
+$heroButtonText = ""; // vacío → no aparece botón
+$heroButtonLink = "";
+include __DIR__ . '/templates/hero.php';
+?> 
   
   // CARRUSEL
   <section class="tag-carousel">
@@ -98,5 +104,6 @@ $card_html = [
 </main>
 
 <?php include __DIR__ . '/templates/footer.php'; ?>
+
 
 
