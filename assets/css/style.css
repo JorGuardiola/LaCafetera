@@ -76,18 +76,10 @@ h3 { font-size: 2.8rem; }
 
 
 /* =======================================
-   HEADER / HERO
+   HEADER
 ======================================= */
 
 .header {
-    background-image: url(../img/header-home.jpg);
-    height: 92rem;
-    background-size: cover;
-    background-position:top center;
-    padding-top: 2rem;
-}
-
-.barra {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -103,7 +95,7 @@ h3 { font-size: 2.8rem; }
     height: 35px;
     display: flex;
     align-items: center;
-    background: rgba(var(--white), var(--opacidad-barra));
+    background: rgba(var(--black), var(--opacidad-barra));
     backdrop-filter: blur(6px);
     padding: 0 24px;
     border-radius: 40px;
@@ -155,7 +147,7 @@ h3 { font-size: 2.8rem; }
 /* ------- MOBILE ------- */
 @media (max-width: 767px) {
 
-    .barra {
+    .header {
         flex-direction: column;
         align-items: center;
         gap: 1rem;
@@ -239,6 +231,14 @@ h3 { font-size: 2.8rem; }
         max-width: 60rem;
     }
 }
+
+
+
+
+
+
+
+
 
 
 /* =====================
@@ -568,3 +568,4 @@ h3 { font-size: 2.8rem; }
 .btn-add-cart:hover {
     background-color: rgb(var(--primary-700));
 }
+
