@@ -13,12 +13,12 @@ CREATE DATABASE IF NOT EXISTS cafeteria_db CHARACTER SET utf8mb4 COLLATE utf8mb4
 USE cafeteria_db;
 
 -- ----------------------------------------------------
--- 1. DROP DE TABLAS (OPCIONAL: Para empezar desde cero)
+-- 1. DROP DE TABLAS 
 -- ----------------------------------------------------
 
 SET FOREIGN_KEY_CHECKS = 0;
 
--- Tablas antiguas y renombradas
+
 DROP TABLE IF EXISTS pagos;
 DROP TABLE IF EXISTS pedido_items; -- Antes orden_items
 DROP TABLE IF EXISTS pedidos;      -- Antes ordenes
@@ -63,7 +63,7 @@ CREATE TABLE producto_variantes (
     tueste ENUM('medio', 'oscuro') NOT NULL, 
     envase ENUM('250g', '1kg', '2kg') NOT NULL,
     
-    FOREIGN KEY (producto_id) REFERENCES productos(id),
+    FOREIGN KEY (producto_id) REFERENCES productos(id), ON DELETE CASCADE,
     UNIQUE KEY uk_variante (producto_id, molienda, tueste, envase) 
 );
 
@@ -111,8 +111,8 @@ CREATE TABLE carrito_items (
     cantidad INT NOT NULL,
     fecha_agregado DATETIME,
     
-    FOREIGN KEY (id_carrito) REFERENCES carritos(id_carrito),
-    FOREIGN KEY (id_variante_sku) REFERENCES producto_variantes(sku),
+    FOREIGN KEY (id_carrito) REFERENCES carritos(id_carrito) ON DELETE CASCADE,
+    FOREIGN KEY (id_variante_sku) REFERENCES producto_variantes(sku) ON UPDATE CASCADE,
     UNIQUE KEY uk_carrito_variante (id_carrito, id_variante_sku)
 );
 
@@ -244,18 +244,56 @@ INSERT INTO productos (
 -- ----------------------------------------------------
 -- 4. INSERCIÓN DE DATOS DE VARIANTES
 -- ----------------------------------------------------
+-- PAIS(3) + NOM(3) + MOL(3) + TUE(1) + ENV(3)
+-- sku de 13 digitos (3 letras pais)+(3 letras nombre)+(GRA,ESP,MOK,GOT,FRA)+(M,O)+(250,1KG,2KG)
+-- Ej: BRA + SAR + GRA + M + 250 => BRASARGRAM250
+-- ----------------------------------------------------
 
--- Ejemplo de inserción de una variante (250g, Grano) para el producto con ID=1
-INSERT INTO producto_variantes (sku, producto_id, stock, precio, molienda, tueste, envase)
-VALUES ('SARUT_250_G', 1, 100, 12.90, 'grano', 'medio', '250g');
+-- ----------------------------------------------------
+-- VARIANTES BÁSICAS (Necesarias para botón rápido de search.php)
+-- SKU: PAIS(3) + NOM(3) + GRA + M + 250
+-- crear generar_variantes.php para el resto
+-- ----------------------------------------------------
 
--- Ejemplo de inserción de una variante (1kg, Molido Espresso) para el producto con ID=4 (Colombia Agualinda)
-INSERT INTO producto_variantes (sku, producto_id, stock, precio, molienda, tueste, envase)
-VALUES ('AGUAL_1KG_E', 4, 50, 49.90, 'molido espresso', 'medio', '1kg');
-
--- Ejemplo de inserción de una variante (250g, Molido V60) para el producto con ID=11 (Ethiopia Aramo)
-INSERT INTO producto_variantes (sku, producto_id, stock, precio, molienda, tueste, envase)
-VALUES ('ARAMO_250_V', 11, 80, 18.50, 'molido goteo', 'medio', '250g');
+INSERT INTO producto_variantes (sku, producto_id, precio, stock, molienda, tueste, envase) VALUES 
+-- 1. Brasil Sarutaia
+('BRASARGRAM250', 1, 12.90, 100, 'grano', 'medio', '250g'),
+-- 2. Brasil Vila Boa
+('BRAVILGRAM250', 2, 13.50, 100, 'grano', 'medio', '250g'),
+-- 3. Burundi Kawavumera
+('BURKAWGRAM250', 3, 18.50, 100, 'grano', 'medio', '250g'),
+-- 4. Colombia Agualinda
+('COLAGUGRAM250', 4, 15.50, 100, 'grano', 'medio', '250g'),
+-- 5. Colombia Bourbon Sidra
+('COLBOUGRAM250', 5, 22.00, 100, 'grano', 'medio', '250g'),
+-- 6. Colombia Ceiba Honey
+('COLCEIGRAM250', 6, 16.50, 100, 'grano', 'medio', '250g'),
+-- 7. Colombia Guayava
+('COLGUAGRAM250', 7, 18.00, 100, 'grano', 'medio', '250g'),
+-- 8. Colombia Hydro Honey
+('COLHYDGRAM250', 8, 19.50, 100, 'grano', 'medio', '250g'),
+-- 9. Colombia Las Garzas
+('COLLASGRAM250', 9, 14.90, 100, 'grano', 'medio', '250g'),
+-- 10. Colombia Mango Washed
+('COLMANGRAM250', 10, 17.00, 100, 'grano', 'medio', '250g'),
+-- 11. Ethiopia Aramo Natural
+('ETHARAGRAM250', 11, 21.00, 100, 'grano', 'medio', '250g'),
+-- 12. Ethiopia Kochere Beloya
+('ETHKOCGRAM250', 12, 19.00, 100, 'grano', 'medio', '250g'),
+-- 13. Ethiopia Yirga Natural
+('ETHYIRGRAM250', 13, 23.00, 100, 'grano', 'medio', '250g'),
+-- 14. Etiopía Sidamo Shantawene
+('ETHSIDGRAM250', 14, 18.50, 100, 'grano', 'medio', '250g'),
+-- 15. Guatemala San Sebastián
+('GUASANGRAM250', 15, 14.50, 100, 'grano', 'medio', '250g'),
+-- 16. Honduras Los Lirios
+('HONLOSGRAM250', 16, 13.90, 100, 'grano', 'medio', '250g'),
+-- 17. Kenia Gititu AA
+('KENGITGRAM250', 17, 24.00, 100, 'grano', 'medio', '250g'),
+-- 18. Nicaragua Jinotega
+('NICJINGRAM250', 18, 12.50, 100, 'grano', 'medio', '250g'),
+-- 19. Perú Gesha Los Quispe
+('PERGESGRAM250', 19, 28.00, 100, 'grano', 'medio', '250g');
 
 -- ----------------------------------------------------
 -- 5. INSERCIÓN DE DATOS DE PRUEBA: USUARIOS
@@ -291,3 +329,4 @@ VALUES (2, NOW(), NOW());
 -- Añade 2 unidades del Brasil Sarutaia (sku 'SARUT_250_G') al carrito del usuario 2 (id_carrito=1)
 INSERT INTO carrito_items (id_carrito, id_variante_sku, cantidad, fecha_agregado)
 VALUES (1, 'SARUT_250_G', 2, NOW());
+
