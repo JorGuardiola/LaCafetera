@@ -1,9 +1,10 @@
 <?php
 // db/connection.php
-$host = 'localhost';
-$db   = 'cafetera';
-$user = 'root';
-$pass = '';
+
+$host = 'sql210.infinityfree.com';  // Host de InfinityFree
+$db = 'if0_40576183_lacafetera';  // Tu base de datos real
+$user = 'if0_40576183';             // Usuario MySQL
+$pass = 'j3j6nendJd';               // Tu contraseña MySQL
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
