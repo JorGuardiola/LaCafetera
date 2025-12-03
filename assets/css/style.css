@@ -239,7 +239,74 @@ h3 { font-size: 2.8rem; }
 
 
 
+/* =======================================
+   RESPONSIVE
+======================================= */
 
+/* --------- TABLET (768–1023px) -------- */
+@media (max-width: 1023px) {
+
+    .hero-container {
+        padding: 4rem;
+        height: 70vh;
+    }
+
+    .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .hero-left h1 {
+        font-size: 3.4rem;
+        max-width: 90%;
+    }
+
+    .hero-left h2 {
+        font-size: 1.7rem;
+        max-width: 90%;
+    }
+
+    .hero-right {
+        display: none;
+    }
+}
+
+
+
+/* --------- MOBILE (0–767px) -------- */
+@media (max-width: 767px) {
+
+    .hero-container {
+        padding: 3rem 2rem;
+        height: auto;
+        padding-top: 8rem; /* más espacio bajo el header */
+        padding-bottom: 8rem;
+    }
+
+    .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .hero-left h1 {
+        font-size: 2.8rem;
+        max-width: 100%;
+    }
+
+    .hero-left h2 {
+        font-size: 1.6rem;
+        max-width: 100%;
+    }
+
+    .hero-btn {
+        font-size: 1.5rem;
+        padding: 1rem 2rem;
+    }
+
+    .hero-right {
+        display: none;
+    }
+}
 
 
 
@@ -572,6 +639,7 @@ h3 { font-size: 2.8rem; }
 .btn-add-cart:hover {
     background-color: rgb(var(--primary-700));
 }
+
 
 
 
