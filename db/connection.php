@@ -1,7 +1,7 @@
 <?php
 // db/connection.php
 $host = 'localhost';
-$db   = 'cafetera';
+$db   = 'cafeteria_db';
 $user = 'root';
 $pass = '';
 $charset = 'utf8mb4';
@@ -16,3 +16,4 @@ try {
 } catch (PDOException $e) {
     die('Error de conexión: ' . $e->getMessage());
 }
+
