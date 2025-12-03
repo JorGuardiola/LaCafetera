@@ -95,7 +95,7 @@ h3 { font-size: 2.8rem; }
     height: 35px;
     display: flex;
     align-items: center;
-    background: rgba(var(--black), var(--opacidad-barra));
+    background: rgba(var(--secondary-500), var(--opacidad-barra));
     backdrop-filter: blur(6px);
     padding: 0 24px;
     border-radius: 40px;
@@ -117,7 +117,7 @@ h3 { font-size: 2.8rem; }
 
 /* ICONOS */
 .icons-bar {
-    gap: 1.4rem;
+    gap: 2rem;
 }
 .icon-header {
     background: transparent;
@@ -621,6 +621,7 @@ h3 { font-size: 2.8rem; }
 .btn-add-cart:hover {
     background-color: rgb(var(--primary-700));
 }
+
 
 
 
