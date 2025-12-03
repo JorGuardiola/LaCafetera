@@ -1,6 +1,5 @@
 -- ##################################################
 -- # SCRIPT SQL 
--- # Base de Datos: MySQL / MariaDB
 -- ##################################################
 
 -- ----------------------------------------------------
@@ -150,7 +149,6 @@ CREATE TABLE pagos (
 
 -- ----------------------------------------------------
 -- 3. INSERCIÓN DE DATOS DE PRODUCTOS (DML)
--- 
 -- ----------------------------------------------------
 
 INSERT INTO productos (
@@ -239,7 +237,6 @@ INSERT INTO productos (
 
 -- ----------------------------------------------------
 -- 4. INSERCIÓN DE DATOS DE VARIANTES (EJEMPLO)
--- 
 -- ----------------------------------------------------
 
 -- Ejemplo de inserción de una variante (250g, Grano) para el producto con ID=1
@@ -255,3 +252,4 @@ VALUES ('AGUAL_1KG_E', 4, 50, 49.90, 'molido espresso', 'medio', '1kg');
 -- El tueste se ajusta a 'medio'
 INSERT INTO producto_variantes (sku, producto_id, stock, precio, molienda, tueste, envase)
 VALUES ('ARAMO_250_V', 11, 80, 18.50, 'molido goteo', 'medio', '250g');
+
