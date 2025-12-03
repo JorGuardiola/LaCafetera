@@ -23,7 +23,7 @@ $card_html = [
  <?php
 $bgClass = "bg-default";
 $heroTitle = "Llevamos el café de especialidad del campo a la taza";
-$heroSubtitle = "Desde 1994 seleccionando los mejores cafés del mundo para llevarlos a tu taza.";
+$heroSubtitle = "";
 $heroButtonText = ""; // vacío → no aparece botón
 $heroButtonLink = "";
 include __DIR__ . '/templates/hero.php';
@@ -104,6 +104,7 @@ include __DIR__ . '/templates/hero.php';
 </main>
 
 <?php include __DIR__ . '/templates/footer.php'; ?>
+
 
 
 
