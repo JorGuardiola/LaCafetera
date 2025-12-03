@@ -187,13 +187,30 @@ h3 { font-size: 2.8rem; }
 ======================================= */
 /* Hero general */
 .hero-container {
-    background-image: url('../assets/img/header-home.jpg');
+    
     height: 75rem;
     display: flex;
     align-items: center;
     background-size: cover;
     background-position: center;
     padding: 4rem 8rem;
+}
+
+/* Variantes de fondo */
+.hero-container.bg-default {
+    background-image: url('../img/hero-home.jpg');
+}
+.hero-container.bg-productos {
+    background-image: url('../img/hero-productos.jpg');
+}
+.hero-container.bg-producto {
+    background-image: url('../img/hero-producto.jpg');
+}
+.hero-container.bg-login {
+    background-image: url('../img/hero-login.jpg');
+}
+.hero-container.bg-login {
+    background-image: url('../img/hero-login.jpg');
 }
 
 /* Layout interno */
@@ -623,6 +640,7 @@ h3 { font-size: 2.8rem; }
 .btn-add-cart:hover {
     background-color: rgb(var(--primary-700));
 }
+
 
 
 
