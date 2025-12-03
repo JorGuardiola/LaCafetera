@@ -1,25 +1,32 @@
--- Crear base de datos
-CREATE DATABASE IF NOT EXISTS proyecto;
-USE proyecto;
+-- ##################################################
+-- # SCRIPT SQL 
+-- # Base de Datos: MySQL / MariaDB
+-- ##################################################
 
--- Crear tablas principales
+-- ----------------------------------------------------
+-- 1. DROP DE TABLAS (OPCIONAL: Para empezar desde cero)
+-- ----------------------------------------------------
 
-CREATE TABLE IF NOT EXISTS usuarios (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    email VARCHAR(150) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    rol ENUM('cliente','admin') DEFAULT 'cliente',
-    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+SET FOREIGN_KEY_CHECKS = 0;
 
-CREATE TABLE IF NOT EXISTS categorias (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    descripcion TEXT
-);
+DROP TABLE IF EXISTS pagos;
+DROP TABLE IF EXISTS orden_items;
+DROP TABLE IF EXISTS ordenes;
+DROP TABLE IF EXISTS carrito_items;
+DROP TABLE IF EXISTS carritos;
+DROP TABLE IF EXISTS direcciones;
+DROP TABLE IF EXISTS usuarios;
+DROP TABLE IF EXISTS producto_variantes;
+DROP TABLE IF EXISTS productos;
 
-CREATE TABLE IF NOT EXISTS productos (
+SET FOREIGN_KEY_CHECKS = 1;
+
+-- ----------------------------------------------------
+-- 2. DEFINICIÓN DE TABLAS MODIFICADAS (DDL)
+-- ----------------------------------------------------
+
+-- TABLA PRODUCTOS
+CREATE TABLE productos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre_cafe VARCHAR(150) NOT NULL,
     pais_origen VARCHAR(100),
@@ -27,229 +34,224 @@ CREATE TABLE IF NOT EXISTS productos (
     finca VARCHAR(150),
     altitud_msnm INT,
     variedad VARCHAR(150),
-    proceso VARCHAR(150),
-    perfil_tueste VARCHAR(100),
+    proceso ENUM('Lavado', 'Natural', 'Honey') NOT NULL, 
     puntuacion_sca DECIMAL(4,1),
     notas_sabor TEXT,
-    metodos_recomendados TEXT,
     presentacion VARCHAR(255),
-    precio_eur DECIMAL(10,2) NOT NULL,
+    precio_variante250 DECIMAL(10,2),
     descripcion TEXT,
     imagen VARCHAR(255),
-    disponible TINYINT(1) DEFAULT 1
+    disponible BOOLEAN DEFAULT TRUE
 );
 
-CREATE TABLE IF NOT EXISTS carrito (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    usuario_id INT NOT NULL,
+-- TABLA PRODUCTO_VARIANTES
+CREATE TABLE producto_variantes (
+    sku VARCHAR(50) PRIMARY KEY, 
     producto_id INT NOT NULL,
-    cantidad INT DEFAULT 1,
-    fecha_agregado TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
-    FOREIGN KEY (producto_id) REFERENCES productos(id)
-);
-
-CREATE TABLE IF NOT EXISTS pedidos (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    usuario_id INT NOT NULL,
-    total DECIMAL(10,2) NOT NULL,
-    estado ENUM('pendiente','pagado','preparando','enviado','entregado','cancelado') DEFAULT 'pendiente',
-    fecha_pedido TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
-);
-
-CREATE TABLE IF NOT EXISTS pedido_detalles (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    pedido_id INT NOT NULL,
-    producto_id INT NOT NULL,
-    cantidad INT NOT NULL,
-    precio_unitario DECIMAL(10,2) NOT NULL,
-    FOREIGN KEY (pedido_id) REFERENCES pedidos(id),
-    FOREIGN KEY (producto_id) REFERENCES productos(id)
-);
-
--- Tabla intermedia para múltiples categorías por producto
-CREATE TABLE IF NOT EXISTS producto_categorias (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    producto_id INT NOT NULL,
-    categoria_id INT NOT NULL,
-    FOREIGN KEY (producto_id) REFERENCES productos(id),
-    FOREIGN KEY (categoria_id) REFERENCES categorias(id)
-);
-
--- Insertar categorías por país
-INSERT INTO categorias (nombre, descripcion) VALUES
-('Brasil','Cafés originarios de Brasil'),
-('Burundi','Cafés originarios de Burundi'),
-('Colombia','Cafés originarios de Colombia'),
-('Etiopía','Cafés originarios de Etiopía'),
-('Guatemala','Cafés originarios de Guatemala'),
-('Honduras','Cafés originarios de Honduras'),
-('Kenia','Cafés originarios de Kenia'),
-('Nicaragua','Cafés originarios de Nicaragua'),
-('Perú','Cafés originarios de Perú');
-
--- Categorías por proceso
-INSERT INTO categorias (nombre, descripcion) VALUES
-('Natural','Café procesado mediante secado natural'),
-('Lavado','Café procesado mediante lavado'),
-('Honey','Café procesado Honey'),
-('Hydro Honey','Café procesado Hydro Honey'),
-('Natural Anaeróbico','Café procesado Natural Anaeróbico');
-
--- Categorías por tueste
-INSERT INTO categorias (nombre, descripcion) VALUES
-('Ligero','Tueste Ligero'),
-('Medio','Tueste Medio'),
-('Ligero-Medio','Tueste Ligero-Medio'),
-('Medio-Ligero','Tueste Medio-Ligero');
-
--- Insertar todos los productos (imagen placeholder)
-INSERT INTO productos (nombre_cafe, pais_origen, region, finca, altitud_msnm, variedad, proceso, perfil_tueste, puntuacion_sca, notas_sabor, metodos_recomendados, presentacion, precio_eur, descripcion, imagen) VALUES
-('Brasil Sarutaia','Brasil','Minas Gerais','Fazenda Sarutaia',1100,'Yellow Bourbon','Natural','Medio',84,'Chocolate, nuez, caramelo','Espresso, moka','Tostado en grano y molido bajo pedido',12.9,
- 'Café brasileño suave y dulce, con cuerpo redondo y acidez baja. Ideal para quienes buscan un perfil clásico y estable.','placeholder.jpg'),
-
-('Brasil Vila Boa','Brasil','Cerrado Mineiro','Vila Boa',1200,'Catuai','Honey','Medio',85,'Cacao, miel, almendra','Espresso, V60','Tostado en grano y molido bajo pedido',13.5,
- 'Café dulce y equilibrado, con textura melosa y un postgusto prolongado gracias al proceso Honey.','placeholder.jpg'),
-
-('Burundi Kawavumera','Burundi','Kayanza','Kawavumera Cooperative',1800,'Red Bourbon','Lavado','Ligero-Medio',87,'Frutos rojos, té negro, cítrico','V60, Kalita','Tostado en grano y molido bajo pedido',15.9,
- 'Café vibrante, complejo y brillante con notas intensas a frutos rojos y un final limpio.','placeholder.jpg'),
-
-('Colombia Agualinda','Colombia','Antioquia','Finca Agualinda',1900,'Caturra','Lavado','Ligero',86,'Panela, mandarina, floral','V60, Aeropress','Tostado en grano y molido bajo pedido',14.9,
- 'Café fresco y floral con acidez cítrica balanceada y dulzor alto, muy típico del perfil colombiano.','placeholder.jpg'),
-
-('Colombia Bourbon Sidra','Colombia','Nariño','El Silencio',2050,'Bourbon Sidra','Natural','Ligero',89,'Fresa, vino tinto, jazmín','V60, Chemex','Tostado en grano y molido bajo pedido',22,
- 'Café complejo y aromático con notas florales intensas y un carácter casi vinoso.','placeholder.jpg'),
-
-('Colombia Ceiba Honey','Colombia','Huila','La Ceiba',1750,'Caturra','Honey','Ligero-Medio',87,'Miel, melocotón, cacao','V60, Aeropress','Tostado en grano y molido bajo pedido',15.5,
- 'Café dulce y jugoso con textura sedosa y excelente equilibrio gracias al proceso Honey.','placeholder.jpg'),
-
-('Colombia Guayava','Colombia','Tolima','El Vergel',1500,'Varietal Blend','Natural','Ligero',88,'Guayaba, mora, flor blanca','V60, Kalita','Tostado en grano y molido bajo pedido',16.5,
- 'Café frutal intenso con notas tropicales marcadas y una acidez brillante.','placeholder.jpg'),
-
-('Colombia Hydro Honey','Colombia','Huila','Las Flores',1750,'Bourbon Rosado','Hydro Honey','Ligero-Medio',88,'Uva, miel, flor de cacao','V60, Aeropress','Tostado en grano y molido bajo pedido',17.9,
- 'Café complejo con proceso Hydro Honey, dulce y limpio con notas a uva y miel.','placeholder.jpg'),
-
-('Colombia Las Garzas Natural','Colombia','Cauca','Las Garzas',1850,'Castillo','Natural','Ligero',86,'Frutos rojos, cacao, especias','V60, Chemex','Tostado en grano y molido bajo pedido',15.9,
- 'Café afrutado y especiado, con dulzor intenso y gran profundidad.','placeholder.jpg'),
-
-('Colombia Mango Washed','Colombia','Antioquia','El Recreo',1600,'Castillo','Lavado Fermentado','Ligero-Medio',87,'Mango, cítrico, miel','V60, Aeropress','Tostado en grano y molido bajo pedido',16.9,
- 'Café tropical con notas a mango y miel, brillante y expresivo.','placeholder.jpg'),
-
-('Ethiopia Aramo Natural','Etiopía','Yirgacheffe','Aramo',2000,'Heirloom','Natural','Ligero',88,'Arándanos, jazmín, miel','V60, Chemex','Tostado en grano y molido bajo pedido',18.5,
- 'Café floral y afrutado, dulce y aromático, ideal para filtrados delicados.','placeholder.jpg'),
-
-('Ethiopia Kochere Beloya Oro','Etiopía','Kochere','Beloya',1950,'Heirloom','Lavado','Ligero',87,'Limón, melocotón, té blanco','V60, Kalita','Tostado en grano y molido bajo pedido',17.9,
- 'Café limpio, delicado y floral con acidez refrescante y final suave.','placeholder.jpg'),
-
-('Ethiopia Yirga Natural Anaerobico','Etiopía','Yirgacheffe','Worka',2050,'Heirloom','Natural Anaeróbico','Ligero',89,'Fresa fermentada, flor, vino','V60, Chemex','Tostado en grano y molido bajo pedido',21,
- 'Café explosivo y aromático con notas vinosas gracias al proceso anaeróbico.','placeholder.jpg'),
-
-('Etiopía Sidamo Shantawene','Etiopía','Sidamo','Shantawene',1900,'Heirloom','Lavado','Ligero',87,'Bergamota, miel, flor blanca','V60, Kalita','Tostado en grano y molido bajo pedido',16.9,
- 'Café elegante y floral con acidez refinada y dulzor suave.','placeholder.jpg'),
-
-('Guatemala San Sebastián','Guatemala','Antigua','San Sebastián',1650,'Bourbon','Lavado','Medio',85,'Chocolate, avellana, cítrico','Espresso, Chemex','Tostado en grano y molido bajo pedido',14.5,
- 'Café equilibrado y suave con notas clásicas a chocolate y cítrico.','placeholder.jpg'),
-
-('Honduras Los Lirios','Honduras','Marcala','Los Lirios',1600,'Catuai','Lavado','Medio-Ligero',84,'Caramelo, nuez, manzana','V60, Moka','Tostado en grano y molido bajo pedido',13.9,
- 'Café suave con dulzor a caramelo y acidez frutal ligera.','placeholder.jpg'),
-
-('Kenia Gititu AA','Kenia','Kiambu','Gititu',1900,'SL28, SL34','Lavado','Ligero',88,'Grosella negra, pomelo, floral','V60, Chemex','Tostado en grano y molido bajo pedido',19,
- 'Café keniano brillante y jugoso con notas intensas y acidez compleja.','placeholder.jpg'),
-
-('Nicaragua Jinotega','Nicaragua','Jinotega','Buenos Aires',1400,'Caturra','Lavado','Medio',84,'Chocolate, toffee, cítrico','Espresso, V60','Tostado en grano y molido bajo pedido',12.9,
- 'Café suave y cremoso con notas cálidas a toffee y cítrico.','placeholder.jpg'),
-
-('Perú Gesha Los quispe','Perú','Cusco','Los Quispe',1900,'Gesha','Lavado','Ligero',89,'Bergamota, jazmín, miel','V60, Chemex','Tostado en grano y molido bajo pedido',28,
- 'Café floral y elegante con acidez brillante y dulzor delicado.','placeholder.jpg');
-
--- Asignar categorías múltiples por producto (país, proceso, tueste)
--- Esto se hace insertando en la tabla intermedia
-
--- Categorías por país
-INSERT INTO producto_categorias (producto_id, categoria_id)
-SELECT p.id, c.id
-FROM productos p
-JOIN categorias c ON c.nombre = p.pais_origen;
-
--- Categorías por proceso
-INSERT INTO producto_categorias (producto_id, categoria_id)
-SELECT p.id, c.id
-FROM productos p
-JOIN categorias c ON c.nombre = p.proceso;
-
--- Categorías por tueste
-INSERT INTO producto_categorias (producto_id, categoria_id)
-SELECT p.id, c.id
-FROM productos p
-JOIN categorias c ON c.nombre = p.perfil_tueste;
-
--- Modificación de tu tabla productos
-ALTER TABLE productos
-CHANGE COLUMN precio_eur precio_base_250g DECIMAL(10,2) NOT NULL;
-
--- Crear tabla VARIANTES
-CREATE TABLE IF NOT EXISTS variantes (
-    sku VARCHAR(50) PRIMARY KEY,
-    producto_id INT NOT NULL,
-    envase ENUM('250g','1kg','2kg') NOT NULL,
-    formato ENUM('grano','molido') NOT NULL,
-    tueste VARCHAR(100) NOT NULL,
-    precio DECIMAL(10,2) NOT NULL,
     stock INT DEFAULT 0,
-    FOREIGN KEY (producto_id) REFERENCES productos(id)
+    precio DECIMAL(10,2) NOT NULL,
+    molienda ENUM('grano', 'molido espresso', 'molido moka', 'molido goteo', 'molido francesa') NOT NULL,
+    tueste ENUM('medio', 'oscuro') NOT NULL, 
+    envase ENUM('250g', '1kg', '2kg') NOT NULL,
+    
+    FOREIGN KEY (producto_id) REFERENCES productos(id),
+    UNIQUE KEY uk_variante (producto_id, molienda, tueste, envase) 
 );
 
--- Modificar carrito para usar VARIANTES (no productos)
-ALTER TABLE carrito
-DROP FOREIGN KEY carrito_ibfk_1;
+-- TABLA USUARIOS 
+CREATE TABLE usuarios (
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(150),
+    apellido VARCHAR(150),
+    email VARCHAR(200) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    telefono VARCHAR(20),
+    rol ENUM('cliente','admin') DEFAULT 'cliente',
+    fecha_registro DATETIME
+);
 
-ALTER TABLE carrito
-CHANGE COLUMN producto_id sku VARCHAR(50) NOT NULL;
+-- TABLA DIRECCIONES 
+CREATE TABLE direcciones (
+    id_direccion INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    direccion VARCHAR(255) NOT NULL,
+    ciudad VARCHAR(150),
+    provincia VARCHAR(150),
+    pais VARCHAR(150),
+    codigo_postal VARCHAR(20),
+    predeterminada BOOLEAN DEFAULT FALSE,
+    
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
+);
 
-ALTER TABLE carrito
-ADD FOREIGN KEY (sku) REFERENCES variantes(sku);
+-- TABLA CARRITOS 
+CREATE TABLE carritos (
+    id_carrito INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT UNIQUE NOT NULL,
+    fecha_creacion DATETIME,
+    fecha_ultima_act DATETIME,
+    
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
+);
 
--- Modificar pedido_detalles igual (de producto a variante) 
-ALTER TABLE pedido_detalles
-DROP FOREIGN KEY pedido_detalles_ibfk_2;
+-- TABLA CARRITO_ITEMS 
+CREATE TABLE carrito_items (
+    id_item INT AUTO_INCREMENT PRIMARY KEY,
+    id_carrito INT NOT NULL,
+    id_variante_sku VARCHAR(50) NOT NULL,
+    cantidad INT NOT NULL,
+    fecha_agregado DATETIME,
+    
+    FOREIGN KEY (id_carrito) REFERENCES carritos(id_carrito),
+    FOREIGN KEY (id_variante_sku) REFERENCES producto_variantes(sku),
+    UNIQUE KEY uk_carrito_variante (id_carrito, id_variante_sku)
+);
 
-ALTER TABLE pedido_detalles
-CHANGE COLUMN producto_id sku VARCHAR(50) NOT NULL;
+-- TABLA ORDENES 
+CREATE TABLE ordenes (
+    id_orden INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    id_direccion INT NOT NULL,
+    total DECIMAL(10,2),
+    estado ENUM('pendiente','pagado','preparando','enviado','entregado','cancelado') DEFAULT 'pendiente',
+    fecha_orden DATETIME,
+    direccion_envio_snapshot TEXT, 
+    ciudad_envio_snapshot VARCHAR(150),
+    
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
+    FOREIGN KEY (id_direccion) REFERENCES direcciones(id_direccion)
+);
 
-ALTER TABLE pedido_detalles
-ADD FOREIGN KEY (sku) REFERENCES variantes(sku);
+-- TABLA ORDEN_ITEMS 
+CREATE TABLE orden_items (
+    id_item INT AUTO_INCREMENT PRIMARY KEY,
+    id_orden INT NOT NULL,
+    id_variante_sku VARCHAR(50) NOT NULL,
+    precio_unitario DECIMAL(10,2),
+    cantidad INT,
+    
+    FOREIGN KEY (id_orden) REFERENCES ordenes(id_orden),
+    FOREIGN KEY (id_variante_sku) REFERENCES producto_variantes(sku)
+);
 
--- Insertar variantes automáticamente para todos tus productos
-INSERT INTO variantes (sku, producto_id, envase, formato, tueste, precio, stock)
-SELECT 
-    CONCAT('P', id, '-250'),
-    id,
-    '250g',
-    'grano',
-    perfil_tueste,
-    precio_base_250g,
-    50
-FROM productos;
+-- TABLA PAGOS 
+CREATE TABLE pagos (
+    id_pago INT AUTO_INCREMENT PRIMARY KEY,
+    id_orden INT NOT NULL,
+    metodo VARCHAR(50) NOT NULL,
+    monto DECIMAL(10,2) NOT NULL,
+    estado VARCHAR(50),
+    fecha_pago DATETIME,
+    referencia_transaccion VARCHAR(255) UNIQUE,
+    
+    FOREIGN KEY (id_orden) REFERENCES ordenes(id_orden)
+);
 
-INSERT INTO variantes (sku, producto_id, envase, formato, tueste, precio, stock)
-SELECT 
-    CONCAT('P', id, '-1KG'),
-    id,
-    '1kg',
-    'grano',
-    perfil_tueste,
-    precio_base_250g * 4,
-    50
-FROM productos;
 
-INSERT INTO variantes (sku, producto_id, envase, formato, tueste, precio, stock)
-SELECT 
-    CONCAT('P', id, '-2KG'),
-    id,
-    '2kg',
-    'grano',
-    perfil_tueste,
-    precio_base_250g * 8,
-    50
-FROM productos;
+-- ----------------------------------------------------
+-- 3. INSERCIÓN DE DATOS DE PRODUCTOS (DML)
+-- 
+-- ----------------------------------------------------
+
+INSERT INTO productos (
+    nombre_cafe, pais_origen, region, finca, altitud_msnm, variedad, proceso, 
+    puntuacion_sca, notas_sabor, presentacion, precio_variante250, descripcion, imagen
+) VALUES 
+('Brasil Sarutaia', 'Brasil', 'Minas Gerais', 'Fazenda Sarutaia', 1100, 'Yellow Bourbon', 'Natural', 84.0, 
+    'Chocolate, nuez, caramelo', 'Espresso, moka', 12.90, 
+    'Café brasileño suave y dulce, con cuerpo redondo y acidez baja. Ideal para quienes buscan un perfil clásico y estable.', 
+    'brasil_sarutaia.jpg'),
+('Brasil Vila Boa', 'Brasil', 'Cerrado Mineiro', 'Vila Boa', 1200, 'Catuai', 'Honey', 85.0, 
+    'Cacao, miel, almendra', 'Espresso, V60', 13.50, 
+    'Café dulce y equilibrado, con textura melosa y un postgusto prolongado gracias al proceso Honey.', 
+    'brasil_vila_boa.jpg'),
+('Burundi Kawavumera', 'Burundi', 'Kayanza', 'Kawavumera Cooperative', 1800, 'Red Bourbon', 'Lavado', 87.0, 
+    'Frutos rojos, té negro, cítrico', 'V60, Kalita', 15.90, 
+    'Café vibrante, complejo y brillante con notas intensas a frutos rojos y un final limpio.', 
+    'burundi_kawavumera.jpg'),
+('Colombia Agualinda', 'Colombia', 'Antioquia', 'Finca Agualinda', 1900, 'Caturra', 'Lavado', 86.0, 
+    'Panela, mandarina, floral', 'V60, Aeropress', 14.90, 
+    'Café fresco y floral con acidez cítrica balanceada y dulzor alto, muy típico del perfil colombiano.', 
+    'colombia_agualinda.jpg'),
+('Colombia Bourbon Sidra', 'Colombia', 'Nariño', 'El Silencio', 2050, 'Bourbon Sidra', 'Natural', 89.0, 
+    'Fresa, vino tinto, jazmín', 'V60, Chemex', 22.00, 
+    'Café complejo y aromático con notas florales intensas y un carácter casi vinoso.', 
+    'colombia_bourbon_sidra.jpg'),
+('Colombia Ceiba Honey', 'Colombia', 'Huila', 'La Ceiba', 1750, 'Caturra', 'Honey', 87.0, 
+    'Miel, melocotón, cacao', 'V60, Aeropress', 15.50, 
+    'Café dulce y jugoso con textura sedosa y excelente equilibrio gracias al proceso Honey.', 
+    'colombia_ceiba_honey.jpg'),
+('Colombia Guayava', 'Colombia', 'Tolima', 'El Vergel', 1500, 'Varietal Blend', 'Natural', 88.0, 
+    'Guayaba, mora, flor blanca', 'V60, Kalita', 16.50, 
+    'Café frutal intenso con notas tropicales marcadas y una acidez brillante.', 
+    'colombia_guayava.jpg'),
+-- Proceso ajustado de 'Hydro Honey' a 'Honey'
+('Colombia Hydro Honey', 'Colombia', 'Huila', 'Las Flores', 1750, 'Bourbon Rosado', 'Honey', 88.0, 
+    'Uva, miel, flor de cacao', 'V60, Aeropress', 17.90, 
+    'Café complejo con proceso Hydro Honey, dulce y limpio con notas a uva y miel.', 
+    'colombia_hydro_honey.jpg'),
+('Colombia Las Garzas Natural', 'Colombia', 'Cauca', 'Las Garzas', 1850, 'Castillo', 'Natural', 86.0, 
+    'Frutos rojos, cacao, especias', 'V60, Chemex', 15.90, 
+    'Café afrutado y especiado, con dulzor intenso y gran profundidad.', 
+    'colombia_las_garzas.jpg'),
+-- Proceso ajustado de 'Lavado Fermentado' a 'Lavado'
+('Colombia Mango Washed', 'Colombia', 'Antioquia', 'El Recreo', 1600, 'Castillo', 'Lavado', 87.0, 
+    'Mango, cítrico, miel', 'V60, Aeropress', 16.90, 
+    'Café tropical con notas a mango y miel, brillante y expresivo.', 
+    'colombia_mango_washed.jpg'),
+('Ethiopia Aramo Natural', 'Etiopía', 'Yirgacheffe', 'Aramo', 2000, 'Heirloom', 'Natural', 88.0, 
+    'Arándanos, jazmín, miel', 'V60, Chemex', 18.50, 
+    'Café floral y afrutado, dulce y aromático, ideal para filtrados delicados.', 
+    'ethiopia_aramo.jpg'),
+('Ethiopia Kochere Beloya Oro', 'Etiopía', 'Kochere', 'Beloya', 1950, 'Heirloom', 'Lavado', 87.0, 
+    'Limón, melocotón, té blanco', 'V60, Kalita', 17.90, 
+    'Café limpio, delicado y floral con acidez refrescante y final suave.', 
+    'ethiopia_kochere.jpg'),
+-- Proceso ajustado de 'Natural Anaeróbico' a 'Natural'
+('Ethiopia Yirga Natural Anaerobico', 'Etiopía', 'Yirgacheffe', 'Worka', 2050, 'Heirloom', 'Natural', 89.0, 
+    'Fresa fermentada, flor, vino', 'V60, Chemex', 21.00, 
+    'Café explosivo y aromático con notas vinosas gracias al proceso anaeróbico.', 
+    'ethiopia_yirga_anaerobico.jpg'),
+('Etiopía Sidamo Shantawene', 'Etiopía', 'Sidamo', 'Shantawene', 1900, 'Heirloom', 'Lavado', 87.0, 
+    'Bergamota, miel, flor blanca', 'V60, Kalita', 16.90, 
+    'Café elegante y floral con acidez refinada y dulzor suave.', 
+    'ethiopia_sidamo.jpg'),
+('Guatemala San Sebastián', 'Guatemala', 'Antigua', 'San Sebastián', 1650, 'Bourbon', 'Lavado', 85.0, 
+    'Chocolate, avellana, cítrico', 'Espresso, Chemex', 14.50, 
+    'Café equilibrado y suave con notas clásicas a chocolate y cítrico.', 
+    'guatemala_san_sebastian.jpg'),
+('Honduras Los Lirios', 'Honduras', 'Marcala', 'Los Lirios', 1600, 'Catuai', 'Lavado', 84.0, 
+    'Caramelo, nuez, manzana', 'V60, Moka', 13.90, 
+    'Café suave con dulzor a caramelo y acidez frutal ligera.', 
+    'honduras_los_lirios.jpg'),
+('Kenia Gititu AA', 'Kenia', 'Kiambu', 'Gititu', 1900, 'SL28, SL34', 'Lavado', 88.0, 
+    'Grosella negra, pomelo, floral', 'V60, Chemex', 19.00, 
+    'Café keniano brillante y jugoso con notas intensas y acidez compleja.', 
+    'kenia_gititu.jpg'),
+('Nicaragua Jinotega', 'Nicaragua', 'Jinotega', 'Buenos Aires', 1400, 'Caturra', 'Lavado', 84.0, 
+    'Chocolate, toffee, cítrico', 'Espresso, V60', 12.90, 
+    'Café suave y cremoso con notas cálidas a toffee y cítrico.', 
+    'nicaragua_jinotega.jpg'),
+('Perú Gesha Los quispe', 'Perú', 'Cusco', 'Los Quispe', 1900, 'Gesha', 'Lavado', 89.0, 
+    'Bergamota, jazmín, miel', 'V60, Chemex', 28.00, 
+    'Café floral y elegante con acidez brillante y dulzor delicado.', 
+    'peru_gesha_los_quispe.jpg');
+
+-- ----------------------------------------------------
+-- 4. INSERCIÓN DE DATOS DE VARIANTES (EJEMPLO)
+-- 
+-- ----------------------------------------------------
+
+-- Ejemplo de inserción de una variante (250g, Grano) para el producto con ID=1
+INSERT INTO producto_variantes (sku, producto_id, stock, precio, molienda, tueste, envase)
+VALUES ('SARUT_250_G', 1, 100, 12.90, 'grano', 'medio', '250g');
+
+-- Ejemplo de inserción de una variante (1kg, Molido Espresso) para el producto con ID=4 (Colombia Agualinda)
+-- El tueste se ajusta a 'medio'
+INSERT INTO producto_variantes (sku, producto_id, stock, precio, molienda, tueste, envase)
+VALUES ('AGUAL_1KG_E', 4, 50, 49.90, 'molido espresso', 'medio', '1kg');
+
+-- Ejemplo de inserción de una variante (250g, Molido V60) para el producto con ID=11 (Ethiopia Aramo)
+-- El tueste se ajusta a 'medio'
+INSERT INTO producto_variantes (sku, producto_id, stock, precio, molienda, tueste, envase)
+VALUES ('ARAMO_250_V', 11, 80, 18.50, 'molido goteo', 'medio', '250g');
