@@ -1,8 +1,9 @@
 -- ##################################################
--- # SCRIPT SQL 3 diciembre
+-- # SCRIPT SQL MODIFICADO: cafetera_db
 -- ##################################################
+
 -- ----------------------------------------------------
--- 0. CREACIÓN Y SELECCIÓN DE LA BASE DE DATOS 
+-- 0. CREACIÓN Y SELECCIÓN DE LA BASE DE DATOS
 -- ----------------------------------------------------
 
 -- Crea la base de datos si no existe
@@ -17,9 +18,10 @@ USE cafeteria_db;
 
 SET FOREIGN_KEY_CHECKS = 0;
 
+-- Tablas antiguas y renombradas
 DROP TABLE IF EXISTS pagos;
-DROP TABLE IF EXISTS orden_items;
-DROP TABLE IF EXISTS ordenes;
+DROP TABLE IF EXISTS pedido_items; -- Antes orden_items
+DROP TABLE IF EXISTS pedidos;      -- Antes ordenes
 DROP TABLE IF EXISTS carrito_items;
 DROP TABLE IF EXISTS carritos;
 DROP TABLE IF EXISTS direcciones;
@@ -30,7 +32,7 @@ DROP TABLE IF EXISTS productos;
 SET FOREIGN_KEY_CHECKS = 1;
 
 -- ----------------------------------------------------
--- 2. DEFINICIÓN DE TABLAS MODIFICADAS 
+-- 2. DEFINICIÓN DE TABLAS MODIFICADAS
 -- ----------------------------------------------------
 
 -- TABLA PRODUCTOS
@@ -114,8 +116,8 @@ CREATE TABLE carrito_items (
     UNIQUE KEY uk_carrito_variante (id_carrito, id_variante_sku)
 );
 
--- TABLA ORDENES 
-CREATE TABLE ordenes (
+-- TABLA PEDIDOS (ANTES ORDENES)
+CREATE TABLE pedidos (
     id_orden INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT NOT NULL,
     id_direccion INT NOT NULL,
@@ -129,33 +131,33 @@ CREATE TABLE ordenes (
     FOREIGN KEY (id_direccion) REFERENCES direcciones(id_direccion)
 );
 
--- TABLA ORDEN_ITEMS 
-CREATE TABLE orden_items (
+-- TABLA PEDIDO_ITEMS (ANTES ORDEN_ITEMS)
+CREATE TABLE pedido_items (
     id_item INT AUTO_INCREMENT PRIMARY KEY,
     id_orden INT NOT NULL,
     id_variante_sku VARCHAR(50) NOT NULL,
     precio_unitario DECIMAL(10,2),
     cantidad INT,
     
-    FOREIGN KEY (id_orden) REFERENCES ordenes(id_orden),
+    FOREIGN KEY (id_orden) REFERENCES pedidos(id_orden),
     FOREIGN KEY (id_variante_sku) REFERENCES producto_variantes(sku)
 );
 
--- TABLA PAGOS 
+-- TABLA PAGOS
 CREATE TABLE pagos (
     id_pago INT AUTO_INCREMENT PRIMARY KEY,
     id_orden INT NOT NULL,
-    metodo VARCHAR(50) NOT NULL,
+    metodo ENUM('tarjeta', 'bizum', 'gpay', 'paypal') NOT NULL, 
     monto DECIMAL(10,2) NOT NULL,
     estado VARCHAR(50),
     fecha_pago DATETIME,
     referencia_transaccion VARCHAR(255) UNIQUE,
     
-    FOREIGN KEY (id_orden) REFERENCES ordenes(id_orden)
+    FOREIGN KEY (id_orden) REFERENCES pedidos(id_orden)
 );
 
 -- ----------------------------------------------------
--- 3. INSERCIÓN DE DATOS DE PRODUCTOS 
+-- 3. INSERCIÓN DE DATOS DE PRODUCTOS
 -- ----------------------------------------------------
 
 INSERT INTO productos (
@@ -240,7 +242,7 @@ INSERT INTO productos (
     'peru_gesha_los_quispe.jpg');
 
 -- ----------------------------------------------------
--- 4. INSERCIÓN DE DATOS DE VARIANTES 
+-- 4. INSERCIÓN DE DATOS DE VARIANTES
 -- ----------------------------------------------------
 
 -- Ejemplo de inserción de una variante (250g, Grano) para el producto con ID=1
@@ -248,17 +250,44 @@ INSERT INTO producto_variantes (sku, producto_id, stock, precio, molienda, tuest
 VALUES ('SARUT_250_G', 1, 100, 12.90, 'grano', 'medio', '250g');
 
 -- Ejemplo de inserción de una variante (1kg, Molido Espresso) para el producto con ID=4 (Colombia Agualinda)
--- El tueste se ajusta a 'medio'
 INSERT INTO producto_variantes (sku, producto_id, stock, precio, molienda, tueste, envase)
 VALUES ('AGUAL_1KG_E', 4, 50, 49.90, 'molido espresso', 'medio', '1kg');
 
 -- Ejemplo de inserción de una variante (250g, Molido V60) para el producto con ID=11 (Ethiopia Aramo)
--- El tueste se ajusta a 'medio'
 INSERT INTO producto_variantes (sku, producto_id, stock, precio, molienda, tueste, envase)
 VALUES ('ARAMO_250_V', 11, 80, 18.50, 'molido goteo', 'medio', '250g');
 
+-- ----------------------------------------------------
+-- 5. INSERCIÓN DE DATOS DE PRUEBA: USUARIOS
+-- ----------------------------------------------------
 
+INSERT INTO usuarios (nombre, apellido, email, password_hash, telefono, rol, fecha_registro)
+VALUES
+('Admin', 'Global', 'admin@cafetera.com', '$2y$10$XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX', '123456789', 'admin', NOW()), 
+('Cliente', 'Fiel', 'cliente@prueba.com', '$2y$10$YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY', '987654321', 'cliente', NOW());
 
+-- ----------------------------------------------------
+-- 6. INSERCIÓN DE DATOS DE PRUEBA: DIRECCIONES
+-- ----------------------------------------------------
 
+-- Asume que el 'id_usuario' del 'Cliente Fiel' es 2 (por el orden de inserción)
+INSERT INTO direcciones (id_usuario, direccion, ciudad, provincia, pais, codigo_postal, predeterminada)
+VALUES
+(2, 'Calle Falsa 123', 'Madrid', 'Madrid', 'España', '28001', TRUE),
+(2, 'Avenida Siempreviva 742', 'Barcelona', 'Barcelona', 'España', '08001', FALSE);
 
+-- ----------------------------------------------------
+-- 7. INSERCIÓN DE DATOS DE PRUEBA: CARRITO
+-- ----------------------------------------------------
 
+-- Crea un carrito para el Cliente Fiel (id_usuario=2)
+INSERT INTO carritos (id_usuario, fecha_creacion, fecha_ultima_act)
+VALUES (2, NOW(), NOW());
+
+-- ----------------------------------------------------
+-- 8. INSERCIÓN DE DATOS DE PRUEBA: CARRITO_ITEMS
+-- ----------------------------------------------------
+
+-- Añade 2 unidades del Brasil Sarutaia (sku 'SARUT_250_G') al carrito del usuario 2 (id_carrito=1)
+INSERT INTO carrito_items (id_carrito, id_variante_sku, cantidad, fecha_agregado)
+VALUES (1, 'SARUT_250_G', 2, NOW());
