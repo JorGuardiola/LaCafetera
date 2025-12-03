@@ -83,6 +83,8 @@ h3 { font-size: 2.8rem; }
     display: flex;
     justify-content: space-between;
     align-items: center;
+   padding-left: 20rem;
+    padding-right: 20rem;
 }
 
 .img-logo img {
@@ -621,6 +623,7 @@ h3 { font-size: 2.8rem; }
 .btn-add-cart:hover {
     background-color: rgb(var(--primary-700));
 }
+
 
 
 
