@@ -131,50 +131,12 @@ h3 { font-size: 2.8rem; }
 
 
 
-
 /* =======================================
    RESPONSIVE HEADER
 ======================================= */
 
 /* ------- MOBILE ------- */
 @media (max-width: 767px) {
-
-    .header {
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-        padding: 2rem;
-        
-    }
-
-    .img-logo {
-        order: 0;
-        align-self: flex-start;
-    }
-
-    .img-logo img {
-        width: 14rem;
-    }
-
-    .icons-bar {
-        order: 1;
-        align-self: flex-end;
-        margin-right: 0.5rem;
-        height: 32px;
-        padding: 0 14px;
-    }
-
-    .nav-bar {
-        order: 2;
-        width: 100%;
-        justify-content: center;
-        margin-top: 1.2rem;
-        display: flex;
-    }
-
-    .nav-bar ul {
-        gap: 1.6rem;
-    }
 
     .hero-text-block {
         margin-top: 8rem;
@@ -190,31 +152,93 @@ h3 { font-size: 2.8rem; }
 /* ------- TABLET ------- */
 @media (min-width: 768px) and (max-width: 1023px) {
 
-        .header {
-        height: 10rem;
-        padding: 2rem;
-    }
-    
-    
-    .nav-bar {
-        display: flex;
+    .hero-text-block {
+        margin-top: 13rem;
     }
 
-    .img-logo img {
-        width: 17rem;
+    .hero-text-block h1 {
+        font-size: 3.2rem;
+        max-width: 40rem;
     }
-
 }
 
 
 /* ------- DESKTOP ------- */
 @media (min-width: 1024px) {
 
-    .header {
-        height: 10rem;
-        padding:2rem;
+    .hero-text-block {
+        margin-top: 18rem;
+    }
+
+    .hero-text-block h1 {
+        font-size: 4.1rem;
+        max-width: 60rem;
     }
 }
+
+
+
+
+
+/* =======================================
+   BANNER + HERO
+======================================= */
+/* Hero general */
+.hero-container {
+    background-image: url('../assets/img/header-home.jpg');
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    padding: 4rem 8rem;
+}
+
+
+/* agrega todas las que quieras */
+
+/* Layout interno */
+.hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    width: 100%;
+    max-width: 1400px;
+}
+
+/* Columna izquierda */
+.hero-left h1 {
+    font-size: 4.2rem;
+    max-width: 50rem;
+    color: black;
+}
+.hero-left h2 {
+    font-size: 1.8rem;
+    max-width: 45rem;
+    margin-top: 1rem;
+    color: black;
+}
+
+/* Botón opcional */
+.hero-btn {
+    margin-top: 2rem;
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: rgb(var(--primary-500));
+    color: white;
+    border-radius: 30px;
+    font-size: 1.6rem;
+    transition: 0.3s ease;
+}
+.hero-btn:hover {
+    background-color: rgb(var(--primary-600));
+}
+
+/* Columna derecha (vacía pero estructural) */
+
+
+
+
 
 
 
@@ -548,5 +572,6 @@ h3 { font-size: 2.8rem; }
 .btn-add-cart:hover {
     background-color: rgb(var(--primary-700));
 }
+
 
 
