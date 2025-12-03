@@ -19,11 +19,6 @@
 <body>
 
 <header class="header">
-  <div class="container">
-
-    <!-- BARRA SUPERIOR -->
-    <div class="barra">
-
       <!-- LOGO -->
       <div class="img-logo">
         <img src="../assets/img/logo.png" alt="Logo La Cafetera">
@@ -51,14 +46,4 @@
           <img src="../assets/img/carrito.png" alt="Carrito">
         </button>
       </div>
-
-    </div>
-
-    <!-- TEXTO HERO -->
-    <div class="hero-text-block">
-      <h1>Llevamos el café de especialidad del campo a la taza</h1>
-      <p>Desde 1994 seleccionando los mejores cafés del mundo para llevarlos a tu taza.</p>
-    </div>
-
-  </div>
-</header>
+</header>  
