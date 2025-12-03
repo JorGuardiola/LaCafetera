@@ -36,34 +36,62 @@ $card_html = [
           echo $card_html[$i];
       }
       ?>
-    </div>
-  </section>
+   </div>
+</section>
 
-  <section class="container" style="margin:6rem auto;">
+<section class="container" style="margin:6rem auto;">
     <h2 class="center-text">Cafés destacados</h2>
 
+    <?php
+    // =================================================================
+    // CONSULTA SQL FUNCIONAL: Usa JOIN para obtener precio, nombre e imagen.
+    // =================================================================
+    $sql_destacados = "
+        SELECT
+            p.id,
+            p.nombre_cafe AS name,   -- Alias: nombre_cafe -> name
+            p.imagen AS image,       -- Alias: imagen -> image
+            pv.precio AS price       -- Precio de la variante base (250g, grano, medio)
+        FROM
+            productos p
+        JOIN
+            producto_variantes pv 
+            ON p.id = pv.producto_id
+        WHERE
+            p.disponible = TRUE
+            AND pv.envase = '250g'    
+            AND pv.molienda = 'grano'
+            AND pv.tueste = 'medio'
+        LIMIT 6
+    ";
+
+    // Preparamos y ejecutamos la consulta (asumiendo que $pdo está conectado)
+    $stmt = $pdo->prepare($sql_destacados);
+    $stmt->execute();
+    ?>
+
     <div class="productos-grid">
-      <?php
-      $stmt = $pdo->query("SELECT id, name, price, image FROM products LIMIT 6");
-      while ($row = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
-        <article class="producto-card">
-          <?php if (!empty($row['image'])): ?>
-            <img src="../assets/img/<?php echo htmlspecialchars($row['image']); ?>"
-                 alt="<?php echo htmlspecialchars($row['name']); ?>">
-          <?php endif; ?>
+        <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
+            <article class="producto-card">
+                <?php if (!empty($row['image'])): ?>
+                    <img src="../assets/img/<?php echo htmlspecialchars($row['image']); ?>"
+                         alt="<?php echo htmlspecialchars($row['name']); ?>">
+                <?php endif; ?>
 
-          <h3><?php echo htmlspecialchars($row['name']); ?></h3>
-          <p class="precio"><?php echo number_format($row['price'], 2); ?> €</p>
+                <h3><?php echo htmlspecialchars($row['name']); ?></h3>
+                
+                <p class="precio"><?php echo number_format($row['price'], 2); ?> €</p>
 
-          <form action="cart.php" method="post">
-            <input type="hidden" name="product_id" value="<?php echo (int)$row['id']; ?>">
-            <button type="submit" class="btn-add-cart">Añadir al carrito</button>
-          </form>
-        </article>
-      <?php endwhile; ?>
+                <form action="cart.php" method="post">
+                    <input type="hidden" name="product_id" value="<?php echo (int)$row['id']; ?>">
+                    <button type="submit" class="btn-add-cart">Añadir al carrito</button>
+                </form>
+            </article>
+        <?php endwhile; ?>
     </div>
-  </section>
+</section>
 
 </main>
 
 <?php include __DIR__ . '/templates/footer.php'; ?>
+
