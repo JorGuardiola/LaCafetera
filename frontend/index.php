@@ -20,6 +20,10 @@ $card_html = [
 
 <main>
 
+ <?php include __DIR__ . '/templates/hero.php'; ?> 
+  
+  
+  // CARRUSEL
   <section class="tag-carousel">
     <div class="carousel-header">
       <h2>Nuestros valores</h2>
@@ -38,7 +42,7 @@ $card_html = [
       ?>
    </div>
 </section>
-
+// PRODUCTOS DESTACADOS
 <section class="container" style="margin:6rem auto;">
     <h2 class="center-text">Cafés destacados</h2>
 
@@ -94,4 +98,5 @@ $card_html = [
 </main>
 
 <?php include __DIR__ . '/templates/footer.php'; ?>
+
 
