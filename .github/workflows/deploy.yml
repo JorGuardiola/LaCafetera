@@ -27,6 +27,8 @@ jobs:
         protocol: ftp                         # Usa 'ftp' ya que el puerto es 21 (FTP estándar)
         local-dir: ./                         # Sube la raíz de tu repositorio
         server-dir: htdocs/                   # Sube a la carpeta de destino en InfinityFree
+        # IMPORTANTE: Esta línea garantiza que se borren del servidor los archivos que ya no están en tu repositorio.
+        delete-local: true
         
     - name: 3. Despliegue Finalizado
-      run: echo "¡Despliegue exitoso a la carpeta htdocs!"
+      run: echo "¡Despliegue exitoso a la carpeta htdocs y archivos viejos eliminados!"
