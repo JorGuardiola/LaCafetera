@@ -6,10 +6,10 @@
 -- ----------------------------------------------------
 
 -- Crea la base de datos si no existe
-CREATE DATABASE IF NOT EXISTS cafetera CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE IF NOT EXISTS cafeteria_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- Selecciona la base de datos para ejecutar las siguientes instrucciones
-USE cafetera;
+USE cafeteria_db;
 
 -- ----------------------------------------------------
 -- 1. DROP DE TABLAS (OPCIONAL: Para empezar desde cero)
@@ -256,6 +256,7 @@ VALUES ('AGUAL_1KG_E', 4, 50, 49.90, 'molido espresso', 'medio', '1kg');
 -- El tueste se ajusta a 'medio'
 INSERT INTO producto_variantes (sku, producto_id, stock, precio, molienda, tueste, envase)
 VALUES ('ARAMO_250_V', 11, 80, 18.50, 'molido goteo', 'medio', '250g');
+
 
 
 
