@@ -24,8 +24,8 @@ DROP TABLE IF EXISTS pedido_items; -- Antes orden_items
 DROP TABLE IF EXISTS pedidos;      -- Antes ordenes
 DROP TABLE IF EXISTS carrito_items;
 DROP TABLE IF EXISTS carritos;
-DROP TABLE IF EXISTS direcciones;
 DROP TABLE IF EXISTS usuarios;
+DROP TABLE IF EXISTS direcciones;
 DROP TABLE IF EXISTS producto_variantes;
 DROP TABLE IF EXISTS productos;
 
@@ -892,4 +892,5 @@ INSERT INTO producto_variantes (sku, producto_id, precio, stock, molienda, tuest
 ('PERGESGOTO2KG', 18, 182.00, 100, 'molido goteo', 'oscuro', '2kg'),
 ('PERGESFRAM2KG', 18, 182.00, 100, 'molido francesa', 'medio', '2kg'),
 ('PERGESFRAO2KG', 18, 182.00, 100, 'molido francesa', 'oscuro', '2kg');
+
 
