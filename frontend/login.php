@@ -41,18 +41,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif (empty($password)) {
         $error_message = "La contraseña es obligatoria.";
     } else {
-        try {
-            // 2. Preparar y ejecutar la consulta a la base de datos
-            $stmt = $pdo->prepare("SELECT contrasena FROM usuarios WHERE email = ?");
-            $stmt->execute([$email]);
-            $user = $stmt->fetch();
+        try {
+            // 2. Preparar y ejecutar la consulta a la base de datos
+            $stmt = $pdo->prepare("SELECT id, email, contrasena FROM usuarios WHERE email = ?");
+            $stmt->execute([$email]);
+            $user = $stmt->fetch();
 
-            // 3. Verificar las credenciales
-            if ($user && password_verify($password, $user['contrasena'])) {
-                // 4. Login Exitoso: Iniciar sesión y Redirigir
-                // *** Configuramos las variables de sesión ***
+            // 3. Verificar las credenciales
+            if ($user && password_verify($password, $user['contrasena'])) {
+                // 4. Login Exitoso: Iniciar sesión y Redirigir
+                // *** Configuramos las variables de sesión ***
                 $_SESSION['user_id'] = $user['id']; 
-                $_SESSION['logged_in'] = true; 
+                $_SESSION['user_email'] = $user['email'];
+                $_SESSION['logged_in'] = true;
                 
                 header('Location: index.html');
                 exit;
@@ -159,7 +160,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="absolute inset-0 bg-black bg-opacity-10"></div>
                 <!-- Logo flotante -->
                 <div class="absolute top-8 left-8 flex items-center space-x-2">
-                    <img src="img/logo-white.png" alt="Logo La Cafetera" class="logo-icon w-8 h-8">
+                    <img src="/assets/img/logo-white.png" alt="Logo La Cafetera" class="logo-icon w-8 h-8">
                     <span class="text-3xl font-bold text-white">La Cafetera</span>
                 </div>
             </div>
