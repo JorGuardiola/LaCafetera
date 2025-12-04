@@ -326,9 +326,9 @@ VALUES (2, NOW(), NOW());
 -- 8. INSERCIÓN DE DATOS DE PRUEBA: CARRITO_ITEMS
 -- ----------------------------------------------------
 
--- Añade 2 unidades del Brasil Sarutaia (sku 'SARUT_250_G') al carrito del usuario 2 (id_carrito=1)
+-- Añade 2 unidades del Brasil Sarutaia (sku 'BRASARGRAM250') al carrito del usuario 2 (id_carrito=1)
 INSERT INTO carrito_items (id_carrito, id_variante_sku, cantidad, fecha_agregado)
-VALUES (1, 'SARUT_250_G', 2, NOW());
+VALUES (1, 'BRASARGRAM250', 2, NOW());
 
 -- -------------------------------------------------------------------
 -- VARIANTES ADICIONALES (Resto de combinaciones)
@@ -892,5 +892,6 @@ INSERT INTO producto_variantes (sku, producto_id, precio, stock, molienda, tuest
 ('PERGESGOTO2KG', 18, 182.00, 100, 'molido goteo', 'oscuro', '2kg'),
 ('PERGESFRAM2KG', 18, 182.00, 100, 'molido francesa', 'medio', '2kg'),
 ('PERGESFRAO2KG', 18, 182.00, 100, 'molido francesa', 'oscuro', '2kg');
+
 
 
