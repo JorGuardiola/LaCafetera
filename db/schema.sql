@@ -63,7 +63,7 @@ CREATE TABLE producto_variantes (
     tueste ENUM('medio', 'oscuro') NOT NULL, 
     envase ENUM('250g', '1kg', '2kg') NOT NULL,
     
-    FOREIGN KEY (producto_id) REFERENCES productos(id), ON DELETE CASCADE,
+    FOREIGN KEY (producto_id) REFERENCES productos(id) ON DELETE CASCADE,
     UNIQUE KEY uk_variante (producto_id, molienda, tueste, envase) 
 );
 
@@ -892,6 +892,7 @@ INSERT INTO producto_variantes (sku, producto_id, precio, stock, molienda, tuest
 ('PERGESGOTO2KG', 18, 182.00, 100, 'molido goteo', 'oscuro', '2kg'),
 ('PERGESFRAM2KG', 18, 182.00, 100, 'molido francesa', 'medio', '2kg'),
 ('PERGESFRAO2KG', 18, 182.00, 100, 'molido francesa', 'oscuro', '2kg');
+
 
 
 
