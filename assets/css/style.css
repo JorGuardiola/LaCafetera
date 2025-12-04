@@ -829,3 +829,110 @@ h3 { font-size: 2.8rem; }
 
 
 
+
+/* ===============================
+   BARRA DE FILTROS (SEARCH.PHP)
+================================ */
+
+/* CONTENEDOR PRINCIPAL */
+.product-filter-bar {
+    width: 90%;
+    max-width: 1300px;
+    margin: 4rem auto 2rem auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* TÍTULO */
+.filter-title {
+    font-family: var(--primary-700)
+    font-size: 3rem;
+    margin: 0;
+    
+}
+
+/* CONTROLES */
+.filter-controls {
+    display: flex;
+    gap: 1.4rem;
+    align-items: center;
+}
+
+/* BOTONES */
+.filter-btn {
+    padding: 1rem 2rem;
+    border-radius: 40px;
+    border: transparent
+    background: rgba(var(--secondary-500), var(--opacidad-barra));
+    
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: 0.2s ease;
+}
+
+.filter-btn:hover {
+    background: rgba(34,54,74,0.1);
+}
+
+/* BOTÓN MÁS LARGO */
+.filter-btn.long {
+    padding-right: 2.6rem;
+    padding-left: 2.6rem;
+}
+
+/* FLECHA */
+.arrow {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+/* ICONO CALENDARIO */
+.calendar-icon {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+/* =====================
+   RESPONSIVE
+===================== */
+
+/* Tablet */
+@media (max-width: 900px) {
+    .product-filter-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2rem;
+    }
+
+    .filter-controls {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+}
+
+/* Móvil */
+@media (max-width: 600px) {
+    .filter-title {
+        font-size: 2.3rem;
+    }
+
+    .filter-controls {
+        gap: 1rem;
+    }
+
+    .filter-btn {
+        padding: 0.8rem 1.6rem;
+        font-size: 1.3rem;
+    }
+
+    .filter-btn.long {
+        padding-left: 1.6rem;
+        padding-right: 1.6rem;
+    }
+}
