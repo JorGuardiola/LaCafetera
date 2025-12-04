@@ -1,6 +1,11 @@
 <?php
+// frontend/products.php
 session_start();
 require_once __DIR__ . '/../db/connection.php';
+
+// Ruta base dinámica (usada para las imágenes del carrusel)
+// Asegúrate de que '/lacafetera' sea la subcarpeta del proyecto en htdocs.
+$base_path = '/lacafetera'; 
 
 // Datos del hero
 $bgClass = "bg-productos";
@@ -39,17 +44,30 @@ $heroButtonLink = "";
 
     $offset = ($pagina - 1) * $por_pagina;
 
-    /* -----------------------------------
-        CONSULTA DE PRODUCTOS
+/* -----------------------------------
+       CONSULTA: 19 Productos + Precio base (250g) Corregida
     ----------------------------------- */
-    $stmt = $conn->prepare("
-        SELECT id, nombre_cafe, presentacion, imagen, puntuacion_sca
-        FROM productos
-        WHERE disponible = 1
-        LIMIT :offset, :limite
-    ");
-    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
-    $stmt->bindValue(':limite', $por_pagina, PDO::PARAM_INT);
+    $sql = "
+        SELECT 
+            p.id, 
+            p.nombre_cafe, 
+            p.presentacion, 
+            p.imagen, 
+            p.puntuacion_sca,
+            pv.precio  -- Precio directo de la variante de 250g
+        FROM productos p
+        -- Unimos con variantes SOLO si coinciden con el formato base '250g'
+        LEFT JOIN producto_variantes pv 
+            ON p.id = pv.producto_id AND pv.formato = '250g'
+        WHERE p.disponible = 1
+        ORDER BY p.id ASC
+        LIMIT :limite OFFSET :desplazamiento
+    ";
+
+    $stmt = $conn->prepare($sql);
+    // Usamos bindValue para evitar errores de paginación con LIMIT
+    $stmt->bindValue(':limite', (int)$por_pagina, PDO::PARAM_INT);
+    $stmt->bindValue(':desplazamiento', (int)$offset, PDO::PARAM_INT);
     $stmt->execute();
     $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -85,7 +103,7 @@ $heroButtonLink = "";
 
             <p class="product-weight"><?= htmlspecialchars($p['presentacion']) ?></p>
 
-            <p class="product-price"><?= number_format($p['puntuacion_sca'], 1) ?>€</p>
+            <p class="product-price"><?= number_format($p['precio'], 2) ?>€</p>
 
             <button class="product-btn">Ver detalles</button>
 

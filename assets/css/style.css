@@ -846,7 +846,7 @@ h3 { font-size: 2.8rem; }
 
 /* TÍTULO */
 .filter-title {
-    font-family: var(--primary-700)
+    font-family: var(--primary-700);
     font-size: 3rem;
     margin: 0;
     
@@ -863,7 +863,7 @@ h3 { font-size: 2.8rem; }
 .filter-btn {
     padding: 1rem 2rem;
     border-radius: 40px;
-    border: transparent
+    border: transparent;
     background: rgba(var(--secondary-500), var(--opacidad-barra));
     
     letter-spacing: 0.3px;
