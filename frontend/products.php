@@ -1,6 +1,15 @@
 <?php
+// frontend/products.php
 session_start();
 require_once __DIR__ . '/../db/connection.php';
+
+// DEBUG temporal
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+// Ruta base dinámica (usada para las imágenes del carrusel)
+// Asegúrate de que '/lacafetera' sea la subcarpeta del proyecto en htdocs.
+$base_path = '/lacafetera'; 
 
 // Datos del hero
 $bgClass = "bg-productos";
@@ -39,24 +48,38 @@ $heroButtonLink = "";
 
     $offset = ($pagina - 1) * $por_pagina;
 
-    /* -----------------------------------
-        CONSULTA DE PRODUCTOS
+/* -----------------------------------
+       CONSULTA: 19 Productos + Precio base (250g) Corregida
     ----------------------------------- */
-    $stmt = $conn->prepare("
-        SELECT id, nombre_cafe, presentacion, imagen, puntuacion_sca
-        FROM productos
-        WHERE disponible = 1
-        LIMIT :offset, :limite
-    ");
-    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
-    $stmt->bindValue(':limite', $por_pagina, PDO::PARAM_INT);
+   $sql = "
+        SELECT 
+            p.id, 
+            p.nombre_cafe, 
+            p.presentacion, 
+            p.imagen, 
+            p.puntuacion_sca,
+            -- Subconsulta: Busca el precio exacto de la variante base (250g)
+            (SELECT precio FROM producto_variantes pv 
+             WHERE pv.producto_id = p.id 
+             AND pv.envase = '250g' 
+             LIMIT 1) as precio
+        FROM productos p
+        WHERE p.disponible = 1
+        ORDER BY p.id ASC
+        LIMIT :limite OFFSET :desplazamiento
+    ";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(':limite', (int)$por_pagina, PDO::PARAM_INT);
+    $stmt->bindValue(':desplazamiento', (int)$offset, PDO::PARAM_INT);
     $stmt->execute();
+    
     $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     /* -----------------------------------
         CONTAR TOTAL
     ----------------------------------- */
-    $total_query = $conn->query("SELECT COUNT(*) AS total FROM productos WHERE disponible = 1");
+    $total_query = $pdo->query("SELECT COUNT(*) AS total FROM productos WHERE disponible = 1");
     $total_productos = $total_query->fetch()['total'];
     $total_paginas = ceil($total_productos / $por_pagina);
     ?>
@@ -85,7 +108,7 @@ $heroButtonLink = "";
 
             <p class="product-weight"><?= htmlspecialchars($p['presentacion']) ?></p>
 
-            <p class="product-price"><?= number_format($p['puntuacion_sca'], 1) ?>€</p>
+            <p class="product-price"><?= isset($p['precio']) ? number_format($p['precio'], 2) : '0.00' ?>€</p>
 
             <button class="product-btn">Ver detalles</button>
 
