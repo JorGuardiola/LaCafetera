@@ -4,7 +4,7 @@ session_start();
 require_once __DIR__ . '/../db/connection.php';
 
 // Ruta base dinámica (usada para las imágenes del carrusel)
-// Asegúrate de que '/lacafetera' sea la subcarpeta de tu proyecto en htdocs.
+// Asegúrate de que '/lacafetera' sea la subcarpeta del proyecto en htdocs.
 $base_path = '/lacafetera'; 
 
 // Definición de las tarjetas en PHP para duplicarlas fácilmente
@@ -29,7 +29,9 @@ $heroButtonLink = "";
 include __DIR__ . '/templates/hero.php';
 ?> 
   
-  // CARRUSEL
+
+<!-- CARRUSEL -->
+
   <section class="tag-carousel">
     <div class="carousel-header">
       <h2>Nuestros valores</h2>
@@ -48,7 +50,9 @@ include __DIR__ . '/templates/hero.php';
       ?>
    </div>
 </section>
-// PRODUCTOS DESTACADOS
+
+<!-- PRODUCTOS DESTACADOS -->
+
 <section class="container" style="margin:6rem auto;">
     <h2 class="center-text">Cafés destacados</h2>
 
