@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         /* Estilo para la columna de la imagen de fondo */
         .image-bg {
-            background-image: url('img/hannah-tims-oasBqJPFyJA-unsplash.jpg'); 
+            background-image: url('/assets/img/hannah-tims-oasBqJPFyJA-unsplash.jpg'); 
             background-size: cover;
             background-position: center;
             border-radius: 0 10px 10px 0; /* Bordes redondeados en la derecha */
@@ -90,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <!-- Logo -->
                 <div class="flex items-center space-x-2">
                     <!-- ICONO DEL LOGO -->
-                    <img src="img/logo-white.png" alt="Logo La Cafetera" class="logo-icon">
+                    <img src="/assets/img/logo-white.png" alt="Logo La Cafetera" class="logo-icon">
                     <span class="text-xl font-bold">La Cafetera</span>
                 </div>
                 
@@ -210,7 +210,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <!-- Columna 1: Branding -->
                     <div class="col-span-2 md:col-span-1 space-y-3">
                          <div class="flex items-center space-x-2">
-                            <img src="img/logo-white.png" alt="Logo La Cafetera" class="logo-icon">
+                            <img src="/assets/img/logo-white.png" alt="Logo La Cafetera" class="logo-icon">
                             <span class="text-2xl font-bold">La Cafetera</span>
                         </div>
                         <p class="text-sm opacity-70">Desde 1994 seleccionando los mejores cafés del mundo para llevarlos a tu taza</p>
@@ -246,13 +246,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <!-- Redes Sociales usando IMG -->
                         <div class="flex space-x-3 mb-6">
                             <a href="URL_TU_INSTAGRAM" class="p-2 border border-gray-700 rounded-full hover:bg-gray-800 transition duration-200">
-                                <img src="img/instagram.svj" alt="Instagram" class="w-5 h-5">
+                                <img src="/assets/img/instagram.svj" alt="Instagram" class="w-5 h-5">
                             </a>
                             <a href="URL_TU_FACEBOOK" class="p-2 border border-gray-700 rounded-full hover:bg-gray-800 transition duration-200">
-                                <img src="img/facebook.svj" alt="Facebook" class="w-5 h-5">
+                                <img src="/assets/img/facebook.svj" alt="Facebook" class="w-5 h-5">
                             </a>
                             <a href="URL_TU_WHATSAPP" class="p-2 border border-gray-700 rounded-full hover:bg-gray-800 transition duration-200">
-                                <img src="img/whatsapp.svj" alt="Whatsapp" class="w-5 h-5">
+                                <img src="/assets/img/whatsapp.svj" alt="Whatsapp" class="w-5 h-5">
                             </a>                    
                         </div>
                     </div>
@@ -296,3 +296,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </script>
 </body>
 </html>
+
