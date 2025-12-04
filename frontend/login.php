@@ -104,9 +104,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 <!-- Iconos de Lupa, Carrito y Usuario -->
                 <div class="flex items-center space-x-4">
-                    <img src="img/buscar.png" alt="Buscar" class="header-icon">
-                    <img src="img/carrito.png" alt="Carrito" class="header-icon">
-                    <img src="img/usuario.png" alt="Perfil" class="header-icon">
+                    <img src="/assets/img/buscar.png" alt="Buscar" class="header-icon">
+                    <img src="/assets/img/carrito.png" alt="Carrito" class="header-icon">
+                    <img src="/assets/img/login.png" alt="Perfil" class="header-icon">
                 </div>
             </div>
         </header>
@@ -296,4 +296,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </script>
 </body>
 </html>
+
 
