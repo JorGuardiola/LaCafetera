@@ -10,7 +10,7 @@ $success_message = '';
 // db/db_connection.php
 // Parámetros de conexión a la base de datos
 $host = 'localhost';
-$db   = 'cafeteria_db'; // Asegúrate de que esta base de datos exista
+$db   = 'cafeteria_db'; // Asegúrate de que esta base de datos exista
 $user = 'root';
 $pass = ''; // Contraseña de tu usuario root de MySQL
 $charset = 'utf8mb4';
@@ -18,17 +18,54 @@ $charset = 'utf8mb4';
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 
 try {
-    // Crear una instancia de PDO
-    $pdo = new PDO($dsn, $user, $pass, [
-        // Opciones de configuración para PDO
-        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, // Lanzar excepciones en caso de error
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,       // Establecer el modo de obtención predeterminado a array asociativo
-        PDO::ATTR_EMULATE_PREPARES   => false,                  // Deshabilitar la emulación de prepared statements (más seguro)
-    ]);
+    // Crear una instancia de PDO
+    $pdo = new PDO($dsn, $user, $pass, [
+        // Opciones de configuración para PDO
+        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_EMULATE_PREPARES   => false,
+    ]);
 } catch (PDOException $e) {
-    // Si la conexión falla, detiene la ejecución y muestra un error
-    // En un entorno de producción, solo deberías loguear el error, no mostrarlo al usuario.
-    die('Error de conexión a la base de datos: ' . $e->getMessage());
+    // Si la conexión falla, detiene la ejecución y muestra un error
+    die('Error de conexión a la base de datos: ' . $e->getMessage());
+}
+
+// --- 🔑 Lógica de Procesamiento del Formulario de Login ---
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // 1. Recoger y sanear los datos del formulario
+    $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+    $password = $_POST['password'] ?? ''; // La contraseña sin sanear (será verificada con hash)
+
+    if (!$email) {
+        $error_message = "El formato del email es inválido.";
+    } elseif (empty($password)) {
+        $error_message = "La contraseña es obligatoria.";
+    } else {
+        try {
+            // 2. Preparar y ejecutar la consulta a la base de datos
+            $stmt = $pdo->prepare("SELECT contrasena FROM usuarios WHERE email = ?");
+            $stmt->execute([$email]);
+            $user = $stmt->fetch();
+
+            // 3. Verificar las credenciales
+            if ($user && password_verify($password, $user['contrasena'])) {
+                // 4. Login Exitoso: Iniciar sesión y Redirigir
+                
+                // ** ESTA ES LA REDIRECCIÓN CLAVE **
+                header('Location: index.html');
+                exit; 
+                
+            } else {
+                // 5. Login Fallido
+                $error_message = "Email o contraseña incorrectos.";
+            }
+
+        } catch (PDOException $e) {
+            // Error de consulta
+            $error_message = "Ocurrió un error en el servidor. Inténtelo de nuevo.";
+            // Puedes loguear $e->getMessage() para debug
+        }
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -296,6 +333,7 @@ try {
     </script>
 </body>
 </html>
+
 
 
 
