@@ -7,10 +7,9 @@ error_reporting(E_ALL);
 $error_message = '';
 $success_message = '';
 
-// db/db_connection.php
 // Parámetros de conexión a la base de datos
 $host = 'localhost';
-$db   = 'cafeteria_db'; // Asegúrate de que esta base de datos exista
+$db   = 'cafeteria_db'; 
 $user = 'root';
 $pass = ''; // Contraseña de tu usuario root de MySQL
 $charset = 'utf8mb4';
@@ -333,6 +332,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </script>
 </body>
 </html>
+
 
 
 
