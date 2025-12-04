@@ -3,7 +3,7 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-// Iniciar la sesión dfsgsdf
+// Iniciar la sesión 
 session_start();
 
 // Inicializar variables para mensajes
