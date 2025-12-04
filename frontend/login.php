@@ -285,13 +285,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <!-- Redes Sociales usando IMG -->
                         <div class="flex space-x-3 mb-6">
                             <a href="URL_TU_INSTAGRAM" class="p-2 border border-gray-700 rounded-full hover:bg-gray-800 transition duration-200">
-                                <img src="/assets/img/instagram.svj" alt="Instagram" class="w-5 h-5">
+                                <img src="/assets/img/instagram.svg" alt="Instagram" class="w-5 h-5">
                             </a>
                             <a href="URL_TU_FACEBOOK" class="p-2 border border-gray-700 rounded-full hover:bg-gray-800 transition duration-200">
-                                <img src="/assets/img/facebook.svj" alt="Facebook" class="w-5 h-5">
+                                <img src="/assets/img/facebook.svg" alt="Facebook" class="w-5 h-5">
                             </a>
                             <a href="URL_TU_WHATSAPP" class="p-2 border border-gray-700 rounded-full hover:bg-gray-800 transition duration-200">
-                                <img src="/assets/img/whatsapp.svj" alt="Whatsapp" class="w-5 h-5">
+                                <img src="/assets/img/whatsapp.svg" alt="Whatsapp" class="w-5 h-5">
                             </a>                    
                         </div>
                     </div>

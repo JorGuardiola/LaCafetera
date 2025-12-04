@@ -17,7 +17,7 @@ $email = '';
 // db/db_connection.php
 // Parámetros de conexión a la base de datos
 $host = 'localhost';
-$db   = 'cafeteria_db'; // Asegúrate de que esta base de datos exista
+$db = 'cafeteria_db'; // Asegúrate de que esta base de datos exista
 $user = 'root';
 $pass = ''; // Contraseña de tu usuario root de MySQL
 $charset = 'utf8mb4';
@@ -25,16 +25,17 @@ $charset = 'utf8mb4';
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 
 try {
-    // Crear una instancia de PDO
-    $pdo = new PDO($dsn, $user, $pass, [
-        // Opciones de configuración para PDO
-        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, // Lanzar excepciones en caso de error
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,       // Establecer el modo de obtención predeterminado a array asociativo
-        PDO::ATTR_EMULATE_PREPARES   => false,                  // Deshabilitar la emulación de prepared statements (más seguro)
-    ]);
+    // Crear una instancia de PDO
+    $pdo = new PDO($dsn, $user, $pass, [
+        // Opciones de configuración para PDO
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, // Lanzar excepciones en caso de error
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, // Establecer el modo de obtención predeterminado a array asociativo
+        PDO::ATTR_EMULATE_PREPARES => false, // Deshabilitar la emulación de prepared statements (más seguro)
+    ]);
 } catch (PDOException $e) {
-    // Si la conexión falla, detiene la ejecución y muestra un error
-    // die('Error de conexión a la base de datos: ' . $e->getMessage());
+    // Si la conexión falla, registrar el error y detener la ejecución
+    error_log('Error de conexión a la base de datos: ' . $e->getMessage());
+    die('Error de conexión a la base de datos. Revisa los registros del servidor.');
 }
 
 // ====================================================================
@@ -144,13 +145,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </button>
                     <div class="flex space-x-3 mb-6">
                         <a href="URL_TU_INSTAGRAM" class="p-2 border border-gray-700 rounded-full hover:bg-gray-800 transition duration-200">
-                            <img src="/assets/img/instagram.svj" alt="Instagram" class="w-5 h-5">
+                            <img src="/assets/img/instagram.svg" alt="Instagram" class="w-5 h-5">
                         </a>
                         <a href="URL_TU_FACEBOOK" class="p-2 border border-gray-700 rounded-full hover:bg-gray-800 transition duration-200">
-                            <img src="/assets/img/facebook.svj" alt="Facebook" class="w-5 h-5">
+                            <img src="/assets/img/facebook.svg" alt="Facebook" class="w-5 h-5">
                         </a>
                         <a href="URL_TU_WHATSAPP" class="p-2 border border-gray-700 rounded-full hover:bg-gray-800 transition duration-200">
-                            <img src="/assets/img/whatsapp.svj" alt="Whatsapp" class="w-5 h-5">
+                            <img src="/assets/img/whatsapp.svg" alt="Whatsapp" class="w-5 h-5">
                         </a>
                     </div>
                 </div>
@@ -170,25 +171,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </footer>
     
     <script>
-        // Inicializar iconos de Lucide (solo es necesario para el toggle de contraseña)
-        lucide.createIcons();
+        // Inicializar iconos de Lucide (si está disponible)
+        if (window.lucide && typeof window.lucide.createIcons === 'function') {
+            window.lucide.createIcons();
+        }
 
-        // Lógica para mostrar/ocultar contraseña
-        document.getElementById('togglePassword').addEventListener('click', function (e) {
-            const passwordInput = document.getElementById('password');
-            const icon = e.currentTarget.querySelector('i');
-            
-            // Alternar el tipo de input y el icono
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                icon.setAttribute('data-lucide', 'eye-off');
-                lucide.createIcons();
-            } else {
-                passwordInput.type = 'password';
-                icon.setAttribute('data-lucide', 'eye');
-                lucide.createIcons();
-            }
-        });
+        // Lógica para mostrar/ocultar contraseña (proteger contra elementos faltantes)
+        const togglePassword = document.getElementById('togglePassword');
+        if (togglePassword) {
+            togglePassword.addEventListener('click', function (e) {
+                const passwordInput = document.getElementById('password');
+                if (!passwordInput) return;
+                const icon = e.currentTarget.querySelector('i');
+
+                // Alternar el tipo de input y el icono
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    if (icon) icon.setAttribute('data-lucide', 'eye-off');
+                    if (window.lucide && typeof window.lucide.createIcons === 'function') window.lucide.createIcons();
+                } else {
+                    passwordInput.type = 'password';
+                    if (icon) icon.setAttribute('data-lucide', 'eye');
+                    if (window.lucide && typeof window.lucide.createIcons === 'function') window.lucide.createIcons();
+                }
+            });
+        }
 
         // Redirigir al index.php si el registro fue exitoso
         <?php if (!empty($success_message)): ?>
