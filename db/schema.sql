@@ -24,8 +24,8 @@ DROP TABLE IF EXISTS pedido_items; -- Antes orden_items
 DROP TABLE IF EXISTS pedidos;      -- Antes ordenes
 DROP TABLE IF EXISTS carrito_items;
 DROP TABLE IF EXISTS carritos;
-DROP TABLE IF EXISTS direcciones;
 DROP TABLE IF EXISTS usuarios;
+DROP TABLE IF EXISTS direcciones;
 DROP TABLE IF EXISTS producto_variantes;
 DROP TABLE IF EXISTS productos;
 
@@ -63,7 +63,7 @@ CREATE TABLE producto_variantes (
     tueste ENUM('medio', 'oscuro') NOT NULL, 
     envase ENUM('250g', '1kg', '2kg') NOT NULL,
     
-    FOREIGN KEY (producto_id) REFERENCES productos(id), ON DELETE CASCADE,
+    FOREIGN KEY (producto_id) REFERENCES productos(id) ON DELETE CASCADE,
     UNIQUE KEY uk_variante (producto_id, molienda, tueste, envase) 
 );
 
@@ -326,9 +326,9 @@ VALUES (2, NOW(), NOW());
 -- 8. INSERCIÓN DE DATOS DE PRUEBA: CARRITO_ITEMS
 -- ----------------------------------------------------
 
--- Añade 2 unidades del Brasil Sarutaia (sku 'SARUT_250_G') al carrito del usuario 2 (id_carrito=1)
+-- Añade 2 unidades del Brasil Sarutaia (sku 'BRASARGRAM250') al carrito del usuario 2 (id_carrito=1)
 INSERT INTO carrito_items (id_carrito, id_variante_sku, cantidad, fecha_agregado)
-VALUES (1, 'SARUT_250_G', 2, NOW());
+VALUES (1, 'BRASARGRAM250', 2, NOW());
 
 -- -------------------------------------------------------------------
 -- VARIANTES ADICIONALES (Resto de combinaciones)
@@ -925,4 +925,7 @@ INSERT INTO producto_variantes (sku, producto_id, precio, stock, molienda, tuest
 ('PERGESGOTO2KG', 19, 86.80, 100, 'molido goteo', 'oscuro', '2kg'),
 ('PERGESFRAM2KG', 19, 86.80, 100, 'molido francesa', 'medio', '2kg'),
 ('PERGESFRAO2KG', 19, 86.80, 100, 'molido francesa', 'oscuro', '2kg');
+
+
+
 
