@@ -253,27 +253,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <p class="text-sm opacity-70">Desde 1994 seleccionando los mejores cafés del mundo para llevarlos a tu taza</p>
                     </div>
 
-                    <!-- Columna 2: Cafetera Links -->
-                    <div>
-                        <h4 class="font-semibold mb-3">Cafetera</h4>
-                        <ul class="space-y-2 text-sm opacity-70">
-                            <li><a href="#" class="hover:text-white transition duration-200">Nosotros</a></li>
-                            <li><a href="#" class="hover:text-white transition duration-200">Elaboración</a></li>
-                            <li><a href="#" class="hover:text-white transition duration-200">Sostenibilidad</a></li>
-                            <li><a href="#" class="hover:text-white transition duration-200">Contacto</a></li>
-                        </ul>
-                    </div>
+                    <!-- Columna 2: Cafetera Links  -->
+                <div class="text-left md:text-left">
+                    <h4 class="font-semibold mb-3">Cafetera</h4>
+                    <ul class="space-y-2 text-sm opacity-70">
+                        <li><a href="#" class="hover:text-white transition duration-200 rounded-sm focus:outline-none focus:ring-2 focus:ring-white">Nosotros</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-200 rounded-sm focus:outline-none focus:ring-2 focus:ring-white">Elaboración</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-200 rounded-sm focus:outline-none focus:ring-2 focus:ring-white">Sostenibilidad</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-200 rounded-sm focus:outline-none focus:ring-2 focus:ring-white">Contacto</a></li>
+                    </ul>
+                </div>
 
-                    <!-- Columna 3: Productos Links -->
-                    <div>
-                        <h4 class="font-semibold mb-3">Productos</h4>
-                        <ul class="space-y-2 text-sm opacity-70">
-                            <li><a href="#" class="hover:text-white transition duration-200">Productos</a></li>
-                            <li><a href="#" class="hover:text-white transition duration-200">Packs</a></li>
-                            <li><a href="#" class="hover:text-white transition duration-200">Recetas</a></li>
-                            <li><a href="#" class="hover:text-white transition duration-200">Información</a></li>
-                        </ul>
-                    </div>
+                <!-- Columna 3: Productos Links  -->
+                <div class="text-left md:text-left">
+                    <h4 class="font-semibold mb-3">Productos</h4>
+                    <ul class="space-y-2 text-sm opacity-70">
+                        <li><a href="#" class="hover:text-white transition duration-200 rounded-sm focus:outline-none focus:ring-2 focus:ring-white">Productos</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-200 rounded-sm focus:outline-none focus:ring-2 focus:ring-white">Packs</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-200 rounded-sm focus:outline-none focus:ring-2 focus:ring-white">Recetas</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-200 rounded-sm focus:outline-none focus:ring-2 focus:ring-white">Información</a></li>
+                    </ul>
+                </div>
 
                     <!-- Columna 4 & 5: Contacto y Social Media -->
                     <div class="col-span-2 md:col-span-2 flex flex-col items-start md:items-end">
@@ -333,6 +333,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </script>
 </body>
 </html>
+
 
 
 
