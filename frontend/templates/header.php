@@ -21,13 +21,15 @@
 <header class="header">
       <!-- LOGO -->
       <div class="img-logo">
-        <img src="../assets/img/logo.png" alt="Logo La Cafetera">
+        <a href="index.php"> 
+          <img src="../assets/img/logo.png" alt="Logo La Cafetera">
+        </a>
       </div>
 
       <!-- NAV -->
       <nav class="nav-bar">
         <ul>
-          <li><a href="index.php">Productos</a></li>
+          <li><a href="products.php">Productos</a></li>
           <li><a href="#">Nosotros</a></li>
           <li><a href="#">Recetas</a></li>
           <li><a href="#">Contacto</a></li>
