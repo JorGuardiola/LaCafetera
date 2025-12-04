@@ -14,8 +14,7 @@ $heroButtonLink = "";
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Productos - La Cafetera</title>
-
+    <title>La Cafetera - Productos</title>
     <!-- CSS con ruta ABSOLUTA (esto siempre funciona) -->
     <link rel="stylesheet" href="/lacafetera/assets/css/style.css">
 </head>
@@ -27,6 +26,7 @@ $heroButtonLink = "";
 <main>
 
     <?php include __DIR__ . '/templates/hero.php'; ?>
+    <?php include __DIR__ . '/templates/search.php'; ?>
 
     <?php
     /* -----------------------------------
