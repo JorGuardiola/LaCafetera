@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombre = filter_input(INPUT_POST, 'nombre', FILTER_SANITIZE_SPECIAL_CHARS);
     $apellidos = filter_input(INPUT_POST, 'apellidos', FILTER_SANITIZE_SPECIAL_CHARS);
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-    $password_input = $_POST['password'];
+    $password_input = filter_input(INPUT_POST, 'password', FILTER_UNSAFE_RAW) ?? '';
 
     // Validaciones básicas
     if (empty($nombre) || empty($apellidos) || empty($email) || empty($password_input)) {
