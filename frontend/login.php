@@ -1,4 +1,5 @@
 <?php
+session_start();
 // Configuración de errores (opcional)
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
@@ -49,11 +50,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // 3. Verificar las credenciales
             if ($user && password_verify($password, $user['contrasena'])) {
                 // 4. Login Exitoso: Iniciar sesión y Redirigir
-                
-                // ** ESTA ES LA REDIRECCIÓN CLAVE **
-                header('Location: index.html');
-                exit; 
+                // *** Configuramos las variables de sesión ***
+                $_SESSION['user_id'] = $user['id']; 
+                $_SESSION['logged_in'] = true; 
                 
+                header('Location: index.html');
+                exit;
+                
             } else {
                 // 5. Login Fallido
                 $error_message = "Email o contraseña incorrectos.";
@@ -332,6 +335,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </script>
 </body>
 </html>
+
 
 
 
