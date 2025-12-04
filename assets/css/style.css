@@ -446,11 +446,6 @@ h3 { font-size: 2.8rem; }
     padding-bottom: 4rem; /* Espacio antes de la línea divisoria */
 }
 
-/* --- 1. Brand Info (Columna Izquierda) --- */
-.footer-brand-info {
-    /* Alinear al inicio del grid */
-}
-
 .footer-logo-text {
     display: flex;
     align-items: center;
@@ -477,11 +472,6 @@ h3 { font-size: 2.8rem; }
     margin-top: 1.5rem;
     font-size: 1.5rem;
     max-width: 25rem;
-}
-
-/* --- 2. Links Container (Columnas Centrales) --- */
-.footer-links-col {
-    /* No necesita más estilos si está dentro del Grid */
 }
 
 .footer-links-col h3 {
@@ -605,11 +595,7 @@ h3 { font-size: 2.8rem; }
     .footer-container {
         grid-template-columns: 2fr 1fr;
     }
-    
-    .footer-brand-info {
-        /* Ocupa la primera mitad izquierda */
-    }
-
+ 
     /* Colocamos los enlaces y las acciones sociales en la segunda mitad derecha */
     .footer-links-container {
         grid-column: 2 / 3;
