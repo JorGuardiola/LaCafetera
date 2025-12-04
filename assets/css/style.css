@@ -1,8 +1,3 @@
-Aquí tienes el archivo completo. He **limpiado todos los caracteres invisibles** (espacios de no-ruptura) que estaban causando los errores en VS Code, pero he mantenido **todos tus comentarios, estructura y valores** (incluido el padding de 20rem y todo lo demás) exactamente como me has pedido.
-
-Copia este bloque entero y pégalo en un **archivo nuevo** en VS Code para asegurarte de que no arrastras los errores del archivo viejo.
-
-```css
 /* =======================================
    VARIABLES
 ======================================= */
@@ -918,6 +913,5 @@ h3 { font-size: 2.8rem; }
         padding-right: 1.6rem;
     }
 }
-```
 
-Fuentes
+
