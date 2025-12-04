@@ -7,29 +7,29 @@ error_reporting(E_ALL);
 $error_message = '';
 $success_message = '';
 
-// ====================================================================
-// *** COMENTARIO: AQUÍ VA LA CONEXIÓN DE BASE DE DATOS Y LÓGICA DE PHP ***
-// Este es el bloque que se ejecuta cuando el usuario envía el formulario.
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // 1. Recoger y sanitizar datos:
-    // $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-    // $password = $_POST['password']; 
+// db/db_connection.php
+// Parámetros de conexión a la base de datos
+$host = 'localhost';
+$db   = 'cafeteria_db'; // Asegúrate de que esta base de datos exista
+$user = 'root';
+$pass = ''; // Contraseña de tu usuario root de MySQL
+$charset = 'utf8mb4';
 
-    // 2. Lógica de autenticación:
-    /*
-    // require 'db_config.php'; // Incluye tu archivo de configuración de BD
+$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 
-    // Lógica para verificar credenciales contra la base de datos (MySQLi, PDO, Firestore, etc.)
-    // if (credenciales_validas($email, $password)) {
-    //     $success_message = "¡Acceso exitoso!";
-    //     // header("Location: dashboard.php");
-    //     // exit();
-    // } else {
-    //     $error_message = "Email o contraseña incorrectos.";
-    // }
-    */
+try {
+    // Crear una instancia de PDO
+    $pdo = new PDO($dsn, $user, $pass, [
+        // Opciones de configuración para PDO
+        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, // Lanzar excepciones en caso de error
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,       // Establecer el modo de obtención predeterminado a array asociativo
+        PDO::ATTR_EMULATE_PREPARES   => false,                  // Deshabilitar la emulación de prepared statements (más seguro)
+    ]);
+} catch (PDOException $e) {
+    // Si la conexión falla, detiene la ejecución y muestra un error
+    // En un entorno de producción, solo deberías loguear el error, no mostrarlo al usuario.
+    die('Error de conexión a la base de datos: ' . $e->getMessage());
 }
-// ====================================================================
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -296,5 +296,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </script>
 </body>
 </html>
+
 
 
