@@ -30,7 +30,7 @@ try {
     die('Error de conexión a la base de datos: ' . $e->getMessage());
 }
 
-// --- 🔑 Lógica de Procesamiento del Formulario de Login ---
+// --- Lógica de Procesamiento del Formulario de Login ---
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // 1. Recoger y sanear los datos del formulario
     $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
@@ -333,6 +333,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </script>
 </body>
 </html>
+
 
 
 
