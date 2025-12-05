@@ -7,7 +7,7 @@ require_once __DIR__ . '/../db/connection.php';
 $error_message = '';
 $success_message = '';
 
-// Ruta base dinámica (usada para las imágenes, debe coincidir con la subcarpeta del proyecto en htdocs).
+// Ruta base dinámica 
 $base_path = '/LaCafetera'; 
 
 // --- Lógica de Procesamiento del Formulario de Login ---
@@ -137,9 +137,8 @@ include __DIR__ . '/templates/header.php';
 <script>
     // Se ejecuta tan pronto como el navegador llega a este punto
     
-    // ====================================================
-    // === 1. LÓGICA DE REDIRECCIÓN PARA INICIO DE SESIÓN ===
-    // ====================================================
+    // === 1. LÓGICA DE REDIRECCIÓN PARA INICIO DE SESIÓN 
+    
     <?php 
     // Usamos la variable de éxito de sesión para manejar la redirección si el header PHP falló
     if (isset($_SESSION['login_success']) && $_SESSION['login_success']): 
@@ -148,12 +147,11 @@ include __DIR__ . '/templates/header.php';
         // Redirección inmediata (si el PHP no pudo hacer el header())
         window.location.href = '<?php echo $base_path; ?>/index.php'; 
     <?php endif; ?>
-
     
     // Ejecutar el resto del código cuando el DOM esté completamente cargado.
     document.addEventListener('DOMContentLoaded', function() {
         
-        // === 2. INICIALIZACIÓN DE ICONOS (CRÍTICO PARA VER EL OJO) ===
+        // INICIALIZACIÓN DE ICONOS 
         // Usamos setTimeout(0) para darle prioridad alta después de la carga del DOM.
         if (window.lucide && typeof window.lucide.createIcons === 'function') {
             setTimeout(function() {
@@ -161,9 +159,9 @@ include __DIR__ . '/templates/header.php';
             }, 0);
         }
 
-        // ====================================================
-        // === 3. Lógica para mostrar/ocultar contraseña (El Ojo) ===
-        // ====================================================
+       
+        // Lógica para mostrar/ocultar contraseña
+        
         const togglePassword = document.getElementById('togglePassword');
         if (togglePassword) {
             togglePassword.addEventListener('click', function (e) {
