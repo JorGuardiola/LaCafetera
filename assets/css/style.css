@@ -26,6 +26,7 @@
     --secondary-700: 173, 106, 74;
     --secondary-800: 162, 87, 52;
     --secondary-900: 122, 63, 35;
+   --secondary-1000: 122, 63, 35;
 
     /* Basics */
     --black: 0, 0, 0;
@@ -899,5 +900,6 @@ h3 { font-size: 2.8rem; }
         padding-right: 1.6rem;
     }
 }
+
 
 
