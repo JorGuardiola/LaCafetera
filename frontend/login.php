@@ -7,9 +7,9 @@ require_once __DIR__ . '/../db/connection.php';
 $error_message = '';
 $success_message = '';
 
-// Ruta base dinámica (usada para las imágenes del carrusel)
-// Asegúrate de que '/lacafetera' sea la subcarpeta del proyecto en htdocs.
-$base_path = '/lacafetera'; 
+// Ruta base dinámica (usada para las imágenes, debe coincidir con la subcarpeta del proyecto en htdocs).
+// ¡ATENCIÓN! Si tu proyecto se accede como http://localhost/LaCafetera/, esta ruta es correcta.
+$base_path = '/LaCafetera'; 
 
 // --- Lógica de Procesamiento del Formulario de Login ---
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -57,10 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php include __DIR__ . '/templates/header.php'; ?>
-    <!-- Carga de Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Iconos para funcionalidad de contraseña -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
         /* Definición de la fuente general: Inter */
@@ -69,15 +66,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             font-family: 'Inter', sans-serif;
             background-color: #0d0d0d; 
         }
-        /* Estilo para la columna de la imagen de fondo */
+        /* Estilo para la columna de la imagen de fondo: USAMOS LA RUTA DINÁMICA DE PHP */
         .image-bg {
-            background-image: url('/assets/img/hannah-tims-oasBqJPFyJA-unsplash.jpg'); 
+            /* Se utiliza la variable $base_path para asegurar la ruta correcta en XAMPP/WAMP */
+            background-image: url('<?php echo $base_path; ?>/assets/img/hannah-tims-oasBqJPFyJA-unsplash.jpg'); 
             background-size: cover;
             background-position: center;
             border-radius: 0 10px 10px 0; /* Bordes redondeados en la derecha */
             overflow: hidden;
         }
-        /* Contenedor del formulario  */
+        /* Contenedor del formulario  */
         .login-panel {
             background-color: rgba(255, 255, 255, 0.61);
             backdrop-filter: blur(10px); 
@@ -102,28 +100,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
 
-    <!-- Contenedor principal de la página -->
     <div class="min-h-screen flex flex-col bg-[#0d0d0d] text-white">
 
-       <?php include __DIR__ . '/templates/header.php'; ?>
+        <?php include __DIR__ . '/templates/header.php'; ?>
 
-        <!-- CONTENIDO PRINCIPAL (SPLIT LAYOUT) -->
-       <main class="flex-grow grid grid-cols-1 lg:grid-cols-2 lg:max-w-7xl lg:mx-auto lg:rounded-xl lg:shadow-2xl lg:my-10 lg:overflow-hidden w-full">
+        <main class="flex-grow grid grid-cols-1 lg:grid-cols-2 lg:max-w-7xl lg:mx-auto lg:rounded-xl lg:shadow-2xl lg:my-10 lg:overflow-hidden w-full">
 
-            <!-- Columna Izquierda: Imagen de Fondo -->
             <div class="image-bg relative hidden lg:block">
-                <!-- Overlay sutil -->
                 <div class="absolute inset-0 bg-black bg-opacity-10"></div>
             </div>
-
-            <!-- Columna Derecha: Formulario de Acceso (Fondo Semitransparente) -->
+            
             <div class="flex items-center justify-center p-8 relative login-panel">
                 
-                <!-- Contenedor del formulario -->
                 <div class="w-full max-w-sm z-10 p-4 text-black"> 
                     <h1 class="text-5xl font-light mb-8">Acceso</h1>
 
-                    <!-- Mostrar mensajes de PHP (Errores/Éxito) -->
                     <?php if ($error_message): ?>
                         <div class="bg-red-800 bg-opacity-80 text-white px-4 py-3 rounded-lg mb-4 text-sm" role="alert">
                             <p><?php echo $error_message; ?></p>
@@ -136,10 +127,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                     <?php endif; ?>
                     
-                    <!-- Formulario de Acceso -->
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" class="space-y-6">
                         
-                        <!-- Campo de Email -->
                         <div>
                             <label for="email" class="block text-sm mb-2">
                                 Email
@@ -149,7 +138,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 placeholder="tu.correo@dominio.com">
                         </div>
 
-                        <!-- Campo de Contraseña -->
                         <div>
                             <label for="password" class="block text-sm mb-2">
                                 Contraseña
@@ -158,7 +146,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <input type="password" id="password" name="password" required
                                     class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-black focus:border-black transition duration-150 text-gray-800"
                                     placeholder="********">
-                                <!-- Icono de Ojo -->
                                 <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-600 focus:outline-none">
                                     <i data-lucide="eye" class="w-5 h-5"></i>
                                 </button>
@@ -170,10 +157,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </div>
                         </div>
 
-                        <!-- Botón de Enviar -->
                         <div class="pt-4">
                             <button type="submit"
-                                    class="w-full flex justify-center py-3 px-6 rounded-lg shadow-md text-base font-semibold text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black transition duration-150 ease-in-out transform hover:scale-[1.01]">
+                                        class="w-full flex justify-center py-3 px-6 rounded-lg shadow-md text-base font-semibold text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black transition duration-150 ease-in-out transform hover:scale-[1.01]">
                                 Acceder &rightarrow;
                             </button>
                         </div>
@@ -183,7 +169,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="mt-8 text-center">
                         <span class="text-sm opacity-70">
                             ¿Aún no te has registrado? 
-                            <a href="#" class="font-semibold underline hover:opacity-100 transition duration-150">
+                            <a href="register.php" class="font-semibold underline hover:opacity-100 transition duration-150">
                                 Regístrate
                             </a>
                         </span>
