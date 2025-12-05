@@ -88,7 +88,7 @@ include __DIR__ . '/templates/hero.php';
         <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
             <article class="producto-card">
                 <?php if (!empty($row['image'])): ?>
-                    <img src="../assets/img/<?php echo htmlspecialchars($row['image']); ?>"
+                    <img src="../assets/img/imgsproducts/<?php echo htmlspecialchars($row['image']); ?>"
                          alt="<?php echo htmlspecialchars($row['name']); ?>">
                 <?php endif; ?>
 
