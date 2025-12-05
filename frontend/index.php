@@ -18,7 +18,7 @@ $card_html = [
 ?>
 <?php include __DIR__ . '/templates/header.php'; ?>
 
-<main>
+
 
  <?php
 $bgClass = "bg-default";
@@ -26,9 +26,10 @@ $heroTitle = "Llevamos el café de especialidad del campo a la taza";
 $heroSubtitle = "";
 $heroButtonText = ""; // vacío → no aparece botón
 $heroButtonLink = "";
-include __DIR__ . '/templates/hero.php';
 ?> 
-  
+
+<main>
+    <?php include __DIR__ . '/templates/hero.php'; ?>
 
 <!-- CARRUSEL -->
 
@@ -57,52 +58,57 @@ include __DIR__ . '/templates/hero.php';
     <h2 class="center-text">Cafés destacados</h2>
 
     <?php
-    // =================================================================
-    // CONSULTA SQL FUNCIONAL: Usa JOIN para obtener precio, nombre e imagen.
-    // =================================================================
-    $sql_destacados = "
-        SELECT
-            p.id,
-            p.nombre_cafe AS name,   -- Alias: nombre_cafe -> name
-            p.imagen AS image,       -- Alias: imagen -> image
-            pv.precio AS price       -- Precio de la variante base (250g, grano, medio)
-        FROM
-            productos p
-        JOIN
-            producto_variantes pv 
-            ON p.id = pv.producto_id
-        WHERE
-            p.disponible = TRUE
-            AND pv.envase = '250g'    
-            AND pv.molienda = 'grano'
-            AND pv.tueste = 'medio'
-        LIMIT 6
-    ";
+$sql_destacados = "
+    SELECT 
+        p.id,
+        p.nombre_cafe,
+        p.presentacion,
+        p.imagen,
+        p.puntuacion_sca,
+        (SELECT precio FROM producto_variantes pv 
+         WHERE pv.producto_id = p.id 
+         AND pv.envase = '250g'
+         LIMIT 1) AS precio
+    FROM productos p
+    WHERE p.disponible = 1
+    ORDER BY p.id ASC
+    LIMIT 4
+";
+$stmt = $pdo->prepare($sql_destacados);
+$stmt->execute();
+?>
 
-    // Preparamos y ejecutamos la consulta (asumiendo que $pdo está conectado)
-    $stmt = $pdo->prepare($sql_destacados);
-    $stmt->execute();
-    ?>
+<div class="product-grid">
+<?php while ($p = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
+    
+    <div class="product-card">
 
-    <div class="productos-grid">
-        <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
-            <article class="producto-card">
-                <?php if (!empty($row['image'])): ?>
-                    <img src="../assets/img/imgsproducts/<?php echo htmlspecialchars($row['image']); ?>"
-                         alt="<?php echo htmlspecialchars($row['name']); ?>">
-                <?php endif; ?>
+        <button class="fav-btn">
+            <img src="/lacafetera/assets/img/icon-heart.png" alt="Fav">
+        </button>
 
-                <h3><?php echo htmlspecialchars($row['name']); ?></h3>
-                
-                <p class="precio"><?php echo number_format($row['price'], 2); ?> €</p>
+        <div class="product-image">
+            <img src="/lacafetera/assets/img/imgsproducts/<?= htmlspecialchars($p['imagen']) ?>"
+                 alt="<?= htmlspecialchars($p['nombre_cafe']) ?>">
+        </div>
 
-                <form action="cart.php" method="post">
-                    <input type="hidden" name="product_id" value="<?php echo (int)$row['id']; ?>">
-                    <button type="submit" class="btn-add-cart">Añadir al carrito</button>
-                </form>
-            </article>
-        <?php endwhile; ?>
+        <div class="product-rating">★ ★ ★ ★ ☆</div>
+
+        <h3 class="product-name"><?= htmlspecialchars($p['nombre_cafe']) ?></h3>
+
+        <p class="product-weight"><?= htmlspecialchars($p['presentacion']) ?></p>
+
+        <p class="product-price">
+            <?= isset($p['precio']) ? number_format($p['precio'], 2) : '0.00' ?> €
+        </p>
+
+        <button class="product-btn">Ver detalles</button>
+
     </div>
+
+<?php endwhile; ?>
+</div>
+
 </section>
 
 </main>
