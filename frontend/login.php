@@ -185,6 +185,7 @@ include __DIR__ . '/templates/header.php';
                 if (window.lucide && typeof window.lucide.createIcons === 'function') {
                     window.lucide.createIcons();
                 }
+                if (window.lucide && typeof window.lucide.createIcons === 'function') window.lucide.createIcons();
             });
         }
     });
