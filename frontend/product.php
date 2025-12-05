@@ -1,0 +1,216 @@
+<?php
+// frontend/product.php
+session_start();
+require_once __DIR__ . '/../db/connection.php';
+
+// 1. Validar ID
+if (!isset($_GET['id']) || empty($_GET['id'])) {
+    header('Location: products.php');
+    exit;
+}
+
+$id = (int)$_GET['id'];
+
+// 2. Obtener Info General
+$stmt = $pdo->prepare("SELECT * FROM productos WHERE id = ? AND disponible = 1");
+$stmt->execute([$id]);
+$producto = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$producto) {
+    echo "Producto no encontrado.";
+    exit;
+}
+
+// 3. Obtener Variantes (Para que JS calcule precios y stock)
+$stmtVar = $pdo->prepare("SELECT sku, precio, stock, molienda, tueste, envase FROM producto_variantes WHERE producto_id = ?");
+$stmtVar->execute([$id]);
+$variantes = $stmtVar->fetchAll(PDO::FETCH_ASSOC);
+$variantesJson = json_encode($variantes);
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title><?= htmlspecialchars($producto['nombre_cafe']) ?> - La Cafetera</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/lacafetera/assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-beige">
+
+<?php include __DIR__ . '/templates/header.php'; ?>
+
+<main class="product-detail-layout">
+    
+    <div class="detail-left">
+        <div class="detail-image-container">
+            <img src="/lacafetera/assets/img/imgsproducts/<?= htmlspecialchars($producto['imagen']) ?>" 
+                 alt="<?= htmlspecialchars($producto['nombre_cafe']) ?>">
+        </div>
+        <h1 class="big-product-title"><?= htmlspecialchars($producto['nombre_cafe']) ?></h1>
+    </div>
+
+    <div class="detail-right-card">
+        
+        <div class="card-header">
+            <div style="display:flex; justify-content:space-between; align-items:start;">
+                <div>
+                    <div class="reviews-placeholder">
+                        <i class="fa-solid fa-star star-icon"></i>
+                        <i class="fa-solid fa-star star-icon"></i>
+                        <i class="fa-solid fa-star star-icon"></i>
+                        <i class="fa-solid fa-star star-icon"></i>
+                        <i class="fa-solid fa-star-half-stroke star-icon-half"></i>
+                        <a href="#" class="reviews-link">45 valoraciones</a>
+                    </div>
+                    <h2 class="card-title"><?= htmlspecialchars($producto['nombre_cafe']) ?></h2>
+                    <span class="card-origin"><?= htmlspecialchars($producto['region']) ?></span>
+                </div>
+                <i class="fa-regular fa-heart" style="font-size:1.5rem; cursor:pointer; color:#1A1A1A;"></i>
+            </div>
+        </div>
+
+        <div class="card-price" id="displayPrice">-- €</div>
+
+        <p class="card-description">
+            <?= nl2br(htmlspecialchars($producto['descripcion'])) ?>
+        </p>
+
+        <form action="cart.php" method="POST" id="addToCartForm">
+            <input type="hidden" name="action" value="add">
+            <input type="hidden" name="product_id" value="<?= $producto['id'] ?>">
+
+            <div class="selector-group">
+                <label class="selector-label">Elija envase:</label>
+                <div class="option-buttons">
+                    <input type="radio" name="envase" id="size-250" value="250g" class="option-radio" checked>
+                    <label for="size-250" class="option-label">250 g.</label>
+                    
+                    <input type="radio" name="envase" id="size-1kg" value="1kg" class="option-radio">
+                    <label for="size-1kg" class="option-label">1000 g.</label>
+                    
+                    <input type="radio" name="envase" id="size-2kg" value="2kg" class="option-radio">
+                    <label for="size-2kg" class="option-label">2000 g.</label>
+                </div>
+            </div>
+
+            <div class="selector-group">
+                <label class="selector-label">Elija molienda:</label>
+                <div class="option-buttons">
+                    <input type="radio" name="molienda" id="mol-grano" value="grano" class="option-radio" checked>
+                    <label for="mol-grano" class="option-label">En grano</label>
+                    
+                    <input type="radio" name="molienda" id="mol-espresso" value="molido espresso" class="option-radio">
+                    <label for="mol-espresso" class="option-label">Molido</label>
+                </div>
+            </div>
+
+            <div class="selector-group">
+                <label class="selector-label">Elija tueste:</label>
+                <div class="option-buttons">
+                    <input type="radio" name="tueste" id="tueste-medio" value="medio" class="option-radio" checked>
+                    <label for="tueste-medio" class="option-label">Medio</label>
+                    
+                    <input type="radio" name="tueste" id="tueste-oscuro" value="oscuro" class="option-radio">
+                    <label for="tueste-oscuro" class="option-label">Oscuro</label>
+                </div>
+            </div>
+
+            <div class="stock-info">
+                <div class="stock-dot"></div>
+                <span id="stockText">En Stock. Entrega gratuita estimada el lunes.</span>
+            </div>
+
+            <div class="card-actions-row">
+                <div class="quantity-selector-widget">
+                    <button type="button" class="qty-btn" onclick="updateQty(-1)">-</button>
+                    <input type="number" name="cantidad" id="inputQty" value="1" readonly>
+                    <button type="button" class="qty-btn" onclick="updateQty(1)">+</button>
+                </div>
+
+                <button type="submit" class="btn-add-to-cart-dark" id="btnSubmit">
+                    Añadir a la cesta
+                </button>
+            </div>
+        </form>
+
+    </div>
+</main>
+
+<?php include __DIR__ . "/templates/footer.php"; ?>
+
+<script>
+    const variantes = <?= $variantesJson ?>;
+    
+    // Selectores de grupos de botones (Radio Buttons)
+    const radiosEnvase = document.querySelectorAll('input[name="envase"]');
+    const radiosMolienda = document.querySelectorAll('input[name="molienda"]');
+    const radiosTueste = document.querySelectorAll('input[name="tueste"]'); // Nuevo grupo
+
+    const displayPrice = document.getElementById('displayPrice');
+    const btnSubmit = document.getElementById('btnSubmit');
+    const stockText = document.getElementById('stockText');
+    const stockDot = document.querySelector('.stock-dot');
+    const inputQty = document.getElementById('inputQty');
+
+    // Función cantidad
+    function updateQty(change) {
+        let current = parseInt(inputQty.value);
+        let newVal = current + change;
+        if(newVal < 1) newVal = 1;
+        inputQty.value = newVal;
+    }
+
+    // Función principal
+    function updateProductState() {
+        // 1. Obtener valores de los radio buttons checkeados
+        const envaseVal = document.querySelector('input[name="envase"]:checked')?.value;
+        const moliendaVal = document.querySelector('input[name="molienda"]:checked')?.value;
+        const tuesteVal = document.querySelector('input[name="tueste"]:checked')?.value; // Nuevo valor
+
+        // 2. Buscar variante (comparación segura en minúsculas)
+        const found = variantes.find(v => 
+            v.envase.toLowerCase() === envaseVal.toLowerCase() && 
+            v.molienda.toLowerCase() === moliendaVal.toLowerCase() && 
+            v.tueste.toLowerCase() === tuesteVal.toLowerCase()
+        );
+
+        // 3. Actualizar UI
+        if (found) {
+            displayPrice.textContent = parseFloat(found.precio).toLocaleString('es-ES') + '€';
+            
+            if (parseInt(found.stock) > 0) {
+                stockText.textContent = "En Stock. Entrega gratuita estimada en 24h.";
+                stockDot.style.backgroundColor = "#27AE60"; // Verde
+                btnSubmit.disabled = false;
+                btnSubmit.textContent = "Añadir a la cesta";
+                btnSubmit.classList.remove('disabled');
+            } else {
+                stockText.textContent = "Agotado temporalmente.";
+                stockDot.style.backgroundColor = "#e74c3c"; // Rojo
+                btnSubmit.disabled = true;
+                btnSubmit.textContent = "Sin Stock";
+                btnSubmit.classList.add('disabled');
+            }
+        } else {
+            displayPrice.textContent = "-- €";
+            stockText.textContent = "Combinación no disponible.";
+            stockDot.style.backgroundColor = "#ccc"; 
+            btnSubmit.disabled = true;
+            btnSubmit.textContent = "No disponible";
+            btnSubmit.classList.add('disabled');
+        }
+    }
+
+    // Listeners para todos los grupos
+    radiosEnvase.forEach(r => r.addEventListener('change', updateProductState));
+    radiosMolienda.forEach(r => r.addEventListener('change', updateProductState));
+    radiosTueste.forEach(r => r.addEventListener('change', updateProductState)); // Nuevo listener
+
+    // Inicializar
+    updateProductState();
+</script>
+
+</body>
+</html>

@@ -110,8 +110,8 @@ $heroButtonLink = "";
 
             <p class="product-price"><?= isset($p['precio']) ? number_format($p['precio'], 2) : '0.00' ?>€</p>
 
-            <button class="product-btn">Ver detalles</button>
-
+            <a href="product.php?id=<?= $p['id'] ?>" class="product-btn"> Ver detalles </a>
+            
         </div>
     <?php endforeach; ?>
 
