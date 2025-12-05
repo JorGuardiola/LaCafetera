@@ -52,144 +52,65 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
+ob_start(); 
+?>
+    <div class="login-container">
+        <?php if (!empty($error_message)) : ?>
+            <div class="error-message"><?= htmlspecialchars($error_message) ?></div>
+        <?php endif; ?>
+
+        <?php if (!empty($success_message)) : ?>
+            <div class="success-message"><?= htmlspecialchars($success_message) ?></div>
+        <?php endif; ?>
+
+        <form action="login.php" method="POST" class="login-form">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Contraseña:</label>
+            <div class="password-wrapper">
+                <input type="password" id="password" name="password" required>
+                <button type="button" id="togglePassword" class="toggle-password">
+                    <i data-lucide="eye"></i>
+                </button>
+            </div>
+
+            <button type="submit" class="login-btn">Ingresar</button>
+        </form>
+
+        <p class="register-link">
+            ¿No tienes una cuenta? <a href="register.php">Regístrate aquí</a>
+        </p>
+    </div>
+<?php
+// Guardamos el HTML del formulario en la variable $heroContent
+$heroContent = ob_get_clean(); 
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    <style>
-        /* Definición de la fuente general: Inter */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0d0d0d; 
-        }
-        /* Estilo para la columna de la imagen de fondo: USAMOS LA RUTA DINÁMICA DE PHP */
-        .image-bg {
-            /* Se utiliza la variable $base_path para asegurar la ruta correcta en XAMPP/WAMP */
-            background-image: url('<?php echo $base_path; ?>/assets/img/hannah-tims-oasBqJPFyJA-unsplash.jpg'); 
-            background-size: cover;
-            background-position: center;
-            border-radius: 0 10px 10px 0; /* Bordes redondeados en la derecha */
-            overflow: hidden;
-        }
-        /* Contenedor del formulario  */
-        .login-panel {
-            background-color: rgba(255, 255, 255, 0.61);
-            backdrop-filter: blur(10px); 
-        }
-        /* Estilos base para iconos (Header, Footer) */
-        .logo-icon {
-            width: 32px; 
-            height: 32px; 
-            filter: invert(1); 
-        }
-        .header-icon {
-            width: 20px; 
-            height: 20px; 
-            opacity: 0.75;
-            cursor: pointer;
-            transition: opacity 200ms;
-        }
-        .header-icon:hover {
-            opacity: 1;
-        }
-    </style>
+    <title><?= $heroTitle ?> | La Cafetera</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
+    <?php include __DIR__ . '/templates/header.php'; ?>
 
-    <div class="min-h-screen flex flex-col bg-[#0d0d0d] text-white">
+    <main class="login-main">
+        <?php include __DIR__ . '/templates/hero.php'; ?>
+    </main>
 
-        <?php include __DIR__ . '/templates/header.php'; ?>
-
-        <main class="flex-grow grid grid-cols-1 lg:grid-cols-2 lg:max-w-7xl lg:mx-auto lg:rounded-xl lg:shadow-2xl lg:my-10 lg:overflow-hidden w-full">
-
-            <div class="image-bg relative hidden lg:block">
-                <div class="absolute inset-0 bg-black bg-opacity-10"></div>
-            </div>
-            
-            <div class="flex items-center justify-center p-8 relative login-panel">
-                
-                <div class="w-full max-w-sm z-10 p-4 text-black"> 
-                    <h1 class="text-5xl font-light mb-8">Acceso</h1>
-
-                    <?php if ($error_message): ?>
-                        <div class="bg-red-800 bg-opacity-80 text-white px-4 py-3 rounded-lg mb-4 text-sm" role="alert">
-                            <p><?php echo $error_message; ?></p>
-                        </div>
-                    <?php endif; ?>
-
-                    <?php if ($success_message): ?>
-                        <div class="bg-green-800 bg-opacity-80 text-white px-4 py-3 rounded-lg mb-4 text-sm" role="alert">
-                            <p><?php echo $success_message; ?></p>
-                        </div>
-                    <?php endif; ?>
-                    
-                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" class="space-y-6">
-                        
-                        <div>
-                            <label for="email" class="block text-sm mb-2">
-                                Email
-                            </label>
-                            <input type="email" id="email" name="email" required
-                                class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-black focus:border-black transition duration-150 text-gray-800"
-                                placeholder="tu.correo@dominio.com">
-                        </div>
-
-                        <div>
-                            <label for="password" class="block text-sm mb-2">
-                                Contraseña
-                            </label>
-                            <div class="relative">
-                                <input type="password" id="password" name="password" required
-                                    class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-black focus:border-black transition duration-150 text-gray-800"
-                                    placeholder="********">
-                                <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-600 focus:outline-none">
-                                    <i data-lucide="eye" class="w-5 h-5"></i>
-                                </button>
-                            </div>
-                            <div class="text-right mt-2">
-                                <a href="#" class="text-xs text-black opacity-70 hover:opacity-100 transition duration-150 underline">
-                                    ¿Has olvidado la contraseña?
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="pt-4">
-                            <button type="submit"
-                                        class="w-full flex justify-center py-3 px-6 rounded-lg shadow-md text-base font-semibold text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black transition duration-150 ease-in-out transform hover:scale-[1.01]">
-                                Acceder &rightarrow;
-                            </button>
-                        </div>
-                        
-                    </form>
-
-                    <div class="mt-8 text-center">
-                        <span class="text-sm opacity-70">
-                            ¿Aún no te has registrado? 
-                            <a href="register.php" class="font-semibold underline hover:opacity-100 transition duration-150">
-                                Regístrate
-                            </a>
-                        </span>
-                    </div>
-
-                </div>
-            </div>
-        </main>
-
-        <?php include __DIR__ . '/templates/footer.php'; ?>
-
-    </div>
-
+    <?php include __DIR__ . '/templates/footer.php'; ?>
+    
     <script>
         // Inicializar iconos de Lucide (si está disponible)
         if (window.lucide && typeof window.lucide.createIcons === 'function') {
             window.lucide.createIcons();
         }
 
-        // Lógica para mostrar/ocultar contraseña (proteger contra elementos faltantes)
+        // Lógica para mostrar/ocultar contraseña
         const togglePassword = document.getElementById('togglePassword');
         if (togglePassword) {
             togglePassword.addEventListener('click', function (e) {
@@ -201,12 +122,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if (passwordInput.type === 'password') {
                     passwordInput.type = 'text';
                     if (icon) icon.setAttribute('data-lucide', 'eye-off');
-                    if (window.lucide && typeof window.lucide.createIcons === 'function') window.lucide.createIcons();
                 } else {
                     passwordInput.type = 'password';
                     if (icon) icon.setAttribute('data-lucide', 'eye');
-                    if (window.lucide && typeof window.lucide.createIcons === 'function') window.lucide.createIcons();
                 }
+                if (window.lucide && typeof window.lucide.createIcons === 'function') window.lucide.createIcons();
             });
         }
     </script>
