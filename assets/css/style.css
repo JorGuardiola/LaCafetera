@@ -1033,6 +1033,498 @@ h3 { font-size: 2.8rem; }
     
 }
 
+/* =========================================
+   SECCION PRODUCTO jorge5dic
+   ========================================= */
+
+/* Fondo general beige */
+body.bg-beige {
+    background-color: #F5EFE5; /* Color aproximado del fondo */
+}
+
+/* Layout principal de dos columnas */
+.product-detail-layout {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 50% - 50% */
+    gap: 60px;
+    align-items: center; /* Centrar verticalmente */
+}
+
+/* Columna Izquierda */
+.detail-left {
+    text-align: center;
+}
+.detail-image-container img {
+    max-width: 100%;
+    height: auto;
+    /* Sombra suave debajo de la bolsa */
+    filter: drop-shadow(0px 20px 30px rgba(0,0,0,0.15)); 
+}
+.big-product-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    color: #1A1A1A; /* Casi negro */
+    margin-top: 2rem;
+}
+
+/* Columna Derecha: La Tarjeta */
+.detail-right-card {
+    background-color: #FAF7F2; /* Un tono más claro que el fondo */
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+/* Header de la tarjeta */
+.card-header { margin-bottom: 1rem; }
+.reviews-placeholder {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+.star-icon { color: #C7A17A; font-size: 1.2rem; } /* Color dorado/café */
+.star-icon-half { color: #C7A17A; font-size: 1.2rem; }
+.reviews-link {
+    color: #1A1A1A;
+    text-decoration: underline;
+    margin-left: 5px;
+}
+.card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    margin: 0.5rem 0;
+    color: #1A1A1A;
+}
+.card-origin {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: #666;
+    font-weight: 500;
+}
+
+/* Precio */
+.card-price {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #1A1A1A;
+    margin: 1.5rem 0;
+}
+
+/* Descripción */
+.card-description {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+/* --- SELECTORES TIPO BOTÓN --- */
+.selector-group {
+    margin-bottom: 1.5rem;
+}
+.selector-label {
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    color: #1A1A1A;
+    font-size: 0.95rem;
+}
+.option-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+/* Ocultamos el radio button real */
+.option-radio {
+    display: none;
+}
+/* Estilo del label que parece botón */
+.option-label {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: transparent;
+    border: 1px solid #DDD;
+    border-radius: 30px; /* Bordes muy redondeados */
+    cursor: pointer;
+    font-weight: 600;
+    color: #1A1A1A;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+    text-transform: capitalize; /* Primera letra mayúscula */
+}
+.option-label:hover {
+    border-color: #1A1A1A;
+}
+/* Estilo cuando el radio asociado está checkeado */
+.option-radio:checked + .option-label {
+    background-color: #1A1A1A; /* Fondo oscuro */
+    color: #FFF; /* Texto blanco */
+    border-color: #1A1A1A;
+}
+
+/* Selector Dropdown Normal (Tueste) */
+.form-select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #DDD;
+    border-radius: 8px;
+    background-color: transparent;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+/* Info de Stock */
+.stock-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: #1A1A1A;
+    margin: 1.5rem 0;
+    font-weight: 600;
+}
+.stock-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #27AE60; /* Verde */
+    border-radius: 50%;
+}
+
+/* --- Fila de Acciones (Cantidad + Botón) --- */
+.card-actions-row {
+    display: flex;
+    gap: 15px;
+}
+
+/* Widget de Cantidad (- 1 +) */
+.quantity-selector-widget {
+    display: flex;
+    align-items: center;
+    border: 1px solid #DDD;
+    border-radius: 30px;
+    padding: 5px;
+    background: transparent;
+}
+.qty-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    padding: 5px 15px;
+    cursor: pointer;
+    color: #1A1A1A;
+}
+.quantity-selector-widget input {
+    width: 40px;
+    text-align: center;
+    border: none;
+    background: transparent;
+    font-weight: bold;
+    font-size: 1rem;
+    
+}
+.quantity-selector-widget input::-webkit-outer-spin-button,
+.quantity-selector-widget input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Botón Añadir a la Cesta */
+.btn-add-to-cart-dark {
+    flex: 1; /* Ocupa el resto del espacio */
+    background-color: #1A1A1A; /* Color oscuro */
+    color: #FFF;
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.btn-add-to-cart-dark:hover {
+    background-color: #333;
+}
+.btn-add-to-cart-dark.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Responsividad */
+@media (max-width: 900px) {
+    .product-detail-layout {
+        grid-template-columns: 1fr; /* Una columna en móviles */
+        gap: 30px;
+    }
+    .detail-image-container img {
+        max-width: 60%; /* Imagen más pequeña en móvil */
+    }
+    .big-product-title {
+        font-size: 2.5rem; /* Título más pequeño */
+    }
+    .card-actions-row {
+        flex-direction: column; /* Apilar cantidad y botón */
+    }
+    .quantity-selector-widget {
+        justify-content: center;
+    }
+    .btn-add-to-cart-dark {
+        padding: 15px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+/* =======================================
+    LOGIN: ESTILOS ESPECÍFICOS
+
+/* --- Columna Derecha: Centrado y Estilos Generales --- */
+
+.hero-right {
+    /* Ajusta el flexbox para centrar el contenido vertical y horizontalmente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem; /* Espacio de seguridad */
+}
+
+/* --- La Caja del Formulario (El Panel Transparente) --- */
+.login-box {
+    /* Usamos un color base muy claro con opacidad para el fondo */
+    background-color: rgba(var(--white), 0.75); 
+    
+    /* Efecto "Glassmorphism" (Añadimos el prefijo -webkit- para máxima compatibilidad) */
+    -webkit-backdrop-filter: blur(8px); /* ¡Añadido! */
+    backdrop-filter: blur(8px); 
+    
+    /* Esquinas redondeadas grandes */
+    border-radius: 20px;
+    
+    /* Sombra muy sutil */
+    box-shadow: 0 10px 30px rgba(var(--black), 0.15); 
+    
+    /* Espacio interno */
+    padding: 4rem 5rem;
+    
+    /* Ancho máximo para que no ocupe toda la mitad derecha */
+    max-width: 48rem;
+    width: 100%;
+    
+    /* Color de texto por defecto dentro de la caja */
+    color: rgb(var(--primary-900)); 
+}
+
+/* Título "Acceso" */
+.login-title {
+    font-family: var(--fuenteHeading);
+    font-size: 4rem; /* Grande y elegante */
+    text-align: center;
+    margin-bottom: 3rem;
+    line-height: 1;
+}
+
+/* --- Inputs y Grupos --- */
+
+.input-group {
+    margin-bottom: 2rem;
+    position: relative; /* Necesario para posicionar la etiqueta pequeña */
+}
+
+/* Etiqueta pequeña (Email, Contraseña) */
+.input-label {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: rgb(var(--primary-400)); /* Color sutil */
+    margin-bottom: 0.5rem;
+}
+
+/* Estilo del campo de texto/email/password */
+.form-input {
+    .password-field .form-input {
+    /* El valor debe ser mayor que el 'right' del botón (1.5rem) más el ancho del ojo (20px o 1.25rem) */
+    padding-right: 4rem; 
+}
+    width: 100%;
+    padding: 1.2rem 1.5rem;
+    border: 1px solid rgba(var(--primary-400), 0.3); /* Borde sutil */
+    border-radius: 10px; /* Bordes redondeados */
+    background-color: rgba(var(--white), 0.8); /* Fondo casi blanco */
+    font-size: 1.6rem;
+    font-family: var(--fuenteTexto);
+    transition: border-color 0.3s;
+    
+}
+
+.form-input:focus {
+    border-color: rgb(var(--primary-500));
+    outline: none;
+    box-shadow: 0 0 5px rgba(var(--primary-500), 0.3);
+}
+
+/* --- Campo de Contraseña y Toggle --- */
+.password-field {
+    position: relative;
+}
+
+.toggle-password {
+    /* Posicionamiento */
+    position: absolute;
+    right: 1.5rem; /* Distancia desde el borde derecho */
+    top: 0;        /* Se pega a la parte superior del campo */
+    bottom: 0;     /* Se pega a la parte inferior del campo */
+    
+    /* CRÍTICO: Centrado con Flexbox */
+    display: flex;
+    align-items: center; /* Centrado vertical */
+    justify-content: center; /* Centrado horizontal (opcional, pero buena práctica) */
+
+    /* Estilos base */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 10;
+    /* Asegúrate de que no tenga transform */
+    transform: none; 
+}
+
+
+.toggle-password [data-lucide] {
+    width: 20px;
+    height: 20px;
+    color: rgb(var(--primary-400));
+}
+
+
+/* --- Enlaces y Botones --- */
+
+/* Enlace "¿Olvidaste la Contraseña?" */
+.forgot-link {
+    text-align: right;
+    margin-bottom: 3rem;
+}
+.forgot-link a {
+    font-size: 1.4rem;
+    color: rgb(var(--secondary-700));
+    transition: color 0.3s;
+}
+.forgot-link a:hover {
+    color: rgb(var(--secondary-900));
+}
+
+/* Botón de Acceder (Fondo Oscuro) */
+.btn-acceder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    width: 100%;
+    padding: 1.2rem;
+    
+    background-color: rgb(var(--primary-900)); /* Fondo negro/oscuro */
+    color: white;
+    
+    border: none;
+    border-radius: 10px; /* Bordes rectangulares suaves */
+    
+    font-size: 1.7rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-acceder:hover {
+    background-color: rgb(var(--primary-700));
+}
+
+.arrow-icon {
+    margin-left: 1rem;
+    font-size: 2rem;
+    line-height: 1;
+}
+
+/* Enlace de Registro */
+.register-prompt {
+    text-align: center;
+    margin-top: 2.5rem;
+    font-size: 1.4rem;
+    color: rgb(var(--primary-400));
+}
+
+.register-prompt a {
+    color: rgb(var(--secondary-700));
+    font-weight: 600;
+    transition: color 0.3s;
+}
+.register-prompt a:hover {
+    color: rgb(var(--secondary-900));
+}
+
+/* --- Mensajes de Alerta --- */
+.alert.error {
+    /* Aquí puedes usar un color secundario de tu paleta si quieres */
+    background-color: rgba(var(--secondary-100), 0.8); 
+    color: rgb(var(--secondary-800));
+    border: 1px solid rgb(var(--secondary-400));
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+}
+
+.alert.error i[data-lucide] {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    min-width: 20px;
+    color: rgb(var(--secondary-900));
+}
+
+
+/* =======================================
+    LOGIN: RESPONSIVE
+@media (max-width: 1023px) {
+    .hero-mobile .hero-container {
+        padding: 4rem;
+        height: auto; /* Permitir altura automática */
+        padding-top: 8rem; /* más espacio bajo el header */
+        padding-bottom: 8rem;
+    }
+    
+    .hero-right {
+        display: flex; 
+        padding: 0;
+        margin-top: 3rem;
+    }
+    
+    .login-box {
+        padding: 3rem;
+        max-width: 100%;
+    }
+    .login-title {
+        font-size: 3.5rem;
+        margin-bottom: 2.5rem;
+    }    
+    
+}
+
+@media (max-width: 767px) {
+    .login-box {
+        padding: 2.5rem 3rem;
+    }
+
 @media (max-width: 767px) {
     .login-box {
         padding: 2.5rem 3rem;
