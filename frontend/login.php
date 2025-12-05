@@ -7,15 +7,14 @@ require_once __DIR__ . '/../db/connection.php';
 $error_message = '';
 $success_message = '';
 
-// Ruta base dinámica (usada para las imágenes, debe coincidir con la subcarpeta del proyecto en htdocs).
-// ¡ATENCIÓN! Si tu proyecto se accede como http://localhost/LaCafetera/, esta ruta es correcta.
+// Ruta base dinámica 
 $base_path = '/LaCafetera'; 
 
 // --- Lógica de Procesamiento del Formulario de Login ---
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // 1. Recoger y sanear los datos del formulario
     $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-    $password = $_POST['password'] ?? ''; // La contraseña sin sanear (será verificada con hash)
+    $password = $_POST['password'] ?? '';
 
     if (!$email) {
         $error_message = "El formato del email es inválido.";
@@ -31,13 +30,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // 3. Verificar las credenciales
             if ($user && password_verify($password, $user['password_hash'])) {
                 // 4. Login Exitoso: Iniciar sesión y Redirigir
-                // *** Configuramos las variables de sesión ***
                 $_SESSION['user_id'] = $user['id']; 
                 $_SESSION['user_email'] = $user['email'];
                 $_SESSION['logged_in'] = true;
                 
-                header('Location: index.php');
-                exit;
+                // === REDIRECCIÓN ===
+                // Verifica que no haya output antes de este header()
+                header('Location: index.php'); 
+                exit; // Detiene la ejecución para asegurar la redirección
+                // ====================
                 
             } else {
                 // 5. Login Fallido
@@ -51,84 +52,146 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
+
+
+// =================================================================
+// 1. VARIABLES PARA LA PLANTILLA HERO.PHP
+// =================================================================
+$bgClass = 'bg-login'; // Clase para aplicar el fondo de las dos mitades
+$heroTitle = ''; 
+$heroSubtitle = ''; 
+$heroButtonText = '';
+$heroButtonLink = ''; 
+
+// =================================================================
+// 2. CONTENIDO DEL FORMULARIO (PARA INYECTAR EN hero-right)
+// =================================================================
+ob_start();
 ?>
-ob_start(); 
-?>
-    <div class="login-container">
-        <?php if (!empty($error_message)) : ?>
-            <div class="error-message"><?= htmlspecialchars($error_message) ?></div>
-        <?php endif; ?>
-
-        <?php if (!empty($success_message)) : ?>
-            <div class="success-message"><?= htmlspecialchars($success_message) ?></div>
-        <?php endif; ?>
-
-        <form action="login.php" method="POST" class="login-form">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="password">Contraseña:</label>
-            <div class="password-wrapper">
-                <input type="password" id="password" name="password" required>
-                <button type="button" id="togglePassword" class="toggle-password">
-                    <i data-lucide="eye"></i>
-                </button>
-            </div>
-
-            <button type="submit" class="login-btn">Ingresar</button>
-        </form>
-
-        <p class="register-link">
-            ¿No tienes una cuenta? <a href="register.php">Regístrate aquí</a>
-        </p>
-    </div>
-<?php
-// Guardamos el HTML del formulario en la variable $heroContent
-$heroContent = ob_get_clean(); 
-?>
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $heroTitle ?> | La Cafetera</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
-</head>
-<body>
-    <?php include __DIR__ . '/templates/header.php'; ?>
-
-    <main class="login-main">
-        <?php include __DIR__ . '/templates/hero.php'; ?>
-    </main>
-
-    <?php include __DIR__ . '/templates/footer.php'; ?>
+<div class="login-box">
     
-    <script>
-        // Inicializar iconos de Lucide (si está disponible)
+    <h2 class="login-title">Acceso</h2>
+    
+    <?php if (!empty($error_message)): ?>
+        <div class="alert error">
+            <i data-lucide="alert-circle"></i>
+            <p><?php echo htmlspecialchars($error_message); ?></p>
+        </div>
+    <?php endif; ?>
+
+    <form action="login.php" method="POST" class="login-form">
+        
+        <div class="input-group">
+            <label for="email" class="input-label small-label">Email</label>
+            <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                required
+                class="form-input"
+                value="<?php echo isset($email) ? htmlspecialchars($email) : ''; ?>"
+            >
+        </div>
+
+        <div class="input-group password-field">
+            <label for="password" class="input-label small-label">Contraseña</label>
+            <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                required
+                class="form-input"
+            >
+            <button type="button" id="togglePassword" class="toggle-password">
+                <i data-lucide="eye"></i>
+            </button>
+        </div>
+        
+        <div class="forgot-link">
+            <a href="forgot_password.php">¿Has olvidado la contraseña?</a>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-acceder">
+            Acceder <span class="arrow-icon">&rarr;</span>
+        </button>
+
+    </form>
+    
+    <div class="register-prompt">
+        <span>¿Aún no te has registrado? <a href="register.php">Regístrate</a></span>
+    </div>
+</div>
+<?php
+
+$heroRightContent = ob_get_clean();
+
+
+// Incluye el inicio del HTML (<!DOCTYPE html>, <head>, <body>, Nav)
+include __DIR__ . '/templates/header.php';
+?>
+
+<main>
+    <?php include __DIR__ . '/templates/hero.php'; ?>
+</main>
+
+<script>
+    // Se ejecuta tan pronto como el navegador llega a este punto
+    
+    // === 1. LÓGICA DE REDIRECCIÓN PARA INICIO DE SESIÓN 
+    
+    <?php 
+    // Usamos la variable de éxito de sesión para manejar la redirección si el header PHP falló
+    if (isset($_SESSION['login_success']) && $_SESSION['login_success']): 
+        unset($_SESSION['login_success']); 
+    ?>
+        // Redirección inmediata (si el PHP no pudo hacer el header())
+        window.location.href = '<?php echo $base_path; ?>/index.php'; 
+    <?php endif; ?>
+    
+    // Ejecutar el resto del código cuando el DOM esté completamente cargado.
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        // INICIALIZACIÓN DE ICONOS 
+        // Usamos setTimeout(0) para darle prioridad alta después de la carga del DOM.
         if (window.lucide && typeof window.lucide.createIcons === 'function') {
-            window.lucide.createIcons();
+            setTimeout(function() {
+                 window.lucide.createIcons();
+            }, 0);
         }
 
+       
         // Lógica para mostrar/ocultar contraseña
+        
         const togglePassword = document.getElementById('togglePassword');
         if (togglePassword) {
             togglePassword.addEventListener('click', function (e) {
+                e.preventDefault(); 
+                
                 const passwordInput = document.getElementById('password');
-                if (!passwordInput) return;
-                const icon = e.currentTarget.querySelector('i');
+                // Buscamos el elemento que tiene el atributo data-lucide (el icono)
+                const icon = e.currentTarget.querySelector('[data-lucide]'); 
 
-                // Alternar el tipo de input y el icono
+                if (!passwordInput || !icon) return; 
+
                 if (passwordInput.type === 'password') {
                     passwordInput.type = 'text';
-                    if (icon) icon.setAttribute('data-lucide', 'eye-off');
+                    icon.setAttribute('data-lucide', 'eye-off'); // Ojo tachado
                 } else {
                     passwordInput.type = 'password';
-                    if (icon) icon.setAttribute('data-lucide', 'eye');
+                    icon.setAttribute('data-lucide', 'eye'); // Ojo normal
+                }
+                
+                // Vuelve a renderizar los iconos de Lucide
+                if (window.lucide && typeof window.lucide.createIcons === 'function') {
+                    window.lucide.createIcons();
                 }
                 if (window.lucide && typeof window.lucide.createIcons === 'function') window.lucide.createIcons();
             });
         }
-    </script>
-</body>
-</html>
+    });
+</script>
+
+<?php
+// Incluye el cierre del HTML (Footer, Scripts, </body>, </html>)
+require_once __DIR__ . '/templates/footer.php';
+?>

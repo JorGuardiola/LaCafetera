@@ -14,8 +14,14 @@
         </div>
 
         <!-- DERECHA VACÍA (sirve para mantener composición) -->
-        <div class="hero-right"></div>
-
+        <div class="hero-right">
+            <?php
+            // Solo si la variable está definida (es decir, estamos en login.php)
+            if (isset($heroRightContent)) {
+                echo $heroRightContent;
+            }
+            ?>
+        </div>
     </div>
 </div>
 

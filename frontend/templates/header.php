@@ -15,6 +15,7 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
 
