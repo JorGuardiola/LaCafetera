@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceso - La Cafetera</title>
+    <?php include __DIR__ . '/templates/header.php'; ?>
     <!-- Carga de Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Iconos para funcionalidad de contraseña -->
@@ -114,11 +114,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="image-bg relative hidden lg:block">
                 <!-- Overlay sutil -->
                 <div class="absolute inset-0 bg-black bg-opacity-10"></div>
-                <!-- Logo flotante -->
-                <div class="absolute top-8 left-8 flex items-center space-x-2">
-                    <img src="/assets/img/logo-white.png" alt="Logo La Cafetera" class="logo-icon w-8 h-8">
-                    <span class="text-3xl font-bold text-white">La Cafetera</span>
-                </div>
             </div>
 
             <!-- Columna Derecha: Formulario de Acceso (Fondo Semitransparente) -->
