@@ -1046,3 +1046,269 @@ body.bg-beige {
         padding: 15px;
     }
 }
+
+
+
+
+
+
+
+
+
+
+/* =======================================
+    LOGIN: ESTILOS ESPECÍFICOS
+======================================= */
+
+/* --- Columna Derecha: Centrado y Estilos Generales --- */
+
+.hero-right {
+    /* Ajusta el flexbox para centrar el contenido vertical y horizontalmente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem; /* Espacio de seguridad */
+}
+
+/* --- La Caja del Formulario (El Panel Transparente) --- */
+.login-box {
+    /* Usamos un color base muy claro con opacidad para el fondo */
+    background-color: rgba(var(--white), 0.75); 
+    
+    /* Efecto "Glassmorphism" (Añadimos el prefijo -webkit- para máxima compatibilidad) */
+    -webkit-backdrop-filter: blur(8px); /* ¡Añadido! */
+    backdrop-filter: blur(8px); 
+    
+    /* Esquinas redondeadas grandes */
+    border-radius: 20px;
+    
+    /* Sombra muy sutil */
+    box-shadow: 0 10px 30px rgba(var(--black), 0.15); 
+    
+    /* Espacio interno */
+    padding: 4rem 5rem;
+    
+    /* Ancho máximo para que no ocupe toda la mitad derecha */
+    max-width: 48rem;
+    width: 100%;
+    
+    /* Color de texto por defecto dentro de la caja */
+    color: rgb(var(--primary-900)); 
+}
+
+/* Título "Acceso" */
+.login-title {
+    font-family: var(--fuenteHeading);
+    font-size: 4rem; /* Grande y elegante */
+    text-align: center;
+    margin-bottom: 3rem;
+    line-height: 1;
+}
+
+/* --- Inputs y Grupos --- */
+
+.input-group {
+    margin-bottom: 2rem;
+    position: relative; /* Necesario para posicionar la etiqueta pequeña */
+}
+
+/* Etiqueta pequeña (Email, Contraseña) */
+.input-label {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: rgb(var(--primary-400)); /* Color sutil */
+    margin-bottom: 0.5rem;
+}
+
+/* Estilo del campo de texto/email/password */
+.form-input {
+    .password-field .form-input {
+    /* El valor debe ser mayor que el 'right' del botón (1.5rem) más el ancho del ojo (20px o 1.25rem) */
+    padding-right: 4rem; 
+}
+    width: 100%;
+    padding: 1.2rem 1.5rem;
+    border: 1px solid rgba(var(--primary-400), 0.3); /* Borde sutil */
+    border-radius: 10px; /* Bordes redondeados */
+    background-color: rgba(var(--white), 0.8); /* Fondo casi blanco */
+    font-size: 1.6rem;
+    font-family: var(--fuenteTexto);
+    transition: border-color 0.3s;
+    
+}
+
+.form-input:focus {
+    border-color: rgb(var(--primary-500));
+    outline: none;
+    box-shadow: 0 0 5px rgba(var(--primary-500), 0.3);
+}
+
+/* --- Campo de Contraseña y Toggle --- */
+.password-field {
+    position: relative;
+}
+
+.toggle-password {
+    /* Posicionamiento */
+    position: absolute;
+    right: 1.5rem; /* Distancia desde el borde derecho */
+    top: 0;        /* Se pega a la parte superior del campo */
+    bottom: 0;     /* Se pega a la parte inferior del campo */
+    
+    /* CRÍTICO: Centrado con Flexbox */
+    display: flex;
+    align-items: center; /* Centrado vertical */
+    justify-content: center; /* Centrado horizontal (opcional, pero buena práctica) */
+
+    /* Estilos base */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 10;
+    /* Asegúrate de que no tenga transform */
+    transform: none; 
+}
+
+
+.toggle-password [data-lucide] {
+    width: 20px;
+    height: 20px;
+    color: rgb(var(--primary-400));
+}
+
+
+/* --- Enlaces y Botones --- */
+
+/* Enlace "¿Olvidaste la Contraseña?" */
+.forgot-link {
+    text-align: right;
+    margin-bottom: 3rem;
+}
+.forgot-link a {
+    font-size: 1.4rem;
+    color: rgb(var(--secondary-700));
+    transition: color 0.3s;
+}
+.forgot-link a:hover {
+    color: rgb(var(--secondary-900));
+}
+
+/* Botón de Acceder (Fondo Oscuro) */
+.btn-acceder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    width: 100%;
+    padding: 1.2rem;
+    
+    background-color: rgb(var(--primary-900)); /* Fondo negro/oscuro */
+    color: white;
+    
+    border: none;
+    border-radius: 10px; /* Bordes rectangulares suaves */
+    
+    font-size: 1.7rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-acceder:hover {
+    background-color: rgb(var(--primary-700));
+}
+
+.arrow-icon {
+    margin-left: 1rem;
+    font-size: 2rem;
+    line-height: 1;
+}
+
+/* Enlace de Registro */
+.register-prompt {
+    text-align: center;
+    margin-top: 2.5rem;
+    font-size: 1.4rem;
+    color: rgb(var(--primary-400));
+}
+
+.register-prompt a {
+    color: rgb(var(--secondary-700));
+    font-weight: 600;
+    transition: color 0.3s;
+}
+.register-prompt a:hover {
+    color: rgb(var(--secondary-900));
+}
+
+/* --- Mensajes de Alerta --- */
+.alert.error {
+    /* Aquí puedes usar un color secundario de tu paleta si quieres */
+    background-color: rgba(var(--secondary-100), 0.8); 
+    color: rgb(var(--secondary-800));
+    border: 1px solid rgb(var(--secondary-400));
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+}
+
+.alert.error i[data-lucide] {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    min-width: 20px;
+    color: rgb(var(--secondary-900));
+}
+
+
+/* =======================================
+    LOGIN: RESPONSIVE
+======================================= */
+@media (max-width: 1023px) {
+    .hero-mobile .hero-container {
+        padding: 4rem;
+        height: auto; /* Permitir altura automática */
+        padding-top: 8rem; /* más espacio bajo el header */
+        padding-bottom: 8rem;
+    }
+    
+    .hero-right {
+        display: flex; 
+        padding: 0;
+        margin-top: 3rem;
+    }
+    
+    .login-box {
+        padding: 3rem;
+        max-width: 100%;
+    }
+    .login-title {
+        font-size: 3.5rem;
+        margin-bottom: 2.5rem;
+    }    
+    
+}
+
+@media (max-width: 767px) {
+    .login-box {
+        padding: 2.5rem 3rem;
+    }
+
+    .login-title {
+        font-size: 3rem;
+        margin-bottom: 2rem;
+    }
+}
+/* =======================================
+    OJO: ESTILOS ESPECÍFICOS
+======================================= */
+.input-group.password-field {
+    /* CRÍTICO: Permite posicionar elementos internos (el ojo) de forma absoluta */
+    position: relative;
+    /* Asegura que el contenedor tenga suficiente espacio */
+    margin-bottom: 2rem; 
+}
