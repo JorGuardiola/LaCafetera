@@ -1,34 +1,15 @@
 <?php
+// frontend/login.php
 session_start();
-// Configuración de errores (opcional)
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+require_once __DIR__ . '/../db/connection.php';
 
-// Inicializar variables para mensajes
+// Inicializar mensajes
 $error_message = '';
 $success_message = '';
 
-// Parámetros de conexión a la base de datos
-$host = 'localhost';
-$db = 'cafeteria_db';
-$user = 'root';
-$pass = ''; // Contraseña de tu usuario root de MySQL
-$charset = 'utf8mb4';
-
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-
-try {
-    // Crear una instancia de PDO
-    $pdo = new PDO($dsn, $user, $pass, [
-        // Opciones de configuración para PDO
-        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        PDO::ATTR_EMULATE_PREPARES   => false,
-    ]);
-} catch (PDOException $e) {
-    // Si la conexión falla, detiene la ejecución y muestra un error
-    die('Error de conexión a la base de datos: ' . $e->getMessage());
-}
+// Ruta base dinámica (usada para las imágenes del carrusel)
+// Asegúrate de que '/lacafetera' sea la subcarpeta del proyecto en htdocs.
+$base_path = '/lacafetera'; 
 
 // --- Lógica de Procesamiento del Formulario de Login ---
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -43,19 +24,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         try {
             // 2. Preparar y ejecutar la consulta a la base de datos
-            $stmt = $pdo->prepare("SELECT id, email, contrasena FROM usuarios WHERE email = ?");
+            $stmt = $pdo->prepare("SELECT id, email, password_hash FROM usuarios WHERE email = ?");
             $stmt->execute([$email]);
             $user = $stmt->fetch();
 
             // 3. Verificar las credenciales
-            if ($user && password_verify($password, $user['contrasena'])) {
+            if ($user && password_verify($password, $user['password_hash'])) {
                 // 4. Login Exitoso: Iniciar sesión y Redirigir
                 // *** Configuramos las variables de sesión ***
                 $_SESSION['user_id'] = $user['id']; 
                 $_SESSION['user_email'] = $user['email'];
                 $_SESSION['logged_in'] = true;
                 
-                header('Location: index.html');
+                header('Location: index.php');
                 exit;
                 
             } else {
@@ -314,25 +295,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
     <script>
-        // Inicializar iconos de Lucide
-        lucide.createIcons();
+        // Inicializar iconos de Lucide (si está disponible)
+        if (window.lucide && typeof window.lucide.createIcons === 'function') {
+            window.lucide.createIcons();
+        }
 
-        // Lógica para mostrar/ocultar contraseña
-        document.getElementById('togglePassword').addEventListener('click', function (e) {
-            const passwordInput = document.getElementById('password');
-            const icon = e.currentTarget.querySelector('i');
-            
-            // Alternar el tipo de input y el icono
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                icon.setAttribute('data-lucide', 'eye-off');
-                lucide.createIcons();
-            } else {
-                passwordInput.type = 'password';
-                icon.setAttribute('data-lucide', 'eye');
-                lucide.createIcons();
-            }
-        });
+        // Lógica para mostrar/ocultar contraseña (proteger contra elementos faltantes)
+        const togglePassword = document.getElementById('togglePassword');
+        if (togglePassword) {
+            togglePassword.addEventListener('click', function (e) {
+                const passwordInput = document.getElementById('password');
+                if (!passwordInput) return;
+                const icon = e.currentTarget.querySelector('i');
+
+                // Alternar el tipo de input y el icono
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    if (icon) icon.setAttribute('data-lucide', 'eye-off');
+                    if (window.lucide && typeof window.lucide.createIcons === 'function') window.lucide.createIcons();
+                } else {
+                    passwordInput.type = 'password';
+                    if (icon) icon.setAttribute('data-lucide', 'eye');
+                    if (window.lucide && typeof window.lucide.createIcons === 'function') window.lucide.createIcons();
+                }
+            });
+        }
     </script>
 </body>
 </html>
