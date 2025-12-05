@@ -208,9 +208,8 @@ h3 { font-size: 2.8rem; }
 .hero-container.bg-login {
     background-image: url('../img/hero-login.jpg');
 }
-/* (Nota: tenías duplicada esta clase, la mantengo tal cual pediste) */
-.hero-container.bg-login {
-    background-image: url('../img/hero-login.jpg');
+.hero-container.bg-registro {
+    background-image: url('../img/hero-registro.jpg');
 }
 
 /* Layout interno */
