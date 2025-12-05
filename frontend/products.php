@@ -98,7 +98,7 @@ $heroButtonLink = "";
             </button>
 
             <div class="product-image">
-                <img src="/lacafetera/assets/img/<?= htmlspecialchars($p['imagen']) ?>" 
+                <img src="/lacafetera/assets/img/imgsproducts/<?= htmlspecialchars($p['imagen']) ?>" 
                      alt="<?= htmlspecialchars($p['nombre_cafe']) ?>">
             </div>
 

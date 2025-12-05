@@ -105,7 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- Contenedor principal de la página -->
     <div class="min-h-screen flex flex-col bg-[#0d0d0d] text-white">
 
-        
+       <?php include __DIR__ . '/templates/header.php'; ?>
 
         <!-- CONTENIDO PRINCIPAL (SPLIT LAYOUT) -->
        <main class="flex-grow grid grid-cols-1 lg:grid-cols-2 lg:max-w-7xl lg:mx-auto lg:rounded-xl lg:shadow-2xl lg:my-10 lg:overflow-hidden w-full">
@@ -193,74 +193,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </main>
 
-        <!-- FOOTER (Negro) -->
-        <footer class="bg-black text-white py-10 border-t border-gray-800">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-2 md:grid-cols-5 gap-8">
-                    
-                    <!-- Columna 1: Branding -->
-                    <div class="col-span-2 md:col-span-1 space-y-3">
-                         <div class="flex items-center space-x-2">
-                            <img src="/assets/img/logo-white.png" alt="Logo La Cafetera" class="logo-icon">
-                            <span class="text-2xl font-bold">La Cafetera</span>
-                        </div>
-                        <p class="text-sm opacity-70">Desde 1994 seleccionando los mejores cafés del mundo para llevarlos a tu taza</p>
-                    </div>
-
-                    <!-- Columna 2: Cafetera Links  -->
-                <div class="text-left md:text-left">
-                    <h4 class="font-semibold mb-3">Cafetera</h4>
-                    <ul class="space-y-2 text-sm opacity-70">
-                        <li><a href="#" class="hover:text-white transition duration-200 rounded-sm focus:outline-none focus:ring-2 focus:ring-white">Nosotros</a></li>
-                        <li><a href="#" class="hover:text-white transition duration-200 rounded-sm focus:outline-none focus:ring-2 focus:ring-white">Elaboración</a></li>
-                        <li><a href="#" class="hover:text-white transition duration-200 rounded-sm focus:outline-none focus:ring-2 focus:ring-white">Sostenibilidad</a></li>
-                        <li><a href="#" class="hover:text-white transition duration-200 rounded-sm focus:outline-none focus:ring-2 focus:ring-white">Contacto</a></li>
-                    </ul>
-                </div>
-
-                <!-- Columna 3: Productos Links  -->
-                <div class="text-left md:text-left">
-                    <h4 class="font-semibold mb-3">Productos</h4>
-                    <ul class="space-y-2 text-sm opacity-70">
-                        <li><a href="#" class="hover:text-white transition duration-200 rounded-sm focus:outline-none focus:ring-2 focus:ring-white">Productos</a></li>
-                        <li><a href="#" class="hover:text-white transition duration-200 rounded-sm focus:outline-none focus:ring-2 focus:ring-white">Packs</a></li>
-                        <li><a href="#" class="hover:text-white transition duration-200 rounded-sm focus:outline-none focus:ring-2 focus:ring-white">Recetas</a></li>
-                        <li><a href="#" class="hover:text-white transition duration-200 rounded-sm focus:outline-none focus:ring-2 focus:ring-white">Información</a></li>
-                    </ul>
-                </div>
-
-                    <!-- Columna 4 & 5: Contacto y Social Media -->
-                    <div class="col-span-2 md:col-span-2 flex flex-col items-start md:items-end">
-                        <button class="border border-white text-white px-6 py-2 rounded-lg hover:bg-white hover:text-black transition duration-200 mb-4">
-                            Contacto
-                        </button>
-                        <!-- Redes Sociales usando IMG -->
-                        <div class="flex space-x-3 mb-6">
-                            <a href="URL_TU_INSTAGRAM" class="p-2 border border-gray-700 rounded-full hover:bg-gray-800 transition duration-200">
-                                <img src="/assets/img/instagram.svg" alt="Instagram" class="w-5 h-5">
-                            </a>
-                            <a href="URL_TU_FACEBOOK" class="p-2 border border-gray-700 rounded-full hover:bg-gray-800 transition duration-200">
-                                <img src="/assets/img/facebook.svg" alt="Facebook" class="w-5 h-5">
-                            </a>
-                            <a href="URL_TU_WHATSAPP" class="p-2 border border-gray-700 rounded-full hover:bg-gray-800 transition duration-200">
-                                <img src="/assets/img/whatsapp.svg" alt="Whatsapp" class="w-5 h-5">
-                            </a>                    
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- Legal/Copyright -->
-                <div class="border-t border-gray-800 pt-6 mt-6 flex flex-col md:flex-row justify-between items-center text-xs opacity-50">
-                    <p>© 2025 La Cafetera. Todos los derechos reservados.</p>
-                    <p class="mt-2 md:mt-0 space-x-4">
-                        <a href="#" class="hover:text-white">Política de privacidad</a> | 
-                        <a href="#" class="hover:text-white">Términos y condiciones</a> | 
-                        <a href="#" class="hover:text-white">Cookies</a>
-                    </p>
-                </div>
-            </div>
-        </footer>
+        <?php include __DIR__ . '/templates/footer.php'; ?>
 
     </div>
 
