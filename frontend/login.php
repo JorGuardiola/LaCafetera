@@ -137,9 +137,8 @@ include __DIR__ . '/templates/header.php';
 <script>
     // Se ejecuta tan pronto como el navegador llega a este punto
     
-    // ====================================================
-    // === 1. LÓGICA DE REDIRECCIÓN PARA INICIO DE SESIÓN ===
-    // ====================================================
+    // === 1. LÓGICA DE REDIRECCIÓN PARA INICIO DE SESIÓN 
+    
     <?php 
     // Usamos la variable de éxito de sesión para manejar la redirección si el header PHP falló
     if (isset($_SESSION['login_success']) && $_SESSION['login_success']): 
@@ -187,6 +186,7 @@ include __DIR__ . '/templates/header.php';
                 if (window.lucide && typeof window.lucide.createIcons === 'function') {
                     window.lucide.createIcons();
                 }
+                if (window.lucide && typeof window.lucide.createIcons === 'function') window.lucide.createIcons();
             });
         }
     });

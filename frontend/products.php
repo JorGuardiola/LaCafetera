@@ -88,7 +88,7 @@ $heroButtonLink = "";
         Selecciona tus productos
     </h2>
 
-    <section class="product-grid">
+ <section class="product-grid">
 
     <?php foreach ($productos as $p): ?>
         <div class="product-card">
@@ -98,19 +98,27 @@ $heroButtonLink = "";
             </button>
 
             <div class="product-image">
-                <img src="/lacafetera/assets/img/imgsproducts/<?= htmlspecialchars($p['imagen']) ?>" 
-                     alt="<?= htmlspecialchars($p['nombre_cafe']) ?>">
+                <a href="product.php?id=<?= $p['id'] ?>" style="display:block; text-decoration:none;">
+                    <img src="/lacafetera/assets/img/imgsproducts/<?= htmlspecialchars($p['imagen']) ?>" 
+                         alt="<?= htmlspecialchars($p['nombre_cafe']) ?>">
+                </a>
             </div>
 
             <div class="product-rating">★ ★ ★ ★ ☆</div>
 
-            <h3 class="product-name"><?= htmlspecialchars($p['nombre_cafe']) ?></h3>
+            <h3 class="product-name">
+                <a href="product.php?id=<?= $p['id'] ?>" style="color:inherit; text-decoration:none;">
+                    <?= htmlspecialchars($p['nombre_cafe']) ?>
+                </a>
+            </h3>
 
             <p class="product-weight"><?= htmlspecialchars($p['presentacion']) ?></p>
 
             <p class="product-price"><?= isset($p['precio']) ? number_format($p['precio'], 2) : '0.00' ?>€</p>
 
-            <button class="product-btn">Ver detalles</button>
+            <a href="product.php?id=<?= $p['id'] ?>" class="product-btn">
+                Ver detalles
+            </a>
 
         </div>
     <?php endforeach; ?>

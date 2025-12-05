@@ -97,12 +97,21 @@ $variantesJson = json_encode($variantes);
 
             <div class="selector-group">
                 <label class="selector-label">Elija molienda:</label>
-                <div class="option-buttons">
+                <div class="option-buttons" style="flex-wrap: wrap; gap: 5px;">
                     <input type="radio" name="molienda" id="mol-grano" value="grano" class="option-radio" checked>
-                    <label for="mol-grano" class="option-label">En grano</label>
-                    
+                    <label for="mol-grano" class="option-label">Grano</label>
+
                     <input type="radio" name="molienda" id="mol-espresso" value="molido espresso" class="option-radio">
-                    <label for="mol-espresso" class="option-label">Molido</label>
+                    <label for="mol-espresso" class="option-label">Molido-Espresso</label>
+
+                    <input type="radio" name="molienda" id="mol-moka" value="molido moka" class="option-radio">
+                    <label for="mol-moka" class="option-label">Molido-Moka</label>
+
+                    <input type="radio" name="molienda" id="mol-goteo" value="molido goteo" class="option-radio">
+                    <label for="mol-goteo" class="option-label">Molido-Goteo</label>
+
+                    <input type="radio" name="molienda" id="mol-francesa" value="molido francesa" class="option-radio">
+                    <label for="mol-francesa" class="option-label">Molido-Francesa</label>
                 </div>
             </div>
 
@@ -178,8 +187,7 @@ $variantesJson = json_encode($variantes);
 
         // 3. Actualizar UI
         if (found) {
-            displayPrice.textContent = parseFloat(found.precio).toLocaleString('es-ES') + '€';
-            
+            displayPrice.textContent = parseFloat(found.precio).toFixed(2) + '€';            
             if (parseInt(found.stock) > 0) {
                 stockText.textContent = "En Stock. Entrega gratuita estimada en 24h.";
                 stockDot.style.backgroundColor = "#27AE60"; // Verde

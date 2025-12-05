@@ -37,7 +37,7 @@
     <!-- Columna 4 Iconos + Botón -->
     <div class="footer-col footer-right">
       <div class="footer-social">
-        <a href="https://www.instagram.com/lacafetera1994/"><img src="../assets/img/instagram.svg" alt="Instagram"></a>
+        <a href="https://www.instagram.com/lacafetera1994/" target="_blank"><img src="../assets/img/instagram.svg" alt="Instagram"></a>
         <a href="#"><img src="../assets/img/facebook.svg" alt="Facebook"></a>
         <a href="#"><img src="../assets/img/whatsapp.svg" alt="WhatsApp"></a>
       </div>
