@@ -24,6 +24,11 @@
         <?= isset($p['precio']) ? number_format($p['precio'], 2) : '0.00' ?> €
     </p>
 
-    <button class="product-btn">Ver detalles</button>
+    <a href="product.php?id=<?= (int)$p['id'] ?>">
+        <button class="product-btn">Ver detalles</button>
+    </a>
+
+    
+
 
 </div>

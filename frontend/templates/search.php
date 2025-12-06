@@ -1,49 +1,56 @@
 <?php
-// frontend/templates/header.php
+// Recoger valores enviados
+$f_origen  = $_GET['origen']  ?? '';
+$f_proceso = $_GET['proceso'] ?? '';
+$f_altitud = $_GET['altitud'] ?? '';
+
+// Valores dinámicos para los selects
+$origenes = ["Brasil","Burundi","Colombia","Etiopía","Guatemala","Honduras","Kenia","Nicaragua","Perú"];
+$procesos = ["Lavado","Natural","Honey"];
+$rangos = [
+    "1000-1500" => "1000m - 1500m",
+    "1500-1800" => "1500m - 1800m",
+    "1800-9999" => "+1800m"
+];
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-  <!-- Fuentes -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="../assets/css/style.css">
-</head>
-    
-        <div class="product-filter-bar">
+<div class="product-filter-bar">
 
     <h2 class="filter-title">Selecciona tus productos</h2>
 
-    <div class="filter-controls">
+    <form method="GET" class="filter-controls">
 
-        <button class="filter-btn">
-            ORIGEN
-            <img src="../assets/img/down-arrow.png" class="arrow" alt="">
-        </button>
+        <!-- ORIGEN -->
+        <select name="origen" class="filter-btn">
+            <option value="">ORIGEN</option>
+            <?php foreach ($origenes as $o): ?>
+                <option value="<?= $o ?>" <?= $f_origen === $o ? 'selected' : '' ?>>
+                    <?= $o ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
 
-        <button class="filter-btn">
-            TUESTE
-            <img src="../assets/img/down-arrow.png" class="arrow" alt="">
-        </button>
+        <!-- PROCESO -->
+        <select name="proceso" class="filter-btn long">
+            <option value="">MÉTODO DE PROCESAMIENTO</option>
+            <?php foreach ($procesos as $p): ?>
+                <option value="<?= $p ?>" <?= $f_proceso === $p ? 'selected' : '' ?>>
+                    <?= $p ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
 
-        <button class="filter-btn long">
-            METODO DE PROCESAMIENTO
-            
-            <img src="../assets/img/down-arrow.png" class="arrow" alt="">
-        </button>
+        <!-- ALTITUD -->
+        <select name="altitud" class="filter-btn">
+            <option value="">ALTITUD</option>
+            <?php foreach ($rangos as $valor => $label): ?>
+                <option value="<?= $valor ?>" <?= $f_altitud === $valor ? 'selected' : '' ?>>
+                    <?= $label ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
 
-        <button class="filter-btn long">
-            FECHA DE TUESTE
-            <img src="../assets/img/calendar.png" class="calendar-icon" alt="">
-        </button>
+        <button type="submit" class="filter-btn">FILTRAR</button>
 
-    </div>
+    </form>
 </div>
