@@ -91,36 +91,7 @@ $heroButtonLink = "";
  <section class="product-grid">
 
     <?php foreach ($productos as $p): ?>
-        <div class="product-card">
-
-            <button class="fav-btn">
-                <img src="../assets/img/icon-heart.png" alt="Fav">
-            </button>
-
-            <div class="product-image">
-                <a href="product.php?id=<?= $p['id'] ?>" style="display:block; text-decoration:none;">
-                    <img src="/lacafetera/assets/img/imgsproducts/<?= htmlspecialchars($p['imagen']) ?>" 
-                         alt="<?= htmlspecialchars($p['nombre_cafe']) ?>">
-                </a>
-            </div>
-
-            <div class="product-rating">★ ★ ★ ★ ☆</div>
-
-            <h3 class="product-name">
-                <a href="product.php?id=<?= $p['id'] ?>" style="color:inherit; text-decoration:none;">
-                    <?= htmlspecialchars($p['nombre_cafe']) ?>
-                </a>
-            </h3>
-
-            <p class="product-weight"><?= htmlspecialchars($p['presentacion']) ?></p>
-
-            <p class="product-price"><?= isset($p['precio']) ? number_format($p['precio'], 2) : '0.00' ?>€</p>
-
-            <a href="product.php?id=<?= $p['id'] ?>" class="product-btn">
-                Ver detalles
-            </a>
-
-        </div>
+        <?php include __DIR__ . '/templates/card.php'; ?>
     <?php endforeach; ?>
 
     </section>
