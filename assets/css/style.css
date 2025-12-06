@@ -735,7 +735,7 @@ h3 { font-size: 2.8rem; }
 }
 
 .filter-btn:hover {
-    background: rgba(34,54,74,0.1);
+    background: rgba(var(--secondary-900), --opacidad-barra);
 }
 
 /* BOTÓN MÁS LARGO */
@@ -751,12 +751,7 @@ h3 { font-size: 2.8rem; }
     object-fit: contain;
 }
 
-/* ICONO CALENDARIO */
-.calendar-icon {
-    width: 18px;
-    height: 18px;
-    object-fit: contain;
-}
+
 
 
 
@@ -1496,7 +1491,7 @@ body.bg-beige {
 
 
 /* =======================================
-    LOGIN: RESPONSIVE
+    LOGIN: RESPONSIVE   */
 @media (max-width: 1023px) {
     .hero-mobile .hero-container {
         padding: 4rem;
