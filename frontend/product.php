@@ -85,13 +85,13 @@ $variantesJson = json_encode($variantes);
                 <label class="selector-label">Elija envase:</label>
                 <div class="option-buttons">
                     <input type="radio" name="envase" id="size-250" value="250g" class="option-radio" checked>
-                    <label for="size-250" class="option-label">250 g.</label>
+                    <label for="size-250" class="option-label">250 G</label>
                     
                     <input type="radio" name="envase" id="size-1kg" value="1kg" class="option-radio">
-                    <label for="size-1kg" class="option-label">1000 g.</label>
+                    <label for="size-1kg" class="option-label">1 KG</label>
                     
                     <input type="radio" name="envase" id="size-2kg" value="2kg" class="option-radio">
-                    <label for="size-2kg" class="option-label">2000 g.</label>
+                    <label for="size-2kg" class="option-label">2 KG</label>
                 </div>
             </div>
 
