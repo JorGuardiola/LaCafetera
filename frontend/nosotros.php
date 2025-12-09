@@ -3,7 +3,7 @@
 // 1. VARIABLES PARA EL HERO (ESENCIALES)
 $bgClass = 'bg-nosotros'; 
 $heroTitle = 'La Cafetera 1994: Más que café, una tradición.';
-$heroSubTitle = 'La Cafetera 1994 no es solo una tienda de café; es el resultado de una promesa de calidad que hicimos hace más de dos décadas. Todo comenzó en 1994, cuando nuestro fundador, KALDI], se propuso recuperar la auténtica experiencia del café. Desde entonces, nuestro objetivo no ha cambiado: traer el café más honesto y perfectamente tostado directamente de la finca a tu taza.';
+$heroSubTitle = 'La Cafetera 1994 no es solo una tienda de café; es el resultado de una promesa de calidad que hicimos hace más de dos décadas. Todo comenzó en 1994, cuando nuestro fundador, KALDI, se propuso recuperar la auténtica experiencia del café. Desde entonces, nuestro objetivo no ha cambiado: traer el café más honesto y perfectamente tostado directamente de la finca a tu taza.';
 
 // 2. Incluir el encabezado
 include __DIR__ . '/templates/header.php';
