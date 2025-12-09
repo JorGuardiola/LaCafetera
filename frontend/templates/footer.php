@@ -16,10 +16,10 @@
     <div class="footer-col">
       <h4>Cafetera</h4>
       <ul>
-        <li><a href="#">Nosotros</a></li>
+        <li><a href="nosotros.php">Nosotros</a></li>
         <li><a href="#">Elaboración</a></li>
         <li><a href="#">Sostenibilidad</a></li>
-        <li><a href="#">Contacto</a></li>
+        <li><a href="contacto.php">Contacto</a></li>
       </ul>
     </div>
 
