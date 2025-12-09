@@ -54,18 +54,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 
-// =================================================================
 // 1. VARIABLES PARA LA PLANTILLA HERO.PHP
-// =================================================================
 $bgClass = 'bg-login'; // Clase para aplicar el fondo de las dos mitades
 $heroTitle = ''; 
 $heroSubtitle = ''; 
 $heroButtonText = '';
 $heroButtonLink = ''; 
 
-// =================================================================
 // 2. CONTENIDO DEL FORMULARIO (PARA INYECTAR EN hero-right)
-// =================================================================
 ob_start();
 ?>
 <div class="login-box">

@@ -199,13 +199,10 @@ h3 { font-size: 2.8rem; }
     background-image: url('../img/hero-sesion.jpg'); 
     
 }
-.hero-container.bg-resgistro {
+.hero-container.bg-registro {
     background-image: url('../img/hero-registro.jpg');
 }
 
-.hero-container.bg-login {
-    background-image: url('../img/hero-registro.jpg');
-}
 
 
 /* Layout interno */

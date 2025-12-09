@@ -100,155 +100,101 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
+// 1. VARIABLES PARA LA PLANTILLA HERO.PHP
+$bgClass = 'bg-registro'; // Clase para aplicar el fondo de las dos mitades
+$heroTitle = ''; 
+$heroSubtitle = ''; 
+$heroButtonText = '';
+$heroButtonLink = ''; 
+
+// 2. CONTENIDO DEL FORMULARIO DE REGISTRO (PARA INYECTAR EN hero-right)
+ob_start();
 ?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro - La Cafetera</title>
+<div class="login-box register-box">
     
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            /* Cambiado a fondo oscuro para igualar login.php */
-            background-color: #0d0d0d; 
-        }
-        /* Uso de la variable PHP para la ruta de la imagen */
-        .image-bg {
-            /* Se establece la imagen de fondo solicitada */
-            background-image: url('<?php echo $base_path; ?>/assets/img/stephanie-morales-DGt9zA3Fr0g-unsplash.jpg');
-            background-color: #e5e7eb; 
-            background-size: cover;
-            background-position: center;
-        }
-        /* Estilo del panel de registro (similar al de login.php) */
-        .register-panel {
-            background-color: rgba(255, 255, 255, 0.61);
-            backdrop-filter: blur(10px); 
-        }
-        /* Estilos base para iconos (copiados de login.php) */
-        .logo-icon {
-            width: 32px; 
-            height: 32px; 
-            filter: invert(1); 
-        }
-        .header-icon {
-            width: 20px; 
-            height: 20px; 
-            opacity: 0.75;
-            cursor: pointer;
-            transition: opacity 200ms;
-        }
-        .header-icon:hover {
-            opacity: 1;
-        }
-    </style>
-</head>
-<body>
+    <h2 class="login-title">Crea tu cuenta</h2>
+    
+    <?php if (!empty($error_message)): ?>
+        <div class="alert error">
+            <i data-lucide="alert-circle"></i>
+            <p><?php echo htmlspecialchars($error_message); ?></p>
+        </div>
+    <?php endif; ?>
 
-    <!-- Contenedor principal cambiado a tema oscuro para igualar login.php -->
-    <div class="min-h-screen flex flex-col bg-[#0d0d0d] text-white">
-
-        <?php include __DIR__ . '/templates/header.php'; ?>
-
-        <main class="flex-grow grid grid-cols-1 lg:grid-cols-2 lg:max-w-7xl lg:mx-auto lg:rounded-xl lg:shadow-2xl lg:my-10 lg:overflow-hidden w-full">
-
-            <div class="image-bg relative hidden lg:block p-10">
-                <!-- Oscurecimiento del fondo para mejor contraste -->
-                <div class="absolute inset-0 bg-black bg-opacity-10"></div> 
+    <form action="register.php" method="POST" class="register-form">
+        
+        <div class="input-group-row">
+            <div class="input-group half-width">
+                <label for="nombre" class="input-label small-label">Nombre</label>
+                <input 
+                    type="text" 
+                    id="nombre" 
+                    name="nombre" 
+                    required
+                    class="form-input"
+                    value="<?php echo isset($nombre) ? htmlspecialchars($nombre) : ''; ?>"
+                >
             </div>
 
-            <!-- El panel usa 'register-panel' con blur y el texto interno es negro sobre el panel claro -->
-            <div class="flex items-center justify-center p-8 relative register-panel">
-                
-                <div class="w-full max-w-sm z-10 p-4 text-black"> 
-                    <h1 class="text-4xl font-light mb-8">Crea tu cuenta</h1>
-
-                    <!-- Mensajes de error y éxito con colores adaptados para el fondo claro del panel -->
-                    <?php if ($error_message): ?>
-                        <div class="bg-red-800 bg-opacity-80 text-white px-4 py-3 rounded-lg mb-4 text-sm" role="alert">
-                            <p><?php echo $error_message; ?></p>
-                        </div>
-                    <?php endif; ?>
-
-                    <?php if ($success_message): ?>
-                        <div class="bg-green-800 bg-opacity-80 text-white px-4 py-3 rounded-lg mb-4 text-sm" role="alert">
-                            <p><?php echo $success_message; ?></p>
-                        </div>
-                    <?php endif; ?>
-                    
-                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" class="space-y-4">
-                        
-                        <div class="flex space-x-4">
-                            <div class="w-1/2">
-                                <label for="nombre" class="block text-sm mb-2">Nombre</label>
-                                <input type="text" id="nombre" name="nombre" required
-                                    class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-black focus:border-black transition duration-150 text-gray-800"
-                                    value="<?php echo htmlspecialchars($nombre); ?>"
-                                    placeholder="Nombre">
-                            </div>
-                            <div class="w-1/2">
-                                <label for="apellidos" class="block text-sm mb-2">Apellidos</label>
-                                <input type="text" id="apellidos" name="apellidos" required
-                                    class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-black focus:border-black transition duration-150 text-gray-800"
-                                    value="<?php echo htmlspecialchars($apellidos); ?>"
-                                    placeholder="Apellidos">
-                            </div>
-                        </div>
-
-                        <div>
-                            <label for="email" class="block text-sm mb-2">Email</label>
-                            <input type="email" id="email" name="email" required
-                                class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-black focus:border-black transition duration-150 text-gray-800"
-                                value="<?php echo htmlspecialchars($email); ?>"
-                                placeholder="tu.correo@dominio.com">
-                        </div>
-
-                        <div>
-                            <label for="password" class="block text-sm mb-2">Contraseña</label>
-                            <div class="relative">
-                                <input type="password" id="password" name="password" required
-                                    class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-black focus:border-black transition duration-150 text-gray-800"
-                                    placeholder="Mínimo 8 caracteres">
-                                <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-600 focus:outline-none">
-                                    <i data-lucide="eye" class="w-5 h-5"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="pt-4">
-                            <button type="submit"
-                                        class="w-full flex justify-center py-3 px-6 rounded-lg shadow-md text-base font-semibold text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black transition duration-150 ease-in-out transform hover:scale-[1.01]">
-                                Registrarse &rightarrow;
-                            </button>
-                        </div>
-                        
-                        <div class="flex items-center justify-center pt-2">
-                            <button type="button" class="w-full flex items-center justify-center py-3 px-6 border border-gray-300 rounded-lg shadow-sm text-base font-semibold text-gray-700 bg-white hover:bg-gray-50 transition duration-150">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png" alt="Google logo" class="w-5 h-5 mr-2">
-                                Sign up with Google
-                            </button>
-                        </div>
-
-                    </form>
-
-                    <div class="mt-8 text-center">
-                        <span class="text-sm opacity-70">
-                            ¿Ya tienes una cuenta? 
-                            <a href="login.php" class="font-semibold underline hover:opacity-100 transition duration-150">
-                                Accede
-                            </a>
-                        </span>
-                    </div>
-
-                </div>
-            
+            <div class="input-group half-width">
+                <label for="apellidos" class="input-label small-label">Apellidos</label>
+                <input 
+                    type="text" 
+                    id="apellidos" 
+                    name="apellidos" 
+                    required
+                    class="form-input"
+                    value="<?php echo isset($apellidos) ? htmlspecialchars($apellidos) : ''; ?>"
+                >
             </div>
-        </main>
+        </div>
+
+        <div class="input-group">
+            <label for="email" class="input-label small-label">Email</label>
+            <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                required
+                class="form-input"
+                value="<?php echo isset($email) ? htmlspecialchars($email) : ''; ?>"
+            >
+        </div>
+
+        <div class="input-group password-field">
+            <label for="password" class="input-label small-label">Contraseña</label>
+            <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                required
+                class="form-input"
+            >
+            <button type="button" id="togglePassword" class="toggle-password">
+                <i data-lucide="eye"></i>
+            </button>
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-acceder btn-register">
+            Registrarse <span class="arrow-icon">&rarr;</span>
+        </button>
+
+    </form>
+      
+    <div class="login-prompt">
+        <span>Ya tienes una cuenta? <a href="login.php">Accede</a></span>
+    </div>
+</div>
+<?php
+
+$heroRightContent = ob_get_clean();
+
+
+// Incluye el inicio del HTML (<!DOCTYPE html>, <head>, <body>, Nav)
+include __DIR__ . '/templates/header.php';
+?>
+
+    <?php include __DIR__ . '/templates/hero.php'; ?>
 
         <!-- FOOTER: Se ha quitado la etiqueta <footer> envolvente para que el footer.php incluído determine el estilo, como en login.php -->
         <?php include __DIR__ . '/templates/footer.php'; ?>
@@ -291,5 +237,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             });
         }
     </script>
-</body>
-</html>
