@@ -1,4 +1,7 @@
 <?php
+// LÍNEA 1: INICIA EL BUFFER DE SALIDA
+ob_start(); 
+
 // frontend/login.php
 session_start();
 require_once __DIR__ . '/../db/connection.php';
@@ -6,6 +9,13 @@ require_once __DIR__ . '/../db/connection.php';
 // Inicializar mensajes
 $error_message = '';
 $success_message = '';
+
+// INICIO DEL CAMBIO: RECUPERAR MENSAJE DE SESIÓN//
+if (isset($_SESSION['mensaje_exito'])) {
+    $success_message = $_SESSION['mensaje_exito'];
+    // Limpiar la variable de sesión para que no se muestre de nuevo al recargar
+    unset($_SESSION['mensaje_exito']); 
+}
 
 // --- Lógica de Procesamiento del Formulario de Login ---
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -24,35 +34,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->execute([$email]);
             $user = $stmt->fetch();
 
-            // 3. Verificar las credenciales
+            // 3. Verificar las credenciales y el hash de la contraseña
             if ($user && password_verify($password, $user['password_hash'])) {
+                
                 // 4. Login Exitoso: Iniciar sesión y Redirigir
                 $_SESSION['user_id'] = $user['id']; 
-                $_SESSION['user_email'] = $user['email'];
                 $_SESSION['logged_in'] = true;
                 
-                // === REDIRECCIÓN ===
-                // Verifica que no haya output antes de este header()
-                header('Location: index.php'); 
-                exit; // Detiene la ejecución para asegurar la redirección
-                // ====================
+                // === REDIRECCIÓN FINAL VÍA PHP ===
+                ob_end_clean(); // Limpia el buffer antes de enviar la cabecera
+                // Usa la ruta absoluta comprobada
+                header('Location: /lacafetera/frontend/index.php'); 
+                exit; 
+                // =================================
                 
             } else {
-                // 5. Login Fallido
+                // 5. Login Fallido (Usuario no encontrado o contraseña incorrecta)
                 $error_message = "Email o contraseña incorrectos.";
             }
 
         } catch (PDOException $e) {
-            // Error de consulta
+            // Error de consulta o base de datos
             $error_message = "Ocurrió un error en el servidor. Inténtelo de nuevo.";
-            // Puedes loguear $e->getMessage() para debug
+            // $error_message .= " Error: " . $e->getMessage(); // Descomentar solo para debug
         }
     }
 }
 
 
 // 1. VARIABLES PARA LA PLANTILLA HERO.PHP
-$bgClass = 'bg-login'; // Clase para aplicar el fondo de las dos mitades
+$bgClass = 'bg-login'; 
 $heroTitle = ''; 
 $heroSubtitle = ''; 
 $heroButtonText = '';
@@ -72,6 +83,12 @@ ob_start();
         </div>
     <?php endif; ?>
 
+    <?php if (!empty($success_message)): ?>
+        <div class="alert success">
+            <i data-lucide="check-circle"></i> 
+            <p><?php echo htmlspecialchars($success_message); ?></p>
+        </div>
+    <?php endif; ?>
     <form action="login.php" method="POST" class="login-form">
         
         <div class="input-group">
@@ -127,58 +144,52 @@ include __DIR__ . '/templates/header.php';
 </main>
 
 <script>
-    // Se ejecuta tan pronto como el navegador llega a este punto
-    
-    // === 1. LÓGICA DE REDIRECCIÓN PARA INICIO DE SESIÓN 
-    
-    <?php 
-    // Usamos la variable de éxito de sesión para manejar la redirección si el header PHP falló
-    if (isset($_SESSION['login_success']) && $_SESSION['login_success']): 
-        unset($_SESSION['login_success']); 
-    ?>
-        // Redirección inmediata (si el PHP no pudo hacer el header())
-        window.location.href = '<?php echo $base_path; ?>/index.php'; 
-    <?php endif; ?>
+    // Ejecutar el resto del código cuando el DOM esté completamente cargado.
+    document.addEventListener('DOMContentLoaded', function() {
 
-    
+$heroRightContent = ob_get_clean();
+
+
+include __DIR__ . '/templates/header.php';
+
+<main>
+    <?php include __DIR__ . '/templates/hero.php'; ?>
+</main>
+
+<script>
     // Ejecutar el resto del código cuando el DOM esté completamente cargado.
     document.addEventListener('DOMContentLoaded', function() {
         
-        // === 2. INICIALIZACIÓN DE ICONOS (CRÍTICO PARA VER EL OJO) ===
-        // Usamos setTimeout(0) para darle prioridad alta después de la carga del DOM.
+        // === 2. INICIALIZACIÓN DE ICONOS ===
         if (window.lucide && typeof window.lucide.createIcons === 'function') {
             setTimeout(function() {
                  window.lucide.createIcons();
             }, 0);
         }
 
-        // ====================================================
         // === 3. Lógica para mostrar/ocultar contraseña (El Ojo) ===
-        // ====================================================
         const togglePassword = document.getElementById('togglePassword');
         if (togglePassword) {
             togglePassword.addEventListener('click', function (e) {
                 e.preventDefault(); 
                 
                 const passwordInput = document.getElementById('password');
-                // Buscamos el elemento que tiene el atributo data-lucide (el icono)
                 const icon = e.currentTarget.querySelector('[data-lucide]'); 
 
                 if (!passwordInput || !icon) return; 
 
                 if (passwordInput.type === 'password') {
                     passwordInput.type = 'text';
-                    icon.setAttribute('data-lucide', 'eye-off'); // Ojo tachado
+                    icon.setAttribute('data-lucide', 'eye-off'); 
                 } else {
                     passwordInput.type = 'password';
-                    icon.setAttribute('data-lucide', 'eye'); // Ojo normal
+                    icon.setAttribute('data-lucide', 'eye'); 
                 }
                 
-                // Vuelve a renderizar los iconos de Lucide
+                // Volver a dibujar los iconos después del cambio
                 if (window.lucide && typeof window.lucide.createIcons === 'function') {
                     window.lucide.createIcons();
                 }
-                if (window.lucide && typeof window.lucide.createIcons === 'function') window.lucide.createIcons();
             });
         }
     });

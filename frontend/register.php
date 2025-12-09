@@ -157,7 +157,7 @@ include __DIR__ . '/templates/header.php';
         // Redirigir al index.php si el registro fue exitoso
         <?php if (!empty($success_message)): ?>
             setTimeout(function() {
-                window.location.href = '<?php echo $base_path; ?>/index.php'; // Redirección a la página principal
+                window.location.href = '<?php echo $base_path; ?> index.php'; // Redirección a la página principal
             }, 2000); // 2 segundos
         <?php endif; ?>
 
@@ -166,19 +166,33 @@ include __DIR__ . '/templates/header.php';
             window.lucide.createIcons();
         }
 
-    // Inicializar iconos al cargar
-    if(window.lucide && window.lucide.createIcons) {
-        window.lucide.createIcons();
-    }
+    // === 3. Lógica para mostrar/ocultar contraseña (El Ojo) ===
+        // ====================================================
+        const togglePassword = document.getElementById('togglePassword');
+        if (togglePassword) {
+            togglePassword.addEventListener('click', function (e) {
+                e.preventDefault(); 
+                
+                const passwordInput = document.getElementById('password');
+                // Buscamos el elemento que tiene el atributo data-lucide (el icono)
+                const icon = e.currentTarget.querySelector('[data-lucide]'); 
+
+                if (!passwordInput || !icon) return; 
+
                 if (passwordInput.type === 'password') {
                     passwordInput.type = 'text';
-                if (icon) icon.setAttribute('data-lucide', 'eye-off');
+                    icon.setAttribute('data-lucide', 'eye-off'); // Ojo tachado
                 } else {
                     passwordInput.type = 'password';
-                if (icon) icon.setAttribute('data-lucide', 'eye');
+                    icon.setAttribute('data-lucide', 'eye'); // Ojo normal
                 }
-                // Vuelve a renderizar los iconos de Lucide después del cambio de atributo
+                
+                // Vuelve a renderizar los iconos de Lucide
                 if (window.lucide && typeof window.lucide.createIcons === 'function') {
                     window.lucide.createIcons();
-                }       
+                }
+                if (window.lucide && typeof window.lucide.createIcons === 'function') window.lucide.createIcons();
+            }); 
+        };
+    
 </script>
