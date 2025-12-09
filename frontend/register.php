@@ -148,8 +148,8 @@ include __DIR__ . '/templates/header.php';
 
     <?php include __DIR__ . '/templates/hero.php'; ?>
 
-        <!-- FOOTER: Se ha quitado la etiqueta <footer> envolvente para que el footer.php incluído determine el estilo, como en login.php -->
-        <?php include __DIR__ . '/templates/footer.php'; ?>
+        
+    <?php include __DIR__ . '/templates/footer.php'; ?>
 
     </div>
     
