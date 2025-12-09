@@ -35,6 +35,7 @@
     --opacidad-barra: 0.15;
 }
 
+
 /* =======================================
    RESET & BASE
 ======================================= */
@@ -60,7 +61,6 @@ h1,h2,h3,h4,h5,h6 { font-family: var(--fuenteHeading); }
 h1 { font-size: 4.1rem; line-height: 1.18; }
 h2 { font-size: 3.2rem; }
 h3 { font-size: 2.8rem; }
-
 
 .container {
     width: 90%;
@@ -131,6 +131,8 @@ h3 { font-size: 2.8rem; }
     width: 1.8rem;
 }
 
+
+
 /* =======================================
    RESPONSIVE HEADER
 ======================================= */
@@ -147,6 +149,7 @@ h3 { font-size: 2.8rem; }
         max-width: 28rem;
     }
 }
+
 
 /* ------- TABLET ------- */
 @media (min-width: 768px) and (max-width: 1023px) {
@@ -214,7 +217,6 @@ h3 { font-size: 2.8rem; }
 }
 
 
-
 /* Layout interno */
 .hero-inner {
     display: grid;
@@ -238,6 +240,9 @@ h3 { font-size: 2.8rem; }
 }
 
 /* Columna derecha (vacía pero estructural) */
+
+
+
 
 /* =======================================
    RESPONSIVE
@@ -452,7 +457,6 @@ h3 { font-size: 2.8rem; }
     color: rgba(255,255,255,0.8);
     line-height: 1.6;
 }
-
 /* Columnas de enlaces */
 .footer-col h4 {
     font-family: var(--fuenteHeading);
@@ -468,11 +472,6 @@ h3 { font-size: 2.8rem; }
 
 .footer-col ul li {
     margin-bottom: .8rem;
-}
-
-.footer-col ul a {
-    color: rgba(255,255,255,0.75);
-    transition: .3s;
 }
 
 .footer-col ul a:hover {
@@ -544,6 +543,7 @@ h3 { font-size: 2.8rem; }
     color: rgba(255,255,255,0.7);
 }
 
+
 .footer-links {
     display: flex;
     gap: 2rem;
@@ -579,7 +579,61 @@ h3 { font-size: 2.8rem; }
     }
 }
 
+@media (max-width: 767px) {
 
+    .footer-main {
+        padding: 4rem 0 2rem;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr; /* Una sola columna en móvil */
+        gap: 4rem;
+    }
+
+    .footer-brand-info,
+    .footer-links-container,
+    .footer-social-action {
+        grid-column: 1 / 2;
+        width: 100%;
+        border-top: none !important;
+        padding-top: 0 !important;
+    }
+    
+    .footer-links-container {
+        flex-direction: column; /* Apilamos las columnas de enlaces */
+        gap: 2.5rem;
+    }
+
+    .footer-links-col h3 {
+        margin-bottom: 0.8rem;
+    }
+
+    .footer-social-action {
+        flex-direction: column; /* Apilamos iconos y botón */
+        align-items: flex-start;
+        gap: 2rem;
+    }
+
+    /* Línea inferior (Copyright y Privacidad) */
+    .footer-legal-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+        font-size: 1.4rem;
+    }
+    
+    .privacy-links a {
+        margin-left: 0;
+        margin-right: 1rem;
+    }
+
+    .copyright-text {
+        order: 2; /* Coloca el copyright abajo de los links legales */
+    }
+    .privacy-links {
+        order: 1;
+    }
+}
 
 /*  ============================
    SECCION DE PRODUCTOS
@@ -696,6 +750,11 @@ h3 { font-size: 2.8rem; }
     }
 }
 
+
+
+
+
+
 /* ===============================
    BARRA DE FILTROS (SEARCH.PHP)
 ================================ */
@@ -799,6 +858,371 @@ h3 { font-size: 2.8rem; }
     .filter-btn.long {
         padding-left: 1.6rem;
         padding-right: 1.6rem;
+    }
+}
+
+
+/* =========================================
+   SECCION CARRITO jorge5dic
+   ========================================= */
+
+/* Carrito Layout */
+.cart-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* 2 partes lista, 1 parte resumen */
+    gap: 40px;
+    align-items: start;
+}
+
+/* Fila de producto */
+.cart-item-row {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding: 20px 0;
+    gap: 20px;
+}
+.cart-img img {
+    width: 80px;
+    height: auto;
+    border-radius: 4px;
+}
+.cart-info {
+    flex: 1; /* Ocupa el espacio disponible */
+}
+.cart-product-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+.cart-sku {
+    font-size: 0.75rem;
+    color: #999;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+.variant-tag {
+    display: block;
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 2px;
+}
+
+/* Acciones y Precio */
+.qty-selector input {
+    width: 60px;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.btn-delete {
+    color: #d9534f;
+    margin-left: 10px;
+    display: inline-flex;
+    vertical-align: middle;
+}
+.cart-total-line {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #333;
+    min-width: 80px;
+    text-align: right;
+}
+
+/* Caja Resumen (Derecha) */
+.cart-summary-box {
+    background: #fcfcfc;
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+.cart-summary-box h2 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    color: #555;
+}
+.summary-row.total {
+    color: #000;
+    font-weight: bold;
+    font-size: 1.3rem;
+    margin-top: 15px;
+}
+.iva-text {
+    font-size: 0.8rem;
+    color: #999;
+    text-align: right;
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+.btn-checkout {
+    width: 100%;
+    background: #F5A623; /* Color mostaza similar a tu imagen */
+    color: #fff;
+    border: none;
+    padding: 15px;
+    border-radius: 50px; /* Bordes redondeados */
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btn-checkout:hover {
+    background: #e09612;
+}
+
+/* Responsivo */
+@media(max-width: 768px) {
+    .cart-layout { grid-template-columns: 1fr; }
+    .cart-item-row { flex-wrap: wrap; }
+    .mobile-hide { display: none; }
+}
+
+/* =========================================
+   SECCION PRODUCTO jorge5dic
+   ========================================= */
+
+/* Fondo general beige */
+body.bg-beige {
+    background-color: #F5EFE5; /* Color aproximado del fondo */
+}
+
+/* Layout principal de dos columnas */
+.product-detail-layout {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 50% - 50% */
+    gap: 60px;
+    align-items: center; /* Centrar verticalmente */
+}
+
+/* Columna Izquierda */
+.detail-left {
+    text-align: center;
+}
+.detail-image-container img {
+    max-width: 100%;
+    height: auto;
+    /* Sombra suave debajo de la bolsa */
+    filter: drop-shadow(0px 20px 30px rgba(0,0,0,0.15)); 
+}
+.big-product-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    color: #1A1A1A; /* Casi negro */
+    margin-top: 2rem;
+}
+
+/* Columna Derecha: La Tarjeta */
+.detail-right-card {
+    background-color: #FAF7F2; /* Un tono más claro que el fondo */
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+/* Header de la tarjeta */
+.card-header { margin-bottom: 1rem; }
+.reviews-placeholder {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+.star-icon { color: #C7A17A; font-size: 1.2rem; } /* Color dorado/café */
+.star-icon-half { color: #C7A17A; font-size: 1.2rem; }
+.reviews-link {
+    color: #1A1A1A;
+    text-decoration: underline;
+    margin-left: 5px;
+}
+.card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    margin: 0.5rem 0;
+    color: #1A1A1A;
+}
+.card-origin {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: #666;
+    font-weight: 500;
+}
+
+/* Precio */
+.card-price {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #1A1A1A;
+    margin: 1.5rem 0;
+}
+
+/* Descripción */
+.card-description {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+/* --- SELECTORES TIPO BOTÓN --- */
+.selector-group {
+    margin-bottom: 1.5rem;
+}
+.selector-label {
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    color: #1A1A1A;
+    font-size: 0.95rem;
+}
+.option-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+/* Ocultamos el radio button real */
+.option-radio {
+    display: none;
+}
+/* Estilo del label que parece botón */
+.option-label {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: transparent;
+    border: 1px solid #DDD;
+    border-radius: 30px; /* Bordes muy redondeados */
+    cursor: pointer;
+    font-weight: 600;
+    color: #1A1A1A;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+    text-transform: capitalize; /* Primera letra mayúscula */
+}
+.option-label:hover {
+    border-color: #1A1A1A;
+}
+/* Estilo cuando el radio asociado está checkeado */
+.option-radio:checked + .option-label {
+    background-color: #1A1A1A; /* Fondo oscuro */
+    color: #FFF; /* Texto blanco */
+    border-color: #1A1A1A;
+}
+
+/* Selector Dropdown Normal (Tueste) */
+.form-select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #DDD;
+    border-radius: 8px;
+    background-color: transparent;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+/* Info de Stock */
+.stock-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: #1A1A1A;
+    margin: 1.5rem 0;
+    font-weight: 600;
+}
+.stock-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #27AE60; /* Verde */
+    border-radius: 50%;
+}
+
+/* --- Fila de Acciones (Cantidad + Botón) --- */
+.card-actions-row {
+    display: flex;
+    gap: 15px;
+}
+
+/* Widget de Cantidad (- 1 +) */
+.quantity-selector-widget {
+    display: flex;
+    align-items: center;
+    border: 1px solid #DDD;
+    border-radius: 30px;
+    padding: 5px;
+    background: transparent;
+}
+.qty-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    padding: 5px 15px;
+    cursor: pointer;
+    color: #1A1A1A;
+}
+.quantity-selector-widget input {
+    width: 40px;
+    text-align: center;
+    border: none;
+    background: transparent;
+    font-weight: bold;
+    font-size: 1rem;
+    
+}
+.quantity-selector-widget input::-webkit-outer-spin-button,
+.quantity-selector-widget input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Botón Añadir a la Cesta */
+.btn-add-to-cart-dark {
+    flex: 1; /* Ocupa el resto del espacio */
+    background-color: #1A1A1A; /* Color oscuro */
+    color: #FFF;
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.btn-add-to-cart-dark:hover {
+    background-color: #333;
+}
+.btn-add-to-cart-dark.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Responsividad */
+@media (max-width: 900px) {
+    .product-detail-layout {
+        grid-template-columns: 1fr; /* Una columna en móviles */
+        gap: 30px;
+    }
+    .detail-image-container img {
+        max-width: 60%; /* Imagen más pequeña en móvil */
+    }
+    .big-product-title {
+        font-size: 2.5rem; /* Título más pequeño */
+    }
+    .card-actions-row {
+        flex-direction: column; /* Apilar cantidad y botón */
+    }
+    .quantity-selector-widget {
+        justify-content: center;
+    }
+    .btn-add-to-cart-dark {
+        padding: 15px;
     }
 }
 /* =======================================
