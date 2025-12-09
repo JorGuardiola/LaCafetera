@@ -40,22 +40,9 @@ include __DIR__ . '/templates/header.php';
                 
                 </div>
                 
-                
-                <h3>Los Rostros Detrás de la Tostadora</h3>
-
-                <div class="equipo-info">
-                    <p>Somos un equipo apasionado de amantes del café, pero el corazón de La Cafetera 1994 es nuestro maestro tostador.</p>
-                    
-                    <p><strong>[Nombre del Tostador, ej: Manuel López]</strong>, Maestro Tostador.</p>
-                    <p class="cita"><em>“Llevo [X] años supervisando cada lote. Para mí, el tostado no es ciencia; es un arte que se siente, se huele y se prueba. ¡Espero que disfrutes el resultado!”</em></p>
-                    
-                    
-                </div>
-                
-                
                 <div class="llamada-a-la-accion">
                     <p>Creemos firmemente que la vida es demasiado corta para el café mediocre.</p>
-                    <a href="productos.php" class="boton boton-primario">
+                    <a href="products.php" class="boton boton-primario">
                         Explora Nuestros Tuestes Únicos
                     </a>
                 </div>
