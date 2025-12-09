@@ -735,7 +735,7 @@ h3 { font-size: 2.8rem; }
 }
 
 .filter-btn:hover {
-    background: rgba(34,54,74,0.1);
+    background: rgba(var(--secondary-900), --opacidad-barra);
 }
 
 /* BOTÓN MÁS LARGO */
@@ -751,12 +751,9 @@ h3 { font-size: 2.8rem; }
     object-fit: contain;
 }
 
-/* ICONO CALENDARIO */
-.calendar-icon {
-    width: 18px;
-    height: 18px;
-    object-fit: contain;
-}
+
+
+
 
 /* =====================
    RESPONSIVE
@@ -1494,7 +1491,7 @@ body.bg-beige {
 
 
 /* =======================================
-    LOGIN: RESPONSIVE
+    LOGIN: RESPONSIVE   */
 @media (max-width: 1023px) {
     .hero-mobile .hero-container {
         padding: 4rem;
@@ -1535,6 +1532,7 @@ body.bg-beige {
         margin-bottom: 2rem;
     }
 }
+
 /* =======================================
     OJO: ESTILOS ESPECÍFICOS
 ======================================= */
@@ -1542,5 +1540,5 @@ body.bg-beige {
     /* CRÍTICO: Permite posicionar elementos internos (el ojo) de forma absoluta */
     position: relative;
     /* Asegura que el contenedor tenga suficiente espacio */
-    margin-bottom: 2rem; 
+    margin-bottom: 2rem;
 }
