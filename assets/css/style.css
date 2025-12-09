@@ -787,7 +787,6 @@ body.bg-beige {
     width: 100px;
     height: 100px;
     flex-shrink: 0;
-    background: #f9f9f9;
     border-radius: 12px;
     display: flex;
     align-items: center;
