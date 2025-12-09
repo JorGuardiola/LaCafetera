@@ -170,7 +170,7 @@ include __DIR__ . '/templates/header.php';
     if(window.lucide && window.lucide.createIcons) {
         window.lucide.createIcons();
     }
-</script>
+
 
                 if (passwordInput.type === 'password') {
                     passwordInput.type = 'text';

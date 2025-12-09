@@ -1,4 +1,6 @@
 <?php
+ob_start();
+
 // frontend/login.php
 session_start();
 require_once __DIR__ . '/../db/connection.php';
@@ -32,10 +34,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['logged_in'] = true;
                 
                 // === REDIRECCIÓN ===
-                // Verifica que no haya output antes de este header()
+                // 1. Limpiar el buffer de salida antes de enviar la cabecera
+                ob_end_clean(); 
+                // 2. Redirigir y asegurar que la ejecución se detiene
                 header('Location: index.php'); 
-                exit; // Detiene la ejecución para asegurar la redirección
-                // ====================
+                exit; 
+                
                 
             } else {
                 // 5. Login Fallido
@@ -45,7 +49,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } catch (PDOException $e) {
             // Error de consulta
             $error_message = "Ocurrió un error en el servidor. Inténtelo de nuevo.";
-            // Puedes loguear $e->getMessage() para debug
         }
     }
 }
@@ -127,20 +130,7 @@ include __DIR__ . '/templates/header.php';
 </main>
 
 <script>
-    // Se ejecuta tan pronto como el navegador llega a este punto
-    
-    // === 1. LÓGICA DE REDIRECCIÓN PARA INICIO DE SESIÓN 
-    
-    <?php 
-    // Usamos la variable de éxito de sesión para manejar la redirección si el header PHP falló
-    if (isset($_SESSION['login_success']) && $_SESSION['login_success']): 
-        unset($_SESSION['login_success']); 
-    ?>
-        // Redirección inmediata (si el PHP no pudo hacer el header())
-        window.location.href = '<?php echo $base_path; ?>/index.php'; 
-    <?php endif; ?>
-
-    
+      
     // Ejecutar el resto del código cuando el DOM esté completamente cargado.
     document.addEventListener('DOMContentLoaded', function() {
         
@@ -152,9 +142,8 @@ include __DIR__ . '/templates/header.php';
             }, 0);
         }
 
-        // ====================================================
-        // === 3. Lógica para mostrar/ocultar contraseña (El Ojo) ===
-        // ====================================================
+       
+        // 3. Lógica para mostrar/ocultar contraseña 
         const togglePassword = document.getElementById('togglePassword');
         if (togglePassword) {
             togglePassword.addEventListener('click', function (e) {
