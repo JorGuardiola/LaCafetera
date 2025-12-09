@@ -62,19 +62,14 @@ h1 { font-size: 4.1rem; line-height: 1.18; }
 h2 { font-size: 3.2rem; }
 h3 { font-size: 2.8rem; }
 
-
-
 /* UTILIDADES */
 .no-margin { margin: 0 !important; }
 .no-padding { padding: 0 !important; }
 .center-text { text-align: center !important; }
 
-
-
 /* =======================================
    HEADER
 ======================================= */
-
 .header {
     display: flex;
     justify-content: space-between;
@@ -127,61 +122,27 @@ h3 { font-size: 2.8rem; }
     width: 1.8rem;
 }
 
-
-
 /* =======================================
    RESPONSIVE HEADER
 ======================================= */
-
-/* ------- MOBILE ------- */
 @media (max-width: 767px) {
-
-    .hero-text-block {
-        margin-top: 8rem;
-    }
-
-    .hero-text-block h1 {
-        font-size: 2.6rem;
-        max-width: 28rem;
-    }
+    .header { padding: 0 2rem; }
+    .hero-text-block { margin-top: 8rem; }
+    .hero-text-block h1 { font-size: 2.6rem; max-width: 28rem; }
 }
-
-
-/* ------- TABLET ------- */
 @media (min-width: 768px) and (max-width: 1023px) {
-
-    .hero-text-block {
-        margin-top: 13rem;
-    }
-
-    .hero-text-block h1 {
-        font-size: 3.2rem;
-        max-width: 40rem;
-    }
+    .header { padding: 0 4rem; }
+    .hero-text-block { margin-top: 13rem; }
+    .hero-text-block h1 { font-size: 3.2rem; max-width: 40rem; }
 }
-
-
-/* ------- DESKTOP ------- */
 @media (min-width: 1024px) {
-
-    .hero-text-block {
-        margin-top: 18rem;
-    }
-
-    .hero-text-block h1 {
-        font-size: 4.1rem;
-        max-width: 60rem;
-    }
+    .hero-text-block { margin-top: 18rem; }
+    .hero-text-block h1 { font-size: 4.1rem; max-width: 60rem; }
 }
-
-
-
-
 
 /* =======================================
    BANNER + HERO
 ======================================= */
-/* Hero general */
 .hero-container {
     height: 75rem;
     display: flex;
@@ -190,24 +151,11 @@ h3 { font-size: 2.8rem; }
     background-position: center;
     padding: 4rem 8rem;
 }
+.hero-container.bg-default { background-image: url('../img/hero-home.jpg'); }
+.hero-container.bg-productos { background-image: url('../img/hero-productos.jpg'); }
+.hero-container.bg-producto { background-image: url('../img/hero-producto.jpg'); }
+.hero-container.bg-login { background-image: url('../img/hero-sesion.jpg'); }
 
-/* Variantes de fondo */
-.hero-container.bg-default {
-    background-image: url('../img/hero-home.jpg');
-}
-.hero-container.bg-productos {
-    background-image: url('../img/hero-productos.jpg');
-}
-.hero-container.bg-producto {
-    background-image: url('../img/hero-producto.jpg');
-}
-.hero-container.bg-login {
-    background-image: url('../img/hero-sesion.jpg'); 
-    
-}
-
-
-/* Layout interno */
 .hero-inner {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -215,8 +163,6 @@ h3 { font-size: 2.8rem; }
     width: 100%;
     max-width: 1400px;
 }
-
-/* Columna izquierda */
 .hero-left h1 {
     font-size: 4.2rem;
     max-width: 50rem;
@@ -229,120 +175,45 @@ h3 { font-size: 2.8rem; }
     color: black;
 }
 
-/* Columna derecha (vacía pero estructural) */
-
-
-
-
-/* =======================================
-   RESPONSIVE
-======================================= */
-
-/* --------- TABLET (768–1023px) -------- */
+/* RESPONSIVE HERO */
 @media (max-width: 1023px) {
-
-    .hero-container {
-        padding: 4rem;
-        height: 70vh;
-    }
-
-    .hero-inner {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-    }
-
-    .hero-left h1 {
-        font-size: 3.4rem;
-        max-width: 90%;
-    }
-
-    .hero-left h2 {
-        font-size: 1.7rem;
-        max-width: 90%;
-    }
-
-    .hero-right {
-        display: none;
-    }
+    .hero-container { padding: 4rem; height: 70vh; }
+    .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .hero-left h1 { font-size: 3.4rem; max-width: 90%; }
+    .hero-left h2 { font-size: 1.7rem; max-width: 90%; }
+    .hero-right { display: none; }
 }
-
-
-
-/* --------- MOBILE (0–767px) -------- */
 @media (max-width: 767px) {
-
-    .hero-container {
-        padding: 3rem 2rem;
-        height: auto;
-        padding-top: 8rem; /* más espacio bajo el header */
-        padding-bottom: 8rem;
-    }
-
-    .hero-inner {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-    }
-
-    .hero-left h1 {
-        font-size: 2.8rem;
-        max-width: 100%;
-    }
-
-    .hero-left h2 {
-        font-size: 1.6rem;
-        max-width: 100%;
-    }
-
-    .hero-btn {
-        font-size: 1.5rem;
-        padding: 1rem 2rem;
-    }
-
-    .hero-right {
-        display: none;
-    }
+    .hero-container { padding: 3rem 2rem; height: auto; padding-top: 8rem; padding-bottom: 8rem; }
+    .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .hero-left h1 { font-size: 2.8rem; max-width: 100%; }
+    .hero-left h2 { font-size: 1.6rem; max-width: 100%; }
+    .hero-right { display: none; }
 }
-
-
-
-
 
 /* =====================
-   CARRUSEL BASE (MODIFICADO PARA ANIMACIÓN)
+   CARRUSEL
 ===================== */
 .tag-carousel {
     position: relative;
-    overflow: hidden; /* Oculta el contenido duplicado que no cabe */
+    overflow: hidden;
     width: 100%;
     padding: 3rem 0;
 }
-
 .carousel-track {
     display: flex;
     gap: 2rem;
-    width: max-content; /* Es crucial para que todo el contenido (duplicado) quepa en una línea */
-    animation: scroll 35s linear infinite; /* Aplicar animación: 35s, lineal, infinito */
-    transition: none; /* Desactivar transiciones que interfieren con la animación */
+    width: max-content;
+    animation: scroll 35s linear infinite;
 }
-
-/* Pausar animación al pasar el ratón */
 .tag-carousel:hover .carousel-track {
     animation-play-state: paused;
 }
-
-/* Definición de la animación de desplazamiento */
 @keyframes scroll {
     0% { transform: translateX(0); }
-    /* Mueve el 50% de la longitud total, que es la longitud original del contenido */
     100% { transform: translateX(-50%); }
 }
 
-/* Ya no es necesario ocultar scrollbar en tag-carousel si overflow es hidden */
-
-
-/* =====================
-   TARJETAS
-===================== */
 .tag-card {
     width: 32rem;
     height: 48rem;
@@ -353,14 +224,12 @@ h3 { font-size: 2.8rem; }
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    background-image: var(--bg);    /* usa la variable definida en el HTML */
+    background-image: var(--bg);
     background-size: cover;
     background-position: center;
     box-shadow: 0 8px 18px rgba(0,0,0,0.15);
     flex-shrink: 0;
 }
-
-/* Mini etiqueta arriba izquierda */
 .tag-card .tag-more {
     position: absolute;
     top: 1rem;
@@ -371,38 +240,15 @@ h3 { font-size: 2.8rem; }
     letter-spacing: 1px;
     color: white;
 }
-
-/* Título h3 abajo izquierda */
-.tag-card h3 {
-    margin: 0;
-    color: white;
-}
-
-
-/* =====================
-   RESPONSIVE CARRUSEL
-===================== */
+.tag-card h3 { margin: 0; color: white; }
 
 @media (max-width: 767px) {
-    .carousel-track {
-        gap: 1.4rem;
-    }
-
-    .tag-card {
-        width: 24rem;
-        height: 32rem;
-    }
-
-    .tag-card h3 {
-        font-size: 1.6rem;
-    }
-
-    .tag-card .tag-more {
-        font-size: 1rem;
-    }
+    .carousel-track { gap: 1.4rem; }
+    .tag-card { width: 24rem; height: 32rem; }
+    .tag-card h3 { font-size: 1.6rem; }
+    .tag-card .tag-more { font-size: 1rem; }
 }
 
-/* Cabecera del carrusel */
 .carousel-header {
     display: flex;
     justify-content: space-between;
@@ -412,14 +258,8 @@ h3 { font-size: 2.8rem; }
     padding-left: 3rem;
 }
 
-/* Botones (Ocultar completamente, ya no existen en el HTML) */
-.carousel-btn {
-    display: none;
-}
-
-
 /* ============================
-   FOOTER (ACTUALIZADO PARA COINCIDIR CON HTML Y DISEÑO)
+   FOOTER
 ============================ */
 .footer {
     background: rgb(var(--primary-800));
@@ -427,7 +267,6 @@ h3 { font-size: 2.8rem; }
     padding: 6rem 0 3rem;
     font-size: 1.4rem;
 }
-
 .footer-container {
     width: 90%;
     max-width: 130rem;
@@ -437,56 +276,15 @@ h3 { font-size: 2.8rem; }
     gap: 5rem;
     flex-wrap: wrap;
 }
-/* Columna 1 */
-.footer-logo {
-    width: 26rem;
-    margin-bottom: 2rem;
-}
-
-.footer-desc {
-    color: rgba(255,255,255,0.8);
-    line-height: 1.6;
-}
-
-/* Columnas de enlaces */
-.footer-col h4 {
-    font-family: var(--fuenteHeading);
-    font-size: 1.6rem;
-    margin-bottom: 1.2rem;
-}
-
-.footer-col ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.footer-col ul li {
-    margin-bottom: .8rem;
-}
-
-.footer-col ul a {
-    color: rgba(255,255,255,0.75);
-    transition: .3s;
-}
-
-.footer-col ul a:hover {
-    color: white;
-}
-
-/* Columna derecha (iconos + botón) */
-.footer-right {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2rem;
-}
-
-.footer-social {
-    display: flex;
-    gap: 2rem;
-}
-
+.footer-logo { width: 26rem; margin-bottom: 2rem; }
+.footer-desc { color: rgba(255,255,255,0.8); line-height: 1.6; }
+.footer-col h4 { font-family: var(--fuenteHeading); font-size: 1.6rem; margin-bottom: 1.2rem; }
+.footer-col ul { list-style: none; padding: 0; margin: 0; }
+.footer-col ul li { margin-bottom: .8rem; }
+.footer-col ul a { color: rgba(255,255,255,0.75); transition: .3s; }
+.footer-col ul a:hover { color: white; }
+.footer-right { display: flex; flex-direction: column; align-items: flex-start; gap: 2rem; }
+.footer-social { display: flex; gap: 2rem; }
 .footer-social a {
     background: rgba(255,255,255,0.1);
     padding: .9rem;
@@ -495,16 +293,8 @@ h3 { font-size: 2.8rem; }
     align-items: center;
     transition: .3s;
 }
-
-.footer-social a:hover {
-    background: rgba(255,255,255,0.25);
-}
-
-.footer-social img {
-    width: 2rem;
-}
-
-/* Botón */
+.footer-social a:hover { background: rgba(255,255,255,0.25); }
+.footer-social img { width: 2rem; }
 .footer-btn {
     display: inline-block;
     padding: 1rem 3rem;
@@ -514,72 +304,33 @@ h3 { font-size: 2.8rem; }
     transition: .3s;
     font-size: 1.4rem;
 }
+.footer-btn:hover { background: rgba(255,255,255,0.15); }
 
-.footer-btn:hover {
-    background: rgba(255,255,255,0.15);
-}
-
-/* ============================
-   LÍNEA INFERIOR
-============================ */
 .footer-bottom {
     width: 90%;
     max-width: 130rem;
     margin: 4rem auto 0;
     padding-top: 2rem;
     border-top: 1px solid rgba(255,255,255,0.1);
-
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 2rem;
 }
+.footer-bottom p { color: rgba(255,255,255,0.7); }
+.footer-links { display: flex; gap: 2rem; }
+.footer-links a { color: rgba(255,255,255,0.7); transition: .3s; }
+.footer-links a:hover { color: white; }
 
-.footer-bottom p {
-    color: rgba(255,255,255,0.7);
-}
-
-.footer-links {
-    display: flex;
-    gap: 2rem;
-}
-
-.footer-links a {
-    color: rgba(255,255,255,0.7);
-    transition: .3s;
-}
-
-.footer-links a:hover {
-    color: white;
+@media (max-width: 767px) {
+    .footer-container { flex-direction: column; gap: 3rem; }
+    .footer-right { align-items: flex-start; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
 }
 
 /* ============================
-   RESPONSIVE FOOTER
+   PRODUCTOS
 ============================ */
-@media (max-width: 767px) {
-
-    .footer-container {
-        flex-direction: column;
-        gap: 3rem;
-    }
-
-    .footer-right {
-        align-items: flex-start;
-    }
-
-    .footer-bottom {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1.5rem;
-    }
-}
-
-
-
-/*  ============================
-   SECCION DE PRODUCTOS
-============================ */
-/* GRID DE PRODUCTOS */
 .product-grid {
     width: 90%;
     max-width: 1300px;
@@ -588,8 +339,6 @@ h3 { font-size: 2.8rem; }
     grid-template-columns: repeat(4, 1fr);
     gap: 3rem;
 }
-
-/* TARJETA */
 .product-card {
     height: 50rem;
     background: white;
@@ -599,12 +348,7 @@ h3 { font-size: 2.8rem; }
     position: relative;
     transition: .2s ease;
 }
-
-.product-card:hover {
-    transform: translateY(-4px);
-}
-
-/* FAVORITO */
+.product-card:hover { transform: translateY(-4px); }
 .fav-btn {
     position: absolute;
     top: 1.8rem;
@@ -615,52 +359,13 @@ h3 { font-size: 2.8rem; }
     background: transparent;
     cursor: pointer;
 }
-.fav-btn img {
-    width: 100%;
-}
-
-/* IMAGEN */
-.product-image {
-    text-align: center;
-    margin-bottom: 1.6rem;
-}
-.product-image img {
-    width: 70%;
-    object-fit: contain;
-}
-
-/* RATING */
-.product-rating {
-    font-size: 1.8rem;
-    color: #b67456;
-    margin-bottom: 1rem;
-    letter-spacing: 3px;
-}
-
-/* NOMBRE */
-.product-name {
-    font-family: var(--fuenteHeading);
-    font-size: 2rem;
-    margin: 0 0 .6rem;
-    color: rgb(var(--primary-900));
-}
-
-/* PESO */
-.product-weight {
-    color: #777;
-    font-size: 1.4rem;
-    margin: 0 0 1.6rem;
-}
-
-/* PRECIO */
-.product-price {
-    font-size: 2.4rem;
-    font-weight: 700;
-    margin-bottom: 2rem;
-    color: rgb(var(--primary-900));
-}
-
-/* BOTÓN */
+.fav-btn img { width: 100%; }
+.product-image { text-align: center; margin-bottom: 1.6rem; }
+.product-image img { width: 70%; object-fit: contain; }
+.product-rating { font-size: 1.8rem; color: #b67456; margin-bottom: 1rem; letter-spacing: 3px; }
+.product-name { font-family: var(--fuenteHeading); font-size: 2rem; margin: 0 0 .6rem; color: rgb(var(--primary-900)); }
+.product-weight { color: #777; font-size: 1.4rem; margin: 0 0 1.6rem; }
+.product-price { font-size: 2.4rem; font-weight: 700; margin-bottom: 2rem; color: rgb(var(--primary-900)); }
 .product-btn {
     width: 100%;
     padding: 1.4rem 0;
@@ -672,30 +377,14 @@ h3 { font-size: 2.8rem; }
     color: rgb(var(--primary-900));
     transition: 0.25s ease;
 }
+.product-btn:hover { background: rgb(var(--primary-700)); color: white; }
 
-.product-btn:hover {
-    background: rgb(var(--primary-700));
-    color: white;
-}
-
-/* RESPONSIVE */
-@media (max-width: 1024px) {
-    .product-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 600px) {
-    .product-grid {
-        grid-template-columns: 1fr;
-    }
-}
+@media (max-width: 1024px) { .product-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .product-grid { grid-template-columns: 1fr; } }
 
 /* ===============================
-   BARRA DE FILTROS (SEARCH.PHP)
+   FILTROS (SEARCH)
 ================================ */
-
-/* CONTENEDOR PRINCIPAL */
 .product-filter-bar {
     width: 90%;
     max-width: 1300px;
@@ -704,28 +393,13 @@ h3 { font-size: 2.8rem; }
     justify-content: space-between;
     align-items: center;
 }
-
-/* TÍTULO */
-.filter-title {
-    font-family: var(--fuenteHeading);
-    font-size: 3rem;
-    margin: 0;
-}
-
-/* CONTROLES */
-.filter-controls {
-    display: flex;
-    gap: 1.4rem;
-    align-items: center;
-}
-
-/* BOTONES */
+.filter-title { font-family: var(--fuenteHeading); font-size: 3rem; margin: 0; }
+.filter-controls { display: flex; gap: 1.4rem; align-items: center; }
 .filter-btn {
     padding: 1rem 2rem;
     border-radius: 40px;
     border: transparent;
     background: rgba(var(--secondary-500), var(--opacidad-barra));
-    
     letter-spacing: 0.3px;
     cursor: pointer;
     display: flex;
@@ -733,257 +407,120 @@ h3 { font-size: 2.8rem; }
     gap: 1rem;
     transition: 0.2s ease;
 }
+.filter-btn:hover { background: rgba(var(--secondary-900), --opacidad-barra); }
+.filter-btn.long { padding-right: 2.6rem; padding-left: 2.6rem; }
 
-.filter-btn:hover {
-    background: rgba(var(--secondary-900), --opacidad-barra);
-}
-
-/* BOTÓN MÁS LARGO */
-.filter-btn.long {
-    padding-right: 2.6rem;
-    padding-left: 2.6rem;
-}
-
-/* FLECHA */
-.arrow {
-    width: 18px;
-    height: 18px;
-    object-fit: contain;
-}
-
-
-
-
-
-/* =====================
-   RESPONSIVE
-===================== */
-
-/* Tablet */
 @media (max-width: 900px) {
-    .product-filter-bar {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 2rem;
-    }
-
-    .filter-controls {
-        flex-wrap: wrap;
-        justify-content: flex-start;
-    }
+    .product-filter-bar { flex-direction: column; align-items: flex-start; gap: 2rem; }
+    .filter-controls { flex-wrap: wrap; justify-content: flex-start; }
 }
-
-/* Móvil */
 @media (max-width: 600px) {
-    .filter-title {
-        font-size: 2.3rem;
-    }
-
-    .filter-controls {
-        gap: 1rem;
-    }
-
-    .filter-btn {
-        padding: 0.8rem 1.6rem;
-        font-size: 1.3rem;
-    }
-
-    .filter-btn.long {
-        padding-left: 1.6rem;
-        padding-right: 1.6rem;
-    }
+    .filter-title { font-size: 2.3rem; }
+    .filter-controls { gap: 1rem; }
 }
+
 /* =======================================
-    LOGIN: ESTILOS ESPECÍFICOS
+    LOGIN / REGISTRO
 ======================================= */
-
-/* --- Columna Derecha: Centrado y Estilos Generales --- */
-
 .hero-right {
-    /* Ajusta el flexbox para centrar el contenido vertical y horizontalmente */
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 2rem; /* Espacio de seguridad */
+    padding: 2rem;
 }
-
-/* --- La Caja del Formulario (El Panel Transparente) --- */
 .login-box {
-    /* Usamos un color base muy claro con opacidad para el fondo */
     background-color: rgba(var(--white), 0.75); 
-    
-    /* Efecto "Glassmorphism" (Añadimos el prefijo -webkit- para máxima compatibilidad) */
-    -webkit-backdrop-filter: blur(8px); /* ¡Añadido! */
+    -webkit-backdrop-filter: blur(8px); 
     backdrop-filter: blur(8px); 
-    
-    /* Esquinas redondeadas grandes */
     border-radius: 20px;
-    
-    /* Sombra muy sutil */
     box-shadow: 0 10px 30px rgba(var(--black), 0.15); 
-    
-    /* Espacio interno */
     padding: 4rem 5rem;
-    
-    /* Ancho máximo para que no ocupe toda la mitad derecha */
     max-width: 48rem;
     width: 100%;
-    
-    /* Color de texto por defecto dentro de la caja */
     color: rgb(var(--primary-900)); 
 }
-
-/* Título "Acceso" */
 .login-title {
     font-family: var(--fuenteHeading);
-    font-size: 4rem; /* Grande y elegante */
+    font-size: 4rem;
     text-align: center;
     margin-bottom: 3rem;
     line-height: 1;
 }
 
-/* --- Inputs y Grupos --- */
-
-.input-group {
-    margin-bottom: 2rem;
-    position: relative; /* Necesario para posicionar la etiqueta pequeña */
-}
-
-/* Etiqueta pequeña (Email, Contraseña) */
+/* Inputs */
+.input-group { margin-bottom: 2rem; position: relative; }
 .input-label {
     display: block;
     font-size: 1.5rem;
     font-weight: 500;
-    color: rgb(var(--primary-400)); /* Color sutil */
+    color: rgb(var(--primary-400));
     margin-bottom: 0.5rem;
 }
-
-/* Estilo del campo de texto/email/password */
 .form-input {
-    .password-field .form-input {
-    /* El valor debe ser mayor que el 'right' del botón (1.5rem) más el ancho del ojo (20px o 1.25rem) */
-    padding-right: 4rem; 
-}
     width: 100%;
     padding: 1.2rem 1.5rem;
-    border: 1px solid rgba(var(--primary-400), 0.3); /* Borde sutil */
-    border-radius: 10px; /* Bordes redondeados */
-    background-color: rgba(var(--white), 0.8); /* Fondo casi blanco */
+    border: 1px solid rgba(var(--primary-400), 0.3);
+    border-radius: 10px;
+    background-color: rgba(var(--white), 0.8);
     font-size: 1.6rem;
     font-family: var(--fuenteTexto);
     transition: border-color 0.3s;
-    
 }
-
 .form-input:focus {
     border-color: rgb(var(--primary-500));
     outline: none;
     box-shadow: 0 0 5px rgba(var(--primary-500), 0.3);
 }
 
-/* --- Campo de Contraseña y Toggle --- */
-.password-field {
-    position: relative;
-}
+/* Password eye padding fix */
+.password-field .form-input { padding-right: 4rem; }
 
+/* Ojo de contraseña */
+.password-field { position: relative; }
 .toggle-password {
-    /* Posicionamiento */
     position: absolute;
-    right: 1.5rem; /* Distancia desde el borde derecho */
-    top: 50%;        /* Se pega a la parte superior del campo */
-    bottom: 0;     /* Se pega a la parte inferior del campo */
-    transform: translateY(-50%); /* Mueve el elemento hacia arriba la mitad de su propia altura */
-    
-    /* CRÍTICO: Centrado con Flexbox */
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
     display: flex;
-    align-items: center; /* Centrado vertical */
-    justify-content: center; /* Centrado horizontal (opcional, pero buena práctica) */
-
-    /* Estilos base */
+    align-items: center;
+    justify-content: center;
     background: none;
     border: none;
     cursor: pointer;
     padding: 0;
     z-index: 10;
-    /* Asegúrate de que no tenga transform */
-    transform: none; 
 }
+.toggle-password [data-lucide] { width: 20px; height: 20px; color: rgb(var(--primary-400)); }
 
+/* Links y Botones */
+.forgot-link { text-align: right; margin-bottom: 3rem; }
+.forgot-link a { font-size: 1.4rem; color: rgb(var(--secondary-700)); transition: color 0.3s; }
+.forgot-link a:hover { color: rgb(var(--secondary-900)); }
 
-.toggle-password [data-lucide] {
-    width: 20px;
-    height: 20px;
-    color: rgb(var(--primary-400));
-}
-
-
-/* --- Enlaces y Botones --- */
-
-/* Enlace "¿Olvidaste la Contraseña?" */
-.forgot-link {
-    text-align: right;
-    margin-bottom: 3rem;
-}
-.forgot-link a {
-    font-size: 1.4rem;
-    color: rgb(var(--secondary-700));
-    transition: color 0.3s;
-}
-.forgot-link a:hover {
-    color: rgb(var(--secondary-900));
-}
-
-/* Botón de Acceder (Fondo Oscuro) */
 .btn-acceder {
     display: flex;
     align-items: center;
     justify-content: center;
-    
     width: 100%;
     padding: 1.2rem;
-    
-    background-color: rgb(var(--primary-900)); /* Fondo negro/oscuro */
+    background-color: rgb(var(--primary-900));
     color: white;
-    
     border: none;
-    border-radius: 10px; /* Bordes rectangulares suaves */
-    
+    border-radius: 10px;
     font-size: 1.7rem;
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.3s;
 }
+.btn-acceder:hover { background-color: rgb(var(--primary-700)); }
+.arrow-icon { margin-left: 1rem; font-size: 2rem; line-height: 1; }
 
-.btn-acceder:hover {
-    background-color: rgb(var(--primary-700));
-}
+.register-prompt { text-align: center; margin-top: 2.5rem; font-size: 1.4rem; color: rgb(var(--primary-400)); }
+.register-prompt a { color: rgb(var(--secondary-700)); font-weight: 600; transition: color 0.3s; }
+.register-prompt a:hover { color: rgb(var(--secondary-900)); }
 
-.arrow-icon {
-    margin-left: 1rem;
-    font-size: 2rem;
-    line-height: 1;
-}
-
-/* Enlace de Registro */
-.register-prompt {
-    text-align: center;
-    margin-top: 2.5rem;
-    font-size: 1.4rem;
-    color: rgb(var(--primary-400));
-}
-
-.register-prompt a {
-    color: rgb(var(--secondary-700));
-    font-weight: 600;
-    transition: color 0.3s;
-}
-.register-prompt a:hover {
-    color: rgb(var(--secondary-900));
-}
-
-/* --- Mensajes de Alerta --- */
 .alert.error {
-    /* Aquí puedes usar un color secundario de tu paleta si quieres */
     background-color: rgba(var(--secondary-100), 0.8); 
     color: rgb(var(--secondary-800));
     border: 1px solid rgb(var(--secondary-400));
@@ -994,117 +531,54 @@ h3 { font-size: 2.8rem; }
     align-items: center;
 }
 
-.alert.error i[data-lucide] {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-    min-width: 20px;
-    color: rgb(var(--secondary-900));
-}
-
-
-/* =======================================
-    LOGIN: RESPONSIVE
-======================================= */
 @media (max-width: 1023px) {
-    .hero-mobile .hero-container {
-        padding: 4rem;
-        height: auto; /* Permitir altura automática */
-        padding-top: 8rem; /* más espacio bajo el header */
-        padding-bottom: 8rem;
-    }
-    
-    .hero-right {
-        display: flex; 
-        padding: 0;
-        margin-top: 3rem;
-    }
-    
-    .login-box {
-        padding: 3rem;
-        max-width: 100%;
-    }
-    .login-title {
-        font-size: 3.5rem;
-        margin-bottom: 2.5rem;
-    }    
-    
+    .hero-right { display: flex; padding: 0; margin-top: 3rem; }
+    .login-box { padding: 3rem; max-width: 100%; }
+    .login-title { font-size: 3.5rem; margin-bottom: 2.5rem; }    
+}
+@media (max-width: 767px) {
+    .login-box { padding: 2.5rem 3rem; }
+    .login-title { font-size: 3rem; margin-bottom: 2rem; }
 }
 
 /* =========================================
-   SECCION PRODUCTO jorge5dic
-   ========================================= */
-
-/* Fondo general beige */
-body.bg-beige {
-    background-color: #F5EFE5; /* Color aproximado del fondo */
-}
-
-/* Layout principal de dos columnas */
+   DETALLE PRODUCTO
+========================================= */
+body.bg-beige { background-color: #F5EFE5; }
 .product-detail-layout {
     max-width: 1200px;
     margin: 4rem auto;
     padding: 0 20px;
     display: grid;
-    grid-template-columns: 1fr 1fr; /* 50% - 50% */
+    grid-template-columns: 1fr 1fr;
     gap: 60px;
-    align-items: center; /* Centrar verticalmente */
+    align-items: center;
 }
-
-/* Columna Izquierda */
-.detail-left {
-    text-align: center;
-}
+.detail-left { text-align: center; }
 .detail-image-container img {
     max-width: 100%;
     height: auto;
-    /* Sombra suave debajo de la bolsa */
     filter: drop-shadow(0px 20px 30px rgba(0,0,0,0.15)); 
 }
 .big-product-title {
     font-family: 'Playfair Display', serif;
     font-size: 3.5rem;
-    color: #1A1A1A; /* Casi negro */
+    color: #1A1A1A;
     margin-top: 2rem;
 }
 
-/* Columna Derecha: La Tarjeta */
 .detail-right-card {
-    background-color: #FAF7F2; /* Un tono más claro que el fondo */
+    background-color: #FAF7F2;
     padding: 40px;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
-
-/* Header de la tarjeta */
 .card-header { margin-bottom: 1rem; }
-.reviews-placeholder {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    margin-bottom: 10px;
-    font-size: 0.9rem;
-}
-.star-icon { color: #C7A17A; font-size: 1.2rem; } /* Color dorado/café */
-.star-icon-half { color: #C7A17A; font-size: 1.2rem; }
-.reviews-link {
-    color: #1A1A1A;
-    text-decoration: underline;
-    margin-left: 5px;
-}
-.card-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.2rem;
-    margin: 0.5rem 0;
-    color: #1A1A1A;
-}
-.card-origin {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    color: #666;
-    font-weight: 500;
-}
-
-/* Precio */
+.reviews-placeholder { display: flex; align-items: center; gap: 5px; margin-bottom: 10px; font-size: 0.9rem; }
+.star-icon, .star-icon-half { color: #C7A17A; font-size: 1.2rem; }
+.reviews-link { color: #1A1A1A; text-decoration: underline; margin-left: 5px; }
+.card-title { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin: 0.5rem 0; color: #1A1A1A; }
+.card-origin { font-family: 'Plus Jakarta Sans', sans-serif; color: #666; font-weight: 500; }
 .card-price {
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 2.5rem;
@@ -1112,93 +586,33 @@ body.bg-beige {
     color: #1A1A1A;
     margin: 1.5rem 0;
 }
+.card-description { color: #555; line-height: 1.6; margin-bottom: 2rem; }
 
-/* Descripción */
-.card-description {
-    color: #555;
-    line-height: 1.6;
-    margin-bottom: 2rem;
-}
-
-/* --- SELECTORES TIPO BOTÓN --- */
-.selector-group {
-    margin-bottom: 1.5rem;
-}
-.selector-label {
-    font-weight: 700;
-    margin-bottom: 0.8rem;
-    color: #1A1A1A;
-    font-size: 0.95rem;
-}
-.option-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-/* Ocultamos el radio button real */
-.option-radio {
-    display: none;
-}
-/* Estilo del label que parece botón */
+/* Selectores */
+.selector-group { margin-bottom: 1.5rem; }
+.selector-label { font-weight: 700; margin-bottom: 0.8rem; color: #1A1A1A; font-size: 0.95rem; }
+.option-buttons { display: flex; flex-wrap: wrap; gap: 10px; }
+.option-radio { display: none; }
 .option-label {
     display: inline-block;
     padding: 10px 20px;
     background-color: transparent;
     border: 1px solid #DDD;
-    border-radius: 30px; /* Bordes muy redondeados */
+    border-radius: 30px;
     cursor: pointer;
     font-weight: 600;
     color: #1A1A1A;
     transition: all 0.2s;
     font-size: 0.9rem;
-    text-transform: capitalize; /* Primera letra mayúscula */
+    text-transform: capitalize;
 }
-.option-label:hover {
-    border-color: #1A1A1A;
-}
-/* Estilo cuando el radio asociado está checkeado */
-.option-radio:checked + .option-label {
-    background-color: #1A1A1A; /* Fondo oscuro */
-    color: #FFF; /* Texto blanco */
-    border-color: #1A1A1A;
-}
+.option-label:hover { border-color: #1A1A1A; }
+.option-radio:checked + .option-label { background-color: #1A1A1A; color: #FFF; border-color: #1A1A1A; }
 
-/* Selector Dropdown Normal (Tueste) */
-.form-select {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid #DDD;
-    border-radius: 8px;
-    background-color: transparent;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 1rem;
-    cursor: pointer;
-}
+.stock-info { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #1A1A1A; margin: 1.5rem 0; font-weight: 600; }
+.stock-dot { width: 8px; height: 8px; background-color: #27AE60; border-radius: 50%; }
 
-/* Info de Stock */
-.stock-info {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.85rem;
-    color: #1A1A1A;
-    margin: 1.5rem 0;
-    font-weight: 600;
-}
-.stock-dot {
-    width: 8px;
-    height: 8px;
-    background-color: #27AE60; /* Verde */
-    border-radius: 50%;
-}
-
-/* --- Fila de Acciones (Cantidad + Botón) --- */
-.card-actions-row {
-    display: flex;
-    gap: 15px;
-}
-
-/* Widget de Cantidad (- 1 +) */
+.card-actions-row { display: flex; gap: 15px; }
 .quantity-selector-widget {
     display: flex;
     align-items: center;
@@ -1207,14 +621,7 @@ body.bg-beige {
     padding: 5px;
     background: transparent;
 }
-.qty-btn {
-    background: none;
-    border: none;
-    font-size: 1.2rem;
-    padding: 5px 15px;
-    cursor: pointer;
-    color: #1A1A1A;
-}
+.qty-btn { background: none; border: none; font-size: 1.2rem; padding: 5px 15px; cursor: pointer; color: #1A1A1A; }
 .quantity-selector-widget input {
     width: 40px;
     text-align: center;
@@ -1222,18 +629,13 @@ body.bg-beige {
     background: transparent;
     font-weight: bold;
     font-size: 1rem;
-    
 }
 .quantity-selector-widget input::-webkit-outer-spin-button,
-.quantity-selector-widget input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
+.quantity-selector-widget input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 
-/* Botón Añadir a la Cesta */
 .btn-add-to-cart-dark {
-    flex: 1; /* Ocupa el resto del espacio */
-    background-color: #1A1A1A; /* Color oscuro */
+    flex: 1;
+    background-color: #1A1A1A;
     color: #FFF;
     border: none;
     border-radius: 30px;
@@ -1242,294 +644,14 @@ body.bg-beige {
     cursor: pointer;
     transition: background 0.3s;
 }
-.btn-add-to-cart-dark:hover {
-    background-color: #333;
-}
-.btn-add-to-cart-dark.disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-    opacity: 0.7;
-}
+.btn-add-to-cart-dark:hover { background-color: #333; }
+.btn-add-to-cart-dark.disabled { background-color: #ccc; cursor: not-allowed; opacity: 0.7; }
 
-/* Responsividad */
 @media (max-width: 900px) {
-    .product-detail-layout {
-        grid-template-columns: 1fr; /* Una columna en móviles */
-        gap: 30px;
-    }
-    .detail-image-container img {
-        max-width: 60%; /* Imagen más pequeña en móvil */
-    }
-    .big-product-title {
-        font-size: 2.5rem; /* Título más pequeño */
-    }
-    .card-actions-row {
-        flex-direction: column; /* Apilar cantidad y botón */
-    }
-    .quantity-selector-widget {
-        justify-content: center;
-    }
-    .btn-add-to-cart-dark {
-        padding: 15px;
-    }
-}
-
-
-
-
-
-
-
-
-
-
-/* =======================================
-    LOGIN: ESTILOS ESPECÍFICOS
-
-/* --- Columna Derecha: Centrado y Estilos Generales --- */
-
-.hero-right {
-    /* Ajusta el flexbox para centrar el contenido vertical y horizontalmente */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem; /* Espacio de seguridad */
-}
-
-/* --- La Caja del Formulario (El Panel Transparente) --- */
-.login-box {
-    /* Usamos un color base muy claro con opacidad para el fondo */
-    background-color: rgba(var(--white), 0.75); 
-    
-    /* Efecto "Glassmorphism" (Añadimos el prefijo -webkit- para máxima compatibilidad) */
-    -webkit-backdrop-filter: blur(8px); /* ¡Añadido! */
-    backdrop-filter: blur(8px); 
-    
-    /* Esquinas redondeadas grandes */
-    border-radius: 20px;
-    
-    /* Sombra muy sutil */
-    box-shadow: 0 10px 30px rgba(var(--black), 0.15); 
-    
-    /* Espacio interno */
-    padding: 4rem 5rem;
-    
-    /* Ancho máximo para que no ocupe toda la mitad derecha */
-    max-width: 48rem;
-    width: 100%;
-    
-    /* Color de texto por defecto dentro de la caja */
-    color: rgb(var(--primary-900)); 
-}
-
-/* Título "Acceso" */
-.login-title {
-    font-family: var(--fuenteHeading);
-    font-size: 4rem; /* Grande y elegante */
-    text-align: center;
-    margin-bottom: 3rem;
-    line-height: 1;
-}
-
-/* --- Inputs y Grupos --- */
-
-.input-group {
-    margin-bottom: 2rem;
-    position: relative; /* Necesario para posicionar la etiqueta pequeña */
-}
-
-/* Etiqueta pequeña (Email, Contraseña) */
-.input-label {
-    display: block;
-    font-size: 1.5rem;
-    font-weight: 500;
-    color: rgb(var(--primary-400)); /* Color sutil */
-    margin-bottom: 0.5rem;
-}
-
-/* Estilo del campo de texto/email/password */
-.form-input {
-    .password-field .form-input {
-    /* El valor debe ser mayor que el 'right' del botón (1.5rem) más el ancho del ojo (20px o 1.25rem) */
-    padding-right: 4rem; 
-}
-    width: 100%;
-    padding: 1.2rem 1.5rem;
-    border: 1px solid rgba(var(--primary-400), 0.3); /* Borde sutil */
-    border-radius: 10px; /* Bordes redondeados */
-    background-color: rgba(var(--white), 0.8); /* Fondo casi blanco */
-    font-size: 1.6rem;
-    font-family: var(--fuenteTexto);
-    transition: border-color 0.3s;
-    
-}
-
-.form-input:focus {
-    border-color: rgb(var(--primary-500));
-    outline: none;
-    box-shadow: 0 0 5px rgba(var(--primary-500), 0.3);
-}
-
-/* --- Campo de Contraseña y Toggle --- */
-.password-field {
-    position: relative;
-}
-
-.toggle-password {
-    /* Posicionamiento */
-    position: absolute;
-    right: 1.5rem; /* Distancia desde el borde derecho */
-    top: 0;        /* Se pega a la parte superior del campo */
-    bottom: 0;     /* Se pega a la parte inferior del campo */
-    
-    /* CRÍTICO: Centrado con Flexbox */
-    display: flex;
-    align-items: center; /* Centrado vertical */
-    justify-content: center; /* Centrado horizontal (opcional, pero buena práctica) */
-
-    /* Estilos base */
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    z-index: 10;
-    /* Asegúrate de que no tenga transform */
-    transform: none; 
-}
-
-
-.toggle-password [data-lucide] {
-    width: 20px;
-    height: 20px;
-    color: rgb(var(--primary-400));
-}
-
-
-/* --- Enlaces y Botones --- */
-
-/* Enlace "¿Olvidaste la Contraseña?" */
-.forgot-link {
-    text-align: right;
-    margin-bottom: 3rem;
-}
-.forgot-link a {
-    font-size: 1.4rem;
-    color: rgb(var(--secondary-700));
-    transition: color 0.3s;
-}
-.forgot-link a:hover {
-    color: rgb(var(--secondary-900));
-}
-
-/* Botón de Acceder (Fondo Oscuro) */
-.btn-acceder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    width: 100%;
-    padding: 1.2rem;
-    
-    background-color: rgb(var(--primary-900)); /* Fondo negro/oscuro */
-    color: white;
-    
-    border: none;
-    border-radius: 10px; /* Bordes rectangulares suaves */
-    
-    font-size: 1.7rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.btn-acceder:hover {
-    background-color: rgb(var(--primary-700));
-}
-
-.arrow-icon {
-    margin-left: 1rem;
-    font-size: 2rem;
-    line-height: 1;
-}
-
-/* Enlace de Registro */
-.register-prompt {
-    text-align: center;
-    margin-top: 2.5rem;
-    font-size: 1.4rem;
-    color: rgb(var(--primary-400));
-}
-
-.register-prompt a {
-    color: rgb(var(--secondary-700));
-    font-weight: 600;
-    transition: color 0.3s;
-}
-.register-prompt a:hover {
-    color: rgb(var(--secondary-900));
-}
-
-/* --- Mensajes de Alerta --- */
-.alert.error {
-    /* Aquí puedes usar un color secundario de tu paleta si quieres */
-    background-color: rgba(var(--secondary-100), 0.8); 
-    color: rgb(var(--secondary-800));
-    border: 1px solid rgb(var(--secondary-400));
-    padding: 1rem;
-    border-radius: 8px;
-    margin-bottom: 2rem;
-    display: flex;
-    align-items: center;
-}
-
-.alert.error i[data-lucide] {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-    min-width: 20px;
-    color: rgb(var(--secondary-900));
-}
-
-
-/* =======================================
-    LOGIN: RESPONSIVE   */
-@media (max-width: 1023px) {
-    .hero-mobile .hero-container {
-        padding: 4rem;
-        height: auto; /* Permitir altura automática */
-        padding-top: 8rem; /* más espacio bajo el header */
-        padding-bottom: 8rem;
-    }
-    
-    .hero-right {
-        display: flex; 
-        padding: 0;
-        margin-top: 3rem;
-    }
-    
-    .login-box {
-        padding: 3rem;
-        max-width: 100%;
-    }
-    .login-title {
-        font-size: 3.5rem;
-        margin-bottom: 2.5rem;
-    }    
-    
-}
-
-@media (max-width: 767px) {
-    .login-box {
-        padding: 2.5rem 3rem;
-    }
-
-@media (max-width: 767px) {
-    .login-box {
-        padding: 2.5rem 3rem;
-    }
-
-    .login-title {
-        font-size: 3rem;
-        margin-bottom: 2rem;
-    }
+    .product-detail-layout { grid-template-columns: 1fr; gap: 30px; }
+    .detail-image-container img { max-width: 60%; }
+    .big-product-title { font-size: 2.5rem; }
+    .card-actions-row { flex-direction: column; }
+    .quantity-selector-widget { justify-content: center; }
+    .btn-add-to-cart-dark { padding: 15px; }
 }
