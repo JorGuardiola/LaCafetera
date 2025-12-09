@@ -1482,10 +1482,6 @@ body.bg-beige {
     height: 100%; 
     text-align: center;
 }
-/* 3. Estilos de Tipografía */
-.header-hero-simple h1 {
-    /* ... */
-}
 
 .header-hero-simple p {
     font-size: 2rem;
@@ -1607,4 +1603,265 @@ body.bg-beige {
 .boton-negro:hover {
     /* Efecto al pasar el ratón */
     background-color: #333333; /* Un gris muy oscuro al pasar el ratón */
+}
+
+
+/* =======================================
+   ESTILOS ESPECÍFICOS DE CONTACTO
+   Archivo: estilos_contacto.css
+======================================= */
+
+/* --- 1. Contenedor y Títulos --- */
+
+/* La clase .container ya está definida en tu CSS base, la reutilizamos para centrar */
+.contenedor.seccion {
+    padding: 6rem 0;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Reutilizando la definición de H1 de tu base */
+.contacto-flex h1 {
+    font-size: 4.1rem;
+    line-height: 1.18;
+    color: rgb(var(--primary-600)); /* Texto oscuro */
+    margin-bottom: 0.5rem;
+}
+
+.descripcion-contacto {
+    font-family: var(--fuenteTexto);
+    font-size: 1.8rem;
+    color: rgb(var(--primary-400)); /* Color sutil */
+    margin-bottom: 4rem;
+    max-width: 80rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* --- 2. Estructura Flex (Formulario + Información) --- */
+
+.contacto-flex {
+    display: flex;
+    gap: 4rem;
+    align-items: flex-start;
+    max-width: 120rem; /* Limite el ancho si es necesario, o usa .container */
+    margin: 0 auto;
+}
+
+.formulario {
+    flex: 2;
+    padding: 3.5rem;
+    background-color: rgb(var(--primary-50)); /* Fondo muy claro (casi blanco) */
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(var(--black), 0.08);
+}
+
+.info-adicional {
+    flex: 1;
+    padding: 3rem;
+    background-color: rgb(var(--secondary-100)); /* Tono Tierra claro */
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(var(--black), 0.05);
+}
+
+.info-adicional h3 {
+    font-family: var(--fuenteHeading);
+    font-size: 2.4rem;
+    margin-bottom: 2rem;
+    color: rgb(var(--primary-600));
+    border-bottom: 2px solid rgb(var(--secondary-500));
+    padding-bottom: 1rem;
+}
+
+.info-adicional p {
+    margin-bottom: 1.5rem;
+    font-size: 1.6rem;
+    color: rgb(var(--primary-700));
+}
+
+.info-adicional a {
+    color: rgb(var(--secondary-700)); /* Tono de café o caramelo para enlaces */
+    text-decoration: none;
+    font-weight: 700;
+    transition: color 0.3s ease;
+}
+
+.info-adicional a:hover {
+    color: rgb(var(--secondary-900));
+}
+
+/* CTA de FAQ (Botón destacado) */
+.cta-faq a {
+    display: block;
+    margin-top: 3rem;
+    padding: 1.5rem;
+    background-color: rgb(var(--primary-500)); /* Color de acento oscuro */
+    color: white;
+    text-align: center;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1.6rem;
+    transition: background-color 0.3s ease;
+}
+
+.cta-faq a:hover {
+    background-color: rgb(var(--primary-700));
+}
+
+
+/* --- 3. Estilos de Formulario y Campos --- */
+
+fieldset {
+    border: 1px solid rgb(var(--primary-200)); /* Borde sutil */
+    padding: 2.5rem;
+    margin-bottom: 3rem;
+    border-radius: 8px;
+}
+
+legend {
+    font-family: var(--fuenteHeading);
+    font-size: 2.2rem;
+    color: rgb(var(--primary-600));
+    padding: 0 1rem;
+    font-weight: 700;
+}
+
+label {
+    display: block;
+    font-size: 1.5rem;
+    color: rgb(var(--primary-500));
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+input:not([type="submit"]), 
+textarea, 
+select {
+    width: 100%;
+    padding: 1.2rem;
+    border: 1px solid rgb(var(--primary-200));
+    border-radius: 8px;
+    box-sizing: border-box; 
+    font-size: 1.6rem;
+    font-family: var(--fuenteTexto);
+    background-color: white;
+}
+
+textarea {
+    height: 15rem;
+    resize: vertical;
+}
+
+/* Estilo para el campo de número de pedido condicional */
+#campo-pedido {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background-color: rgba(var(--secondary-200), 0.5); /* Color de tierra semitransparente */
+    border-left: 5px solid rgb(var(--secondary-600));
+    border-radius: 8px;
+}
+
+/* Aviso legal y checkbox */
+.aviso-legal {
+    margin-top: 2rem;
+    font-size: 1.4rem;
+    color: rgb(var(--primary-500));
+    display: flex;
+    align-items: center;
+}
+
+.aviso-legal input[type="checkbox"] {
+    width: auto;
+    margin-right: 1rem;
+}
+
+.aviso-legal a {
+    color: rgb(var(--secondary-700));
+    text-decoration: underline;
+}
+
+/* Botón de envío usando el color Tierra/Secondary */
+.boton-verde {
+    background-color: rgb(var(--secondary-700)); /* Marrón oscuro de la marca */
+    color: white;
+    padding: 1.5rem 3rem;
+    border: none;
+    display: block;
+    width: 100%;
+    margin-top: 3.5rem;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.8rem;
+    border-radius: 40px; /* Muy redondeado para CTA */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.boton-verde:hover {
+    background-color: rgb(var(--secondary-800));
+}
+
+/* --- 4. Estilos de Mensajes de Estado (Alertas PHP) --- */
+
+.alerta {
+    padding: 1.8rem;
+    border-radius: 8px;
+    margin: 0 auto 3rem auto;
+    font-weight: 600;
+    font-size: 1.6rem;
+    text-align: center;
+    max-width: 80rem;
+    box-shadow: 0 2px 4px rgba(var(--black), 0.05);
+}
+
+.exito {
+    background-color: rgba(7, 24, 43, 0.05); /* Tono primary claro */
+    color: rgb(var(--primary-600));
+    border: 1px solid rgb(var(--primary-500));
+}
+
+.error {
+    background-color: rgba(162, 87, 52, 0.1); /* Tono secondary claro */
+    color: rgb(var(--secondary-900));
+    border: 1px solid rgb(var(--secondary-800));
+}
+
+.error ul {
+    list-style: disc;
+    padding: 0 2rem;
+    margin-top: 1rem;
+    text-align: left;
+}
+
+
+/* --- 5. Media Queries (Responsividad) --- */
+
+@media (max-width: 900px) {
+    /* En Tablet, aún podemos mantener algo de la estructura flex */
+    .contacto-flex {
+        gap: 3rem;
+        /* Permitimos que la info adicional quede a la derecha si hay espacio */
+    }
+}
+
+@media (max-width: 768px) {
+    .contacto-flex {
+        flex-direction: column; /* Apila el formulario y la información en móviles */
+        gap: 4rem;
+    }
+
+    .formulario,
+    .info-adicional {
+        flex: auto;
+        width: 100%;
+        padding: 3rem;
+    }
+    
+    .contacto-flex h1 {
+        font-size: 3.2rem;
+    }
 }
