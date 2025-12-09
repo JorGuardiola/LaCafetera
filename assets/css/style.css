@@ -711,8 +711,7 @@ body.bg-beige {
     background: transparent;
     font-weight: bold;
     font-size: 1rem;
-    -moz-appearance: textfield; 
-    appearance: textfield; /* Added */
+    appearance: textfield; 
 }
 .quantity-selector-widget input::-webkit-outer-spin-button,
 .quantity-selector-widget input::-webkit-inner-spin-button {
