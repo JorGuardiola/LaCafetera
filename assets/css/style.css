@@ -35,7 +35,6 @@
     --opacidad-barra: 0.15;
 }
 
-
 /* =======================================
    RESET & BASE
 ======================================= */
@@ -542,9 +541,15 @@ h3 { font-size: 2.8rem; }
 }
 
 /* =========================================
-   DETALLE PRODUCTO
-========================================= */
-body.bg-beige { background-color: #F5EFE5; }
+   SECCION DETALLE PRODUCTO (product.php)
+   ========================================= */
+
+/* Fondo general beige */
+body.bg-beige {
+    background-color: #F5EFE5;
+}
+
+/* Layout principal */
 .product-detail-layout {
     max-width: 1200px;
     margin: 4rem auto;
@@ -554,249 +559,6 @@ body.bg-beige { background-color: #F5EFE5; }
     gap: 60px;
     align-items: center;
 }
-.detail-left { text-align: center; }
-.detail-image-container img {
-    max-width: 100%;
-    height: auto;
-    filter: drop-shadow(0px 20px 30px rgba(0,0,0,0.15)); 
-}
-.big-product-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 3.5rem;
-    color: #1A1A1A;
-    margin-top: 2rem;
-}
-
-.detail-right-card {
-    background-color: #FAF7F2;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-}
-.card-header { margin-bottom: 1rem; }
-.reviews-placeholder { display: flex; align-items: center; gap: 5px; margin-bottom: 10px; font-size: 0.9rem; }
-.star-icon, .star-icon-half { color: #C7A17A; font-size: 1.2rem; }
-.reviews-link { color: #1A1A1A; text-decoration: underline; margin-left: 5px; }
-.card-title { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin: 0.5rem 0; color: #1A1A1A; }
-.card-origin { font-family: 'Plus Jakarta Sans', sans-serif; color: #666; font-weight: 500; }
-.card-price {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: #1A1A1A;
-    margin: 1.5rem 0;
-}
-.card-description { color: #555; line-height: 1.6; margin-bottom: 2rem; }
-
-/* Selectores */
-.selector-group { margin-bottom: 1.5rem; }
-.selector-label { font-weight: 700; margin-bottom: 0.8rem; color: #1A1A1A; font-size: 0.95rem; }
-.option-buttons { display: flex; flex-wrap: wrap; gap: 10px; }
-.option-radio { display: none; }
-.option-label {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: transparent;
-    border: 1px solid #DDD;
-    border-radius: 30px;
-    cursor: pointer;
-    font-weight: 600;
-    color: #1A1A1A;
-    transition: all 0.2s;
-    font-size: 0.9rem;
-    text-transform: capitalize;
-}
-.option-label:hover { border-color: #1A1A1A; }
-.option-radio:checked + .option-label { background-color: #1A1A1A; color: #FFF; border-color: #1A1A1A; }
-
-.stock-info { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #1A1A1A; margin: 1.5rem 0; font-weight: 600; }
-.stock-dot { width: 8px; height: 8px; background-color: #27AE60; border-radius: 50%; }
-
-.card-actions-row { display: flex; gap: 15px; }
-.quantity-selector-widget {
-    display: flex;
-    align-items: center;
-    border: 1px solid #DDD;
-    border-radius: 30px;
-    padding: 5px;
-    background: transparent;
-}
-.qty-btn { background: none; border: none; font-size: 1.2rem; padding: 5px 15px; cursor: pointer; color: #1A1A1A; }
-.quantity-selector-widget input {
-    width: 40px;
-    text-align: center;
-    border: none;
-    background: transparent;
-    font-weight: bold;
-    font-size: 1rem;
-}
-.quantity-selector-widget input::-webkit-outer-spin-button,
-.quantity-selector-widget input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-
-.btn-add-to-cart-dark {
-    flex: 1;
-    background-color: #1A1A1A;
-    color: #FFF;
-    border: none;
-    border-radius: 30px;
-    font-size: 1rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-.btn-add-to-cart-dark:hover { background-color: #333; }
-.btn-add-to-cart-dark.disabled { background-color: #ccc; cursor: not-allowed; opacity: 0.7; }
-
-@media (max-width: 900px) {
-    .product-detail-layout { grid-template-columns: 1fr; gap: 30px; }
-    .detail-image-container img { max-width: 60%; }
-    .big-product-title { font-size: 2.5rem; }
-    .card-actions-row { flex-direction: column; }
-    .quantity-selector-widget { justify-content: center; }
-    .btn-add-to-cart-dark { padding: 15px; }
-}
-
-
-/* =========================================
-   SECCION CARRITO jorge5dic
-   ========================================= */
-
-/* Carrito Layout */
-.cart-layout {
-    display: grid;
-    grid-template-columns: 2fr 1fr; /* 2 partes lista, 1 parte resumen */
-    gap: 40px;
-    align-items: start;
-}
-
-/* Fila de producto */
-.cart-item-row {
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #eee;
-    padding: 20px 0;
-    gap: 20px;
-}
-.cart-img img {
-    width: 80px;
-    height: auto;
-    border-radius: 4px;
-}
-.cart-info {
-    flex: 1; /* Ocupa el espacio disponible */
-}
-.cart-product-name {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 5px;
-}
-.cart-sku {
-    font-size: 0.75rem;
-    color: #999;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-}
-.variant-tag {
-    display: block;
-    font-size: 0.85rem;
-    color: #555;
-    margin-bottom: 2px;
-}
-
-/* Acciones y Precio */
-.qty-selector input {
-    width: 60px;
-    padding: 5px;
-    text-align: center;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-.btn-delete {
-    color: #d9534f;
-    margin-left: 10px;
-    display: inline-flex;
-    vertical-align: middle;
-}
-.cart-total-line {
-    font-weight: bold;
-    font-size: 1.1rem;
-    color: #333;
-    min-width: 80px;
-    text-align: right;
-}
-
-/* Caja Resumen (Derecha) */
-.cart-summary-box {
-    background: #fcfcfc;
-    padding: 30px;
-    border-radius: 8px;
-    border: 1px solid #eee;
-}
-.cart-summary-box h2 {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-}
-.summary-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
-    color: #555;
-}
-.summary-row.total {
-    color: #000;
-    font-weight: bold;
-    font-size: 1.3rem;
-    margin-top: 15px;
-}
-.iva-text {
-    font-size: 0.8rem;
-    color: #999;
-    text-align: right;
-    margin-top: -10px;
-    margin-bottom: 20px;
-}
-.btn-checkout {
-    width: 100%;
-    background: #F5A623; /* Color mostaza similar a tu imagen */
-    color: #fff;
-    border: none;
-    padding: 15px;
-    border-radius: 50px; /* Bordes redondeados */
-    font-weight: bold;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: 0.3s;
-}
-.btn-checkout:hover {
-    background: #e09612;
-}
-
-/* Responsivo */
-@media(max-width: 768px) {
-    .cart-layout { grid-template-columns: 1fr; }
-    .cart-item-row { flex-wrap: wrap; }
-    .mobile-hide { display: none; }
-
-    
-/* =========================================
-   SECCION PRODUCTO jorge5dic
-   ========================================= */
-
-/* Fondo general beige */
-body.bg-beige {
-    background-color: #F5EFE5; /* Color aproximado del fondo */
-}
-
-/* Layout principal de dos columnas */
-.product-detail-layout {
-    max-width: 1200px;
-    margin: 4rem auto;
-    padding: 0 20px;
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* 50% - 50% */
-    gap: 60px;
-    align-items: center; /* Centrar verticalmente */
-}
 
 /* Columna Izquierda */
 .detail-left {
@@ -805,25 +567,23 @@ body.bg-beige {
 .detail-image-container img {
     max-width: 100%;
     height: auto;
-    /* Sombra suave debajo de la bolsa */
-    filter: drop-shadow(0px 20px 30px rgba(0,0,0,0.15)); 
+    filter: drop-shadow(0px 20px 30px rgba(0,0,0,0.15));
 }
 .big-product-title {
     font-family: 'Playfair Display', serif;
     font-size: 3.5rem;
-    color: #1A1A1A; /* Casi negro */
+    color: #1A1A1A;
     margin-top: 2rem;
 }
 
-/* Columna Derecha: La Tarjeta */
+/* Columna Derecha */
 .detail-right-card {
-    background-color: #FAF7F2; /* Un tono más claro que el fondo */
+    background-color: #FAF7F2;
     padding: 40px;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
 
-/* Header de la tarjeta */
 .card-header { margin-bottom: 1rem; }
 .reviews-placeholder {
     display: flex;
@@ -832,13 +592,16 @@ body.bg-beige {
     margin-bottom: 10px;
     font-size: 0.9rem;
 }
-.star-icon { color: #C7A17A; font-size: 1.2rem; } /* Color dorado/café */
-.star-icon-half { color: #C7A17A; font-size: 1.2rem; }
+.star-icon, .star-icon-half { 
+    color: #C7A17A; 
+    font-size: 1.2rem; 
+}
 .reviews-link {
     color: #1A1A1A;
     text-decoration: underline;
     margin-left: 5px;
 }
+
 .card-title {
     font-family: 'Playfair Display', serif;
     font-size: 2.2rem;
@@ -850,8 +613,6 @@ body.bg-beige {
     color: #666;
     font-weight: 500;
 }
-
-/* Precio */
 .card-price {
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 2.5rem;
@@ -859,15 +620,13 @@ body.bg-beige {
     color: #1A1A1A;
     margin: 1.5rem 0;
 }
-
-/* Descripción */
 .card-description {
     color: #555;
     line-height: 1.6;
     margin-bottom: 2rem;
 }
 
-/* --- SELECTORES TIPO BOTÓN --- */
+/* Selectores */
 .selector-group {
     margin-bottom: 1.5rem;
 }
@@ -882,47 +641,32 @@ body.bg-beige {
     flex-wrap: wrap;
     gap: 10px;
 }
-/* Ocultamos el radio button real */
 .option-radio {
     display: none;
 }
-/* Estilo del label que parece botón */
 .option-label {
     display: inline-block;
     padding: 10px 20px;
     background-color: transparent;
     border: 1px solid #DDD;
-    border-radius: 30px; /* Bordes muy redondeados */
+    border-radius: 30px;
     cursor: pointer;
     font-weight: 600;
     color: #1A1A1A;
     transition: all 0.2s;
     font-size: 0.9rem;
-    text-transform: capitalize; /* Primera letra mayúscula */
+    text-transform: capitalize;
 }
 .option-label:hover {
     border-color: #1A1A1A;
 }
-/* Estilo cuando el radio asociado está checkeado */
 .option-radio:checked + .option-label {
-    background-color: #1A1A1A; /* Fondo oscuro */
-    color: #FFF; /* Texto blanco */
+    background-color: #1A1A1A;
+    color: #FFF;
     border-color: #1A1A1A;
 }
 
-/* Selector Dropdown Normal (Tueste) */
-.form-select {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid #DDD;
-    border-radius: 8px;
-    background-color: transparent;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 1rem;
-    cursor: pointer;
-}
-
-/* Info de Stock */
+/* Stock */
 .stock-info {
     display: flex;
     align-items: center;
@@ -935,17 +679,15 @@ body.bg-beige {
 .stock-dot {
     width: 8px;
     height: 8px;
-    background-color: #27AE60; /* Verde */
+    background-color: #27AE60;
     border-radius: 50%;
 }
 
-/* --- Fila de Acciones (Cantidad + Botón) --- */
+/* Botones Acción */
 .card-actions-row {
     display: flex;
     gap: 15px;
 }
-
-/* Widget de Cantidad (- 1 +) */
 .quantity-selector-widget {
     display: flex;
     align-items: center;
@@ -969,7 +711,8 @@ body.bg-beige {
     background: transparent;
     font-weight: bold;
     font-size: 1rem;
-    
+    -moz-appearance: textfield; 
+    appearance: textfield; /* Added */
 }
 .quantity-selector-widget input::-webkit-outer-spin-button,
 .quantity-selector-widget input::-webkit-inner-spin-button {
@@ -977,10 +720,9 @@ body.bg-beige {
     margin: 0;
 }
 
-/* Botón Añadir a la Cesta */
 .btn-add-to-cart-dark {
-    flex: 1; /* Ocupa el resto del espacio */
-    background-color: #1A1A1A; /* Color oscuro */
+    flex: 1;
+    background-color: #1A1A1A;
     color: #FFF;
     border: none;
     border-radius: 30px;
@@ -998,25 +740,97 @@ body.bg-beige {
     opacity: 0.7;
 }
 
-/* Responsividad */
 @media (max-width: 900px) {
     .product-detail-layout {
-        grid-template-columns: 1fr; /* Una columna en móviles */
+        grid-template-columns: 1fr;
         gap: 30px;
     }
     .detail-image-container img {
-        max-width: 60%; /* Imagen más pequeña en móvil */
+        max-width: 60%;
     }
     .big-product-title {
-        font-size: 2.5rem; /* Título más pequeño */
+        font-size: 2.5rem;
     }
     .card-actions-row {
-        flex-direction: column; /* Apilar cantidad y botón */
+        flex-direction: column;
     }
     .quantity-selector-widget {
         justify-content: center;
     }
     .btn-add-to-cart-dark {
         padding: 15px;
+    }
+}
+
+/* =========================================
+   SECCION CARRITO
+   ========================================= */
+
+.cart-layout {
+    display: flex;
+    gap: 4rem;
+    align-items: flex-start;
+}
+
+.cart-list {
+    flex: 1;
+}
+
+.cart-item-row {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.cart-img {
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+    background: #f9f9f9;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+.cart-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.cart-info h3 {
+    font-size: 1.8rem;
+    margin: 0 0 0.5rem 0;
+    font-family: var(--fuenteHeading);
+}
+
+.variant-tag {
+    font-size: 1.2rem;
+    color: #666;
+    background: #f0f0f0;
+    padding: 4px 8px;
+    border-radius: 6px;
+    margin-right: 5px;
+}
+
+.cart-summary-box {
+    width: 350px;
+    background: white;
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 2rem;
+}
+
+@media (max-width: 850px) {
+    .cart-layout {
+        flex-direction: column;
+    }
+    .cart-summary-box {
+        width: 100%;
     }
 }
