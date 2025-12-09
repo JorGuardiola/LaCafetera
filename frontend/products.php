@@ -3,13 +3,6 @@
 session_start();
 require_once __DIR__ . '/../db/connection.php';
 
-// DEBUG temporal
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-$base_path = '/lacafetera';
-
 // Datos del hero
 $bgClass = "bg-productos";
 $heroTitle = "Nuestros productos";
@@ -133,14 +126,6 @@ $total_productos = $count_stmt->fetchColumn();
 $total_paginas = ceil($total_productos / $por_pagina);
 
 ?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>La Cafetera - Productos</title>
-    <link rel="stylesheet" href="/lacafetera/assets/css/style.css">
-</head>
-<body>
 
 <?php include __DIR__ . '/templates/header.php'; ?>
 
@@ -185,5 +170,4 @@ $total_paginas = ceil($total_productos / $por_pagina);
 </main>
 
 <?php include __DIR__ . "/templates/footer.php"; ?>
-</body>
-</html>
+

@@ -1,6 +1,5 @@
 <?php
 // frontend/index.php
-session_start();
 require_once __DIR__ . '/../db/connection.php';
 
 // Ruta base dinámica (usada para las imágenes del carrusel)

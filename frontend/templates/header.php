@@ -1,5 +1,11 @@
 <?php
 // frontend/templates/header.php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$base_path = '/LaCafetera';
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -12,6 +18,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
   <!-- CSS -->
   <link rel="stylesheet" href="../assets/css/style.css">
@@ -30,10 +38,9 @@
       <!-- NAV -->
       <nav class="nav-bar">
         <ul>
+          <li><a href="nosotros.php">Acerca de nosotros</a></li>
           <li><a href="products.php">Productos</a></li>
-          <li><a href="#">Nosotros</a></li>
-          <li><a href="#">Recetas</a></li>
-          <li><a href="#">Contacto</a></li>
+          <li><a href="contacto.php">Contacto</a></li>
         </ul>
       </nav>
 

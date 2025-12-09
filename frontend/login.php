@@ -7,9 +7,6 @@ require_once __DIR__ . '/../db/connection.php';
 $error_message = '';
 $success_message = '';
 
-// Ruta base dinámica (usada para las imágenes, debe coincidir con la subcarpeta del proyecto en htdocs).
-$base_path = '/LaCafetera'; 
-
 // --- Lógica de Procesamiento del Formulario de Login ---
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // 1. Recoger y sanear los datos del formulario
@@ -54,18 +51,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 
-// =================================================================
 // 1. VARIABLES PARA LA PLANTILLA HERO.PHP
-// =================================================================
 $bgClass = 'bg-login'; // Clase para aplicar el fondo de las dos mitades
 $heroTitle = ''; 
 $heroSubtitle = ''; 
 $heroButtonText = '';
 $heroButtonLink = ''; 
 
-// =================================================================
 // 2. CONTENIDO DEL FORMULARIO (PARA INYECTAR EN hero-right)
-// =================================================================
 ob_start();
 ?>
 <div class="login-box">
@@ -126,7 +119,6 @@ ob_start();
 $heroRightContent = ob_get_clean();
 
 
-// Incluye el inicio del HTML (<!DOCTYPE html>, <head>, <body>, Nav)
 include __DIR__ . '/templates/header.php';
 ?>
 
@@ -193,6 +185,5 @@ include __DIR__ . '/templates/header.php';
 </script>
 
 <?php
-// Incluye el cierre del HTML (Footer, Scripts, </body>, </html>)
 require_once __DIR__ . '/templates/footer.php';
 ?>
