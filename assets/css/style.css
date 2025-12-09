@@ -1532,6 +1532,7 @@ body.bg-beige {
         margin-bottom: 2rem;
     }
 }
+
 /* =======================================
     OJO: ESTILOS ESPECÍFICOS
 ======================================= */
@@ -1539,5 +1540,5 @@ body.bg-beige {
     /* CRÍTICO: Permite posicionar elementos internos (el ojo) de forma absoluta */
     position: relative;
     /* Asegura que el contenedor tenga suficiente espacio */
-    margin-bottom: 2rem; 
+    margin-bottom: 2rem;
 }
