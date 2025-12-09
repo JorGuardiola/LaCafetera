@@ -170,14 +170,12 @@ include __DIR__ . '/templates/header.php';
     if(window.lucide && window.lucide.createIcons) {
         window.lucide.createIcons();
     }
-</script>
-
                 if (passwordInput.type === 'password') {
                     passwordInput.type = 'text';
-                    if (icon) icon.setAttribute('data-lucide', 'eye-off');
+                if (icon) icon.setAttribute('data-lucide', 'eye-off');
                 } else {
                     passwordInput.type = 'password';
-                    if (icon) icon.setAttribute('data-lucide', 'eye');
+                if (icon) icon.setAttribute('data-lucide', 'eye');
                 }
                 // Vuelve a renderizar los iconos de Lucide después del cambio de atributo
                 if (window.lucide && typeof window.lucide.createIcons === 'function') {
