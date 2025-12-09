@@ -182,7 +182,5 @@ include __DIR__ . '/templates/header.php';
                 // Vuelve a renderizar los iconos de Lucide después del cambio de atributo
                 if (window.lucide && typeof window.lucide.createIcons === 'function') {
                     window.lucide.createIcons();
-                }
-            });
-        }
-    </script>
+                }       
+</script>
