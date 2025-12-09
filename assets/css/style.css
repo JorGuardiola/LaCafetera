@@ -212,7 +212,7 @@ h3 { font-size: 2.8rem; }
 .hero-container.bg-registro {
     background-image: url('../img/hero-registro.jpg');
 }
-.hero-container.bg-nosotros {
+.header-hero-simple.bg-nosotros {
     background-image: url('../img/hero-nosotros2.jpg');
 }
 
@@ -1432,4 +1432,179 @@ body.bg-beige {
     margin-right: 10px;
     min-width: 20px;
     color: rgb(var(--secondary-900));
+}
+/* =========================================
+   NUEVO HERO SIMPLE: SOLUCIÓN AL CONFLICTO DEL HEADER
+   ========================================= */
+
+.header-hero-simple {
+    /* Propiedades de posicionamiento para la imagen de fondo */
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+     
+    /* CRÍTICO: Contexto de posicionamiento para la capa ::before */
+    position: relative; 
+    overflow: hidden; /* Asegura que la capa ::before no se desborde */
+}
+
+/* Aplicar la imagen de fondo solo a la clase específica */
+.header-hero-simple.bg-nosotros {
+    /* **¡AÑADIMOS LA ALTURA AQUÍ PARA QUE SOLO AFECTE A ESTA PÁGINA!** */
+    height: 65rem; 
+    /* El background-image de la imagen de café sigue aquí */
+    
+}
+
+/* 1. Capa Blanca Semitransparente (::before) */
+.header-hero-simple.bg-nosotros::before {
+    content: ''; 
+    position: absolute; 
+    top: 0; right: 0; bottom: 0; left: 0; 
+    z-index: 2;
+    background-color: rgba(255, 255, 255, 1); 
+    opacity: 0.4; 
+}
+
+/* 2. Estilos para el texto centrado */
+.header-hero-simple .hero-texto-centrado {
+    position: relative; 
+    z-index: 3;
+
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco casi opaco */
+    padding: 3rem; /* Espacio interno */
+    border-radius: 10px; /* Bordes redondeados */
+    max-width: 80rem;
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    height: 100%; 
+    text-align: center;
+}
+/* 3. Estilos de Tipografía */
+.header-hero-simple h1 {
+    /* ... */
+}
+
+.header-hero-simple p {
+    font-size: 2rem;
+    color: #111111; /* Texto oscuro */
+    max-width: 60rem; /* Limita el ancho del párrafo */
+}
+/* =========================================
+   ESTILOS DE LA LLAMADA A LA ACCIÓN (CTA)
+   ========================================= */
+
+.llamada-a-la-accion {
+    /* 1. Posicionamiento y Centrado */
+    display: flex; /* Usamos flexbox para centrar el contenido interno */
+    flex-direction: column; 
+    align-items: center; /* Centrado horizontal del texto y botón */
+    text-align: center;
+    margin: 5rem auto; /* Margen superior/inferior para separarlo de otros elementos */
+    
+    /* 2. Estilo de Caja */
+    background-color: #FFFFFF; /* Fondo blanco sólido para que destaque */
+    padding: 4rem 2rem; /* Más padding vertical y horizontal */
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Sombra suave para darle profundidad */
+    
+    /* 3. Limitar Ancho */
+    max-width: 80rem; /* Limita el ancho para que no ocupe toda la pantalla */
+}
+
+.llamada-a-la-accion p {
+    font-size: 2.2rem;
+    font-weight: 500; /* Lo hacemos seminegrita para que se lea bien */
+    color: #333333;
+    margin-bottom: 2rem; /* Espacio antes del botón */
+}
+
+/* 4. Estilo del Botón (Ajustar según tu clase 'boton-primario' o 'boton') */
+.llamada-a-la-accion .boton-primario {
+    background-color: #7D4F23; /* Color de acento de café */
+    color: #FFFFFF;
+    text-transform: uppercase;
+    padding: 1.5rem 3rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.llamada-a-la-accion .boton-primario:hover {
+    background-color: #A36B3B; /* Color más claro al pasar el ratón */
+}
+/* -------------------------------------------
+   COLUMNA DERECHA (Ritual de Calidad)
+   ------------------------------------------- */
+.hero-ritual-right {
+    /* Mantenemos tus propiedades de Flexbox para centrar el bloque en sí */
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    text-align: center;
+    /* ... otras propiedades ... */
+}
+
+/* CENTRAR EL TÍTULO h3 */
+.hero-ritual-right .ritual-titulo-centrado {
+    text-align: center; /* ¡Aseguramos que el texto esté centrado! */
+    color: #333333;
+    margin-bottom: 3rem;
+}
+
+/* DISPOSICIÓN DE LOS 3 DIVS EN FILA (USANDO GRID) */
+.ritual-puntos-hero {
+    /* === MODIFICACIÓN CLAVE: USAR GRID PARA 3 COLUMNAS === */
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); /* Crea 3 columnas de igual ancho */
+    gap: 2rem; /* Espacio entre los divs */
+    
+    /* El contenedor ahora debe ocupar el ancho completo disponible */
+    width: 100%; 
+}
+
+/* Estilo de los divs individuales (las "celdas" de la tabla) */
+.ritual-item-hero {
+    /* Mantenemos tus estilos de caja (fondo, padding, borde) */
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 2rem;
+    border-radius: 10px;
+    border-left: 4px solid #7D4F23; 
+    
+    /* Centramos el texto dentro de cada div */
+    text-align: center; 
+}
+/* =========================================
+   ESTILO PARA EL BOTÓN NEGRO DE CTA
+   ========================================= */
+
+.boton-negro {
+    /* 1. Apariencia */
+    display: inline-block; /* Necesario para aplicar padding */
+    background-color: #000000; /* Fondo negro */
+    color: #FFFFFF; /* Letras blancas */
+    text-decoration: none; /* Quitar el subrayado por defecto */
+    
+    /* 2. Tamaño y Forma */
+    padding: 1.5rem 3rem; /* Espacio interno grande */
+    border-radius: 5px; /* Esquinas ligeramente redondeadas */
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    cursor: pointer;
+    
+    /* 3. Transición */
+    transition: background-color 0.3s ease;
+    
+    /* Margen para separarlo del párrafo superior */
+    margin-top: 2rem; 
+}
+
+.boton-negro:hover {
+    /* Efecto al pasar el ratón */
+    background-color: #333333; /* Un gris muy oscuro al pasar el ratón */
 }
