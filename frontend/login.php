@@ -1,5 +1,6 @@
 <?php
-ob_start();
+// LÍNEA 1: INICIA EL BUFFER DE SALIDA
+ob_start(); 
 
 // frontend/login.php
 session_start();
@@ -8,6 +9,13 @@ require_once __DIR__ . '/../db/connection.php';
 // Inicializar mensajes
 $error_message = '';
 $success_message = '';
+
+// INICIO DEL CAMBIO: RECUPERAR MENSAJE DE SESIÓN
+if (isset($_SESSION['mensaje_exito'])) {
+    $success_message = $_SESSION['mensaje_exito'];
+    // Limpiar la variable de sesión para que no se muestre de nuevo al recargar
+    unset($_SESSION['mensaje_exito']); 
+}
 
 // --- Lógica de Procesamiento del Formulario de Login ---
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -22,40 +30,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         try {
             // 2. Preparar y ejecutar la consulta a la base de datos
-            $stmt = $pdo->prepare("SELECT id, email, password_hash FROM usuarios WHERE email = ?");
+            $stmt = $pdo->prepare("SELECT id_usuario, email, password_hash FROM usuarios WHERE email = ?");
             $stmt->execute([$email]);
             $user = $stmt->fetch();
 
-            // 3. Verificar las credenciales
+            // 3. Verificar las credenciales y el hash de la contraseña
             if ($user && password_verify($password, $user['password_hash'])) {
+                
                 // 4. Login Exitoso: Iniciar sesión y Redirigir
-                $_SESSION['user_id'] = $user['id']; 
-                $_SESSION['user_email'] = $user['email'];
+                $_SESSION['user_id'] = $user['id_usuario']; 
                 $_SESSION['logged_in'] = true;
                 
-                // === REDIRECCIÓN ===
-                // 1. Limpiar el buffer de salida antes de enviar la cabecera
-                ob_end_clean(); 
-                // 2. Redirigir y asegurar que la ejecución se detiene
-                header('Location: index.php'); 
+                // === REDIRECCIÓN FINAL  ===
+                ob_end_clean(); // Limpia el buffer antes de enviar la cabecera
+                header('Location: index.php'); // RUTA RELATIVA CORRECTA
                 exit; 
+                // =================================
                 
-                
-            } else {
-                // 5. Login Fallido
+            } else { 
+            // 5. Login Fallido (Usuario no encontrado o contraseña incorrecta)
                 $error_message = "Email o contraseña incorrectos.";
+                
             }
-
         } catch (PDOException $e) {
-            // Error de consulta
+            // Error de consulta o base de datos
             $error_message = "Ocurrió un error en el servidor. Inténtelo de nuevo.";
+            // DESCOMENTA ESTO TEMPORALMENTE para ver el detalle: $error_message .= " Error: " . $e->getMessage(); 
         }
     }
 }
 
 
 // 1. VARIABLES PARA LA PLANTILLA HERO.PHP
-$bgClass = 'bg-login'; // Clase para aplicar el fondo de las dos mitades
+$bgClass = 'bg-login'; 
 $heroTitle = ''; 
 $heroSubtitle = ''; 
 $heroButtonText = '';
@@ -75,6 +82,12 @@ ob_start();
         </div>
     <?php endif; ?>
 
+    <?php if (!empty($success_message)): ?>
+        <div class="alert success">
+            <i data-lucide="check-circle"></i> 
+            <p><?php echo htmlspecialchars($success_message); ?></p>
+        </div>
+    <?php endif; ?>
     <form action="login.php" method="POST" class="login-form">
         
         <div class="input-group">
@@ -130,49 +143,40 @@ include __DIR__ . '/templates/header.php';
 </main>
 
 <script>
-      
-    // Ejecutar el resto del código cuando el DOM esté completamente cargado.
-    document.addEventListener('DOMContentLoaded', function() {
-        
-        // === 2. INICIALIZACIÓN DE ICONOS (CRÍTICO PARA VER EL OJO) ===
-        // Usamos setTimeout(0) para darle prioridad alta después de la carga del DOM.
-        if (window.lucide && typeof window.lucide.createIcons === 'function') {
-            setTimeout(function() {
-                 window.lucide.createIcons();
-            }, 0);
-        }
+    // 1. INICIALIZACIÓN DE ICONOS DE LUCIDE (Se debe ejecutar tan pronto como sea posible)
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+        window.lucide.createIcons();
+    }
 
-       
-        // 3. Lógica para mostrar/ocultar contraseña 
+    // 2. Lógica DOM: Ejecutar la lógica de clic cuando la página esté lista.
+    document.addEventListener('DOMContentLoaded', function() {
+
+        // === Lógica para mostrar/ocultar contraseña (El Ojo) ===
         const togglePassword = document.getElementById('togglePassword');
+        
         if (togglePassword) {
             togglePassword.addEventListener('click', function (e) {
                 e.preventDefault(); 
                 
                 const passwordInput = document.getElementById('password');
-                // Buscamos el elemento que tiene el atributo data-lucide (el icono)
                 const icon = e.currentTarget.querySelector('[data-lucide]'); 
 
                 if (!passwordInput || !icon) return; 
 
                 if (passwordInput.type === 'password') {
                     passwordInput.type = 'text';
-                    icon.setAttribute('data-lucide', 'eye-off'); // Ojo tachado
+                    icon.setAttribute('data-lucide', 'eye-off'); 
                 } else {
                     passwordInput.type = 'password';
-                    icon.setAttribute('data-lucide', 'eye'); // Ojo normal
+                    icon.setAttribute('data-lucide', 'eye'); 
                 }
                 
-                // Vuelve a renderizar los iconos de Lucide
+                // Vuelve a renderizar los iconos de Lucide (necesario después de cambiar el data-lucide)
                 if (window.lucide && typeof window.lucide.createIcons === 'function') {
                     window.lucide.createIcons();
                 }
-                if (window.lucide && typeof window.lucide.createIcons === 'function') window.lucide.createIcons();
             });
         }
     });
 </script>
-
-<?php
-require_once __DIR__ . '/templates/footer.php';
-?>
+<?php include __DIR__ . '/templates/footer.php'; ?>
