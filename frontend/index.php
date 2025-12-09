@@ -1,6 +1,5 @@
 <?php
 // frontend/index.php
-session_start();
 require_once __DIR__ . '/../db/connection.php';
 
 // Ruta base dinámica (usada para las imágenes del carrusel)
@@ -57,7 +56,9 @@ $heroButtonLink = "";
 <section class="container" style="margin:6rem auto;">
     <h2 class="center-text">Cafés destacados</h2>
 
-    <?php
+
+
+<?php
 $sql_destacados = "
     SELECT 
         p.id,
@@ -70,9 +71,9 @@ $sql_destacados = "
          AND pv.envase = '250g'
          LIMIT 1) AS precio
     FROM productos p
-    WHERE p.disponible = 1
-    ORDER BY p.id ASC
-    LIMIT 4
+        WHERE p.disponible = 1
+        ORDER BY p.id ASC
+    LIMIT 4;
 ";
 $stmt = $pdo->prepare($sql_destacados);
 $stmt->execute();
@@ -80,40 +81,17 @@ $stmt->execute();
 
 <div class="product-grid">
 <?php while ($p = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
-    
-    <div class="product-card">
-
-        <button class="fav-btn">
-            <img src="/lacafetera/assets/img/icon-heart.png" alt="Fav">
-        </button>
-
-        <div class="product-image">
-            <img src="/lacafetera/assets/img/imgsproducts/<?= htmlspecialchars($p['imagen']) ?>"
-                 alt="<?= htmlspecialchars($p['nombre_cafe']) ?>">
-        </div>
-
-        <div class="product-rating">★ ★ ★ ★ ☆</div>
-
-        <h3 class="product-name"><?= htmlspecialchars($p['nombre_cafe']) ?></h3>
-
-        <p class="product-weight"><?= htmlspecialchars($p['presentacion']) ?></p>
-
-        <p class="product-price">
-            <?= isset($p['precio']) ? number_format($p['precio'], 2) : '0.00' ?> €
-        </p>
-
-        <button class="product-btn">Ver detalles</button>
-
-    </div>
-
+    <?php include __DIR__ . '/templates/card.php'; ?>
 <?php endwhile; ?>
 </div>
+
 
 </section>
 
 </main>
 
 <?php include __DIR__ . '/templates/footer.php'; ?>
+
 
 
 

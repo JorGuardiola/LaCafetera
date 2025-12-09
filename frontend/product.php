@@ -1,6 +1,5 @@
 <?php
 // frontend/product.php
-session_start();
 require_once __DIR__ . '/../db/connection.php';
 
 // 1. Validar ID
@@ -27,17 +26,6 @@ $stmtVar->execute([$id]);
 $variantes = $stmtVar->fetchAll(PDO::FETCH_ASSOC);
 $variantesJson = json_encode($variantes);
 ?>
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title><?= htmlspecialchars($producto['nombre_cafe']) ?> - La Cafetera</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/lacafetera/assets/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body class="bg-beige">
 
 <?php include __DIR__ . '/templates/header.php'; ?>
 
@@ -85,13 +73,13 @@ $variantesJson = json_encode($variantes);
                 <label class="selector-label">Elija envase:</label>
                 <div class="option-buttons">
                     <input type="radio" name="envase" id="size-250" value="250g" class="option-radio" checked>
-                    <label for="size-250" class="option-label">250g</label>
+                    <label for="size-250" class="option-label">250 G</label>
                     
                     <input type="radio" name="envase" id="size-1kg" value="1kg" class="option-radio">
-                    <label for="size-1kg" class="option-label">1kg</label>
+                    <label for="size-1kg" class="option-label">1 KG</label>
                     
                     <input type="radio" name="envase" id="size-2kg" value="2kg" class="option-radio">
-                    <label for="size-2kg" class="option-label">2kg</label>
+                    <label for="size-2kg" class="option-label">2 KG</label>
                 </div>
             </div>
 

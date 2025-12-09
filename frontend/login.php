@@ -7,9 +7,6 @@ require_once __DIR__ . '/../db/connection.php';
 $error_message = '';
 $success_message = '';
 
-// Ruta base dinámica 
-$base_path = '/LaCafetera'; 
-
 // --- Lógica de Procesamiento del Formulario de Login ---
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // 1. Recoger y sanear los datos del formulario
@@ -122,7 +119,6 @@ ob_start();
 $heroRightContent = ob_get_clean();
 
 
-// Incluye el inicio del HTML (<!DOCTYPE html>, <head>, <body>, Nav)
 include __DIR__ . '/templates/header.php';
 ?>
 
@@ -143,11 +139,12 @@ include __DIR__ . '/templates/header.php';
         // Redirección inmediata (si el PHP no pudo hacer el header())
         window.location.href = '<?php echo $base_path; ?>/index.php'; 
     <?php endif; ?>
+
     
     // Ejecutar el resto del código cuando el DOM esté completamente cargado.
     document.addEventListener('DOMContentLoaded', function() {
         
-        // INICIALIZACIÓN DE ICONOS 
+        // === 2. INICIALIZACIÓN DE ICONOS (CRÍTICO PARA VER EL OJO) ===
         // Usamos setTimeout(0) para darle prioridad alta después de la carga del DOM.
         if (window.lucide && typeof window.lucide.createIcons === 'function') {
             setTimeout(function() {
@@ -155,9 +152,9 @@ include __DIR__ . '/templates/header.php';
             }, 0);
         }
 
-       
-        // Lógica para mostrar/ocultar contraseña
-        
+        // ====================================================
+        // === 3. Lógica para mostrar/ocultar contraseña (El Ojo) ===
+        // ====================================================
         const togglePassword = document.getElementById('togglePassword');
         if (togglePassword) {
             togglePassword.addEventListener('click', function (e) {
@@ -188,6 +185,5 @@ include __DIR__ . '/templates/header.php';
 </script>
 
 <?php
-// Incluye el cierre del HTML (Footer, Scripts, </body>, </html>)
 require_once __DIR__ . '/templates/footer.php';
 ?>
