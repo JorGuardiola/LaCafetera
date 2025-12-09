@@ -62,11 +62,18 @@ h2 { font-size: 3.2rem; }
 h3 { font-size: 2.8rem; }
 
 
+.container {
+    width: 90%;
+    max-width: 120rem;
+    margin: 0 auto;
+}
 
 /* UTILIDADES */
 .no-margin { margin: 0 !important; }
 .no-padding { padding: 0 !important; }
 .center-text { text-align: center !important; }
+
+
 
 /* =======================================
    HEADER
