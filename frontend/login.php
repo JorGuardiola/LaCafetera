@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['user_email'] = $user['email'];
                 $_SESSION['logged_in'] = true;
                 
-                // === REDIRECCIÓN CORREGIDA ===
+                // === REDIRECCIÓN ===
                 // 1. Limpiar el buffer de salida antes de enviar la cabecera
                 ob_end_clean(); 
                 // 2. Redirigir y asegurar que la ejecución se detiene
@@ -143,7 +143,7 @@ include __DIR__ . '/templates/header.php';
         }
 
        
-        // === 3. Lógica para mostrar/ocultar contraseña 
+        // 3. Lógica para mostrar/ocultar contraseña 
         const togglePassword = document.getElementById('togglePassword');
         if (togglePassword) {
             togglePassword.addEventListener('click', function (e) {
