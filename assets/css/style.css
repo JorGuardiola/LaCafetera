@@ -35,7 +35,6 @@
     --opacidad-barra: 0.15;
 }
 
-
 /* =======================================
    RESET & BASE
 ======================================= */
@@ -68,8 +67,6 @@ h3 { font-size: 2.8rem; }
 .no-margin { margin: 0 !important; }
 .no-padding { padding: 0 !important; }
 .center-text { text-align: center !important; }
-
-
 
 /* =======================================
    HEADER
@@ -127,8 +124,6 @@ h3 { font-size: 2.8rem; }
     width: 1.8rem;
 }
 
-
-
 /* =======================================
    RESPONSIVE HEADER
 ======================================= */
@@ -145,7 +140,6 @@ h3 { font-size: 2.8rem; }
         max-width: 28rem;
     }
 }
-
 
 /* ------- TABLET ------- */
 @media (min-width: 768px) and (max-width: 1023px) {
@@ -237,9 +231,6 @@ h3 { font-size: 2.8rem; }
 }
 
 /* Columna derecha (vacía pero estructural) */
-
-
-
 
 /* =======================================
    RESPONSIVE
