@@ -52,93 +52,119 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
-
-// 2. CONFIGURACIÓN VISUAL (Para hero.php)
-$bgClass = 'bg-login'; // Reutilizamos el fondo del login para consistencia
+// 1. VARIABLES PARA LA PLANTILLA HERO.PHP
+$bgClass = 'bg-registro'; // Clase para aplicar el fondo de las dos mitades
 $heroTitle = ''; 
 $heroSubtitle = ''; 
 $heroButtonText = '';
 $heroButtonLink = ''; 
 
-// 3. CONSTRUCCIÓN DEL FORMULARIO (Se inyecta en la derecha del Hero)
+// 2. CONTENIDO DEL FORMULARIO DE REGISTRO (PARA INYECTAR EN hero-right)
 ob_start();
 ?>
-<div class="login-box">
-    <h2 class="login-title">Crear Cuenta</h2>
+<div class="login-box register-box">
     
-    <?php if ($error_message): ?>
-        <div class="alert error" style="color: #e74c3c; text-align:center; margin-bottom:1rem; font-weight:bold;">
-            <?= htmlspecialchars($error_message) ?>
+    <h2 class="login-title">Crea tu cuenta</h2>
+    
+    <?php if (!empty($error_message)): ?>
+        <div class="alert error">
+            <i data-lucide="alert-circle"></i>
+            <p><?php echo htmlspecialchars($error_message); ?></p>
         </div>
     <?php endif; ?>
 
-    <form action="register.php" method="POST" class="login-form">
+    <form action="register.php" method="POST" class="register-form">
         
-        <div class="input-group">
-            <label for="nombre" class="input-label">Nombre</label>
-            <input type="text" name="nombre" id="nombre" class="form-input" value="<?= htmlspecialchars($nombre) ?>" required>
+        <div class="input-group-row">
+            <div class="input-group half-width">
+                <label for="nombre" class="input-label small-label">Nombre</label>
+                <input 
+                    type="text" 
+                    id="nombre" 
+                    name="nombre" 
+                    required
+                    class="form-input"
+                    value="<?php echo isset($nombre) ? htmlspecialchars($nombre) : ''; ?>"
+                >
+            </div>
+
+            <div class="input-group half-width">
+                <label for="apellidos" class="input-label small-label">Apellidos</label>
+                <input 
+                    type="text" 
+                    id="apellidos" 
+                    name="apellidos" 
+                    required
+                    class="form-input"
+                    value="<?php echo isset($apellidos) ? htmlspecialchars($apellidos) : ''; ?>"
+                >
+            </div>
         </div>
 
         <div class="input-group">
-            <label for="apellidos" class="input-label">Apellidos</label>
-            <input type="text" name="apellidos" id="apellidos" class="form-input" value="<?= htmlspecialchars($apellidos) ?>" required>
-        </div>
-
-        <div class="input-group">
-            <label for="email" class="input-label">Email</label>
-            <input type="email" name="email" id="email" class="form-input" value="<?= htmlspecialchars($email) ?>" required>
+            <label for="email" class="input-label small-label">Email</label>
+            <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                required
+                class="form-input"
+                value="<?php echo isset($email) ? htmlspecialchars($email) : ''; ?>"
+            >
         </div>
 
         <div class="input-group password-field">
-            <label for="password" class="input-label">Contraseña</label>
-            <input type="password" name="password" id="password" class="form-input" placeholder="Mínimo 8 caracteres" required>
+            <label for="password" class="input-label small-label">Contraseña</label>
+            <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                required
+                class="form-input"
+            >
             <button type="button" id="togglePassword" class="toggle-password">
                 <i data-lucide="eye"></i>
             </button>
         </div>
-
-        <button type="submit" class="btn-acceder" style="margin-top: 2rem;">
+        
+        <button type="submit" class="btn btn-primary btn-acceder btn-register">
             Registrarse <span class="arrow-icon">&rarr;</span>
         </button>
+
     </form>
-    
-    <div class="register-prompt">
-        <span>¿Ya tienes cuenta? <a href="login.php">Inicia sesión aquí</a></span>
+      
+    <div class="login-prompt">
+        <span>Ya tienes una cuenta? <a href="login.php">Accede</a></span>
     </div>
 </div>
 <?php
-// Guardamos el contenido del formulario en esta variable para el Hero
+
 $heroRightContent = ob_get_clean();
 
-// 4. VISTA FINAL (Header -> Main/Hero -> Footer)
-include __DIR__ . '/templates/header.php'; 
+
+// Incluye el inicio del HTML (<!DOCTYPE html>, <head>, <body>, Nav)
+include __DIR__ . '/templates/header.php';
 ?>
 
-<main>
     <?php include __DIR__ . '/templates/hero.php'; ?>
-</main>
 
-<script>
-    // Script para ver/ocultar contraseña (idéntico a login.php)
-    const toggleBtn = document.getElementById('togglePassword');
-    const passInput = document.getElementById('password');
+        <!-- FOOTER: Se ha quitado la etiqueta <footer> envolvente para que el footer.php incluído determine el estilo, como en login.php -->
+        <?php include __DIR__ . '/templates/footer.php'; ?>
 
-    if(toggleBtn && passInput) {
-        toggleBtn.addEventListener('click', () => {
-            const isPassword = passInput.type === 'password';
-            passInput.type = isPassword ? 'text' : 'password';
-            
-            // Cambiar icono
-            const icon = toggleBtn.querySelector('i');
-            if(icon) {
-                icon.setAttribute('data-lucide', isPassword ? 'eye-off' : 'eye');
-            }
-            // Refrescar iconos Lucide
-            if(window.lucide && window.lucide.createIcons) {
-                window.lucide.createIcons();
-            }
-        });
-    }
+    </div>
+    
+    <script>
+        // Redirigir al index.php si el registro fue exitoso
+        <?php if (!empty($success_message)): ?>
+            setTimeout(function() {
+                window.location.href = '<?php echo $base_path; ?>/index.php'; // Redirección a la página principal
+            }, 2000); // 2 segundos
+        <?php endif; ?>
+
+        // Inicializar iconos de Lucide (si está disponible)
+        if (window.lucide && typeof window.lucide.createIcons === 'function') {
+            window.lucide.createIcons();
+        }
 
     // Inicializar iconos al cargar
     if(window.lucide && window.lucide.createIcons) {
@@ -146,4 +172,17 @@ include __DIR__ . '/templates/header.php';
     }
 </script>
 
-<?php include __DIR__ . '/templates/footer.php'; ?>
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    if (icon) icon.setAttribute('data-lucide', 'eye-off');
+                } else {
+                    passwordInput.type = 'password';
+                    if (icon) icon.setAttribute('data-lucide', 'eye');
+                }
+                // Vuelve a renderizar los iconos de Lucide después del cambio de atributo
+                if (window.lucide && typeof window.lucide.createIcons === 'function') {
+                    window.lucide.createIcons();
+                }
+            });
+        }
+    </script>

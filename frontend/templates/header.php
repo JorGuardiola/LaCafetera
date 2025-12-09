@@ -38,10 +38,9 @@ $base_path = '/LaCafetera';
       <!-- NAV -->
       <nav class="nav-bar">
         <ul>
+          <li><a href="nosotros.php">Acerca de nosotros</a></li>
           <li><a href="products.php">Productos</a></li>
-          <li><a href="#">Nosotros</a></li>
-          <li><a href="#">Recetas</a></li>
-          <li><a href="#">Contacto</a></li>
+          <li><a href="contacto.php">Contacto</a></li>
         </ul>
       </nav>
 
