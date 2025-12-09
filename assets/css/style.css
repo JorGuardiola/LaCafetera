@@ -900,8 +900,9 @@ h3 { font-size: 2.8rem; }
     /* Posicionamiento */
     position: absolute;
     right: 1.5rem; /* Distancia desde el borde derecho */
-    top: 0;        /* Se pega a la parte superior del campo */
+    top: 50%;        /* Se pega a la parte superior del campo */
     bottom: 0;     /* Se pega a la parte inferior del campo */
+    transform: translateY(-50%); /* Mueve el elemento hacia arriba la mitad de su propia altura */
     
     /* CRÍTICO: Centrado con Flexbox */
     display: flex;
