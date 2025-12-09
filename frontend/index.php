@@ -73,7 +73,6 @@ $sql_destacados = "
          LIMIT 1) AS precio
     FROM productos p
         WHERE p.disponible = 1
-        AND p.cafes_destacados = 1
         ORDER BY p.id ASC
     LIMIT 4;
 ";
@@ -93,6 +92,7 @@ $stmt->execute();
 </main>
 
 <?php include __DIR__ . '/templates/footer.php'; ?>
+
 
 
 
