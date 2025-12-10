@@ -1,10 +1,14 @@
 <?php
 // frontend/templates/header.php
+
+// 1. Garantizar que la sesión esté iniciada
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-$base_path = '/lacafetera';
+// 2. Garantizar que connection.php esté cargado para usar BASE_URL
+// Usamos __DIR__ para salir de "templates" (..), salir de "frontend" (..) y entrar a "db"
+require_once __DIR__ . '/../../db/connection.php';
 
 ?>
 <!DOCTYPE html>
@@ -22,50 +26,53 @@ $base_path = '/lacafetera';
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/style.css">
   <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Base URL para recursos -->
+  <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/style.css">
 </head>
 <body>
 
 <header class="header">
       <!-- LOGO -->
       <div class="img-logo">
-        <a href="index.php"> 
-          <img src="../assets/img/logo.png" alt="Logo La Cafetera">
+        <a href="<?= BASE_URL ?>/frontend/index.php">
+          <img src="<?= BASE_URL ?>/assets/img/logo.png" alt="Logo La Cafetera">
         </a>
       </div>
 
       <!-- NAV -->
       <nav class="nav-bar">
         <ul>
-          <li><a href="nosotros.php">Acerca de nosotros</a></li>
-          <li><a href="products.php">Productos</a></li>
-          <li><a href="contacto.php">Contacto</a></li>
+          <li><a href="<?= BASE_URL ?>/frontend/nosotros.php">Acerca de nosotros</a></li>
+          <li><a href="<?= BASE_URL ?>/frontend/products.php">Productos</a></li>
+          <li><a href="<?= BASE_URL ?>/frontend/contacto.php">Contacto</a></li>
         </ul>
       </nav>
 
     <div class="icons-bar">
         
         <button class="icon-header">
-          <img src="../assets/img/buscar.png" alt="Buscar">
+          <img src="<?= BASE_URL ?>/assets/img/buscar.png" alt="Buscar">
         </button>
 
         <?php if (isset($_SESSION['user_id'])): ?>
             
-            <button class="icon-header" onclick="window.location.href='profile.php'" title="Mi Perfil">
+            <button class="icon-header" onclick="window.location.href='<?= BASE_URL ?>/frontend/profile.php'" title="Mi Perfil">
                 <i class="fa-solid fa-user" style="color: #1A1A1A; font-size: 1.8rem;"></i>
             </button>
 
         <?php else: ?>
             
-            <button class="icon-header" onclick="window.location.href='login.php'" title="Iniciar Sesión">
-                <img src="../assets/img/login.png" alt="Login">
+            <button class="icon-header" onclick="window.location.href='<?= BASE_URL ?>/frontend/login.php'" title="Iniciar Sesión">
+                <img src="<?= BASE_URL ?>/assets/img/login.png" alt="Login">
             </button>
 
         <?php endif; ?>
 
-        <button class="icon-header" onclick="window.location.href='cart.php'">
-          <img src="../assets/img/carrito.png" alt="Carrito">
+        <button class="icon-header" onclick="window.location.href='<?= BASE_URL ?>/frontend/cart.php'">
+          <img src="<?= BASE_URL ?>/assets/img/carrito.png" alt="Carrito">
         </button>
         
       </div>

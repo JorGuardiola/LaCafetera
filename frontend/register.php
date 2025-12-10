@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if ($stmt->execute([$nombre, $apellidos, $email, $hash])) {
                     // Éxito: Redirigir al login con mensaje (opcional, aquí redirigimos directo)
                     $_SESSION['mensaje_exito'] = "¡Cuenta creada! Inicia sesión.";
-                    header('Location: login.php');
+                    header('Location: ' . BASE_URL . '/frontend/login.php');
                     exit;
                 } else {
                     $error_message = "Error al guardar en la base de datos.";
@@ -134,7 +134,7 @@ ob_start();
     </form>
       
     <div class="login-prompt">
-        <span>Ya tienes una cuenta? <a href="login.php">Accede</a></span>
+        <span>Ya tienes una cuenta? <a href="<?= BASE_URL ?>/frontend/login.php">Accede</a></span>
     </div>
 </div>
 <?php
@@ -157,7 +157,7 @@ include __DIR__ . '/templates/header.php';
         // Redirigir al index.php si el registro fue exitoso
         <?php if (!empty($success_message)): ?>
             setTimeout(function() {
-                window.location.href = '<?php echo $base_path; ?> index.php'; // Redirección a la página principal
+                window.location.href = '<?= BASE_URL ?>/frontend/index.php'; // Redirección a la página principal
             }, 2000); // 2 segundos
         <?php endif; ?>
 

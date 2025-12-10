@@ -4,7 +4,7 @@ require_once __DIR__ . '/../db/connection.php';
 
 // 1. Validar ID
 if (!isset($_GET['id']) || empty($_GET['id'])) {
-    header('Location: products.php');
+    header('Location:' . BASE_URL . '/frontend/products.php');
     exit;
 }
 
@@ -33,7 +33,7 @@ $variantesJson = json_encode($variantes);
     
     <div class="detail-left">
         <div class="detail-image-container">
-            <img src="/lacafetera/assets/img/imgsproducts/<?= htmlspecialchars($producto['imagen']) ?>" 
+            <img src="<?= BASE_URL ?>/assets/img/imgsproducts/<?= htmlspecialchars($producto['imagen']) ?>" 
                  alt="<?= htmlspecialchars($producto['nombre_cafe']) ?>">
         </div>
         <h1 class="big-product-title"><?= htmlspecialchars($producto['nombre_cafe']) ?></h1>

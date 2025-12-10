@@ -56,7 +56,7 @@ include __DIR__ . '/templates/header.php';
         <div class="info-adicional">
             <h3>Nuestros Canales</h3>
             <p><strong>Horario de Atención:</strong></p>
-            <p>Lunes a Viernes, 9:00 a 18:00 (CET)</p>
+            <p>Lunes a Viernes, 9:00 a 18:00</p>
             
             <p><strong>Teléfono de Soporte:</strong></p>
             <p><a href="tel:+34123456789">+34 648502176</a></p>

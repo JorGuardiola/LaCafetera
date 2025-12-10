@@ -6,7 +6,7 @@
 
     <!-- Columna 1 Logo + Descripción -->
     <div class="footer-col footer-brand">
-      <img src="../assets/img/logo-white.png" alt="La Cafetera" class="footer-logo">
+      <img src="<?= BASE_URL ?>/assets/img/logo-white.png" alt="La Cafetera" class="footer-logo">
       <p class="footer-desc">
         Desde 1994 seleccionando los mejores cafés del mundo para llevarlos a tu taza.
       </p>
@@ -16,10 +16,10 @@
     <div class="footer-col">
       <h4>Cafetera</h4>
       <ul>
-        <li><a href="nosotros.php">Nosotros</a></li>
+        <li><a href="<?= BASE_URL ?>/frontend/nosotros.php">Nosotros</a></li>
         <li><a href="#">Elaboración</a></li>
         <li><a href="#">Sostenibilidad</a></li>
-        <li><a href="contacto.php">Contacto</a></li>
+        <li><a href="<?= BASE_URL ?>/frontend/contacto.php">Contacto</a></li>
       </ul>
     </div>
 
@@ -27,7 +27,7 @@
     <div class="footer-col">
       <h4>Productos</h4>
       <ul>
-        <li><a href="index.php">Productos</a></li>
+        <li><a href="<?= BASE_URL ?>/frontend/products.php">Productos</a></li>
         <li><a href="#">Packs</a></li>
         <li><a href="#">Recetas</a></li>
         <li><a href="#">Información</a></li>
@@ -37,12 +37,11 @@
     <!-- Columna 4 Iconos + Botón -->
     <div class="footer-col footer-right">
       <div class="footer-social">
-        <a href="https://www.instagram.com/lacafetera1994/" target="_blank"><img src="../assets/img/instagram.svg" alt="Instagram"></a>
-        <a href="#"><img src="../assets/img/facebook.svg" alt="Facebook"></a>
-        <a href="#"><img src="../assets/img/whatsapp.svg" alt="WhatsApp"></a>
+        <a href="https://www.instagram.com/lacafetera1994/" target="_blank"><img src="<?= BASE_URL ?>/assets/img/instagram.svg" alt="Instagram"></a>
+        <a href="#"><img src="<?= BASE_URL ?>/assets/img/facebook.svg" alt="Facebook"></a>
+        <a href="#"><img src="<?= BASE_URL ?>/assets/img/whatsapp.svg" alt="WhatsApp"></a>
       </div>
-      <a href="#" class="footer-btn">Contacto</a>
-    </div>
+        <a href="<?= BASE_URL ?>/frontend/contacto.php" class="footer-btn">Contacto</a>    </div>
 
   </div>
 

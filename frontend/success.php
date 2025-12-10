@@ -1,14 +1,15 @@
 <?php
 // frontend/success.php
 require_once __DIR__ . '/../db/connection.php';
-include __DIR__ . '/templates/header.php';
 
-// 1. Validar ID de orden
+// 1. VALIDACIÓN PRIMERO (Antes de mostrar nada de HTML)
+// Si no hay orden, te expulsa al inicio inmediatamente.
 if (!isset($_GET['orden']) || empty($_GET['orden'])) {
-    echo "<script>window.location.href='index.php';</script>";
+    header('Location: ' . BASE_URL . '/frontend/index.php');
     exit;
 }
 
+$id_orden = (int)$_GET['orden'];
 $id_orden = (int)$_GET['orden'];
 
 // 2. Obtener datos completos del pedido (JOIN con usuarios, direcciones y pagos)
@@ -110,7 +111,7 @@ if(!$fecha_formateada) $fecha_formateada = date('d/m/Y', strtotime($pedido['fech
             </div>
             
             <div style="margin-top: 2rem;">
-                 <a href="index.php" style="text-decoration:underline; color:#111; font-weight:600;">Volver a la tienda</a>
+                 <a href="<?= BASE_URL ?>/frontend/index.php" style="text-decoration:underline; color:#111; font-weight:600;">Volver a la tienda</a>
             </div>
         </div>
 
