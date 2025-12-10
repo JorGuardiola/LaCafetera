@@ -187,7 +187,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="checkout-form-section">
                 <div class="checkout-heading">
                     <span>Datos de contacto</span>
-                    <a href="login.php" class="checkout-login-link">¿Tienes cuenta? Iniciar sesión</a>
+                    <a href="<?= BASE_URL ?>/frontend/login.php" class="checkout-login-link">¿Tienes cuenta? Iniciar sesión</a>
                 </div>
                 
                 <div class="form-group">

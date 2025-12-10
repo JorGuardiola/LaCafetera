@@ -134,7 +134,7 @@ ob_start();
     </form>
       
     <div class="login-prompt">
-        <span>Ya tienes una cuenta? <a href="login.php">Accede</a></span>
+        <span>Ya tienes una cuenta? <a href="<?= BASE_URL ?>/frontend/login.php">Accede</a></span>
     </div>
 </div>
 <?php

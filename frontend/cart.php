@@ -123,7 +123,7 @@ if (!empty($_SESSION['carrito'])) {
             <div class="cart-item-row">
                 
                 <div class="cart-img">
-                    <img src="/lacafetera/assets/img/imgsproducts/<?= htmlspecialchars($item['imagen']) ?>" alt="Café">
+                    <img src="<?= BASE_URL ?>/assets/img/imgsproducts/<?= htmlspecialchars($item['imagen']) ?>" alt="Café">
                 </div>
 
                 <div class="cart-info">

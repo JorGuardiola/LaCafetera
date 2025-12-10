@@ -117,7 +117,7 @@ ob_start();
         </div>
         
         <div class="forgot-link">
-            <a href="forgot_password.php">¿Has olvidado la contraseña?</a>
+            <a href="<?= BASE_URL ?>/frontend/forgot_password.php">¿Has olvidado la contraseña?</a>
         </div>
 
         <button type="submit" class="btn btn-primary btn-acceder">
@@ -127,7 +127,7 @@ ob_start();
     </form>
     
     <div class="register-prompt">
-        <span>¿Aún no te has registrado? <a href="register.php">Regístrate</a></span>
+        <span>¿Aún no te has registrado? <a href="<?= BASE_URL ?>/frontend/register.php">Regístrate</a></span>
     </div>
 </div>
 <?php

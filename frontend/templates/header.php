@@ -37,7 +37,7 @@ require_once __DIR__ . '/../../db/connection.php';
 <header class="header">
       <!-- LOGO -->
       <div class="img-logo">
-        <a href="index.php"> 
+        <a href="<?= BASE_URL ?>/frontend/index.php">
           <img src="<?= BASE_URL ?>/assets/img/logo.png" alt="Logo La Cafetera">
         </a>
       </div>

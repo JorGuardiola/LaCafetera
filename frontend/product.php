@@ -4,7 +4,7 @@ require_once __DIR__ . '/../db/connection.php';
 
 // 1. Validar ID
 if (!isset($_GET['id']) || empty($_GET['id'])) {
-    header('Location:' . BASE_URL . '/frontendproducts.php');
+    header('Location:' . BASE_URL . '/frontend/products.php');
     exit;
 }
 
