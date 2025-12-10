@@ -50,6 +50,8 @@ if(!$fecha_formateada) $fecha_formateada = date('d/m/Y', strtotime($pedido['fech
 
 ?>
 
+<?php include __DIR__ . '/templates/header.php'; ?>
+
 <main class="container" style="margin-top: 6rem; margin-bottom: 8rem;">
 
     <div class="success-header">
