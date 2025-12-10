@@ -122,7 +122,7 @@ $variantesJson = json_encode($variantes);
             <div class="card-actions-row">
                 <div class="quantity-selector-widget">
                     <button type="button" class="qty-btn" onclick="updateQty(-1)">-</button>
-                    <input type="number" name="cantidad" id="inputQty" value="1" readonly>
+                    <input type="text" name="cantidad" id="inputQty" value="1" readonly>
                     <button type="button" class="qty-btn" onclick="updateQty(1)">+</button>
                 </div>
 
