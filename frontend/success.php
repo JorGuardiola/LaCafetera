@@ -38,7 +38,7 @@ if (!$pedido) {
 
 // 3. Cálculos visuales
 // Asumimos envío gratis si > 50 (misma lógica que checkout)
-$gastos_envio = ($pedido['total'] >= 50) ? 0.00 : 5.00;
+$gastos_envio = ($pedido['total'] >= 50) ? 0.00 : 8.00;
 $subtotal = $pedido['total'] - $gastos_envio;
 $nombre_completo = htmlspecialchars($pedido['nombre'] . ' ' . $pedido['apellido']);
 
