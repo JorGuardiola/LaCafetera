@@ -4,7 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-$base_path = '/LaCafetera';
+$base_path = '/lacafetera';
 
 ?>
 <!DOCTYPE html>
