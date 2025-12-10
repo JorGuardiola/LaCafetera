@@ -314,7 +314,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div> <div class="cart-summary-box" style="height: fit-content; align-self: flex-start; position:sticky; top:2rem;">
             <h2>Resumen del pedido</h2>
 
-            <div style="margin-bottom:2rem; max-height:200px; overflow-y:auto;">
+            <div style="margin-bottom:2rem; max-height:200px; overflow-y:auto; padding-top: 10px;">
                 <?php foreach($items_checkout as $it): ?>
                     <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1rem;">
                         <div style="position:relative;">

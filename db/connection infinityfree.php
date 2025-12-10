@@ -1,6 +1,8 @@
 <?php
 // db/connection.php
 
+define('BASE_URL', '');    
+
 $host = 'sql210.infinityfree.com';  // Host de InfinityFree
 $db = 'if0_40576183_cafeteria_db';  // Tu base de datos real
 $user = 'if0_40576183';             // Usuario MySQL

@@ -2327,3 +2327,71 @@ textarea {
         white-space: nowrap;
     }
 }
+/* --- TARJETA DE PRODUCTO: DISEÑO FULL IMAGEN --- */
+
+/* 1. Ajuste de la Tarjeta Base */
+.product-card {
+    /* Quitamos el height fijo de 50rem para que la tarjeta crezca según la imagen */
+    height: auto; 
+    min-height: 52rem; /* Altura mínima para mantener uniformidad */
+    padding: 2.5rem;   /* Mantenemos el padding para el texto */
+    position: relative; /* Necesario para posicionar el corazón */
+    overflow: hidden;  /* Para que nada se salga de los bordes redondeados */
+}
+
+/* 2. Contenedor de la Imagen (Efecto "A sangre") */
+.product-image {
+    /* MÁRGENES NEGATIVOS: Esto anula el padding de la tarjeta */
+    margin-top: -2.5rem;
+    margin-left: -2.5rem;
+    margin-right: -2.5rem;
+    margin-bottom: 2rem; /* Espacio entre foto y estrellas */
+
+    /* Importante para el enlace */
+    display: block;
+    width: calc(100% + 5rem); /* Aseguramos que cubra el ancho + padding */
+}
+
+/* 3. La Imagen en sí (Más grande) */
+.product-image img {
+    width: 100%;
+    height: 320px;      /* AUMENTADO: Antes 250px. Hazlo más grande si quieres (ej: 350px) */
+    object-fit: cover;  /* Recorta la imagen para que llene el hueco sin deformarse */
+    display: block;
+    transition: transform 0.5s ease; /* Efecto suave al pasar el ratón */
+}
+
+/* Efecto Zoom al pasar el ratón por la tarjeta */
+.product-card:hover .product-image img {
+    transform: scale(1.05); /* La imagen crece un poquito */
+}
+
+/* 4. El Corazón (Fusionado) */
+.fav-btn {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 10;        /* FLOTA SOBRE LA IMAGEN */
+    
+    background: rgba(255, 255, 255, 0.9); /* Fondo blanco casi opaco */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Sombra suave para destacar */
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.fav-btn img {
+    width: 20px; /* Ajusta el tamaño del icono dentro del círculo */
+    height: auto;
+}
+
+.fav-btn:hover {
+    background: white;
+    transform: scale(1.1); /* Efecto pop al pasar el ratón sobre el corazón */
+}
