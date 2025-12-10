@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Redirigir para evitar reenvío de formulario
-    header('Location: cart.php');
+    header('Location:' . BASE_URL . '/frontend/cart.php');
     exit;
 }
 
@@ -185,7 +185,7 @@ if (!empty($_SESSION['carrito'])) {
             </div>
             <div class="iva-text">IVA incluido</div>
 
-            <button class="btn-checkout" onclick="window.location.href='checkout.php'">Tramitar pedido</button>
+            <button class="btn-checkout" onclick="window.location.href='<?= BASE_URL ?>/frontend/checkout.php'">Tramitar pedido</button>
         </div>
 
     </div>

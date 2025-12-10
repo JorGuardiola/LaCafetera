@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 
                 // === REDIRECCIÓN FINAL  ===
                 ob_end_clean(); // Limpia el buffer antes de enviar la cabecera
-                header('Location: index.php'); // RUTA RELATIVA CORRECTA
+                header('Location:' . BASE_URL . '/frontend/index.php'); // RUTA nueva con BASE_URL
                 exit; 
                 // =================================
                 

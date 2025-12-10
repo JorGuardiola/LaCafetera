@@ -5,7 +5,7 @@ require_once __DIR__ . '/../db/connection.php';
 
 // 1. SI EL CARRITO ESTÁ VACÍO, REDIRIGIR
 if (empty($_SESSION['carrito'])) {
-    header('Location: products.php');
+    header('Location: ' . BASE_URL . '/frontend/products.php');
     exit;
 }
 
@@ -158,8 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         unset($_SESSION['carrito']); // Vaciar carrito
         
         // Redirigir a página de éxito
-        header("Location: success.php?orden=" . $id_orden);
-        exit;
+        header("Location: " . BASE_URL . "/frontend/success.php?orden=" . $id_orden);        exit;
 
     } catch (Exception $e) {
         $pdo->rollBack();
@@ -318,7 +317,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php foreach($items_checkout as $it): ?>
                     <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1rem;">
                         <div style="position:relative;">
-                            <img src="/lacafetera/assets/img/imgsproducts/<?= $it['imagen'] ?>" style="width:50px; border-radius:4px; border:1px solid #eee;">
+                            <img src="<?= BASE_URL ?>/assets/img/imgsproducts/<?= $it['imagen'] ?>" style="width:50px; border-radius:4px; border:1px solid #eee;">
                             <span style="position:absolute; top:-5px; right:-5px; background:#666; color:white; border-radius:50%; width:18px; height:18px; font-size:1rem; display:flex; justify-content:center; align-items:center;"><?= $it['cantidad'] ?></span>
                         </div>
                         <div style="flex:1; font-size:1.3rem;">

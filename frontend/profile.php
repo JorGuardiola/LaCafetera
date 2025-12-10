@@ -4,7 +4,7 @@ session_start();
 require_once __DIR__ . '/../db/connection.php';
 
 // 1. SEGURIDAD
-if (!isset($_SESSION['user_id'])) { header('Location: login.php'); exit; }
+if (!isset($_SESSION['user_id'])) { header('Location: ' . BASE_URL . '/frontend/login.php'); exit; }
 $user_id = $_SESSION['user_id'];
 $mensaje = '';
 $tab_activa = 'datos';

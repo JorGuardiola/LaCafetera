@@ -7,12 +7,12 @@
 <div class="product-card">
 
     <button class="fav-btn">
-        <img src="/lacafetera/assets/img/icon-heart.png" alt="Fav">
+        <img src="<?= BASE_URL ?>/assets/img/icon-heart.png" alt="Fav">
     </button>
 
     <div class="product-image">
         <a href="product.php?id=<?= (int)$p['id'] ?>">
-            <img src="/lacafetera/assets/img/imgsproducts/<?= htmlspecialchars($p['imagen']) ?>"
+            <img src="<?= BASE_URL ?>/assets/img/imgsproducts/<?= htmlspecialchars($p['imagen']) ?>"
                  alt="<?= htmlspecialchars($p['nombre_cafe']) ?>">
         </a>
     </div>
@@ -30,7 +30,7 @@
         <?= isset($p['precio']) ? number_format($p['precio'], 2) : '0.00' ?> €
     </p>
 
-    <a href="product.php?id=<?= (int)$p['id'] ?>">
+    <a href="<?= BASE_URL ?>/frontend/product.php?id=<?= (int)$p['id'] ?>">
         <button class="product-btn">Ver detalles</button>
     </a>
 
