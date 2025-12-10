@@ -44,16 +44,29 @@ $base_path = '/LaCafetera';
         </ul>
       </nav>
 
-      <!-- ICONOS -->
-      <div class="icons-bar">
+    <div class="icons-bar">
+        
         <button class="icon-header">
           <img src="../assets/img/buscar.png" alt="Buscar">
         </button>
-        <button class="icon-header" onclick="window.location.href='login.php'">
-          <img src="../assets/img/login.png" alt="Login">
-        </button>
+
+        <?php if (isset($_SESSION['user_id'])): ?>
+            
+            <button class="icon-header" onclick="window.location.href='profile.php'" title="Mi Perfil">
+                <i class="fa-solid fa-user" style="color: #1A1A1A; font-size: 1.8rem;"></i>
+            </button>
+
+        <?php else: ?>
+            
+            <button class="icon-header" onclick="window.location.href='login.php'" title="Iniciar Sesión">
+                <img src="../assets/img/login.png" alt="Login">
+            </button>
+
+        <?php endif; ?>
+
         <button class="icon-header" onclick="window.location.href='cart.php'">
           <img src="../assets/img/carrito.png" alt="Carrito">
         </button>
+        
       </div>
-</header>  
+</header>
