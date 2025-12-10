@@ -28,3 +28,4 @@ try {
 } catch (PDOException $e) {
     die('.');
 }
+?>
