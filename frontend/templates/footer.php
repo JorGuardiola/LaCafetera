@@ -41,8 +41,7 @@
         <a href="#"><img src="<?= BASE_URL ?>/assets/img/facebook.svg" alt="Facebook"></a>
         <a href="#"><img src="<?= BASE_URL ?>/assets/img/whatsapp.svg" alt="WhatsApp"></a>
       </div>
-      <a href="#" class="footer-btn">Contacto</a>
-    </div>
+        <a href="<?= BASE_URL ?>/frontend/contacto.php" class="footer-btn">Contacto</a>    </div>
 
   </div>
 

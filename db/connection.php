@@ -3,7 +3,7 @@
 
 // 1. Configuración de Base de Datos LOCAL (XAMPP)
 $host = 'localhost';
-$db   = 'cafeteria_db';  // <--- Asegúrate de que este nombre coincida con tu phpMyAdmin local
+$db   = 'cafeteria_db';  // <--- que este nombre coincida con tu phpMyAdmin local
 $user = 'root';
 $pass = '';              // En XAMPP por defecto está vacía
 $charset = 'utf8mb4';
