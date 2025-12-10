@@ -40,7 +40,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    // B) ELIMINAR DEL CARRITO
+    // B) ACTUALIZAR CANTIDAD (Desde el Carrito con JS)
+    if (isset($_POST['action']) && $_POST['action'] === 'update') {
+        $sku_update = $_POST['sku'];
+        $nueva_cantidad = (int)$_POST['cantidad'];
+        
+        if (isset($_SESSION['carrito'][$sku_update]) && $nueva_cantidad >= 1) {
+            $_SESSION['carrito'][$sku_update] = $nueva_cantidad;
+        }
+    }
+
+    // C) ELIMINAR
     if (isset($_POST['action']) && $_POST['action'] === 'remove') {
         $sku_remove = $_POST['sku_remove'];
         if (isset($_SESSION['carrito'][$sku_remove])) {
@@ -48,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
+    // Redirigir para evitar reenvío de formulario
     header('Location: cart.php');
     exit;
 }
@@ -126,8 +137,19 @@ if (!empty($_SESSION['carrito'])) {
                     <?= number_format($item['precio'], 2) ?>€
                 </div>
 
-                <div class="qty-selector">
+                <div class="quantity-selector-widget">
+                    <button type="button" class="qty-btn" 
+                            onclick="updateCart('<?= $item['sku'] ?>', <?= $item['cantidad'] - 1 ?>)"
+                            <?= $item['cantidad'] <= 1 ? 'disabled style="opacity:0.3"' : '' ?>>
+                        -
+                    </button>
+
                     <input type="text" value="<?= $item['cantidad'] ?>" readonly>
+
+                    <button type="button" class="qty-btn" 
+                            onclick="updateCart('<?= $item['sku'] ?>', <?= $item['cantidad'] + 1 ?>)">
+                        +
+                    </button>
                 </div>
 
                 <form action="cart.php" method="POST" style="margin:0;">
@@ -170,6 +192,22 @@ if (!empty($_SESSION['carrito'])) {
     <?php endif; ?>
 
 </div>
+
+<form id="formUpdateCart" action="cart.php" method="POST" style="display:none;">
+    <input type="hidden" name="action" value="update">
+    <input type="hidden" name="sku" id="sku_update">
+    <input type="hidden" name="cantidad" id="qty_update">
+</form>
+
+<script>
+// Función para enviar el formulario oculto al hacer clic en + o -
+function updateCart(sku, qty) {
+    if (qty < 1) return; // Seguridad extra
+    document.getElementById('sku_update').value = sku;
+    document.getElementById('qty_update').value = qty;
+    document.getElementById('formUpdateCart').submit();
+}
+</script>
 
 <?php include __DIR__ . "/templates/footer.php"; ?>
 
