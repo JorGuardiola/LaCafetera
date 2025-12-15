@@ -35,23 +35,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $user = $stmt->fetch();
 
             // 3. Verificar las credenciales y el hash de la contraseña
-            if ($user && password_verify($password, $user['password_hash'])) {
-                
-                // 4. Login Exitoso: Iniciar sesión y Redirigir
-                $_SESSION['user_id'] = $user['id_usuario']; 
-                $_SESSION['logged_in'] = true;
-                
-                // === REDIRECCIÓN FINAL  ===
-                ob_end_clean(); // Limpia el buffer antes de enviar la cabecera
-                header('Location:' . BASE_URL . '/frontend/index.php'); // RUTA nueva con BASE_URL
-                exit; 
-                // =================================
-                
-            } else { 
-            // 5. Login Fallido (Usuario no encontrado o contraseña incorrecta)
-                $error_message = "Email o contraseña incorrectos.";
-                
+
+            // --- INICIO DEL CAMBIO DE LÓGICA DE VERIFICACIÓN ---
+            if ($user) {
+                // El email existe en la base de datos
+                if (password_verify($password, $user['password_hash'])) {
+                    
+                    // 4. Login Exitoso: Iniciar sesión y Redirigir
+                    $_SESSION['user_id'] = $user['id_usuario']; 
+                    $_SESSION['logged_in'] = true;
+                    
+                    // === REDIRECCIÓN FINAL  ===
+                    ob_end_clean(); // Limpia el buffer antes de enviar la cabecera
+                    header('Location:' . BASE_URL . '/frontend/index.php'); // RUTA nueva con BASE_URL
+                    exit; 
+                    // =================================
+                    
+                } else { 
+                    // 5. Contraseña incorrecta para el email encontrado
+                    $error_message = "Email o contraseña incorrectos."; // Mensaje genérico por seguridad
+                    
+                }
+            } else {
+                // 5. Email NO encontrado en la base de datos
+                // Puedes usar un mensaje genérico o el que solicitaste para orientar:
+                $error_message = "Email no registrado, por favor regístrate.";
+                // O el más seguro y genérico: $error_message = "Email o contraseña incorrectos.";
             }
+            // --- FIN DEL CAMBIO DE LÓGICA DE VERIFICACIÓN ---
+
         } catch (PDOException $e) {
             // Error de consulta o base de datos
             $error_message = "Ocurrió un error en el servidor. Inténtelo de nuevo.";

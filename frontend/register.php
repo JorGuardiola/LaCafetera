@@ -9,6 +9,7 @@ $error_message = '';
 $nombre = '';
 $apellidos = '';
 $email = '';
+// $password ya no se mantiene, pero sí los demás campos
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Sanitización básica
@@ -16,14 +17,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $apellidos = trim($_POST['apellidos'] ?? '');
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
+    $password_confirm = $_POST['password_confirm'] ?? ''; // <-- NUEVO CAMPO
 
     // Validaciones
-    if (empty($nombre) || empty($apellidos) || empty($email) || empty($password)) {
+    if (empty($nombre) || empty($apellidos) || empty($email) || empty($password) || empty($password_confirm)) { // <-- AÑADIDO: password_confirm
         $error_message = "Todos los campos son obligatorios.";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error_message = "El formato del email no es válido.";
     } elseif (strlen($password) < 8) {
         $error_message = "La contraseña debe tener al menos 8 caracteres.";
+    } elseif ($password !== $password_confirm) { // <-- NUEVA VALIDACIÓN: Las contraseñas no coinciden
+        $error_message = "Las contraseñas no coinciden.";
     } else {
         try {
             // Verificar si el email ya existe
@@ -34,21 +38,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $error_message = "Este correo electrónico ya está registrado.";
             } else {
                 // Crear usuario
-                $hash = password_hash($password, PASSWORD_DEFAULT);
+               $hash = password_hash($password, PASSWORD_DEFAULT);
+
+                // 1. Preparar la consulta SQL para insertar el nuevo usuario
                 $sql = "INSERT INTO usuarios (nombre, apellido, email, password_hash, fecha_registro) VALUES (?, ?, ?, ?, NOW())";
                 $stmt = $pdo->prepare($sql);
-                
+
+                // 2. Ejecutar la inserción
                 if ($stmt->execute([$nombre, $apellidos, $email, $hash])) {
-                    // Éxito: Redirigir al login con mensaje (opcional, aquí redirigimos directo)
-                    $_SESSION['mensaje_exito'] = "¡Cuenta creada! Inicia sesión.";
-                    header('Location: ' . BASE_URL . '/frontend/login.php');
+                    
+                    // === ÉXITO EN EL REGISTRO E INICIO DE SESIÓN AUTOMÁTICO ===
+                    
+                    // 3. Obtener el ID del último usuario insertado para la sesión
+                    $id_usuario = $pdo->lastInsertId();
+                    
+                    // 4. Configurar las variables de sesión para marcar al usuario como logueado
+                    $_SESSION['user_logged_in'] = true;
+                    $_SESSION['user_id'] = $id_usuario;
+                    $_SESSION['user_nombre'] = $nombre; // Almacena el nombre para usarlo en el front-end
+                    
+                    // 5. Establecer un mensaje de éxito y redirigir a la página principal
+                    $_SESSION['mensaje_exito'] = "¡Cuenta creada! Has iniciado sesión.";
+                    header('Location: ' . BASE_URL . '/frontend/index.php');
                     exit;
                 } else {
+                    // Si la ejecución de la consulta falló (error de la base de datos)
                     $error_message = "Error al guardar en la base de datos.";
                 }
             }
         } catch (PDOException $e) {
-            $error_message = "Error del sistema. Inténtalo más tarde.";
+            // En un entorno de producción, usa un mensaje genérico.
+            // $error_message = "Error del sistema. Inténtalo más tarde."; 
+            $error_message = "Error del sistema. Inténtalo más tarde. Detalles: " . $e->getMessage();
         }
     }
 }
@@ -127,12 +148,25 @@ ob_start();
             </button>
         </div>
         
+        <div class="input-group password-field">
+            <label for="password_confirm" class="input-label small-label">Confirmar Contraseña</label>
+            <input 
+                type="password" 
+                id="password_confirm" 
+                name="password_confirm" 
+                required
+                class="form-input"
+            >
+            <button type="button" id="togglePasswordConfirm" class="toggle-password">
+                <i data-lucide="eye"></i>
+            </button>
+            </div>
         <button type="submit" class="btn btn-primary btn-acceder btn-register">
             Registrarse <span class="arrow-icon">&rarr;</span>
         </button>
 
     </form>
-      
+    
     <div class="login-prompt">
         <span>Ya tienes una cuenta? <a href="<?= BASE_URL ?>/frontend/login.php">Accede</a></span>
     </div>
@@ -166,33 +200,36 @@ include __DIR__ . '/templates/header.php';
             window.lucide.createIcons();
         }
 
-    // === 3. Lógica para mostrar/ocultar contraseña (El Ojo) ===
-        // ====================================================
-        const togglePassword = document.getElementById('togglePassword');
-        if (togglePassword) {
-            togglePassword.addEventListener('click', function (e) {
-                e.preventDefault(); 
-                
-                const passwordInput = document.getElementById('password');
-                // Buscamos el elemento que tiene el atributo data-lucide (el icono)
-                const icon = e.currentTarget.querySelector('[data-lucide]'); 
+            // Lógica para alternar visibilidad de contraseñas
+        const togglePasswordButtons = document.querySelectorAll('.toggle-password');
+        
+        togglePasswordButtons.forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                // 1. Encontramos el campo de input asociado.
+                // El campo input es el elemento anterior (previousElementSibling) o lo buscamos en el contenedor padre.
+                const passwordInput = button.parentElement.querySelector('.form-input');
+                
+                // 2. Encontramos el icono
+                const icon = button.querySelector('[data-lucide]'); 
 
-                if (!passwordInput || !icon) return; 
+                if (!passwordInput || !icon) return; 
 
-                if (passwordInput.type === 'password') {
-                    passwordInput.type = 'text';
-                    icon.setAttribute('data-lucide', 'eye-off'); // Ojo tachado
-                } else {
-                    passwordInput.type = 'password';
-                    icon.setAttribute('data-lucide', 'eye'); // Ojo normal
-                }
-                
-                // Vuelve a renderizar los iconos de Lucide
-                if (window.lucide && typeof window.lucide.createIcons === 'function') {
-                    window.lucide.createIcons();
-                }
-                if (window.lucide && typeof window.lucide.createIcons === 'function') window.lucide.createIcons();
-            }); 
-        };
+                // 3. Alternamos el tipo de campo y el icono
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    icon.setAttribute('data-lucide', 'eye-off'); // Ojo tachado
+                } else {
+                    passwordInput.type = 'password';
+                    icon.setAttribute('data-lucide', 'eye'); // Ojo normal
+                }
+                
+                // 4. Vuelve a renderizar los iconos de Lucide
+                if (window.lucide && typeof window.lucide.createIcons === 'function') {
+                    window.lucide.createIcons();
+                }
+            });
+        });
     
 </script>
