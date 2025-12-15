@@ -3,7 +3,7 @@
 include __DIR__ . '/templates/header.php'; 
 ?>
 
-<main class="privacy-policy">
+<main style="max-width: 900px; margin: 3rem auto; padding: 0 1rem;">
     <h2>Política de Privacidad de LaCafetera</h2>
     <p>Fecha de última actualización: 1 de Diciembre de 2025</p>
 
