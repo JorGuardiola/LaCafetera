@@ -1255,10 +1255,10 @@ body.bg-beige {
     box-shadow: 0 10px 30px rgba(var(--black), 0.15); 
     
     /* Espacio interno */
-    padding: 4rem 5rem;
+    padding: 2rem 1rem;
     
     /* Ancho máximo para que no ocupe toda la mitad derecha */
-    max-width: 48rem;
+    max-width: 36rem;
     width: 100%;
     
     /* Color de texto por defecto dentro de la caja */
@@ -1292,18 +1292,13 @@ body.bg-beige {
 
 /* Estilo del campo de texto/email/password */
 .form-input {
-    .password-field .form-input {
-    /* El valor debe ser mayor que el 'right' del botón (1.5rem) más el ancho del ojo (20px o 1.25rem) */
-    padding-right: 4rem; 
-}
+        
     width: 100%;
     padding: 1.2rem 1.5rem;
-    border: 1px solid rgba(var(--primary-400), 0.3); /* Borde sutil */
-    border-radius: 10px; /* Bordes redondeados */
-    background-color: rgba(var(--white), 0.8); /* Fondo casi blanco */
-    font-size: 1.6rem;
-    font-family: var(--fuenteTexto);
-    transition: border-color 0.3s;
+       
+}
+.password-field .form-input {
+    padding: 1.2rem 4rem 1.2rem 1.5rem;
     
 }
 
@@ -1316,15 +1311,15 @@ body.bg-beige {
 /* --- Campo de Contraseña y Toggle --- */
 .password-field {
     position: relative;
+    
 }
 
 .toggle-password {
     /* Posicionamiento */
-    position: absolute;
-    right: 1.5rem; /* Distancia desde el borde derecho */
-    top: 50%;        /* Se pega a la parte superior del campo */
-    bottom: 0;     /* Se pega a la parte inferior del campo */
-    transform: translateY(-50%); /* Mueve el elemento hacia arriba la mitad de su propia altura */
+   position: absolute;
+    right: 0rem; 
+    top: 72%; 
+    transform: translateY(-50%);
     
     /* CRÍTICO: Centrado con Flexbox */
     display: flex;
@@ -1338,14 +1333,17 @@ body.bg-beige {
     padding: 0;
     z-index: 10;
     /* Asegúrate de que no tenga transform */
-    transform: none; 
 }
 
 
 .toggle-password [data-lucide] {
-    width: 20px;
-    height: 20px;
-    color: rgb(var(--primary-400));
+    position: absolute;
+    right: 1.5rem;
+    top: 50%; 
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center; 
+    justify-content: center;
 }
 
 
@@ -2394,4 +2392,60 @@ textarea {
 .fav-btn:hover {
     background: white;
     transform: scale(1.1); /* Efecto pop al pasar el ratón sobre el corazón */
+}
+
+/* =======================================
+   PAGINACIÓN (NUEVOS ESTILOS)
+======================================= */
+
+/* 1. Contenedor principal que usa Flexbox para distribuir IZQUIERDA vs DERECHA */
+.pagination-flex {
+    display: flex;
+    justify-content: space-between; /* Clave para poner Anterior a la izquierda y los números/Siguiente a la derecha */
+    align-items: center;
+    width: 90%; /* Ajusta esto al ancho de tu contenedor principal de contenido */
+    max-width: 1300px;
+    padding: 0; 
+}
+
+/* 2. Contenedor de la derecha (para agrupar los números y Siguiente) */
+.pagination-right {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacio entre los números [1], [2] y el botón [Siguiente >] */
+}
+
+/* 3. Estilo base de los botones (Números y Navegación) */
+.pagination .page-btn {
+    display: inline-flex;
+    align-items: center; 
+    gap: 5px; 
+    padding: 10px 18px;
+    border: 1px solid #ccc; 
+    border-radius: 40px;
+    margin: 0; /* Aseguramos que no hay márgenes extra */
+    color: rgb(var(--primary-700));
+    font-size: 1.6rem;
+    transition: background-color 0.2s, color 0.2s;
+    font-weight: 500;
+}
+
+/* 4. Estilo de la página activa (el número donde estamos) */
+.pagination .page-btn.active {
+    background-color: rgb(var(--primary-900)); /* Fondo lleno para destacar */
+    color: white;
+    border-color: rgb(var(--primary-900));
+    font-weight: 700;
+}
+
+/* 5. Estilo de hover para todos los botones, excepto el activo */
+.pagination .page-btn:hover:not(.active) {
+    background-color: rgba(var(--primary-900), 0.1);
+    border-color: rgba(var(--primary-900), 0.3);
+}
+
+/* 6. Estilo específico para los botones de navegación (Anterior/Siguiente) si quieres diferenciarlos visualmente */
+.pagination .page-btn.page-nav {
+    border-color: rgb(var(--primary-400));
+    font-weight: 600;
 }

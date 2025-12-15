@@ -133,7 +133,7 @@ $total_paginas = ceil($total_productos / $por_pagina);
 
     <?php include __DIR__ . '/templates/hero.php'; ?>
 
-    <!-- ⭐ AQUÍ VA TU SEARCH.PHP COMO TEMPLATE -->
+    <!-- AQUÍ VA TU SEARCH.PHP COMO TEMPLATE -->
     <?php include __DIR__ . '/templates/search.php'; ?>
 
     <section class="product-grid">
@@ -143,29 +143,79 @@ $total_paginas = ceil($total_productos / $por_pagina);
     </section>
 
     <!-- PAGINACIÓN -->
-    <div class="pagination" style="text-align:center; margin:3rem 0;">
-        <?php
-        // Construir parámetros GET para no perder filtros
-        $query = $_GET;
-        ?>
+<div class="pagination" style="text-align:center; margin:3rem 0;">
+    <?php
+    // Construir parámetros GET para no perder filtros
+    $query = $_GET;
+    $current_page = $pagina; 
+    $total_pages = $total_paginas;
 
-        <?php if ($pagina > 1): ?>
-            <?php $query['pagina'] = $pagina - 1; ?>
-            <a class="page-btn" href="?<?= http_build_query($query) ?>">← Anterior</a>
-        <?php endif; ?>
+    // ----------------------------------------------------------------------
+    // CASO ESPECIAL: SOLO DOS PÁGINAS (Implementando el orden específico)
+    // ----------------------------------------------------------------------
+    if ($total_pages == 2) {
 
-        <?php for ($i = 1; $i <= $total_paginas; $i++): ?>
-            <?php $query['pagina'] = $i; ?>
-            <a class="page-btn <?= ($i == $pagina ? 'active' : '') ?>" href="?<?= http_build_query($query) ?>">
-                <?= $i ?>
-            </a>
-        <?php endfor; ?>
+        if ($current_page == 1) {
+            // EN PÁGINA 1: Mostrar [1] [Siguiente ->] [2]
 
-        <?php if ($pagina < $total_paginas): ?>
-            <?php $query['pagina'] = $pagina + 1; ?>
-            <a class="page-btn" href="?<?= http_build_query($query) ?>">Siguiente →</a>
-        <?php endif; ?>
-    </div>
+            // 1. Enlace a la página 1 (activo)
+            $query['pagina'] = 1;
+            echo '<a class="page-btn active" href="?' . http_build_query($query) . '">1</a>';
+            
+            // 2. Botón Siguiente (que va a 2)
+            $query['pagina'] = 2; // El link Siguiente siempre va a la página 2
+            echo '<a class="page-btn" href="?' . http_build_query($query) . '">Siguiente →</a>';
+            
+            // 3. Enlace a la página 2 (inactivo)
+            $query['pagina'] = 2;
+            echo '<a class="page-btn" href="?' . http_build_query($query) . '">2</a>';
+            
+        } elseif ($current_page == 2) {
+            // EN PÁGINA 2: Mostrar [1] [2] [<- Anterior]
+
+            // 1. Enlace a la página 1 (inactivo)
+            $query['pagina'] = 1;
+            echo '<a class="page-btn" href="?' . http_build_query($query) . '">1</a>';
+            
+            // 2. Enlace a la página 2 (activo)
+            $query['pagina'] = 2;
+            echo '<a class="page-btn active" href="?' . http_build_query($query) . '">2</a>';
+            
+            // 3. Botón Anterior (que va a 1)
+            $query['pagina'] = 1;
+            echo '<a class="page-btn" href="?' . http_build_query($query) . '">← Anterior</a>';
+        }
+
+    } 
+    // ----------------------------------------------------------------------
+    // CASO GENERAL: MÁS DE DOS PÁGINAS (Se mantiene la lógica estándar simple)
+    // ----------------------------------------------------------------------
+    else {
+
+        // Enlace Anterior
+        if ($current_page > 1) {
+            $query['pagina'] = $current_page - 1;
+            echo '<a class="page-btn" href="?' . http_build_query($query) . '">← Anterior</a>';
+        }
+
+        // Mostrar páginas adyacentes
+        $start_page = max(1, $current_page - 1);
+        $end_page = min($total_pages, $current_page + 1);
+
+        for ($i = $start_page; $i <= $end_page; $i++) {
+            $query['pagina'] = $i;
+            $active_class = ($i == $current_page) ? 'active' : '';
+            echo '<a class="page-btn ' . $active_class . '" href="?' . http_build_query($query) . '">' . $i . '</a>';
+        }
+        
+        // Enlace Siguiente
+        if ($current_page < $total_pages) {
+            $query['pagina'] = $current_page + 1;
+            echo '<a class="page-btn" href="?' . http_build_query($query) . '">Siguiente →</a>';
+        }
+    }
+    ?>
+</div>
 
 </main>
 
