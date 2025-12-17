@@ -883,29 +883,40 @@ h3 { font-size: 2.8rem; }
     gap: 20px;
 }
 .cart-img img {
-    width: 80px;
+    width: 200px !important; 
     height: auto;
-    border-radius: 4px;
+    border-radius: 8px;
+    object-fit: contain;
 }
 .cart-info {
-    flex: 1; /* Ocupa el espacio disponible */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Alinea todo al principio (arriba) */
+    align-self: flex-start;      /* Asegura que el bloque empiece arriba */
+    padding-top: 0;
 }
 .cart-product-name {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 5px;
+    font-size: 2.2rem !important; /* Mantenemos el título grande */
+    font-weight: 700;
+    margin-bottom: 5px !important; 
+    line-height: 1.1;
 }
-.cart-sku {
-    font-size: 0.75rem;
-    color: #999;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-}
+/* Envase: 1kg, Molido espresso... */
 .variant-tag {
     display: block;
-    font-size: 0.85rem;
-    color: #555;
-    margin-bottom: 2px;
+    font-size: 1.5rem !important; /* Texto bastante más grande */
+    color: #333; /* Un poco más oscuro para que se lea mejor */
+    margin-bottom: 8px !important; /* Separa el Envase de la Molienda */
+    font-weight: 400;
+    line-height: 1.4; /* Da aire entre las líneas de texto */
+}
+.cart-sku {
+    font-size: 1.2rem !important;
+    color: #999;
+    margin-bottom: 5px !important; /* Este margen crea el hueco antes del envase */
+    display: block;
+    text-transform: uppercase;
 }
 
 /* Acciones y Precio */
@@ -923,10 +934,10 @@ h3 { font-size: 2.8rem; }
     vertical-align: middle;
 }
 .cart-total-line {
-    font-weight: bold;
-    font-size: 1.1rem;
-    color: #333;
-    min-width: 80px;
+    font-weight: 800;
+    font-size: 1.8rem !important; /* Precio más visible */
+    color: #1A1A1A;
+    min-width: 100px;
     text-align: right;
 }
 
@@ -938,7 +949,7 @@ h3 { font-size: 2.8rem; }
     border: 1px solid #eee;
 }
 .cart-summary-box h2 {
-    font-size: 1.2rem;
+    font-size: 2rem;
     margin-bottom: 20px;
 }
 .summary-row {
@@ -950,11 +961,11 @@ h3 { font-size: 2.8rem; }
 .summary-row.total {
     color: #000;
     font-weight: bold;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     margin-top: 15px;
 }
 .iva-text {
-    font-size: 0.8rem;
+    font-size: 1.5rem;
     color: #999;
     text-align: right;
     margin-top: -10px;
@@ -968,7 +979,7 @@ h3 { font-size: 2.8rem; }
     padding: 15px;
     border-radius: 50px; /* Bordes redondeados */
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 1.5rem;
     cursor: pointer;
     transition: 0.3s;
 }
