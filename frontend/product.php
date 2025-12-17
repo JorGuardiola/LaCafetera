@@ -268,15 +268,26 @@ addToCartForm.addEventListener('submit', function(e) {
 });
 
 function mostrarResumenModal() {
-    // Capturamos los valores seleccionados para el modal
+    // 1. Capturar variantes
     const envase = document.querySelector('input[name="envase"]:checked').value;
     const molienda = document.querySelector('input[name="molienda"]:checked').value;
     const tueste = document.querySelector('input[name="tueste"]:checked').value;
-    const precio = document.getElementById('displayPrice').textContent;
-
-    document.getElementById('modalVariantInfo').textContent = `Envase: ${envase} | Molienda: ${molienda}| Tueste: ${tueste}`;
-    document.getElementById('modalProductPrice').textContent = precio;
     
+    // 2. Calcular el total (Precio x Cantidad)
+    const cantidad = parseInt(document.getElementById('inputQty').value) || 1;
+    const precioTexto = document.getElementById('displayPrice').textContent; 
+    const precioUnitario = parseFloat(precioTexto.replace('€', '').trim());
+
+    // Calculamos el total de esta línea
+    const subtotalFinal = (precioUnitario * cantidad).toFixed(2);
+
+    // 3. Inyectar en el modal
+    document.getElementById('modalVariantInfo').textContent = `Envase: ${envase} | Molienda: ${molienda} | Tueste: ${tueste}`;
+    
+    
+    document.getElementById('modalProductPrice').textContent = `${subtotalFinal}€`;
+    
+    // 4. Abrir modal
     cartModal.style.display = 'block';
 }
 
