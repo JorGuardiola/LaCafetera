@@ -1161,13 +1161,13 @@ body.bg-beige {
     padding: 4px;
     background: transparent;
     flex-shrink: 0;
-    max-width: 130px;
+    max-width: 200px;
     justify-content: space-around;
 }
 .qty-btn {
     background: none;
     border: none;
-    font-size: 1.2rem;
+    font-size: 3rem;
     padding: 5px 12px;
     cursor: pointer;
     color: #1A1A1A;
