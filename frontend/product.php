@@ -263,6 +263,11 @@ addToCartForm.addEventListener('submit', function(e) {
         let totalActual = parseInt(cartCountElement.innerText) || 0;
         cartCountElement.innerText = totalActual + cantidadSeleccionada;
         mostrarResumenModal();
+        const headerCount = document.getElementById('headerCartCount');
+        if (headerCount) {
+        let currentTotal = parseInt(headerCount.innerText) || 0;
+        headerCount.innerText = currentTotal + cantidadSeleccionada;
+}
     })
     .catch(error => console.error('Error:', error));
 });
