@@ -100,6 +100,11 @@ if (!empty($_SESSION['carrito'])) {
         }
     }
 }
+
+// --- LÓGICA DE ENVÍO DINÁMICA ---
+// Si supera 50€, envío es 0€, si no 5€
+$gastos_envio = ($total_carrito > 50) ? 0.00 : 5.00;
+$total_pagar = $total_carrito + $gastos_envio;
 ?>
 
 
@@ -174,14 +179,20 @@ if (!empty($_SESSION['carrito'])) {
             
             <div class="summary-row">
                 <span>Gastos de envío</span>
-                <span>0€</span>
+                <?php if ($total_carrito > 50): ?>
+                    <span style="color:#27AE60;">
+                        <?= number_format($gastos_envio, 2) ?>€ (Gratis)
+                    </span>
+                <?php else: ?>
+                    <span><?= number_format($gastos_envio, 2) ?>€</span>
+                <?php endif; ?>
             </div>
 
             <hr style="border:0; border-top:1px solid #eee; margin: 15px 0;">
 
             <div class="summary-row total">
                 <span>Total</span>
-                <span><?= number_format($total_carrito, 2) ?>€</span>
+                <span><?= number_format($total_pagar, 2) ?>€</span>
             </div>
             <div class="iva-text">IVA incluido</div>
 
