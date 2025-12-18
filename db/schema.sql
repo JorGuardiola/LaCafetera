@@ -301,7 +301,7 @@ INSERT INTO producto_variantes (sku, producto_id, precio, stock, molienda, tuest
 
 INSERT INTO usuarios (nombre, apellido, email, password_hash, telefono, rol, fecha_registro)
 VALUES
-('Admin', 'Global', 'admin@cafetera.com', '$2y$10$XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX', '123456789', 'admin', NOW()), 
+('Admin', 'Global', 'admin@cafetera.com', '$2a$12$LcKHUBkTkD6Xj8DRih6g6.5QYw0AAdVqchvH4.wUSzgIJusaqo3Fe', '123456789', 'admin', NOW()), 
 ('Cliente', 'Fiel', 'cliente@prueba.com', '$2y$10$YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY', '987654321', 'cliente', NOW());
 
 -- ----------------------------------------------------
@@ -925,6 +925,7 @@ INSERT INTO producto_variantes (sku, producto_id, precio, stock, molienda, tuest
 ('PERGESGOTO2KG', 19, 86.80, 100, 'molido goteo', 'oscuro', '2kg'),
 ('PERGESFRAM2KG', 19, 86.80, 100, 'molido francesa', 'medio', '2kg'),
 ('PERGESFRAO2KG', 19, 86.80, 100, 'molido francesa', 'oscuro', '2kg');
+
 
 
 
