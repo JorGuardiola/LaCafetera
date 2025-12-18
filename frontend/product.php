@@ -25,6 +25,17 @@ $stmtVar = $pdo->prepare("SELECT sku, precio, stock, molienda, tueste, envase FR
 $stmtVar->execute([$id]);
 $variantes = $stmtVar->fetchAll(PDO::FETCH_ASSOC);
 $variantesJson = json_encode($variantes);
+// 4. Calcular total de items en el carrito 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$totalItems = 0;
+if (isset($_SESSION['carrito']) && is_array($_SESSION['carrito'])) {
+    foreach ($_SESSION['carrito'] as $cantidad_sku) {
+        $totalItems += (int)$cantidad_sku;
+    }
+}
 ?>
 
 <?php include __DIR__ . '/templates/header.php'; ?>
@@ -134,6 +145,33 @@ $variantesJson = json_encode($variantes);
 
     </div>
 </main>
+<div id="cartModal" class="cart-modal">
+    <div class="modal-content">
+        <button class="close-modal" onclick="closeModal()">&times;</button>
+        <div class="modal-body">
+            <div class="success-header">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>Añadido a la cesta</span>
+            </div>
+            
+            <div class="product-preview">
+                <img src="<?= BASE_URL ?>/assets/img/imgsproducts/<?= htmlspecialchars($producto['imagen']) ?>" alt="">
+                <div class="product-info">
+                    <h4 id="modalProductName"><?= htmlspecialchars($producto['nombre_cafe']) ?></h4>
+                    <p id="modalVariantInfo"></p>
+                    <p class="modal-price" id="modalProductPrice"></p>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+    <a href="cart.php" class="btn-primary">
+        Ver cesta (<span id="cartCount"><?= $totalItems ?></span>)
+    </a>
+    <a href="products.php" class="btn-secondary">Seguir comprando</a>
+</div>
+        </div>
+    </div>
+</div>
 
 <?php include __DIR__ . "/templates/footer.php"; ?>
 
@@ -206,6 +244,66 @@ $variantesJson = json_encode($variantes);
 
     // Inicializar
     updateProductState();
+    const cartModal = document.getElementById('cartModal');
+const addToCartForm = document.getElementById('addToCartForm');
+
+addToCartForm.addEventListener('submit', function(e) {
+    e.preventDefault(); 
+
+    const formData = new FormData(this);
+    // Capturamos la cantidad que el usuario tiene en el selector (+ / -)
+    const cantidadSeleccionada = parseInt(document.getElementById('inputQty').value) || 1;
+
+    fetch('cart.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        const cartCountElement = document.getElementById('cartCount');
+        let totalActual = parseInt(cartCountElement.innerText) || 0;
+        cartCountElement.innerText = totalActual + cantidadSeleccionada;
+        mostrarResumenModal();
+        const headerCount = document.getElementById('headerCartCount');
+        if (headerCount) {
+        let currentTotal = parseInt(headerCount.innerText) || 0;
+        headerCount.innerText = currentTotal + cantidadSeleccionada;
+}
+    })
+    .catch(error => console.error('Error:', error));
+});
+
+function mostrarResumenModal() {
+    // 1. Capturar variantes
+    const envase = document.querySelector('input[name="envase"]:checked').value;
+    const molienda = document.querySelector('input[name="molienda"]:checked').value;
+    const tueste = document.querySelector('input[name="tueste"]:checked').value;
+    
+    // 2. Calcular el total (Precio x Cantidad)
+    const cantidad = parseInt(document.getElementById('inputQty').value) || 1;
+    const precioTexto = document.getElementById('displayPrice').textContent; 
+    const precioUnitario = parseFloat(precioTexto.replace('€', '').trim());
+
+    // Calculamos el total de esta línea
+    const subtotalFinal = (precioUnitario * cantidad).toFixed(2);
+
+    // 3. Inyectar en el modal
+    document.getElementById('modalVariantInfo').textContent = `Envase: ${envase} | Molienda: ${molienda} | Tueste: ${tueste}`;
+    
+    
+    document.getElementById('modalProductPrice').textContent = `${subtotalFinal}€`;
+    
+    // 4. Abrir modal
+    cartModal.style.display = 'block';
+}
+
+function closeModal() {
+    cartModal.style.display = 'none';
+}
+
+// Cerrar si hacen clic fuera del cuadrito blanco
+window.onclick = function(event) {
+    if (event.target == cartModal) closeModal();
+}
 </script>
 
 </body>
