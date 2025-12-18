@@ -75,7 +75,7 @@ if (!empty($_SESSION['carrito'])) {
         $placeholders = implode(',', array_fill(0, count($skus), '?'));
         
         $sql = "
-            SELECT pv.sku, pv.precio, pv.molienda, pv.envase, pv.tueste, p.nombre_cafe, p.imagen
+            SELECT pv.sku, pv.precio, pv.molienda, pv.envase, pv.tueste, p.nombre_cafe, p.imagen, p.id
             FROM producto_variantes pv
             JOIN productos p ON pv.producto_id = p.id
             WHERE pv.sku IN ($placeholders)
@@ -126,11 +126,13 @@ $total_pagar = $total_carrito + $gastos_envio;
         <div class="cart-list">
             <?php foreach ($items_carrito as $item): ?>
 <div class="cart-item-row" id="row-<?= $item['sku'] ?>">
-    
-    <div class="cart-img">
-        <img src="<?= BASE_URL ?>/assets/img/imgsproducts/<?= htmlspecialchars($item['imagen']) ?>" alt="Café">
-    </div>
 
+    <div class="cart-img">
+        <a href="product.php?id=<?= $item['id'] ?>">
+            <img src="<?= defined('BASE_URL') ? BASE_URL : '/lacafetera' ?>/assets/img/imgsproducts/<?= htmlspecialchars($item['imagen']) ?>" alt="Café">
+        </a>
+    </div>
+    
     <div class="cart-info">
         <div class="cart-product-name"><?= htmlspecialchars($item['nombre_cafe']) ?></div>
         <div class="cart-sku">SKU: <?= htmlspecialchars($item['sku']) ?></div>
