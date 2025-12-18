@@ -141,7 +141,7 @@ $total_pagar = $total_carrito + $gastos_envio;
 
     <div class="mobile-hide cart-total-line">
         <span id="subtotal-<?= $item['sku'] ?>">
-            <?= number_format($item['precio'] * $item['cantidad'], 2) ?>
+            <?= number_format($item['precio'], 2) ?>€
         </span>€
     </div>
 
@@ -179,16 +179,18 @@ $total_pagar = $total_carrito + $gastos_envio;
     <span id="summary-subtotal"><?= number_format($total_carrito, 2) ?>€</span>
 </div>
             
-            <div class="summary-row">
-                <span>Gastos de envío</span>
+        <div class="summary-row">
+            <span>Gastos de envío</span>
+            <span id="summary-shipping">
                 <?php if ($total_carrito > 50): ?>
                     <span style="color:#27AE60;">
-                        <?= number_format($gastos_envio, 2) ?>€ (Gratis)
+                        Gratis
                     </span>
                 <?php else: ?>
                     <span><?= number_format($gastos_envio, 2) ?>€</span>
                 <?php endif; ?>
-            </div>
+            </span>
+        </div>
 
             <hr style="border:0; border-top:1px solid #eee; margin: 15px 0;">
 
@@ -236,21 +238,27 @@ function updateCartAjax(sku, qty) {
             
             // 2. Actualiza el subtotal de esa línea (producto)
             const subRow = document.getElementById('subtotal-' + sku);
-            if(subRow) subRow.innerText = data.nuevoSubtotalItem.replace('€', ''); // Mantenemos formato numérico visual
+            if(subRow) subRow.innerText = data.nuevoSubtotalItem.replace('€', ''); 
 
-            // 3. Actualiza el Resumen (Subtotal y Total)
-            // IMPORTANTE: data.nuevoTotalCarrito es el Subtotal real de los productos
+            // 3. Actualiza el Resumen (Subtotal)
             const sumSub = document.getElementById('summary-subtotal');
             if(sumSub) sumSub.innerText = data.nuevoTotalCarrito;
 
+            // 4. Actualiza el Total
             const sumTot = document.getElementById('summary-total');
-            if(sumTot) sumTot.innerText = data.nuevoTotalPagar; // Usamos la nueva variable que crearemos en PHP
+            if(sumTot) sumTot.innerText = data.nuevoTotalPagar;
 
-            // 4. Actualiza el Header
+            // 5. CORREGIDO: Actualiza el texto de ENVÍO (Gratis o 5€)
+            const sumShip = document.getElementById('summary-shipping');
+            if(sumShip && data.textoEnvioHTML) {
+                sumShip.innerHTML = data.textoEnvioHTML;
+            }
+
+            // 6. Actualiza el Header
             const headerCount = document.getElementById('headerCartCount');
             if (headerCount) headerCount.innerText = data.totalItemsHeader;
 
-            // 5. Actualizar lógica de botones
+            // 7. Actualizar lógica de botones (deshabilitar menos si es 1)
             const btnMinus = document.getElementById('btn-minus-' + sku);
             const btnPlus = document.getElementById('btn-plus-' + sku);
             
