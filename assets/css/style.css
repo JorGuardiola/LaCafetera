@@ -883,29 +883,40 @@ h3 { font-size: 2.8rem; }
     gap: 20px;
 }
 .cart-img img {
-    width: 80px;
+    width: 200px !important; 
     height: auto;
-    border-radius: 4px;
+    border-radius: 8px;
+    object-fit: contain;
 }
 .cart-info {
-    flex: 1; /* Ocupa el espacio disponible */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Alinea todo al principio (arriba) */
+    align-self: flex-start;      /* Asegura que el bloque empiece arriba */
+    padding-top: 0;
 }
 .cart-product-name {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 5px;
+    font-size: 2.2rem !important; /* Mantenemos el título grande */
+    font-weight: 700;
+    margin-bottom: 5px !important; 
+    line-height: 1.1;
 }
-.cart-sku {
-    font-size: 0.75rem;
-    color: #999;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-}
+/* Envase: 1kg, Molido espresso... */
 .variant-tag {
     display: block;
-    font-size: 0.85rem;
-    color: #555;
-    margin-bottom: 2px;
+    font-size: 1.5rem !important; /* Texto bastante más grande */
+    color: #333; /* Un poco más oscuro para que se lea mejor */
+    margin-bottom: 8px !important; /* Separa el Envase de la Molienda */
+    font-weight: 400;
+    line-height: 1.4; /* Da aire entre las líneas de texto */
+}
+.cart-sku {
+    font-size: 1.2rem !important;
+    color: #999;
+    margin-bottom: 5px !important; /* Este margen crea el hueco antes del envase */
+    display: block;
+    text-transform: uppercase;
 }
 
 /* Acciones y Precio */
@@ -923,10 +934,10 @@ h3 { font-size: 2.8rem; }
     vertical-align: middle;
 }
 .cart-total-line {
-    font-weight: bold;
-    font-size: 1.1rem;
-    color: #333;
-    min-width: 80px;
+    font-weight: 800;
+    font-size: 1.8rem !important; /* Precio más visible */
+    color: #1A1A1A;
+    min-width: 100px;
     text-align: right;
 }
 
@@ -938,7 +949,7 @@ h3 { font-size: 2.8rem; }
     border: 1px solid #eee;
 }
 .cart-summary-box h2 {
-    font-size: 1.2rem;
+    font-size: 2rem;
     margin-bottom: 20px;
 }
 .summary-row {
@@ -950,11 +961,11 @@ h3 { font-size: 2.8rem; }
 .summary-row.total {
     color: #000;
     font-weight: bold;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     margin-top: 15px;
 }
 .iva-text {
-    font-size: 0.8rem;
+    font-size: 1.5rem;
     color: #999;
     text-align: right;
     margin-top: -10px;
@@ -968,7 +979,7 @@ h3 { font-size: 2.8rem; }
     padding: 15px;
     border-radius: 50px; /* Bordes redondeados */
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 1.5rem;
     cursor: pointer;
     transition: 0.3s;
 }
@@ -989,7 +1000,7 @@ h3 { font-size: 2.8rem; }
 
 /* Fondo general beige */
 body.bg-beige {
-    background-color: #F5EFE5; /* Color aproximado del fondo */
+    background-color: #F5EFE5; 
 }
 
 /* Layout principal de dos columnas */
@@ -998,14 +1009,16 @@ body.bg-beige {
     margin: 4rem auto;
     padding: 0 20px;
     display: grid;
-    grid-template-columns: 1fr 1fr; /* 50% - 50% */
+    grid-template-columns: 1fr 1fr; 
     gap: 60px;
-    align-items: center; /* Centrar verticalmente */
+    align-items: center; 
 }
 
 /* Columna Izquierda */
-.detail-left {
-    text-align: center;
+@media (min-width: 1024px) {
+    .detail-left {
+        transform: translateX(-80px);
+    }
 }
 .detail-image-container img {
     max-width: 100%;
@@ -1015,14 +1028,14 @@ body.bg-beige {
 }
 .big-product-title {
     font-family: 'Playfair Display', serif;
-    font-size: 3.5rem;
+    font-size: 4rem;
     color: #1A1A1A; /* Casi negro */
-    margin-top: 2rem;
-}
+    margin-top: 1rem;
+   }
 
 /* Columna Derecha: La Tarjeta */
 .detail-right-card {
-    background-color: #FAF7F2; /* Un tono más claro que el fondo */
+    background-color: #FAF7F2; 
     padding: 40px;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
@@ -1037,7 +1050,7 @@ body.bg-beige {
     margin-bottom: 10px;
     font-size: 0.9rem;
 }
-.star-icon { color: #C7A17A; font-size: 1.2rem; } /* Color dorado/café */
+.star-icon { color: #C7A17A; font-size: 1.2rem; } 
 .star-icon-half { color: #C7A17A; font-size: 1.2rem; }
 .reviews-link {
     color: #1A1A1A;
@@ -1072,15 +1085,16 @@ body.bg-beige {
     margin-bottom: 2rem;
 }
 
+
 /* --- SELECTORES TIPO BOTÓN --- */
 .selector-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: -1rem;
 }
 .selector-label {
-    font-weight: 700;
-    margin-bottom: 0.8rem;
-    color: #1A1A1A;
-    font-size: 0.95rem;
+    font-size: 1.5rem !important; 
+    font-weight: 700 !important;
+    margin-bottom: 0.4rem !important; 
+    margin-top: 1.2rem !important;
 }
 .option-buttons {
     display: flex;
@@ -1094,24 +1108,23 @@ body.bg-beige {
 /* Estilo del label que parece botón */
 .option-label {
     display: inline-block;
-    padding: 10px 20px;
-    background-color: transparent;
+    padding: 10px 22px; 
     border: 1px solid #DDD;
-    border-radius: 30px; /* Bordes muy redondeados */
+    border-radius: 30px;
     cursor: pointer;
     font-weight: 600;
     color: #1A1A1A;
     transition: all 0.2s;
-    font-size: 0.9rem;
-    text-transform: capitalize; /* Primera letra mayúscula */
+    font-size: 1.3rem; 
+    text-transform: capitalize;
 }
 .option-label:hover {
     border-color: #1A1A1A;
 }
 /* Estilo cuando el radio asociado está checkeado */
 .option-radio:checked + .option-label {
-    background-color: #1A1A1A; /* Fondo oscuro */
-    color: #FFF; /* Texto blanco */
+    background-color: #1A1A1A; 
+    color: #FFF; 
     border-color: #1A1A1A;
 }
 
@@ -1132,15 +1145,15 @@ body.bg-beige {
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 0.85rem;
+    font-size: 1.5rem; 
     color: #1A1A1A;
-    margin: 1.5rem 0;
+    margin: 1.2rem 0;
     font-weight: 600;
 }
 .stock-dot {
     width: 8px;
     height: 8px;
-    background-color: #27AE60; /* Verde */
+    background-color: #27AE60; 
     border-radius: 50%;
 }
 
@@ -1156,24 +1169,27 @@ body.bg-beige {
     align-items: center;
     border: 1px solid #DDD;
     border-radius: 30px;
-    padding: 5px;
+    padding: 4px;
     background: transparent;
+    flex-shrink: 0;
+    max-width: 200px;
+    justify-content: space-around;
 }
 .qty-btn {
     background: none;
     border: none;
-    font-size: 1.2rem;
-    padding: 5px 15px;
+    font-size: 3rem;
+    padding: 5px 12px;
     cursor: pointer;
     color: #1A1A1A;
 }
 .quantity-selector-widget input {
-    width: 40px;
+    width: 35px;
     text-align: center;
     border: none;
     background: transparent;
-    font-weight: bold;
-    font-size: 1rem;
+    font-weight: 700;
+    font-size: 1.2rem;
     
 }
 .quantity-selector-widget input::-webkit-outer-spin-button,
@@ -1184,15 +1200,18 @@ body.bg-beige {
 
 /* Botón Añadir a la Cesta */
 .btn-add-to-cart-dark {
-    flex: 1; /* Ocupa el resto del espacio */
-    background-color: #1A1A1A; /* Color oscuro */
+    flex: 1; 
+    background-color: #1A1A1A;
     color: #FFF;
     border: none;
     border-radius: 30px;
-    font-size: 1rem;
+    padding: 15px 25px;
+    font-size: 1.8rem;
     font-weight: 700;
     cursor: pointer;
     transition: background 0.3s;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
 }
 .btn-add-to-cart-dark:hover {
     background-color: #333;
@@ -1216,7 +1235,8 @@ body.bg-beige {
         font-size: 2.5rem; /* Título más pequeño */
     }
     .card-actions-row {
-        flex-direction: column; /* Apilar cantidad y botón */
+        max-width: 420px;
+        gap: 15px;
     }
     .quantity-selector-widget {
         justify-content: center;
@@ -2447,4 +2467,129 @@ textarea {
 .pagination .page-btn.page-nav {
     border-color: rgb(var(--primary-400));
     font-weight: 600;
+}
+/* --- ESTILOS DEL MODAL --- */
+.cart-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 30px;
+    border-radius: 20px;
+    width: 90%; 
+    max-width: 600px; 
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+}
+
+.close-modal {
+    position: absolute;    
+    right: 20px; 
+    top: 15px;
+    background: none;
+    border: none; 
+    font-size: 2rem; 
+    cursor: pointer;
+}
+
+.success-header {
+    display: flex; 
+    align-items: center; 
+    gap: 10px;
+    color: #27AE60; 
+    font-weight: 700; 
+    margin-bottom: 20px;
+}
+
+.product-preview {
+    display: flex; 
+    align-items: center; 
+    gap: 25px; 
+    margin-bottom: 30px;
+    padding: 20px; 
+    border: 1px solid #eee; 
+    border-radius: 15px;
+}
+
+.product-preview img { 
+    width: 150px;
+    height: auto; 
+    border-radius: 12px;
+    object-fit: contain; 
+    background-color: #f9f9f9; 
+    padding: 5px; 
+    flex-shrink: 0; 
+}
+
+
+.product-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1; 
+    min-width: 0; 
+}
+
+.product-info h4 { 
+    margin: 0; 
+    font-size: 2rem; 
+    font-weight: 800;
+    line-height: 1.1;
+    overflow: hidden;
+}
+
+.product-info p { 
+    margin: 8px 0; 
+    color: #666; 
+    font-size: 1.5rem; 
+    line-height: 1.4;
+    word-wrap: break-word;
+}
+
+.modal-price {
+    font-size: 2.2rem !important; 
+    font-weight: 800 !important;
+    color: #1A1A1A !important;
+    margin-top: 15px;
+    letter-spacing: -1px;
+}
+
+.modal-actions { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 12px; 
+    margin-top: 10px; 
+}
+.btn-primary, .btn-secondary { 
+    display: block; 
+    text-align: center; 
+    padding: 18px; 
+    border-radius: 35px; 
+    text-decoration: none; 
+    font-weight: 700;
+    font-size: 1.2rem; 
+    transition: all 0.2s ease;
+}
+
+.btn-primary { 
+    background: #1A1A1A; 
+    color: white; 
+    border: 1px solid #1A1A1A;
+}
+
+.btn-secondary { 
+    background: white; 
+    color: #1A1A1A;
+    border: 1px solid #DDD;
+}
+.btn-secondary:hover {
+    border-color: #1A1A1A;
+    background-color: #f9f9f9;
 }

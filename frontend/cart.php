@@ -125,57 +125,59 @@ $total_pagar = $total_carrito + $gastos_envio;
         
         <div class="cart-list">
             <?php foreach ($items_carrito as $item): ?>
-            <div class="cart-item-row">
-                
-                <div class="cart-img">
-                    <img src="<?= BASE_URL ?>/assets/img/imgsproducts/<?= htmlspecialchars($item['imagen']) ?>" alt="Café">
-                </div>
+<div class="cart-item-row" id="row-<?= $item['sku'] ?>">
+    
+    <div class="cart-img">
+        <img src="<?= BASE_URL ?>/assets/img/imgsproducts/<?= htmlspecialchars($item['imagen']) ?>" alt="Café">
+    </div>
 
-                <div class="cart-info">
-                    <div class="cart-product-name"><?= htmlspecialchars($item['nombre_cafe']) ?></div>
-                    <div class="cart-sku">SKU: <?= htmlspecialchars($item['sku']) ?></div>
-                    <span class="variant-tag">Envase: <?= htmlspecialchars($item['envase']) ?></span>
-                    <span class="variant-tag"><?= ucfirst($item['molienda']) ?></span>
-                </div>
+    <div class="cart-info">
+        <div class="cart-product-name"><?= htmlspecialchars($item['nombre_cafe']) ?></div>
+        <div class="cart-sku">SKU: <?= htmlspecialchars($item['sku']) ?></div>
+        <span class="variant-tag">Envase: <?= htmlspecialchars($item['envase']) ?></span>
+        <span class="variant-tag">Molienda: <?= ucfirst($item['molienda']) ?></span>
+        <span class="variant-tag">Tueste: <?= ucfirst($item['tueste']) ?></span>
+    </div>
 
-                <div class="mobile-hide" style="font-weight:bold;">
-                    <?= number_format($item['precio'], 2) ?>€
-                </div>
+    <div class="mobile-hide cart-total-line">
+        <span id="subtotal-<?= $item['sku'] ?>">
+            <?= number_format($item['precio'] * $item['cantidad'], 2) ?>
+        </span>€
+    </div>
 
-                <div class="quantity-selector-widget">
-                    <button type="button" class="qty-btn" 
-                            onclick="updateCart('<?= $item['sku'] ?>', <?= $item['cantidad'] - 1 ?>)"
-                            <?= $item['cantidad'] <= 1 ? 'disabled style="opacity:0.3"' : '' ?>>
-                        -
-                    </button>
+    <div class="quantity-selector-widget">
+        <button type="button" class="qty-btn" id="btn-minus-<?= $item['sku'] ?>"
+                onclick="updateCartAjax('<?= $item['sku'] ?>', <?= $item['cantidad'] - 1 ?>)"
+                <?= $item['cantidad'] <= 1 ? 'disabled style="opacity:0.3"' : '' ?>>
+            -
+        </button>
 
-                    <input type="text" value="<?= $item['cantidad'] ?>" readonly>
+        <input type="text" id="input-qty-<?= $item['sku'] ?>" value="<?= $item['cantidad'] ?>" readonly>
 
-                    <button type="button" class="qty-btn" 
-                            onclick="updateCart('<?= $item['sku'] ?>', <?= $item['cantidad'] + 1 ?>)">
-                        +
-                    </button>
-                </div>
+        <button type="button" class="qty-btn" id="btn-plus-<?= $item['sku'] ?>"
+                onclick="updateCartAjax('<?= $item['sku'] ?>', <?= $item['cantidad'] + 1 ?>)">
+            +
+        </button>
+    </div>
 
-                <form action="cart.php" method="POST" style="margin:0;">
-                    <input type="hidden" name="action" value="remove">
-                    <input type="hidden" name="sku_remove" value="<?= $item['sku'] ?>">
-                    <button type="submit" style="background:none; border:none; cursor:pointer;" class="btn-delete">
-                        <i class="fa-regular fa-trash-can" style="font-size:1.2rem; color:#00BFA5;"></i>
-                    </button>
-                </form>
-
-            </div>
-            <?php endforeach; ?>
+    <form action="cart.php" method="POST" style="margin:0;">
+        <input type="hidden" name="action" value="remove">
+        <input type="hidden" name="sku_remove" value="<?= $item['sku'] ?>">
+        <button type="submit" style="background:none; border:none; cursor:pointer;" class="btn-delete">
+            <i class="fa-regular fa-trash-can" style="font-size:1.2rem; color:#00BFA5;"></i>
+        </button>
+    </form>
+</div>
+<?php endforeach; ?>
         </div>
 
         <div class="cart-summary-box">
             <h2>Resumen del pedido</h2>
             
             <div class="summary-row">
-                <span>Subtotal</span>
-                <span><?= number_format($total_carrito, 2) ?>€</span>
-            </div>
+    <span>Subtotal</span>
+    <span id="summary-subtotal"><?= number_format($total_carrito, 2) ?>€</span>
+</div>
             
             <div class="summary-row">
                 <span>Gastos de envío</span>
@@ -212,11 +214,46 @@ $total_pagar = $total_carrito + $gastos_envio;
 
 <script>
 // Función para enviar el formulario oculto al hacer clic en + o -
-function updateCart(sku, qty) {
-    if (qty < 1) return; // Seguridad extra
-    document.getElementById('sku_update').value = sku;
-    document.getElementById('qty_update').value = qty;
-    document.getElementById('formUpdateCart').submit();
+function updateCartAjax(sku, qty) {
+    if (qty < 1) return;
+
+    const formData = new FormData();
+    formData.append('sku', sku);
+    formData.append('cantidad', qty);
+
+    fetch('ajaxcart.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Actualiza el número visual
+            document.getElementById('input-qty-' + sku).value = qty;
+            
+            // Actualiza el precio de la fila
+            document.getElementById('subtotal-' + sku).innerText = data.nuevoSubtotalItem.replace('€', '');
+
+            // Actualiza el resumen de la derecha
+            document.getElementById('summary-subtotal').innerText = data.nuevoTotalCarrito;
+            document.getElementById('summary-total').innerText = data.nuevoTotalCarrito;
+
+            // Actualiza el icono del carrito arriba (header)
+            const headerCount = document.getElementById('headerCartCount');
+            if (headerCount) headerCount.innerText = data.totalItemsHeader;
+
+            // Actualiza los botones para que el siguiente clic funcione
+            const btnMinus = document.getElementById('btn-minus-' + sku);
+            const btnPlus = document.getElementById('btn-plus-' + sku);
+            
+            btnMinus.setAttribute('onclick', `updateCartAjax('${sku}', ${qty - 1})`);
+            btnPlus.setAttribute('onclick', `updateCartAjax('${sku}', ${qty + 1})`);
+            
+            // Desactivar el menos si es 1
+            btnMinus.disabled = (qty <= 1);
+            btnMinus.style.opacity = (qty <= 1) ? '0.3' : '1';
+        }
+    });
 }
 </script>
 

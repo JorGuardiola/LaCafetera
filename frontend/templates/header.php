@@ -5,7 +5,12 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-
+$totalHeader = 0;
+if (isset($_SESSION['carrito']) && is_array($_SESSION['carrito'])) {
+    foreach ($_SESSION['carrito'] as $cantidad) {
+        $totalHeader += (int)$cantidad;
+    }
+}
 // 2. Garantizar que connection.php esté cargado para usar BASE_URL
 // Usamos __DIR__ para salir de "templates" (..), salir de "frontend" (..) y entrar a "db"
 require_once __DIR__ . '/../../db/connection.php';
@@ -53,27 +58,29 @@ require_once __DIR__ . '/../../db/connection.php';
 
     <div class="icons-bar">
         
-        <button class="icon-header">
+      <button class="icon-header">
           <img src="<?= BASE_URL ?>/assets/img/buscar.png" alt="Buscar">
+      </button>
+
+      <?php if (isset($_SESSION['user_id'])): ?>
+            
+        <button class="icon-header" onclick="window.location.href='<?= BASE_URL ?>/frontend/profile.php'" title="Mi Perfil">
+          <i class="fa-solid fa-user" style="color: #1A1A1A; font-size: 1.8rem;"></i>
         </button>
 
-        <?php if (isset($_SESSION['user_id'])): ?>
+      <?php else: ?>
             
-            <button class="icon-header" onclick="window.location.href='<?= BASE_URL ?>/frontend/profile.php'" title="Mi Perfil">
-                <i class="fa-solid fa-user" style="color: #1A1A1A; font-size: 1.8rem;"></i>
-            </button>
-
-        <?php else: ?>
-            
-            <button class="icon-header" onclick="window.location.href='<?= BASE_URL ?>/frontend/login.php'" title="Iniciar Sesión">
-                <img src="<?= BASE_URL ?>/assets/img/login.png" alt="Login">
-            </button>
-
-        <?php endif; ?>
-
-        <button class="icon-header" onclick="window.location.href='<?= BASE_URL ?>/frontend/cart.php'">
-          <img src="<?= BASE_URL ?>/assets/img/carrito.png" alt="Carrito">
+        <button class="icon-header" onclick="window.location.href='<?= BASE_URL ?>/frontend/login.php'" title="Iniciar Sesión">
+          <img src="<?= BASE_URL ?>/assets/img/login.png" alt="Login">
         </button>
-        
-      </div>
+
+      <?php endif; ?>
+
+        <button class="icon-header" onclick="window.location.href='<?= BASE_URL ?>/frontend/cart.php'" style="background:none; border:none; cursor:pointer; padding:0;">
+    <div class="cart-wrapper">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span id="headerCartCount" class="cart-badge-number"><?= $totalHeader ?></span>
+    </div>
+</button>
+    </div>
 </header>

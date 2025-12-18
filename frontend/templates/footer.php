@@ -49,8 +49,8 @@
   <div class="footer-bottom">
     <p>© 2025 La Cafetera. Todos los derechos reservados.</p>
     <div class="footer-links">
-      <a href="#">Política de privacidad</a>
-      <a href="#">Términos y condiciones</a>
+      <a href="<?= BASE_URL ?>/frontend/politica-privacidad.php">Política de privacidad</a>
+      <a href="<?= BASE_URL ?>/frontend/terminos-condiciones.php">Términos y condiciones</a>
       <a href="#">Cookies</a>
     </div>
   </div>
