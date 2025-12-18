@@ -36,7 +36,7 @@ if(count($skus) > 0) {
 }
 
 // Gastos de envío (Simulado)
-$gastos_envio = ($total_carrito >= 50) ? 0 : 8.00;
+$gastos_envio = ($total_carrito >= 50) ? 0 : 5.00;
 $total_pagar = $total_carrito + $gastos_envio;
 
 // 3. RECUPERAR DATOS DE USUARIO SI ESTÁ LOGUEADO
