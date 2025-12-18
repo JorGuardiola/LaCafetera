@@ -80,11 +80,18 @@ h3 { font-size: 2.8rem; }
 ======================================= */
 
 .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-left: 20rem;
-    padding-right: 20rem;
+
+    padding: 1.5rem 20rem;
+    background: #fff;
 }
 
 .img-logo img {
