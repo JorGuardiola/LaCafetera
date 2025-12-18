@@ -204,7 +204,7 @@ h3 { font-size: 2.8rem; }
 
 /* Variantes de fondo */
 .hero-container.bg-default {
-    background-image: url('../img/hero-home.jpg');
+    background-image: url('../img/hero-home.png');
 }
 .hero-container.bg-productos {
     background-image: url('../img/hero-productos.jpg');
