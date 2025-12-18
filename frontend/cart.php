@@ -196,6 +196,10 @@ $total_pagar = $total_carrito + $gastos_envio;
                 <span>Total</span>
                 <span><?= number_format($total_pagar, 2) ?>€</span>
             </div>
+            <div class="summary-row total">
+                 <span>Total</span>
+                <span id="summary-total"><?= number_format($total_pagar, 2) ?>€</span>
+            </div>
             <div class="iva-text">IVA incluido</div>
 
             <button class="btn-checkout" onclick="window.location.href='<?= BASE_URL ?>/frontend/checkout.php'">Tramitar pedido</button>
@@ -214,6 +218,8 @@ $total_pagar = $total_carrito + $gastos_envio;
 
 <script>
 // Función para enviar el formulario oculto al hacer clic en + o -
+// CÓDIGO CORREGIDO PARA EL SCRIPT AL FINAL DE cart.php
+
 function updateCartAjax(sku, qty) {
     if (qty < 1) return;
 
@@ -228,32 +234,39 @@ function updateCartAjax(sku, qty) {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            // Actualiza el número visual
-            document.getElementById('input-qty-' + sku).value = qty;
+            // 1. Actualiza el input de cantidad
+            const inputQty = document.getElementById('input-qty-' + sku);
+            if(inputQty) inputQty.value = qty;
             
-            // Actualiza el precio de la fila
-            document.getElementById('subtotal-' + sku).innerText = data.nuevoSubtotalItem.replace('€', '');
+            // 2. Actualiza el subtotal de esa línea (producto)
+            const subRow = document.getElementById('subtotal-' + sku);
+            if(subRow) subRow.innerText = data.nuevoSubtotalItem.replace('€', ''); // Mantenemos formato numérico visual
 
-            // Actualiza el resumen de la derecha
-            document.getElementById('summary-subtotal').innerText = data.nuevoTotalCarrito;
-            document.getElementById('summary-total').innerText = data.nuevoTotalCarrito;
+            // 3. Actualiza el Resumen (Subtotal y Total)
+            // IMPORTANTE: data.nuevoTotalCarrito es el Subtotal real de los productos
+            const sumSub = document.getElementById('summary-subtotal');
+            if(sumSub) sumSub.innerText = data.nuevoTotalCarrito;
 
-            // Actualiza el icono del carrito arriba (header)
+            const sumTot = document.getElementById('summary-total');
+            if(sumTot) sumTot.innerText = data.nuevoTotalPagar; // Usamos la nueva variable que crearemos en PHP
+
+            // 4. Actualiza el Header
             const headerCount = document.getElementById('headerCartCount');
             if (headerCount) headerCount.innerText = data.totalItemsHeader;
 
-            // Actualiza los botones para que el siguiente clic funcione
+            // 5. Actualizar lógica de botones
             const btnMinus = document.getElementById('btn-minus-' + sku);
             const btnPlus = document.getElementById('btn-plus-' + sku);
             
-            btnMinus.setAttribute('onclick', `updateCartAjax('${sku}', ${qty - 1})`);
-            btnPlus.setAttribute('onclick', `updateCartAjax('${sku}', ${qty + 1})`);
-            
-            // Desactivar el menos si es 1
-            btnMinus.disabled = (qty <= 1);
-            btnMinus.style.opacity = (qty <= 1) ? '0.3' : '1';
+            if(btnMinus && btnPlus) {
+                btnMinus.setAttribute('onclick', `updateCartAjax('${sku}', ${qty - 1})`);
+                btnPlus.setAttribute('onclick', `updateCartAjax('${sku}', ${qty + 1})`);
+                btnMinus.disabled = (qty <= 1);
+                btnMinus.style.opacity = (qty <= 1) ? '0.3' : '1';
+            }
         }
-    });
+    })
+    .catch(error => console.error('Error:', error));
 }
 </script>
 
