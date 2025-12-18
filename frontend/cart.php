@@ -193,10 +193,6 @@ $total_pagar = $total_carrito + $gastos_envio;
             <hr style="border:0; border-top:1px solid #eee; margin: 15px 0;">
 
             <div class="summary-row total">
-                <span>Total</span>
-                <span><?= number_format($total_pagar, 2) ?>€</span>
-            </div>
-            <div class="summary-row total">
                  <span>Total</span>
                 <span id="summary-total"><?= number_format($total_pagar, 2) ?>€</span>
             </div>
