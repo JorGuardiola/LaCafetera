@@ -419,7 +419,7 @@ function fillAddress(selectObj) {
 const legalTexts = {
     'reembolso': `
         <strong>Política de reembolso</strong>
-        <p>Si tienes cualquier incidencia con tu pedido, escríbenos a <strong>pedidos@lacafetera.com</strong> y la atenderemos en un plazo de 24-48h laborables. En todos los casos necesitaremos que nos comentes la incidencia lo más detalladamente posible, aportando una foto del contenido de la caja recibido y una foto de la etiqueta del paquete que sea perfectamente legible.</p>
+        <p>Si tienes cualquier incidencia con tu pedido, escríbenos a <lacaffetera1994@gmail.com</strong> y la atenderemos en un plazo de 24-48h laborables. En todos los casos necesitaremos que nos comentes la incidencia lo más detalladamente posible, aportando una foto del contenido de la caja recibido y una foto de la etiqueta del paquete que sea perfectamente legible.</p>
         <p>En <strong>La Cafetera 1994</strong> tostamos nuestros cafés de especialidad cada semana de forma que trabajamos con un producto fresco y recién tostado. De esta forma, aquellos cafés que por alguno de los siguientes motivos sean devueltos, no podemos volver a venderlos.</p>
         <p><strong>Se hará reembolso en caso de que:</strong></p>
         <ul>
@@ -451,8 +451,8 @@ const legalTexts = {
 
     'privacidad': `
         <strong>Política de privacidad</strong>
-        <p>Las presentes condiciones se aplican a todas las transacciones en <strong>www.lacafetera.com</strong>. Para más información, consulte el Aviso Legal.</p>
-        <p><strong>1. Identificación:</strong> El Vendedor es La Cafetera 1994 S.L., con domicilio en Calle del Café 12, Madrid. Correo: pedidos@lacafetera.com.</p>
+        <p>Las presentes condiciones se aplican a todas las transacciones en <strong>www.lacafetera.shop</strong>. Para más información, consulte el Aviso Legal.</p>
+        <p><strong>1. Identificación:</strong> El Vendedor es La Cafetera 1994 S.L., con domicilio en Avda. de la Molienda, 45, Planta 3, 28005 Madrid (España). Correo: lacaffetera1994@gmail.com.</p>
         <p><strong>2. Información recogida:</strong> Recogemos nombre, info de contacto y dirección para procesar pedidos y facturación.</p>
         <p><strong>3. Cookies:</strong> Utilizamos cookies para análisis estadístico y mejorar la experiencia. Usted puede denegar el uso de cookies en la configuración de su navegador.</p>
         <p><strong>4. Control de su privacidad:</strong> No vendemos, filtramos ni cedemos su información personal a terceros bajo ningún concepto, salvo requerimiento judicial.</p>
@@ -473,9 +473,9 @@ const legalTexts = {
         <strong>Aviso Legal</strong>
         <p><strong>Datos identificativos:</strong><br>
         La Cafetera 1994 S.L.<br>
-        Calle del Café 12, 28001, Madrid<br>
+        Avda. de la Molienda, 45, Planta 3, 28005 Madrid<br>
         CIF: B-12345678<br>
-        Email: pedidos@lacafetera.com</p>
+        Email: lacaffetera1994@gmail.com</p>
         <p><strong>Objeto:</strong> Toda persona que acceda a este sitio asume el papel de usuario, comprometiéndose al cumplimiento de las disposiciones legales.</p>
         <p><strong>Responsabilidad:</strong> El sitio web ha sido probado para funcionar correctamente. No obstante, no se garantiza la inexistencia de errores o interrupciones ajenas a la empresa.</p>
     `,
@@ -494,9 +494,9 @@ const legalTexts = {
     'contacto': `
         <strong>Información de Contacto</strong>
         <p><strong>La Cafetera 1994 S.L.</strong></p>
-        <p>Calle del Café 12<br>
-        28001, Madrid, España</p>
-        <p><strong>Email:</strong> pedidos@lacafetera.shop</p>
+        <p>Avda. de la Molienda, 45, Planta 3<br>
+        28005, Madrid, España</p>
+        <p><strong>Email:</strong> lacaffetera1994@gmail.com</p>
         <p><strong>Horario de atención:</strong><br>Lunes a Viernes de 9:00 a 18:00h.</p>
     `
 };
