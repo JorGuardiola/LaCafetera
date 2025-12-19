@@ -10,7 +10,7 @@
             <li>Identidad: LaCafetera1994 S.L.</li>
             <li>NIF/CIF: B87654321</li>
             <li>Dirección: Avda. de la Molienda, 45, Planta 3, 28005 Madrid (España)</li>
-            <li>Contacto: lacaffetera1994@gmail.com</li>
+            <li>Contacto: <a href="mailto:lacaffetera1994@gmail.com?subject=Consulta%20de%20Prensa%20o%20Colaboracion" target="_blank">lacaffetera1994@gmail.com</a></li>
         </ul>
     </div>
 
