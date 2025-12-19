@@ -18,7 +18,6 @@
       <ul>
         <li><a href="<?= BASE_URL ?>/frontend/nosotros.php">Nosotros</a></li>
         <li><a href="#">Elaboración</a></li>
-        <li><a href="#">Sostenibilidad</a></li>
         <li><a href="<?= BASE_URL ?>/frontend/contacto.php">Contacto</a></li>
       </ul>
     </div>
@@ -28,9 +27,8 @@
       <h4>Productos</h4>
       <ul>
         <li><a href="<?= BASE_URL ?>/frontend/products.php">Productos</a></li>
-        <li><a href="#">Packs</a></li>
-        <li><a href="#">Recetas</a></li>
         <li><a href="#">Información</a></li>
+        <li><a href="#">Sostenibilidad</a></li>
       </ul>
     </div>
 
@@ -51,7 +49,7 @@
     <div class="footer-links">
       <a href="<?= BASE_URL ?>/frontend/politica-privacidad.php">Política de privacidad</a>
       <a href="<?= BASE_URL ?>/frontend/terminos-condiciones.php">Términos y condiciones</a>
-      <a href="#">Cookies</a>
+      <a href="<?= BASE_URL ?>/frontend/cookies.php">Cookies</a>
     </div>
   </div>
 </footer>
