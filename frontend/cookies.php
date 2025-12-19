@@ -2,7 +2,7 @@
 <div class="cookies-container">
     <h1>Política de Cookies</h1>
     
-    <p>En LaCafetera1994, utilizamos cookies para mejorar tu experiencia...</p>
+    <p>En La Cafetera, utilizamos cookies para mejorar tu experiencia...</p>
 
     <div class="empresa-box">
         <strong>Responsable del tratamiento:</strong>
