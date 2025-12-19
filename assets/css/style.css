@@ -80,6 +80,7 @@ h3 { font-size: 2.8rem; }
 ======================================= */
 
 .header {
+    height: 9rem;
     position: fixed;
     top: 0;
     left: 0;
@@ -91,14 +92,15 @@ h3 { font-size: 2.8rem; }
     align-items: center;
 
     padding: 1.5rem 20rem;
-    background: #fff;
+    background: #ffffff;
 }
 
+/* LOGO */
 .img-logo img {
     width: 25rem;
 }
 
-/* BARRAS FLOTANTES */
+/* NAV + ICONS (BARRAS FLOTANTES) */
 .nav-bar,
 .icons-bar {
     height: 35px;
@@ -108,7 +110,6 @@ h3 { font-size: 2.8rem; }
     backdrop-filter: blur(6px);
     padding: 0 24px;
     border-radius: 40px;
-    border: none;
 }
 
 /* NAV */
@@ -128,21 +129,136 @@ h3 { font-size: 2.8rem; }
 .icons-bar {
     gap: 2rem;
 }
+
 .icon-header {
     background: transparent;
     border: none;
     cursor: pointer;
     padding: 0;
 }
+
 .icon-header img {
     width: 1.8rem;
 }
 
 
+/* =======================================
+   BOTÓN MENÚ MOBILE
+======================================= */
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.menu-toggle span {
+    width: 22px;
+    height: 2px;
+    background: #1A1A1A;
+    display: block;
+}
+
 
 /* =======================================
    RESPONSIVE HEADER
 ======================================= */
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 767px) {
+
+    .header {
+        padding: 1.2rem 2rem;
+    }
+
+    .img-logo img {
+        width: 18rem;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav-bar {
+        position: fixed;
+        top: 9rem;
+        left: 0;
+        width: 100%;
+        display: none;
+
+        justify-content: center;
+        background: #ffffff;
+        border-radius: 0;
+        padding: 2.5rem 0;
+
+        
+        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        z-index: 999;
+    }
+
+    .nav-bar ul {
+        flex-direction:row;
+        gap: 5rem;
+        text-align: center;
+      
+        justify-content: center;
+        width: 100%;
+        background: #ffffff;
+    }
+
+    .nav-bar.active {
+        display: flex;
+    }
+
+    .icons-bar {
+        padding: 0 16px;
+        gap: 1.2rem;
+    }
+}
+
+
+/* ---------- TABLET ---------- */
+@media (min-width: 768px) and (max-width: 1023px) {
+
+    .header {
+        padding: 1.5rem 4rem;
+    }
+
+    .img-logo img {
+        width: 22rem;
+    }
+
+    .nav-bar ul {
+        gap: 1.5rem;
+    }
+}
+
+
+/* ---------- DESKTOP ---------- */
+@media (min-width: 1024px) {
+
+    .menu-toggle {
+        display: none;
+    }
+}
+
+
+/*aqui hay que mirar*/
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* ------- MOBILE ------- */
 @media (max-width: 767px) {
