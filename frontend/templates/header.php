@@ -76,7 +76,7 @@ require_once __DIR__ . '/../../db/connection.php';
 
       <?php endif; ?>
 
-        <button class="icon-header" onclick="window.location.href='<?= BASE_URL ?>/frontend/cart.php'" style="background:none; border:none; cursor:pointer; padding:0;">
+        <button class="icon-header" onclick="window.location.href='<?= BASE_URL ?>/frontend/cart.php' " title="Tu Carrito" style="background:none; border:none; cursor:pointer; padding:0;">
     <div class="cart-wrapper">
         <i class="fa-solid fa-cart-shopping"></i>
         <span id="headerCartCount" class="cart-badge-number"><?= $totalHeader ?></span>
