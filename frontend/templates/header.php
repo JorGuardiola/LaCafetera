@@ -34,19 +34,19 @@ require_once __DIR__ . '/../../db/connection.php';
 
 <header class="header">
 
-    <!-- LOGO -->
-    <div class="img-logo">
-        <a href="<?= BASE_URL ?>/frontend/index.php">
-            <img src="<?= BASE_URL ?>/assets/img/logo.png" alt="La Cafetera">
-        </a>
-    </div>
-
     <!-- BOTÓN MENÚ MOBILE -->
     <button class="menu-toggle" aria-label="Abrir menú">
         <span></span>
         <span></span>
         <span></span>
     </button>
+    
+    <!-- LOGO -->
+    <div class="img-logo">
+        <a href="<?= BASE_URL ?>/frontend/index.php">
+            <img src="<?= BASE_URL ?>/assets/img/logo.png" alt="La Cafetera">
+        </a>
+    </div>
 
     <!-- NAVEGACIÓN -->
     <nav class="nav-bar">

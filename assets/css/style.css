@@ -33,6 +33,9 @@
 
     /* Transparencias */
     --opacidad-barra: 0.15;
+
+    /* Header height */
+    --header-height: 9rem;
 }
 
 
@@ -46,6 +49,11 @@ html {
 *, *:before, *:after {
     box-sizing: inherit;
 }
+
+main {
+    padding-top: var(--header-height);
+}
+
 
 body {
     font-family: var(--fuenteTexto);
@@ -61,6 +69,7 @@ h1,h2,h3,h4,h5,h6 { font-family: var(--fuenteHeading); }
 h1 { font-size: 4.1rem; line-height: 1.18; }
 h2 { font-size: 3.2rem; }
 h3 { font-size: 2.8rem; }
+h4 { font-size: 1.8rem; }
 
 .container {
     width: 90%;
@@ -80,7 +89,7 @@ h3 { font-size: 2.8rem; }
 ======================================= */
 
 .header {
-    height: 9rem;
+    height: var(--header-height);
     position: fixed;
     top: 0;
     left: 0;
@@ -258,68 +267,12 @@ h3 { font-size: 2.8rem; }
 /*aqui hay que mirar*/
 
 
-
-
-
-
-
-
-
-
-
-
-
-/* ------- MOBILE ------- */
-@media (max-width: 767px) {
-
-    .hero-text-block {
-        margin-top: 8rem;
-    }
-
-    .hero-text-block h1 {
-        font-size: 2.6rem;
-        max-width: 28rem;
-    }
-}
-
-
-/* ------- TABLET ------- */
-@media (min-width: 768px) and (max-width: 1023px) {
-
-    .hero-text-block {
-        margin-top: 13rem;
-    }
-
-    .hero-text-block h1 {
-        font-size: 3.2rem;
-        max-width: 40rem;
-    }
-}
-
-
-/* ------- DESKTOP ------- */
-@media (min-width: 1024px) {
-
-    .hero-text-block {
-        margin-top: 18rem;
-    }
-
-    .hero-text-block h1 {
-        font-size: 4.1rem;
-        max-width: 60rem;
-    }
-}
-
-
-
-
-
 /* =======================================
    BANNER + HERO
 ======================================= */
 /* Hero general */
 .hero-container {
-    height: 75rem;
+    height: 60rem;
     display: flex;
     align-items: center;
     background-size: cover;
@@ -344,8 +297,11 @@ h3 { font-size: 2.8rem; }
 .hero-container.bg-registro {
     background-image: url('../img/hero-registro.jpg');
 }
-.header-hero-simple.bg-nosotros {
-    background-image: url('../img/hero-nosotros2.jpg');
+.hero-container.bg-nosotros {
+    background-image: url('../img/hero-nosotros.jpg');
+}
+.hero-container.bg-contacto {
+    background-image: url('../img/hero-contacto.png');
 }
 
 
@@ -360,13 +316,11 @@ h3 { font-size: 2.8rem; }
 
 /* Columna izquierda */
 .hero-left h1 {
-    font-size: 4.2rem;
-    max-width: 50rem;
+    max-width: 100%;
     color: black;
 }
-.hero-left h2 {
-    font-size: 1.8rem;
-    max-width: 45rem;
+.hero-left h4 {
+    max-width: 50%;
     margin-top: 1rem;
     color: black;
 }
@@ -395,12 +349,12 @@ h3 { font-size: 2.8rem; }
 
     .hero-left h1 {
         font-size: 3.4rem;
-        max-width: 90%;
+        max-width: 50%;
     }
 
-    .hero-left h2 {
+    .hero-left h4 {
         font-size: 1.7rem;
-        max-width: 90%;
+        max-width: 50%;
     }
 
     .hero-right {
@@ -427,12 +381,12 @@ h3 { font-size: 2.8rem; }
 
     .hero-left h1 {
         font-size: 2.8rem;
-        max-width: 100%;
+        max-width: 50%;
     }
 
-    .hero-left h2 {
+    .hero-left h4 {
         font-size: 1.6rem;
-        max-width: 100%;
+        max-width: 60%;
     }
 
     .hero-btn {

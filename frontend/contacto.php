@@ -143,14 +143,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mensaje_estado .= "</ul></div>";
     }
 }
+
+// ==============================================================================
+// Contenido del hero
+$bgClass = "bg-contacto";
+$heroTitle = "Hablemos de Café";
+$heroSubtitle = "Si tienes preguntas sobre un pedido, necesitas consejos de preparación o quieres colaborar, estamos aquí para ayudarte";
+$heroButtonText = ""; // vacío → no aparece botón
+$heroButtonLink = "";
 ?>
 
+
+
 <main class="contenedor seccion contenido-centrado">
-    
-    <h1 class="text-center">Hablemos de Café</h1>
-    <p class="text-center descripcion-contacto">
-        Si tienes preguntas sobre un pedido, necesitas consejos de preparación o quieres colaborar, estamos aquí para ayudarte.
-    </p>
+
+    <?php include __DIR__ . '/templates/hero.php'; ?>
     
     <?php 
         echo $mensaje_estado; 

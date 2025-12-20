@@ -4,7 +4,7 @@
         <!-- IZQUIERDA: textos dinámicos -->
         <div class="hero-left">
             <h1><?= $heroTitle ?></h1>
-            <h2><?= $heroSubtitle ?></h2>
+            <h4><?= $heroSubtitle ?></h4>
 
             <?php if (!empty($heroButtonText)) : ?>
                 <a href="<?= $heroButtonLink ?>" class="hero-btn">
