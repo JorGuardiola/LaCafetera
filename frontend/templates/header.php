@@ -40,7 +40,7 @@ require_once __DIR__ . '/../../db/connection.php';
         <span></span>
         <span></span>
     </button>
-    
+
     <!-- LOGO -->
     <div class="img-logo">
         <a href="<?= BASE_URL ?>/frontend/index.php">
@@ -65,20 +65,39 @@ require_once __DIR__ . '/../../db/connection.php';
             <img src="<?= BASE_URL ?>/assets/img/buscar.png" alt="Buscar">
         </button>
 
-        <!-- Usuario -->
-        <?php if (isset($_SESSION['user_id'])): ?>
-            <button class="icon-header"
-                    onclick="window.location.href='<?= BASE_URL ?>/frontend/profile.php'"
-                    title="Mi perfil">
-                <i class="fa-solid fa-user" style="font-size:1.8rem; color:#1A1A1A;"></i>
-            </button>
-        <?php else: ?>
-            <button class="icon-header"
-                    onclick="window.location.href='<?= BASE_URL ?>/frontend/login.php'"
-                    title="Iniciar sesión">
-                <img src="<?= BASE_URL ?>/assets/img/login.png" alt="Login">
-            </button>
-        <?php endif; ?>
+        <!-- USUARIO -->
+        <div class="user-menu-wrapper">
+
+            <?php if (isset($_SESSION['user_id'])): ?>
+                <button class="icon-header user-toggle" aria-label="Usuario">
+                    <i class="fa-solid fa-user"></i>
+                </button>
+
+                <div class="user-dropdown">
+                    <a href="<?= BASE_URL ?>/frontend/profile.php?tab=perfil">Mi perfil</a>
+                    <a href="<?= BASE_URL ?>/frontend/profile.php?tab=direcciones">Mis direcciones</a>
+                    <a href="<?= BASE_URL ?>/frontend/profile.php?tab=pedidos">Mis pedidos</a>
+
+
+                    <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin'): ?>
+                        <a href="<?= BASE_URL ?>/frontend/admin.php" class="admin-link">
+                            Panel de administración
+                        </a>
+                    <?php endif; ?>
+
+                    <hr>
+                    <a href="<?= BASE_URL ?>/frontend/logout.php">Cerrar sesión</a>
+                </div>
+
+            <?php else: ?>
+                <button class="icon-header"
+                        onclick="window.location.href='<?= BASE_URL ?>/frontend/login.php'"
+                        title="Iniciar sesión">
+                    <img src="<?= BASE_URL ?>/assets/img/login.png" alt="Login">
+                </button>
+            <?php endif; ?>
+
+        </div>
 
         <!-- Carrito -->
         <button class="icon-header"
@@ -99,6 +118,23 @@ require_once __DIR__ . '/../../db/connection.php';
     if (toggle && nav) {
         toggle.addEventListener('click', () => {
             nav.classList.toggle('active');
+        });
+    }
+</script>
+
+<!-- JS DROPDOWN USUARIO -->
+<script>
+    const userToggle = document.querySelector('.user-toggle');
+    const userDropdown = document.querySelector('.user-dropdown');
+
+    if (userToggle && userDropdown) {
+        userToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            userDropdown.classList.toggle('active');
+        });
+
+        document.addEventListener('click', () => {
+            userDropdown.classList.remove('active');
         });
     }
 </script>

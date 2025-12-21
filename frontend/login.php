@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         try {
             // 2. Preparar y ejecutar la consulta a la base de datos
-            $stmt = $pdo->prepare("SELECT id_usuario, email, password_hash FROM usuarios WHERE email = ?");
+            $stmt = $pdo->prepare("SELECT id_usuario, email, password_hash, rol FROM usuarios WHERE email = ?");
             $stmt->execute([$email]);
             $user = $stmt->fetch();
 
@@ -42,7 +42,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if (password_verify($password, $user['password_hash'])) {
                     
                     // 4. Login Exitoso: Iniciar sesión y Redirigir
-                    $_SESSION['user_id'] = $user['id_usuario']; 
+                    $_SESSION['user_id']  = $user['id_usuario']; 
+                    $_SESSION['email']    = $user['email'];
+                    $_SESSION['rol']      = $user['rol'];   // 👈 ESTA ES LA CLAVE
                     $_SESSION['logged_in'] = true;
                     
                     // === REDIRECCIÓN FINAL  ===

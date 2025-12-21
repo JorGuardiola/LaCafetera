@@ -89,9 +89,9 @@ $pedidos = $pdo->query("
     <div class="profile-layout">
 
         <aside class="profile-sidebar">
-            <button class="profile-menu-btn <?= $tab_activa=='usuarios'?'active':'' ?>" onclick="openTab('usuarios')">Usuarios</button>
-            <button class="profile-menu-btn <?= $tab_activa=='productos'?'active':'' ?>" onclick="openTab('productos')">Productos</button>
-            <button class="profile-menu-btn <?= $tab_activa=='pedidos'?'active':'' ?>" onclick="openTab('pedidos')">Pedidos</button>
+            <button class="profile-menu-btn <?= $tab_activa=='usuarios'?'active':'' ?>" onclick="openTab('usuarios')">Gestión de usuarios</button>
+            <button class="profile-menu-btn <?= $tab_activa=='productos'?'active':'' ?>" onclick="openTab('productos')">Gestión de productos</button>
+            <button class="profile-menu-btn <?= $tab_activa=='pedidos'?'active':'' ?>" onclick="openTab('pedidos')">Gestión de pedidos</button>
             <a href="profile.php" class="profile-menu-btn">Volver a mi cuenta</a>
         </aside>
 

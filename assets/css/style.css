@@ -57,8 +57,6 @@ main {
 
 body {
     font-family: var(--fuenteTexto);
-    font-size: 1.6rem;
-    line-height: 2;
     margin: 0;
 }
 
@@ -112,7 +110,7 @@ h4 { font-size: 1.8rem; }
 }
 
 .img-logo img {
-    width: 160px;     /* tamaño real del logo */
+    width: 22rem;     /* tamaño real del logo */
     height: auto;
     max-width: none;
     flex-shrink: 0;
@@ -2678,4 +2676,67 @@ textarea {
 .btn-secondary:hover {
     border-color: #1A1A1A;
     background-color: #f9f9f9;
+}
+
+
+
+/*header dropdown*/
+/* ===============================
+   USER DROPDOWN
+================================ */
+
+.user-menu-wrapper {
+    position: relative;
+}
+
+.user-toggle {
+    cursor: pointer;
+}
+
+.user-toggle i {
+    font-size: 1.8rem;
+    color: #1A1A1A;
+}
+
+.user-dropdown {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    background: #fff;
+    border-radius: 12px;
+    min-width: 200px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    display: none;
+    flex-direction: column;
+    padding: 10px 0;
+    z-index: 1000;
+}
+
+.user-dropdown a {
+    padding: 10px 18px;
+    text-decoration: none;
+    color: #1A1A1A;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.95rem;
+    transition: background 0.2s ease;
+}
+
+.user-dropdown a:hover {
+    background: #F3EFEA;
+}
+
+.user-dropdown hr {
+    border: none;
+    border-top: 1px solid #E5E5E5;
+    margin: 8px 0;
+}
+
+.user-dropdown .admin-link {
+    font-weight: 600;
+    color: #8B4513;
+}
+
+/* Mostrar menú */
+.user-dropdown.active {
+    display: flex;
 }
