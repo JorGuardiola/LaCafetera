@@ -87,7 +87,7 @@ ob_start();
 ?>
 <div class="login-box">
     
-    <h2 class="login-title">Acceso</h2>
+    <h3 class="login-title">Acceso</h3>
     
     <?php if (!empty($error_message)): ?>
         <div class="alert error">
@@ -108,10 +108,10 @@ ob_start();
             <label for="email" class="input-label small-label">Email</label>
             <input 
                 type="email" 
+                class="form-input"
                 id="email" 
                 name="email" 
                 required
-                class="form-input"
                 value="<?php echo isset($email) ? htmlspecialchars($email) : ''; ?>"
             >
         </div>

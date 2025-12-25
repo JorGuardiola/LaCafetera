@@ -51,9 +51,7 @@ html {
 }
 
 main {
-    padding-top: var(--header-height);
 }
-
 
 body {
     font-family: var(--fuenteTexto);
@@ -68,6 +66,9 @@ h1 { font-size: 4.1rem; line-height: 1.18; }
 h2 { font-size: 3.2rem; }
 h3 { font-size: 2.8rem; }
 h4 { font-size: 1.8rem; }
+h5 { font-size: 1.6rem; }
+h6 { font-size: 1.4rem; }
+p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }   
 
 .container {
     width: 90%;
@@ -88,7 +89,6 @@ h4 { font-size: 1.8rem; }
 
 .header {
     height: var(--header-height);
-    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -1095,7 +1095,8 @@ body.bg-beige {
     display: grid;
     grid-template-columns: 1fr 1fr; 
     gap: 60px;
-    align-items: center; 
+    align-items: center;
+    padding-top: var(--header-height);
 }
 
 /* Columna Izquierda */
@@ -1161,14 +1162,6 @@ body.bg-beige {
     color: #1A1A1A;
     margin: 1.5rem 0;
 }
-
-/* Descripción */
-.card-description {
-    color: #555;
-    line-height: 1.6;
-    margin-bottom: 2rem;
-}
-
 
 /* --- SELECTORES TIPO BOTÓN --- */
 .selector-group {
@@ -1359,7 +1352,7 @@ body.bg-beige {
     box-shadow: 0 10px 30px rgba(var(--black), 0.15); 
     
     /* Espacio interno */
-    padding: 2rem 1rem;
+    padding: 2rem;
     
     /* Ancho máximo para que no ocupe toda la mitad derecha */
     max-width: 36rem;
@@ -1371,25 +1364,21 @@ body.bg-beige {
 
 /* Título "Acceso" */
 .login-title {
-    font-family: var(--fuenteHeading);
-    font-size: 4rem; /* Grande y elegante */
+
     text-align: center;
-    margin-bottom: 3rem;
-    line-height: 1;
+
 }
 
 /* --- Inputs y Grupos --- */
 
 .input-group {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     position: relative; /* Necesario para posicionar la etiqueta pequeña */
 }
 
 /* Etiqueta pequeña (Email, Contraseña) */
 .input-label {
     display: block;
-    font-size: 1.5rem;
-    font-weight: 500;
     color: rgb(var(--primary-400)); /* Color sutil */
     margin-bottom: 0.5rem;
 }
@@ -1398,13 +1387,10 @@ body.bg-beige {
 .form-input {
         
     width: 100%;
-    padding: 1.2rem 1.5rem;
+    padding: 0.5rem
        
 }
-.password-field .form-input {
-    padding: 1.2rem 4rem 1.2rem 1.5rem;
-    
-}
+
 
 .form-input:focus {
     border-color: rgb(var(--primary-500));
@@ -1474,7 +1460,6 @@ body.bg-beige {
     justify-content: center;
     
     width: 100%;
-    padding: 1.2rem;
     
     background-color: rgb(var(--primary-900)); /* Fondo negro/oscuro */
     color: white;
@@ -1749,7 +1734,7 @@ body.bg-beige {
     gap: 4rem;
     align-items: flex-start;
     max-width: 120rem; /* Limite el ancho si es necesario, o usa .container */
-    margin: 0 auto;
+    margin: 5rem;
 }
 
 .formulario {
@@ -1834,7 +1819,7 @@ label {
     display: block;
     font-size: 1.5rem;
     color: rgb(var(--primary-500));
-    margin-top: 1.5rem;
+    margin-top: 0.5rem;
     margin-bottom: 0.5rem;
     font-weight: 600;
 }
@@ -1843,7 +1828,8 @@ input:not([type="submit"]),
 textarea, 
 select {
     width: 100%;
-    padding: 1.2rem;
+    padding-right: 1.2rem;
+    padding-left: 1.2rem;
     border: 1px solid rgb(var(--primary-200));
     border-radius: 8px;
     box-sizing: border-box; 
@@ -1945,15 +1931,19 @@ textarea {
 @media (max-width: 900px) {
     /* En Tablet, aún podemos mantener algo de la estructura flex */
     .contacto-flex {
+        flex-direction: column; /* Apila el formulario y la información en móviles */
+        align-items: center;
         gap: 3rem;
         /* Permitimos que la info adicional quede a la derecha si hay espacio */
+        margin: 5rem;
     }
 }
 
 @media (max-width: 768px) {
     .contacto-flex {
-        flex-direction: column; /* Apila el formulario y la información en móviles */
+        
         gap: 4rem;
+        margin: 5rem;
     }
 
     .formulario,
@@ -2654,7 +2644,7 @@ textarea {
 .btn-primary, .btn-secondary { 
     display: block; 
     text-align: center; 
-    padding: 18px; 
+    padding: 1.2rem; 
     border-radius: 35px; 
     text-decoration: none; 
     font-weight: 700;

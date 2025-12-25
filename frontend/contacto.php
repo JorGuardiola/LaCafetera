@@ -23,7 +23,7 @@ require __DIR__ . '/vendor/phpmailer/src/SMTP.php';
 
 $bgClass = 'bg-contacto'; 
 // Asumiendo que templates está al mismo nivel que contacto.php (dentro de frontend/)
-include __DIR__ . '/templates/header.php';
+
 
 
 // Define una variable para almacenar mensajes de estado
@@ -155,9 +155,15 @@ $heroButtonLink = "";
 
 
 
-<main class="contenedor seccion contenido-centrado">
 
-    <?php include __DIR__ . '/templates/hero.php'; ?>
+
+
+<?php 
+include __DIR__ . '/templates/header.php';
+include __DIR__ . '/templates/hero.php';
+?>
+
+<main>
     
     <?php 
         echo $mensaje_estado; 
