@@ -156,6 +156,13 @@ include __DIR__ . '/templates/header.php';
     <?php include __DIR__ . '/templates/hero.php'; ?>
 </main>
 
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+  if (window.lucide) {
+    lucide.createIcons();
+  }
+</script>
+
 <script>
     // 1. INICIALIZACIÓN DE ICONOS DE LUCIDE (Se debe ejecutar tan pronto como sea posible)
     if (window.lucide && typeof window.lucide.createIcons === 'function') {
