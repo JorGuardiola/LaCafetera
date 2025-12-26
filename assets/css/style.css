@@ -1117,7 +1117,6 @@ body.bg-beige {
     font-size: 4rem;
     color: #1A1A1A; /* Casi negro */
     margin-top: 1rem;
-    text-align: center;
    }
 
 /* Columna Derecha: La Tarjeta */
@@ -2675,6 +2674,7 @@ textarea {
 /*header dropdown*/
 /* ===============================
    USER DROPDOWN
+================================ */
 
 .user-menu-wrapper {
     position: relative;
@@ -2730,138 +2730,4 @@ textarea {
 /* Mostrar menú */
 .user-dropdown.active {
     display: flex;
-}
-/* ESTILO POLITICA DE COOKIES */
-/* --- ESTILOS PARA POLÍTICA DE COOKIES --- */
-
-:root {
-    --color-cafe-oscuro: #4e342e;
-    --color-cafe-claro: #795548;
-    --color-fondo-suave: #f9f4f2;
-    --color-borde: #d7ccc8;
-}
-
-.cookies-container {
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 20px;
-    line-height: 1.8;
-    color: #333;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.cookies-container h1 {
-    color: var(--color-cafe-oscuro);
-    border-bottom: 2px solid var(--color-cafe-oscuro);
-    padding-bottom: 10px;
-    font-size: 2.2rem;
-}
-
-.cookies-container h2 {
-    color: var(--color-cafe-claro);
-    margin-top: 30px;
-    font-size: 1.5rem;
-}
-
-/* Bloque de datos de empresa */
-.empresa-box {
-    background-color: var(--color-fondo-suave);
-    border-left: 6px solid var(--color-cafe-oscuro);
-    padding: 20px;
-    margin: 20px 0;
-    border-radius: 4px;
-}
-
-.empresa-box ul {
-    list-style: none;
-    padding: 0;
-    margin: 10px 0 0 0;
-}
-
-.empresa-box li {
-    margin-bottom: 8px;
-}
-
-/* Tabla de cookies */
-.cookies-table-wrapper {
-    overflow-x: auto; /* Para que sea responsive en móviles */
-}
-
-.cookies-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 25px 0;
-    background-color: #fff;
-}
-
-.cookies-table th, 
-.cookies-table td {
-    border: 1px solid var(--color-borde);
-    padding: 12px 15px;
-    text-align: left;
-}
-
-.cookies-table th {
-    background-color: var(--color-cafe-oscuro);
-    color: white;
-}
-
-.cookies-table tr:nth-child(even) {
-    background-color: #fcfaf9;
-}
-
-/* Enlaces de navegadores */
-.links-navegadores {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    padding: 0;
-    list-style: none;
-    margin-top: 20px;
-}
-
-.links-navegadores li a {
-    display: flex;
-    align-items: center;
-    gap: 8px; /* Espacio entre el icono y el texto */
-    padding: 10px 20px;
-    background: #fff;
-    border: 1px solid var(--color-cafe-claro);
-    color: var(--color-cafe-claro);
-    text-decoration: none;
-    border-radius: 30px;
-    transition: all 0.3s ease;
-    font-size: 1.4rem;
-    font-weight: 500;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-
-.links-navegadores li a i {
-    font-size: 1.1rem;
-}
-
-.links-navegadores li a:hover {
-    background: var(--color-cafe-claro);
-    color: #fff;
-    transform: translateY(-2px); /* Efecto sutil de levante */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-
-.cookies-table td:last-child {
-    font-size: 1.6rem;
-    color: #666;
-}
-.cookies-container {
-    /* Sumamos los 94px del header + 40px de espacio extra */
-    margin-top: 135px !important; 
-    
-    /* Aseguramos que el contenido tenga un buen margen lateral en móviles */
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-/* Si usas anclas o enlaces internos, esto evita que el header tape el título al saltar */
-html {
-    scroll-padding-top: 110px;
 }
