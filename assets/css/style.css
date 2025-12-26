@@ -161,7 +161,6 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
 
 .cart-wrapper {
     position: relative;
-    display: inline-flex;
     align-items: center;
 }
 
