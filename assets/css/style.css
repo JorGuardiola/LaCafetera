@@ -159,6 +159,22 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
     width: 1.8rem;
 }
 
+.cart-badge-number {
+    background-color: rgb(var(--secondary-800));
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -8px;
+    right: -10px;
+}
+
 
 /* =======================================
    BOTÓN MENÚ MOBILE
