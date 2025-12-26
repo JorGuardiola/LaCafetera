@@ -8,6 +8,14 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+$totalHeader = 0;
+if (isset($_SESSION['carrito']) && is_array($_SESSION['carrito'])) {
+    foreach ($_SESSION['carrito'] as $cantidad) {
+        $totalHeader += (int)$cantidad;
+    }
+}
+
+
 // Cargar conexión (para BASE_URL)
 require_once __DIR__ . '/../../db/connection.php';
 ?>
