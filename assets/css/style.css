@@ -159,6 +159,12 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
     width: 1.8rem;
 }
 
+.cart-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
 .cart-badge-number {
     background-color: rgb(var(--secondary-800));
     color: white;
