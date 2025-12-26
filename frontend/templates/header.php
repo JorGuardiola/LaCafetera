@@ -113,7 +113,6 @@ require_once __DIR__ . '/../../db/connection.php';
                 aria-label="Carrito">
             <img src="<?= BASE_URL ?>/assets/img/carrito.png" alt="Carrito">
             <div class="cart-wrapper">
-            <i class="fa-solid fa-cart-shopping"></i>
             <span id="headerCartCount" class="cart-badge-number"><?= $totalHeader ?></span>
             </div>
         </button>
