@@ -7,7 +7,7 @@ require_once __DIR__ . '/../db/connection.php';
 if (!isset($_SESSION['user_id'])) { header('Location: ' . BASE_URL . '/frontend/login.php'); exit; }
 $user_id = $_SESSION['user_id'];
 $mensaje = '';
-$tab_activa = 'datos';
+$tab_activa = $_GET['tab'] ?? 'datos';
 
 // 2. LÓGICA POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -79,16 +79,44 @@ $mis_pedidos = $stmt->fetchAll();
 
 <div class="container profile-container">
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
-        <h1>Mi Cuenta</h1>
-        <?php if($mensaje): ?><div style="background:#e8f5e9; color:#2e7d32; padding:1rem; border-radius:8px;"><?= $mensaje ?></div><?php endif; ?>
+        <h1>
+            Mi cuenta
+            <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin'): ?>
+            <span>Administrador</span>
+            <?php endif; ?>
+        </h1>
     </div>
 
     <div class="profile-layout">
         <aside class="profile-sidebar">
-            <button class="profile-menu-btn <?= $tab_activa == 'datos' ? 'active' : '' ?>" onclick="openTab('datos')">Mis Datos</button>
-            <button class="profile-menu-btn <?= $tab_activa == 'direcciones' ? 'active' : '' ?>" onclick="openTab('direcciones')">Mis Direcciones</button>
-            <button class="profile-menu-btn <?= $tab_activa == 'pedidos' ? 'active' : '' ?>" onclick="openTab('pedidos')">Mis Pedidos</button>
-            <a href="logout.php" class="profile-menu-btn btn-logout">Cerrar sesión</a>
+
+            <button class="profile-menu-btn <?= $tab_activa === 'datos' ? 'active' : '' ?>"
+                    onclick="openTab('datos')">
+                Mis datos
+            </button>
+
+            <button class="profile-menu-btn <?= $tab_activa === 'direcciones' ? 'active' : '' ?>"
+                    onclick="openTab('direcciones')">
+                Mis direcciones
+            </button>
+
+            <button class="profile-menu-btn <?= $tab_activa === 'pedidos' ? 'active' : '' ?>"
+                    onclick="openTab('pedidos')">
+                Mis pedidos
+            </button>
+
+            <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin'): ?>
+                <a href="<?= BASE_URL ?>/frontend/admin.php"
+                   class="profile-menu-btn admin-btn">
+                    Panel de administración
+                </a>
+            <?php endif; ?>
+
+            <a href="<?= BASE_URL ?>/frontend/logout.php"
+               class="profile-menu-btn btn-logout">
+                Cerrar sesión
+            </a>
+
         </aside>
 
         <div class="profile-content">
@@ -165,12 +193,24 @@ $mis_pedidos = $stmt->fetchAll();
 </div>
 
 <script>
-function openTab(tabId) {
-    document.querySelectorAll('.profile-content-section').forEach(el => el.classList.remove('active'));
-    document.querySelectorAll('.profile-menu-btn').forEach(el => el.classList.remove('active'));
-    document.getElementById(tabId).classList.add('active');
-    const btns = document.querySelectorAll('.profile-menu-btn');
-    btns.forEach(b => { if(b.onclick.toString().includes(tabId)) b.classList.add('active'); });
-}
+    function openTab(tabId) {
+        const url = new URL(window.location);
+        url.searchParams.set('tab', tabId);
+        window.history.pushState({}, '', url);
+
+        document.querySelectorAll('.profile-content-section')
+            .forEach(el => el.classList.remove('active'));
+
+        document.querySelectorAll('.profile-menu-btn')
+            .forEach(el => el.classList.remove('active'));
+
+        document.getElementById(tabId).classList.add('active');
+
+        document.querySelectorAll('.profile-menu-btn').forEach(btn => {
+            if (btn.getAttribute('onclick')?.includes(tabId)) {
+                btn.classList.add('active');
+            }
+        });
+    }
 </script>
 <?php include __DIR__ . '/templates/footer.php'; ?>

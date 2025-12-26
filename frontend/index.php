@@ -31,7 +31,7 @@ $heroButtonLink = "";
   <section class="tag-carousel">
     <div class="carousel-header">
       <h2>Nuestros valores</h2>
-      </div>
+    </div>
 
     <div class="carousel-track">
       <?php

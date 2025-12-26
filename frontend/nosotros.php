@@ -5,10 +5,21 @@ $bgClass = 'bg-nosotros';
 $heroTitle = 'La Cafetera 1994: Más que café, una tradición.';
 $heroSubTitle = 'La Cafetera 1994 no es solo una tienda de café; es el resultado de una promesa de calidad que hicimos hace más de dos décadas. Todo comenzó en 1994, cuando nuestro fundador, KALDI, se propuso recuperar la auténtica experiencia del café. Desde entonces, nuestro objetivo no ha cambiado: traer el café más honesto y perfectamente tostado directamente de la finca a tu taza.';
 
+// ==============================================================================
+// Contenido del hero
+$bgClass = "bg-nosotros";
+$heroTitle = "La Cafetera 1994: Más que café, una tradición";
+$heroSubtitle = "La Cafetera 1994 no es solo una tienda de café; es el resultado de una promesa de calidad que hicimos hace más de dos décadas. ";
+$heroButtonText = ""; // vacío → no aparece botón
+$heroButtonLink = "";
+
+
+
+
 // 2. Incluir el encabezado
 include __DIR__ . '/templates/header.php';
-?>
 
+/* sdfs
 <div class="header-hero-simple <?php echo $bgClass; ?>">
 
     <div class="hero-texto-centrado contenedor">
@@ -23,13 +34,18 @@ include __DIR__ . '/templates/header.php';
         
         <a href="products.php" class="boton-negro">
         Explora Nuestros Tuestes Únicos
-    </a>
+        </a>
 
     </div>
 
 </div> 
+*/
+?>
 
 <main class="pagina-nosotros">
+        
+    <?php include __DIR__ . '/templates/hero.php'; ?>   
+    
 
     <section class="seccion contenido-principal contenedor">
         

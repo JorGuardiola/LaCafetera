@@ -38,10 +38,13 @@ if (isset($_SESSION['carrito']) && is_array($_SESSION['carrito'])) {
 }
 ?>
 
+
+
+
+
 <?php include __DIR__ . '/templates/header.php'; ?>
 
 <main class="product-detail-layout">
-    
     <div class="detail-left">
         <div class="detail-image-container">
             <img src="<?= BASE_URL ?>/assets/img/imgsproducts/<?= htmlspecialchars($producto['imagen']) ?>" 
