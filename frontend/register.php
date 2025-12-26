@@ -150,6 +150,16 @@ $heroRightContent = ob_get_clean();
 
 <?php include __DIR__ . '/templates/footer.php'; ?>
 
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+  if (window.lucide) {
+    lucide.createIcons();
+  }
+</script>
+
+
+
 <script>
 if (window.lucide) lucide.createIcons();
 
