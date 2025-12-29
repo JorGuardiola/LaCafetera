@@ -6,10 +6,11 @@
 
     <!-- Columna 1 Logo + Descripción -->
     <div class="footer-col footer-brand">
-      <img src="<?= BASE_URL ?>/assets/img/logo-white.png" alt="La Cafetera" class="footer-logo">
-      <p class="footer-desc">
-        Desde 1994 seleccionando los mejores cafés del mundo para llevarlos a tu taza.
-      </p>
+      <a href="<?= BASE_URL ?>/frontend/index.php">
+        <img src="<?= BASE_URL ?>/assets/img/logo-white.png" alt="La Cafetera" class="footer-logo">
+        <p class="footer-desc">
+          Desde 1994 seleccionando los mejores cafés del mundo para llevarlos a tu taza.
+        </p>
     </div>
 
     <!-- Columna 2 -->

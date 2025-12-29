@@ -83,9 +83,16 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
 
 
 
-/* =======================================
+
+
+
+
+
+
+
+/* =========================================================================================================================
    HEADER
-======================================= */
+================================================================================= */
 
 .header {
     height: var(--header-height);
@@ -94,12 +101,10 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
     width: 100%;
     z-index: 1000;
     position: fixed;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    padding: 1.5rem 20rem;
+    padding: 1.5rem 2rem;
     background: #ffffff;
 }
 
@@ -112,7 +117,7 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
 }
 
 .img-logo img {
-    width: 22rem;     /* tamaño real del logo */
+    width: 28rem;     /* tamaño real del logo */
     height: auto;
     max-width: none;
     flex-shrink: 0;
@@ -124,11 +129,18 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
     height: 35px;
     display: flex;
     align-items: center;
-    background: rgba(var(--secondary-500), var(--opacidad-barra));
+    background:rgb(225, 220, 210);
     backdrop-filter: blur(6px);
     padding: 0 24px;
     border-radius: 40px;
 }
+
+.nav-bar a:hover{
+    font-weight: bold;
+    color: rgb(var(--secondary-900));
+}
+
+
 
 /* NAV */
 .nav-bar ul {
@@ -181,9 +193,66 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
 }
 
 
-/* =======================================
-   BOTÓN MENÚ MOBILE
-======================================= */
+/*header dropdown*/
+
+.user-menu-wrapper {
+    position: relative;
+}
+
+.user-toggle {
+    cursor: pointer;
+}
+
+.user-toggle i {
+    font-size: 1.8rem;
+    color: rgb(var(--primary-900));
+}
+
+.user-dropdown {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    background:white;
+    border-radius: 12px;
+    min-width: 200px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    display: none;
+    flex-direction: column;
+    padding: 1rem 0;
+    z-index: 1000;
+}
+
+.user-dropdown a {
+    padding: 10px 18px;
+    font-size: 1.3rem;
+}
+
+.user-dropdown a:hover {
+    font-weight: bold;
+    color: rgb(var(--secondary-900));
+}
+
+.user-dropdown a:hover {
+    background: rgba(var(--secondary-500), var(--opacidad-barra));
+}
+
+.user-dropdown hr {
+    border: none;
+    border-top: 1px solid #E5E5E5;
+    margin: 8px 0;
+}
+
+.user-dropdown .admin-link {
+    font-weight: bold;
+}
+
+/* Mostrar menú */
+.user-dropdown.active {
+    display: flex;
+    font-weight: 1.3rem;
+}
+
+/* BOTÓN MENÚ MOBILE */
 
 .menu-toggle {
     display: none;
@@ -201,10 +270,7 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
     display: block;
 }
 
-
-/* =======================================
-   RESPONSIVE HEADER
-======================================= */
+/* RESPONSIVE HEADER  */
 
 /* ---------- MOBILE ---------- */
 @media (max-width: 767px) {
@@ -227,29 +293,29 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
         left: 0;
         width: 100%;
         display: none;
-
         justify-content: center;
-        background: #ffffff;
         border-radius: 0;
         padding: 2.5rem 0;
-
-        
         box-shadow: 0 8px 20px rgba(0,0,0,0.08);
         z-index: 999;
-    }
+        background: rgba(rgb(225, 225, 202));
+     }
 
     .nav-bar ul {
         flex-direction:row;
         gap: 5rem;
         text-align: center;
-      
         justify-content: center;
-        width: 100%;
-        background: #ffffff;
+        width: 100%;  
     }
 
     .nav-bar.active {
         display: flex;
+        background: rgba(rgb(225, 225, 202));
+    }
+
+    .nav-bar.active a:hover {
+        font-weight: bold;
     }
 
     .icons-bar {
@@ -272,9 +338,9 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
 
     .nav-bar ul {
         gap: 1.5rem;
+        
     }
 }
-
 
 /* ---------- DESKTOP ---------- */
 @media (min-width: 1024px) {
@@ -285,7 +351,19 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
 }
 
 
-/*aqui hay que mirar*/
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* =======================================
@@ -313,7 +391,6 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
 }
 .hero-container.bg-login {
     background-image: url('../img/hero-sesion.jpg'); 
-    
 }
 .hero-container.bg-registro {
     background-image: url('../img/hero-registro.jpg');
@@ -346,14 +423,9 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
     color: black;
 }
 
-/* Columna derecha (vacía pero estructural) */
+/* Columna derecha (vacía pero para dar estructura) */
 
-
-
-
-/* =======================================
-   RESPONSIVE
-======================================= */
+/* RESPONSIVE HERO */
 
 /* --------- TABLET (768–1023px) -------- */
 @media (max-width: 1023px) {
@@ -382,8 +454,6 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
         display: none;
     }
 }
-
-
 
 /* --------- MOBILE (0–767px) -------- */
 @media (max-width: 767px) {
@@ -419,6 +489,247 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
         display: none;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ============================
+   FOOTER 
+============================ */
+.footer {
+    background: rgb(var(--primary-800));
+    color: white;
+    padding: 6rem 0 3rem;
+    font-size: 1.4rem;
+}
+
+.footer-container {
+    width: 90%;
+    max-width: 130rem;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 5rem;
+    flex-wrap: wrap;
+}
+/* Columna 1 */
+.footer-logo {
+    width: 26rem;
+    margin-bottom: 2rem;
+}
+
+.footer-desc {
+    color: rgba(255,255,255,0.8);
+    line-height: 1.6;
+}
+/* Columnas de enlaces */
+.footer-col h4 {
+    font-family: var(--fuenteHeading);
+    font-size: 1.6rem;
+    margin-bottom: 1.2rem;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-col ul li {
+    margin-bottom: .8rem;
+}
+
+.footer-col ul a:hover {
+    color: white;
+}
+
+/* Columna derecha (iconos + botón) */
+.footer-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
+.footer-social {
+    display: flex;
+    gap: 2rem;
+}
+
+.footer-social a {
+    background: rgba(255,255,255,0.1);
+    padding: .9rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    transition: .3s;
+}
+
+.footer-social a:hover {
+    background: rgba(255,255,255,0.25);
+}
+
+.footer-social img {
+    width: 2rem;
+}
+
+/* Botón */
+.footer-btn {
+    display: inline-block;
+    padding: 1rem 3rem;
+    border: 1px solid rgba(255,255,255,0.7);
+    border-radius: 3rem;
+    color: white;
+    transition: .3s;
+    font-size: 1.4rem;
+}
+
+.footer-btn:hover {
+    background: rgba(255,255,255,0.15);
+}
+
+/* LÍNEA INFERIOR */
+.footer-bottom {
+    width: 90%;
+    max-width: 130rem;
+    margin: 4rem auto 0;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.footer-bottom p {
+    color: rgba(255,255,255,0.7);
+}
+
+
+.footer-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.footer-links a {
+    color: rgba(255,255,255,0.7);
+    transition: .3s;
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+/* RESPONSIVE FOOTER */
+
+@media (max-width: 767px) {
+
+    .footer-container {
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    .footer-right {
+        align-items: flex-start;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 767px) {
+
+    .footer-main {
+        padding: 4rem 0 2rem;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr; /* Una sola columna en móvil */
+        gap: 4rem;
+    }
+
+    .footer-brand-info,
+    .footer-links-container,
+    .footer-social-action {
+        grid-column: 1 / 2;
+        width: 100%;
+        border-top: none !important;
+        padding-top: 0 !important;
+    }
+    
+    .footer-links-container {
+        flex-direction: column; /* Apilamos las columnas de enlaces */
+        gap: 2.5rem;
+    }
+
+    .footer-links-col h3 {
+        margin-bottom: 0.8rem;
+    }
+
+    .footer-social-action {
+        flex-direction: column; /* Apilamos iconos y botón */
+        align-items: flex-start;
+        gap: 2rem;
+    }
+
+    /* Línea inferior (Copyright y Privacidad) */
+    .footer-legal-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+        font-size: 1.4rem;
+    }
+    
+    .privacy-links a {
+        margin-left: 0;
+        margin-right: 1rem;
+    }
+
+    .copyright-text {
+        order: 2; /* Coloca el copyright abajo de los links legales */
+    }
+    .privacy-links {
+        order: 1;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -535,212 +846,6 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
 }
 
 
-/* ============================
-   FOOTER (ACTUALIZADO PARA COINCIDIR CON HTML Y DISEÑO)
-============================ */
-.footer {
-    background: rgb(var(--primary-800));
-    color: white;
-    padding: 6rem 0 3rem;
-    font-size: 1.4rem;
-}
-
-.footer-container {
-    width: 90%;
-    max-width: 130rem;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    gap: 5rem;
-    flex-wrap: wrap;
-}
-/* Columna 1 */
-.footer-logo {
-    width: 26rem;
-    margin-bottom: 2rem;
-}
-
-.footer-desc {
-    color: rgba(255,255,255,0.8);
-    line-height: 1.6;
-}
-/* Columnas de enlaces */
-.footer-col h4 {
-    font-family: var(--fuenteHeading);
-    font-size: 1.6rem;
-    margin-bottom: 1.2rem;
-}
-
-.footer-col ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.footer-col ul li {
-    margin-bottom: .8rem;
-}
-
-.footer-col ul a:hover {
-    color: white;
-}
-
-/* Columna derecha (iconos + botón) */
-.footer-right {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2rem;
-}
-
-.footer-social {
-    display: flex;
-    gap: 2rem;
-}
-
-.footer-social a {
-    background: rgba(255,255,255,0.1);
-    padding: .9rem;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    transition: .3s;
-}
-
-.footer-social a:hover {
-    background: rgba(255,255,255,0.25);
-}
-
-.footer-social img {
-    width: 2rem;
-}
-
-/* Botón */
-.footer-btn {
-    display: inline-block;
-    padding: 1rem 3rem;
-    border: 1px solid rgba(255,255,255,0.7);
-    border-radius: 3rem;
-    color: white;
-    transition: .3s;
-    font-size: 1.4rem;
-}
-
-.footer-btn:hover {
-    background: rgba(255,255,255,0.15);
-}
-
-/* ============================
-   LÍNEA INFERIOR
-============================ */
-.footer-bottom {
-    width: 90%;
-    max-width: 130rem;
-    margin: 4rem auto 0;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255,255,255,0.1);
-
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 2rem;
-}
-
-.footer-bottom p {
-    color: rgba(255,255,255,0.7);
-}
-
-
-.footer-links {
-    display: flex;
-    gap: 2rem;
-}
-
-.footer-links a {
-    color: rgba(255,255,255,0.7);
-    transition: .3s;
-}
-
-.footer-links a:hover {
-    color: white;
-}
-
-/* ============================
-   RESPONSIVE FOOTER
-============================ */
-@media (max-width: 767px) {
-
-    .footer-container {
-        flex-direction: column;
-        gap: 3rem;
-    }
-
-    .footer-right {
-        align-items: flex-start;
-    }
-
-    .footer-bottom {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1.5rem;
-    }
-}
-
-@media (max-width: 767px) {
-
-    .footer-main {
-        padding: 4rem 0 2rem;
-    }
-
-    .footer-container {
-        grid-template-columns: 1fr; /* Una sola columna en móvil */
-        gap: 4rem;
-    }
-
-    .footer-brand-info,
-    .footer-links-container,
-    .footer-social-action {
-        grid-column: 1 / 2;
-        width: 100%;
-        border-top: none !important;
-        padding-top: 0 !important;
-    }
-    
-    .footer-links-container {
-        flex-direction: column; /* Apilamos las columnas de enlaces */
-        gap: 2.5rem;
-    }
-
-    .footer-links-col h3 {
-        margin-bottom: 0.8rem;
-    }
-
-    .footer-social-action {
-        flex-direction: column; /* Apilamos iconos y botón */
-        align-items: flex-start;
-        gap: 2rem;
-    }
-
-    /* Línea inferior (Copyright y Privacidad) */
-    .footer-legal-container {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1.5rem;
-        font-size: 1.4rem;
-    }
-    
-    .privacy-links a {
-        margin-left: 0;
-        margin-right: 1rem;
-    }
-
-    .copyright-text {
-        order: 2; /* Coloca el copyright abajo de los links legales */
-    }
-    .privacy-links {
-        order: 1;
-    }
-}
 
 /*  ============================
    SECCION DE PRODUCTOS
@@ -2693,63 +2798,3 @@ textarea {
 
 
 
-/*header dropdown*/
-/* ===============================
-   USER DROPDOWN
-================================ */
-
-.user-menu-wrapper {
-    position: relative;
-}
-
-.user-toggle {
-    cursor: pointer;
-}
-
-.user-toggle i {
-    font-size: 1.8rem;
-    color: #1A1A1A;
-}
-
-.user-dropdown {
-    position: absolute;
-    top: 120%;
-    right: 0;
-    background: #fff;
-    border-radius: 12px;
-    min-width: 200px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-    display: none;
-    flex-direction: column;
-    padding: 10px 0;
-    z-index: 1000;
-}
-
-.user-dropdown a {
-    padding: 10px 18px;
-    text-decoration: none;
-    color: #1A1A1A;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 0.95rem;
-    transition: background 0.2s ease;
-}
-
-.user-dropdown a:hover {
-    background: #F3EFEA;
-}
-
-.user-dropdown hr {
-    border: none;
-    border-top: 1px solid #E5E5E5;
-    margin: 8px 0;
-}
-
-.user-dropdown .admin-link {
-    font-weight: 600;
-    color: #8B4513;
-}
-
-/* Mostrar menú */
-.user-dropdown.active {
-    display: flex;
-}
