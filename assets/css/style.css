@@ -18,7 +18,8 @@
     --primary-900: 0, 1, 2;
 
     /* Secondary - Tierra (RGB) */
-    --secondary-100: 216, 202, 196;
+    --secundary-50: 255, 221, 200;
+    --secondary-100: 242, 232, 228;
     --secondary-200: 207, 187, 177;
     --secondary-400: 199, 166, 150;
     --secondary-500: 187, 142, 120;
@@ -83,6 +84,60 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
 
 
 
+/* =========================================================================================================================
+   BOTONES
+================================================================================= */
+
+
+/* BOTÓN - 1 */
+.boton1-btn {
+    width: 100%;
+    padding: 1.4rem 0;
+    border-radius: 40px;
+    border: 1px solid rgb(var(--primary-600));
+    background:var(--secundary-100);
+    cursor: pointer;
+    font-size: 1.6rem;
+    color: rgb(var(--primary-600));
+    transition: 0.25s ease;
+    margin-top: auto;
+    font-weight: bold;
+    
+}
+
+.boton1-btn:hover {
+    background: rgb(var(--primary-500));
+    color: white;
+}
+
+/* BOTÓN - 2 */
+
+.boton2-btn {
+    padding: 10px 15px;
+    cursor: pointer;
+    background: rgb(var(--primary-500));
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* BOTÓN - 3 */
+
+
+
+
+
+/* BOTÓN - 3 */
+
+
+
+
+
+
+
+
 
 
 
@@ -105,7 +160,7 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem 2rem;
-    background: #ffffff;
+    background: white;
 }
 
 
@@ -129,7 +184,7 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
     height: 35px;
     display: flex;
     align-items: center;
-    background:rgb(225, 220, 210);
+    background:rgb(var(--secondary-100));
     backdrop-filter: blur(6px);
     padding: 0 24px;
     border-radius: 40px;
@@ -139,8 +194,6 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
     font-weight: bold;
     color: rgb(var(--secondary-900));
 }
-
-
 
 /* NAV */
 .nav-bar ul {
@@ -191,7 +244,6 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
     top: -8px;
     right: -10px;
 }
-
 
 /*header dropdown*/
 
@@ -298,7 +350,7 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
         padding: 2.5rem 0;
         box-shadow: 0 8px 20px rgba(0,0,0,0.08);
         z-index: 999;
-        background: rgba(rgb(225, 225, 202));
+        background: rgba(rgb(245, 245, 225));
      }
 
     .nav-bar ul {
@@ -311,7 +363,7 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
 
     .nav-bar.active {
         display: flex;
-        background: rgba(rgb(225, 225, 202));
+        background: rgba(rgb(245, 245, 225));
     }
 
     .nav-bar.active a:hover {
@@ -511,7 +563,7 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
    FOOTER 
 ============================ */
 .footer {
-    background: rgb(var(--primary-800));
+    background: rgb(var(--primary-600));
     color: white;
     padding: 6rem 0 3rem;
     font-size: 1.4rem;
@@ -599,7 +651,9 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
 }
 
 .footer-btn:hover {
-    background: rgba(255,255,255,0.15);
+    background: white;
+    color: black;
+    font-weight: bold;
 }
 
 /* LÍNEA INFERIOR */
@@ -735,9 +789,9 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
 
 
 
-/* =====================
-   CARRUSEL BASE (MODIFICADO PARA ANIMACIÓN)
-===================== */
+/* ==================================================================
+   CARRUSEL BASE con animacion en index.php
+================================================================= */
 .tag-carousel {
     position: relative;
     overflow: hidden; /* Oculta el contenido duplicado que no cabe */
@@ -748,7 +802,7 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
 .carousel-track {
     display: flex;
     gap: 2rem;
-    width: max-content; /* Es crucial para que todo el contenido (duplicado) quepa en una línea */
+    width: max-content; 
     animation: scroll 35s linear infinite; /* Aplicar animación: 35s, lineal, infinito */
     transition: none; /* Desactivar transiciones que interfieren con la animación */
 }
@@ -768,9 +822,7 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
 /* Ya no es necesario ocultar scrollbar en tag-carousel si overflow es hidden */
 
 
-/* =====================
-   TARJETAS
-===================== */
+/*    TARJETAS del carrusel */
 .tag-card {
     width: 32rem;
     height: 48rem;
@@ -806,10 +858,7 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
     color: white;
 }
 
-
-/* =====================
-   RESPONSIVE CARRUSEL
-===================== */
+/* RESPONSIVE CARRUSEL */
 
 @media (max-width: 767px) {
     .carousel-track {
@@ -840,16 +889,28 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
     padding-left: 3rem;
 }
 
-/* Botones (Ocultar completamente, ya no existen en el HTML) */
-.carousel-btn {
-    display: none;
-}
 
 
 
-/*  ============================
-   SECCION DE PRODUCTOS
-============================ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*  ============================================================================================================================
+   Tarjeta tipo producto y grid de productos (usado en index.php para productos destacados y en products.php)
+================================================================================================================================ */
 /* GRID DE PRODUCTOS */
 .product-grid {
     width: 90%;
@@ -862,6 +923,8 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
 
 /* TARJETA */
 .product-card {
+    display: flex;
+    flex-direction: column;
     height: 50rem;
     background: white;
     padding: 2.5rem;
@@ -869,10 +932,20 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     position: relative;
     transition: .2s ease;
+    height: 100%; /* CLAVE */;
+    
 }
 
 .product-card:hover {
     transform: translateY(-4px);
+}
+
+.product-content {
+    flex: 1;
+}
+
+.product-action {
+    margin-top: auto;
 }
 
 /* FAVORITO */
@@ -929,24 +1002,7 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
     font-weight: 700;
     margin-bottom: 2rem;
     color: rgb(var(--primary-900));
-}
-
-/* BOTÓN */
-.product-btn {
-    width: 100%;
-    padding: 1.4rem 0;
-    border-radius: 40px;
-    border: 2px solid rgb(var(--primary-900));
-    background: white;
-    cursor: pointer;
-    font-size: 1.6rem;
-    color: rgb(var(--primary-900));
-    transition: 0.25s ease;
-}
-
-.product-btn:hover {
-    background: rgb(var(--primary-700));
-    color: white;
+    margin-top: auto;
 }
 
 /* RESPONSIVE */
