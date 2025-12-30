@@ -416,7 +416,7 @@ $pedidos = $pdo->query("
 
 <?php include __DIR__ . '/templates/header.php'; ?>
 
-<main class="site-main">
+<main>
 <div class="container profile-container">
 
     <h1>Panel de Administración</h1>

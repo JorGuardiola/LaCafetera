@@ -49,7 +49,7 @@ $heroButtonLink = "";
 
 <!-- PRODUCTOS DESTACADOS -->
 
-<section class="container" style="margin:6rem auto;">
+<section class="container">
     <h2 class="center-text">Cafés destacados</h2>
 
 
@@ -80,8 +80,6 @@ $stmt->execute();
     <?php include __DIR__ . '/templates/card.php'; ?>
 <?php endwhile; ?>
 </div>
-
-
 </section>
 
 </main>

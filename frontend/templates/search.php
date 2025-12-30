@@ -36,7 +36,7 @@ $procesos = ["Lavado","Natural","Honey"];
             Precio <span id="icon-price">=</span>
         </button>
 
-        <button id="btn-clear-filters" style="padding:10px 15px; cursor:pointer; background:#e74c3c; color:white; border:none; border-radius:4px; font-weight: bold; white-space:nowrap;">
+        <button id="btn-clear-filters" class="boton2-btn">
             <i class="fa-solid fa-trash"></i> Borrar filtros
         </button>
     </div>

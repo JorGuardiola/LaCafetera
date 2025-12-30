@@ -18,7 +18,8 @@
     --primary-900: 0, 1, 2;
 
     /* Secondary - Tierra (RGB) */
-    --secondary-100: 216, 202, 196;
+    --secundary-50: 255, 221, 200;
+    --secondary-100: 242, 232, 228;
     --secondary-200: 207, 187, 177;
     --secondary-400: 199, 166, 150;
     --secondary-500: 187, 142, 120;
@@ -83,9 +84,70 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
 
 
 
-/* =======================================
+/* =========================================================================================================================
+   BOTONES
+================================================================================= */
+
+
+/* BOTÓN - 1 */
+.boton1-btn {
+    width: 100%;
+    padding: 1.4rem 0;
+    border-radius: 40px;
+    border: 1px solid rgb(var(--primary-600));
+    background:var(--secundary-100);
+    cursor: pointer;
+    font-size: 1.6rem;
+    color: rgb(var(--primary-600));
+    transition: 0.25s ease;
+    margin-top: auto;
+    font-weight: bold;
+    
+}
+
+.boton1-btn:hover {
+    background: rgb(var(--primary-500));
+    color: white;
+}
+
+/* BOTÓN - 2 */
+
+.boton2-btn {
+    padding: 10px 15px;
+    cursor: pointer;
+    background: rgb(var(--primary-500));
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* BOTÓN - 3 */
+
+
+
+
+
+/* BOTÓN - 3 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================================================================================
    HEADER
-======================================= */
+================================================================================= */
 
 .header {
     height: var(--header-height);
@@ -94,13 +156,11 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
     width: 100%;
     z-index: 1000;
     position: fixed;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    padding: 1.5rem 20rem;
-    background: #ffffff;
+    padding: 1.5rem 2rem;
+    background: white;
 }
 
 
@@ -112,7 +172,7 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
 }
 
 .img-logo img {
-    width: 22rem;     /* tamaño real del logo */
+    width: 28rem;     /* tamaño real del logo */
     height: auto;
     max-width: none;
     flex-shrink: 0;
@@ -124,10 +184,15 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
     height: 35px;
     display: flex;
     align-items: center;
-    background: rgba(var(--secondary-500), var(--opacidad-barra));
+    background:rgb(var(--secondary-100));
     backdrop-filter: blur(6px);
     padding: 0 24px;
     border-radius: 40px;
+}
+
+.nav-bar a:hover{
+    font-weight: bold;
+    color: rgb(var(--secondary-900));
 }
 
 /* NAV */
@@ -180,10 +245,66 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
     right: -10px;
 }
 
+/*header dropdown*/
 
-/* =======================================
-   BOTÓN MENÚ MOBILE
-======================================= */
+.user-menu-wrapper {
+    position: relative;
+}
+
+.user-toggle {
+    cursor: pointer;
+}
+
+.user-toggle i {
+    font-size: 1.8rem;
+    color: rgb(var(--primary-900));
+}
+
+.user-dropdown {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    background:white;
+    border-radius: 12px;
+    min-width: 200px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    display: none;
+    flex-direction: column;
+    padding: 1rem 0;
+    z-index: 1000;
+}
+
+.user-dropdown a {
+    padding: 10px 18px;
+    font-size: 1.3rem;
+}
+
+.user-dropdown a:hover {
+    font-weight: bold;
+    color: rgb(var(--secondary-900));
+}
+
+.user-dropdown a:hover {
+    background: rgba(var(--secondary-500), var(--opacidad-barra));
+}
+
+.user-dropdown hr {
+    border: none;
+    border-top: 1px solid #E5E5E5;
+    margin: 8px 0;
+}
+
+.user-dropdown .admin-link {
+    font-weight: bold;
+}
+
+/* Mostrar menú */
+.user-dropdown.active {
+    display: flex;
+    font-weight: 1.3rem;
+}
+
+/* BOTÓN MENÚ MOBILE */
 
 .menu-toggle {
     display: none;
@@ -201,10 +322,7 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
     display: block;
 }
 
-
-/* =======================================
-   RESPONSIVE HEADER
-======================================= */
+/* RESPONSIVE HEADER  */
 
 /* ---------- MOBILE ---------- */
 @media (max-width: 767px) {
@@ -227,29 +345,29 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
         left: 0;
         width: 100%;
         display: none;
-
         justify-content: center;
-        background: #ffffff;
         border-radius: 0;
         padding: 2.5rem 0;
-
-        
         box-shadow: 0 8px 20px rgba(0,0,0,0.08);
         z-index: 999;
-    }
+        background: rgba(rgb(245, 245, 225));
+     }
 
     .nav-bar ul {
         flex-direction:row;
         gap: 5rem;
         text-align: center;
-      
         justify-content: center;
-        width: 100%;
-        background: #ffffff;
+        width: 100%;  
     }
 
     .nav-bar.active {
         display: flex;
+        background: rgba(rgb(245, 245, 225));
+    }
+
+    .nav-bar.active a:hover {
+        font-weight: bold;
     }
 
     .icons-bar {
@@ -272,9 +390,9 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
 
     .nav-bar ul {
         gap: 1.5rem;
+        
     }
 }
-
 
 /* ---------- DESKTOP ---------- */
 @media (min-width: 1024px) {
@@ -285,7 +403,19 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
 }
 
 
-/*aqui hay que mirar*/
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* =======================================
@@ -313,7 +443,6 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
 }
 .hero-container.bg-login {
     background-image: url('../img/hero-sesion.jpg'); 
-    
 }
 .hero-container.bg-registro {
     background-image: url('../img/hero-registro.jpg');
@@ -346,14 +475,9 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
     color: black;
 }
 
-/* Columna derecha (vacía pero estructural) */
+/* Columna derecha (vacía pero para dar estructura) */
 
-
-
-
-/* =======================================
-   RESPONSIVE
-======================================= */
+/* RESPONSIVE HERO */
 
 /* --------- TABLET (768–1023px) -------- */
 @media (max-width: 1023px) {
@@ -382,8 +506,6 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
         display: none;
     }
 }
-
-
 
 /* --------- MOBILE (0–767px) -------- */
 @media (max-width: 767px) {
@@ -424,122 +546,24 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
 
 
 
-/* =====================
-   CARRUSEL BASE (MODIFICADO PARA ANIMACIÓN)
-===================== */
-.tag-carousel {
-    position: relative;
-    overflow: hidden; /* Oculta el contenido duplicado que no cabe */
-    width: 100%;
-    padding: 3rem 0;
-}
-
-.carousel-track {
-    display: flex;
-    gap: 2rem;
-    width: max-content; /* Es crucial para que todo el contenido (duplicado) quepa en una línea */
-    animation: scroll 35s linear infinite; /* Aplicar animación: 35s, lineal, infinito */
-    transition: none; /* Desactivar transiciones que interfieren con la animación */
-}
-
-/* Pausar animación al pasar el ratón */
-.tag-carousel:hover .carousel-track {
-    animation-play-state: paused;
-}
-
-/* Definición de la animación de desplazamiento */
-@keyframes scroll {
-    0% { transform: translateX(0); }
-    /* Mueve el 50% de la longitud total, que es la longitud original del contenido */
-    100% { transform: translateX(-50%); }
-}
-
-/* Ya no es necesario ocultar scrollbar en tag-carousel si overflow es hidden */
 
 
-/* =====================
-   TARJETAS
-===================== */
-.tag-card {
-    width: 32rem;
-    height: 48rem;
-    border-radius: 18px;
-    position: relative;
-    padding: 1.2rem;
-    color: rgb(var(--white));
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    background-image: var(--bg);    /* usa la variable definida en el HTML */
-    background-size: cover;
-    background-position: center;
-    box-shadow: 0 8px 18px rgba(0,0,0,0.15);
-    flex-shrink: 0;
-}
-
-/* Mini etiqueta arriba izquierda */
-.tag-card .tag-more {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    font-size: 1.1rem;
-    padding: .3rem .8rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: white;
-}
-
-/* Título h3 abajo izquierda */
-.tag-card h3 {
-    margin: 0;
-    color: white;
-}
 
 
-/* =====================
-   RESPONSIVE CARRUSEL
-===================== */
 
-@media (max-width: 767px) {
-    .carousel-track {
-        gap: 1.4rem;
-    }
 
-    .tag-card {
-        width: 24rem;
-        height: 32rem;
-    }
 
-    .tag-card h3 {
-        font-size: 1.6rem;
-    }
 
-    .tag-card .tag-more {
-        font-size: 1rem;
-    }
-}
 
-/* Cabecera del carrusel */
-.carousel-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.4rem;
-    padding-right: 1rem;
-    padding-left: 3rem;
-}
 
-/* Botones (Ocultar completamente, ya no existen en el HTML) */
-.carousel-btn {
-    display: none;
-}
+
 
 
 /* ============================
-   FOOTER (ACTUALIZADO PARA COINCIDIR CON HTML Y DISEÑO)
+   FOOTER 
 ============================ */
 .footer {
-    background: rgb(var(--primary-800));
+    background: rgb(var(--primary-600));
     color: white;
     padding: 6rem 0 3rem;
     font-size: 1.4rem;
@@ -627,12 +651,12 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
 }
 
 .footer-btn:hover {
-    background: rgba(255,255,255,0.15);
+    background: white;
+    color: black;
+    font-weight: bold;
 }
 
-/* ============================
-   LÍNEA INFERIOR
-============================ */
+/* LÍNEA INFERIOR */
 .footer-bottom {
     width: 90%;
     max-width: 130rem;
@@ -665,9 +689,8 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
     color: white;
 }
 
-/* ============================
-   RESPONSIVE FOOTER
-============================ */
+/* RESPONSIVE FOOTER */
+
 @media (max-width: 767px) {
 
     .footer-container {
@@ -742,9 +765,152 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
     }
 }
 
-/*  ============================
-   SECCION DE PRODUCTOS
-============================ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==================================================================
+   CARRUSEL BASE con animacion en index.php
+================================================================= */
+.tag-carousel {
+    position: relative;
+    overflow: hidden; /* Oculta el contenido duplicado que no cabe */
+    width: 100%;
+    padding: 3rem 0;
+}
+
+.carousel-track {
+    display: flex;
+    gap: 2rem;
+    width: max-content; 
+    animation: scroll 35s linear infinite; /* Aplicar animación: 35s, lineal, infinito */
+    transition: none; /* Desactivar transiciones que interfieren con la animación */
+}
+
+/* Pausar animación al pasar el ratón */
+.tag-carousel:hover .carousel-track {
+    animation-play-state: paused;
+}
+
+/* Definición de la animación de desplazamiento */
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    /* Mueve el 50% de la longitud total, que es la longitud original del contenido */
+    100% { transform: translateX(-50%); }
+}
+
+/* Ya no es necesario ocultar scrollbar en tag-carousel si overflow es hidden */
+
+
+/*    TARJETAS del carrusel */
+.tag-card {
+    width: 32rem;
+    height: 48rem;
+    border-radius: 18px;
+    position: relative;
+    padding: 1.2rem;
+    color: rgb(var(--white));
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background-image: var(--bg);    /* usa la variable definida en el HTML */
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+    flex-shrink: 0;
+}
+
+/* Mini etiqueta arriba izquierda */
+.tag-card .tag-more {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-size: 1.1rem;
+    padding: .3rem .8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: white;
+}
+
+/* Título h3 abajo izquierda */
+.tag-card h3 {
+    margin: 0;
+    color: white;
+}
+
+/* RESPONSIVE CARRUSEL */
+
+@media (max-width: 767px) {
+    .carousel-track {
+        gap: 1.4rem;
+    }
+
+    .tag-card {
+        width: 24rem;
+        height: 32rem;
+    }
+
+    .tag-card h3 {
+        font-size: 1.6rem;
+    }
+
+    .tag-card .tag-more {
+        font-size: 1rem;
+    }
+}
+
+/* Cabecera del carrusel */
+.carousel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.4rem;
+    padding-right: 1rem;
+    padding-left: 3rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*  ============================================================================================================================
+   Tarjeta tipo producto y grid de productos (usado en index.php para productos destacados y en products.php)
+================================================================================================================================ */
 /* GRID DE PRODUCTOS */
 .product-grid {
     width: 90%;
@@ -757,6 +923,8 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
 
 /* TARJETA */
 .product-card {
+    display: flex;
+    flex-direction: column;
     height: 50rem;
     background: white;
     padding: 2.5rem;
@@ -764,10 +932,20 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     position: relative;
     transition: .2s ease;
+    height: 100%; /* CLAVE */;
+    
 }
 
 .product-card:hover {
     transform: translateY(-4px);
+}
+
+.product-content {
+    flex: 1;
+}
+
+.product-action {
+    margin-top: auto;
 }
 
 /* FAVORITO */
@@ -824,24 +1002,7 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
     font-weight: 700;
     margin-bottom: 2rem;
     color: rgb(var(--primary-900));
-}
-
-/* BOTÓN */
-.product-btn {
-    width: 100%;
-    padding: 1.4rem 0;
-    border-radius: 40px;
-    border: 2px solid rgb(var(--primary-900));
-    background: white;
-    cursor: pointer;
-    font-size: 1.6rem;
-    color: rgb(var(--primary-900));
-    transition: 0.25s ease;
-}
-
-.product-btn:hover {
-    background: rgb(var(--primary-700));
-    color: white;
+    margin-top: auto;
 }
 
 /* RESPONSIVE */
@@ -2693,63 +2854,3 @@ textarea {
 
 
 
-/*header dropdown*/
-/* ===============================
-   USER DROPDOWN
-================================ */
-
-.user-menu-wrapper {
-    position: relative;
-}
-
-.user-toggle {
-    cursor: pointer;
-}
-
-.user-toggle i {
-    font-size: 1.8rem;
-    color: #1A1A1A;
-}
-
-.user-dropdown {
-    position: absolute;
-    top: 120%;
-    right: 0;
-    background: #fff;
-    border-radius: 12px;
-    min-width: 200px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-    display: none;
-    flex-direction: column;
-    padding: 10px 0;
-    z-index: 1000;
-}
-
-.user-dropdown a {
-    padding: 10px 18px;
-    text-decoration: none;
-    color: #1A1A1A;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 0.95rem;
-    transition: background 0.2s ease;
-}
-
-.user-dropdown a:hover {
-    background: #F3EFEA;
-}
-
-.user-dropdown hr {
-    border: none;
-    border-top: 1px solid #E5E5E5;
-    margin: 8px 0;
-}
-
-.user-dropdown .admin-link {
-    font-weight: 600;
-    color: #8B4513;
-}
-
-/* Mostrar menú */
-.user-dropdown.active {
-    display: flex;
-}

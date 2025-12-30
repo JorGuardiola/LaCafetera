@@ -21,8 +21,10 @@ $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <?php include __DIR__ . '/templates/header.php'; ?>
 
+<?php include __DIR__ . '/templates/hero.php'; ?>
+
 <main>
-    <?php include __DIR__ . '/templates/hero.php'; ?>
+    
     
     <?php include __DIR__ . '/templates/search.php'; ?>
 
