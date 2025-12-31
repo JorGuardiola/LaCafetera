@@ -177,40 +177,40 @@ include __DIR__ . '/templates/hero.php';
                 <legend>Información Personal</legend>
 
                 <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="contacto[nombre]" placeholder="Tu Nombre" required>
+                <input type="text" id="nombre" name="contacto[nombre]" class="input1" placeholder="Tu Nombre" required>
 
                 <label for="email">E-mail:</label>
-                <input type="email" id="email" name="contacto[email]" placeholder="Tu Email" required>
+                <input type="email" id="email" name="contacto[email]" class="input1" placeholder="Tu Email" required>
             </fieldset>
 
             <fieldset>
                 <legend>Motivo y Mensaje</legend>
                 
                 <label for="motivo">Motivo de Contacto:</label>
-                <select id="motivo" name="contacto[motivo]" required>
-                    <option value="" disabled selected>-- Seleccione un Motivo --</option>
+                <select id="motivo" name="contacto[motivo]" class="selector1" required>
+                    <option value="" disabled selected>Seleccione un Motivo --</option>
                     <option value="pedido">Consulta sobre Pedido Existente</option>
                     <option value="producto">Ayuda con Producto/Molienda (Pregunta al Barista)</option>
                     <option value="negocios">Ventas al por Mayor / Negocios</option>
                     <option value="sugerencia">Comentarios y Sugerencias</option>
                 </select>
 
-                <div id="campo-pedido" style="display: none;">
+                <div id="campo-pedido" >
                     <label for="n_pedido">Número de Pedido:</label>
-                    <input type="text" id="n_pedido" name="contacto[n_pedido]" placeholder="Ej: #12345">
+                    <input type="text" id="n_pedido" name="contacto[n_pedido]" placeholder="Numero de pedido" class="input1"Ej: #12345">
                 </div>
 
                 <label for="mensaje">Mensaje:</label>
-                <textarea id="mensaje" name="contacto[mensaje]" required></textarea>
+                <textarea id="mensaje" name="contacto[mensaje]" class="textarea1" required></textarea>
 
                 <div class="aviso-legal">
-                    <input type="checkbox" id="aceptar_politica" name="contacto[aceptar_politica]" required>
+                    <input type="checkbox" id="aceptar_politica" name="contacto[aceptar_politica]" class="checkbox1" required>
                     <label for="aceptar_politica">Acepto la <a href="politica-privacidad.php">Política de Privacidad</a> y los <a href="terminos-condiciones.php">Términos y Condiciones</a>.</label>
                 </div>
 
             </fieldset>
             
-            <input type="submit" value="Enviar mi Consulta y Tomar un Café" class="boton-verde">
+            <input type="submit" value="Enviar mi Consulta y Tomar un Café" class="boton1-btn">
         </form>
         
         <div class="info-adicional">

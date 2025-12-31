@@ -24,19 +24,22 @@ $envases = $pdo->query("
 ")->fetchAll(PDO::FETCH_COLUMN);
 ?>
 <h4>Busqueda de productos</h4>
+<div class="filter-bar">
 <form method="GET"
       id="adminSearchForm"
-      class="admin-search-bar"
-      style="margin-bottom:1rem;display:flex;gap:1rem;align-items:center";background: #FAF7F2; padding: 1rem; border-radius: 8px;>
+      class="filters-group"
 
     <input
         type="text"
         name="q"
         placeholder="Escriba SKU"
+        class="input1"
         value="<?= htmlspecialchars($_GET['q'] ?? '') ?>"
     >
 
-    <select name="molienda" id="filter-molienda">
+    <input type="text" id="ajax-search" placeholder="Buscar café..." class="input1">
+
+    <select name="molienda" id="filter-molienda"class="selector1">
         <option value="">Elija moliendas</option>
         <?php foreach ($moliendas as $m): ?>
             <option value="<?= htmlspecialchars($m) ?>"
@@ -46,7 +49,7 @@ $envases = $pdo->query("
         <?php endforeach; ?>
     </select>
 
-    <select name="tueste" id="filter-tueste">
+    <select name="tueste" id="filter-tueste"class="selector1">
         <option value="">Elija tuestes</option>
         <?php foreach ($tuestes as $t): ?>
             <option value="<?= htmlspecialchars($t) ?>"
@@ -56,7 +59,7 @@ $envases = $pdo->query("
         <?php endforeach; ?>
     </select>
 
-    <select name="envase" id="filter-envase">
+    <select name="envase" id="filter-envase"class="selector1">
         <option value="">Elija envases</option>
         <?php foreach ($envases as $e): ?>
             <option value="<?= htmlspecialchars($e) ?>"
@@ -68,17 +71,10 @@ $envases = $pdo->query("
 
     <input type="hidden" name="tab" value="productos">
 
-    <button type="submit"
-        style="padding:8px 16px;border-radius:6px;background:#1A1A1A;color:#fff;border:none">
-        Filtrar
-    </button>
-
-    <a href="admin.php?tab=productos"
-       style="padding:8px 14px;border-radius:6px;border:1px solid #ccc;text-decoration:none">
-        Limpiar
-    </a>
+    <button type="submit" class="boton3-btn">Filtrar</button>
+    <button href="admin.php?tab=productos" type="submit" class="boton3-btn">Limpiar</button>
 </form>
-
+</div>
 <script>
 (() => {
   const moliendaSelect = document.getElementById('filter-molienda');
