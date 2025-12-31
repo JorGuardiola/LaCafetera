@@ -443,8 +443,7 @@ $pedidos = $pdo->query("
             <div id="usuarios" class="profile-content-section <?= $tab_activa=='usuarios'?'active':'' ?>">
                 <h2 class="section-title">Gestión de Usuarios</h2>
 
-                <button type="button" onclick="openUserForm()"
-                    style="padding:10px 16px;border-radius:8px;background:#1A1A1A;color:#fff;border:none;margin-bottom:1rem">
+                <button type="button" onclick="openUserForm()" class="boton2-btn">
                     + Crear usuario
                 </button>
 
@@ -472,7 +471,7 @@ $pedidos = $pdo->query("
                                 <form method="POST">
                                     <input type="hidden" name="action" value="change_user_role">
                                     <input type="hidden" name="id_usuario" value="<?= (int)$u['id_usuario'] ?>">
-                                    <select name="rol" onchange="this.form.submit()">
+                                    <select name="rol" onchange="this.form.submit()"class="selector1">
                                         <option value="cliente" <?= $u['rol']==='cliente'?'selected':'' ?>>Cliente</option>
                                         <option value="admin" <?= $u['rol']==='admin'?'selected':'' ?>>Admin</option>
                                     </select>
@@ -481,14 +480,14 @@ $pedidos = $pdo->query("
                             <td style="white-space:nowrap">
                                 <button type="button"
                                     onclick='openUserForm(<?= json_encode($u, JSON_HEX_APOS | JSON_HEX_QUOT) ?>)'
-                                    style="color:#1976d2;background:none;border:none;margin-right:10px;cursor:pointer">
+                                    class="modificar-btn">
                                     Modificar
                                 </button>
 
                                 <form method="POST" style="display:inline" onsubmit="return confirm('¿Eliminar usuario?')">
-                                    <input type="hidden" name="action" value="delete_user">
-                                    <input type="hidden" name="id_usuario" value="<?= (int)$u['id_usuario'] ?>">
-                                    <button type="submit" style="color:red;background:none;border:none;cursor:pointer">
+                                    <input type="hidden" name="action" value="delete_user" class="input1">
+                                    <input type="hidden" name="id_usuario" value="<?= (int)$u['id_usuario'] ?>" class="input1">
+                                    <button type="submit" class="eliminar-btn">
                                         Eliminar
                                     </button>
                                 </form>

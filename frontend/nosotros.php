@@ -42,12 +42,12 @@ include __DIR__ . '/templates/header.php';
 */
 ?>
 
-<main class="pagina-nosotros">
+<main>
         
     <?php include __DIR__ . '/templates/hero.php'; ?>   
     
 
-    <section class="seccion contenido-principal contenedor">
+    <section>
         
         <div class="hero-ritual-right contenedor"> 
     

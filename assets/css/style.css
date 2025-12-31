@@ -94,8 +94,8 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
     width: 100%;
     padding: 1.4rem 0;
     border-radius: 40px;
-    border: 1px solid rgb(var(--primary-600));
-    background:var(--secundary-100);
+    border: 1px solid rgb(var(--primary-400));
+    background-color:rgb(var(--secondary-100));
     cursor: pointer;
     font-size: 1.6rem;
     color: rgb(var(--primary-600));
@@ -113,6 +113,7 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
 /* BOTÓN - 2 */
 
 .boton2-btn {
+    font-family: var(--fuenteTexto);
     padding: 10px 15px;
     cursor: pointer;
     background: rgb(var(--primary-500));
@@ -125,16 +126,143 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
 
 /* BOTÓN - 3 */
 
+.boton3-btn {
+    font-family: var(--fuenteTexto);
+    padding: 10px 15px;
+    cursor: pointer;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+/* BOTÓN - Modificar */
+
+.modificar-btn {
+    font-family: var(--fuenteTexto);
+    cursor: pointer;
+    background: white;
+    border: none;
+    white-space: nowrap;
+}
+
+/* BOTÓN - Eliminar */
+
+.eliminar-btn {
+    font-family: var(--fuenteTexto);
+    cursor: pointer;
+    background: white;
+    white-space: nowrap;
+    color: red;
+    border: none;
+}
 
 
 
 
-/* BOTÓN - 3 */
+
+
+
+/* =========================================================================================================================
+   ESTILOS DE FORMULARIO Y CAMPOS
+============================================================================================================================ */
+
+/*SELECTOR 1*/
+.selector1 {
+    font-family: var(--fuenteTexto);
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid;
+    border-color: rgb(var(--primary-100));
+    border-radius: 4px;
+    box-sizing: border-box; 
+    background-color: white;
+}
+
+.input1 {
+    font-family: var(--fuenteTexto);
+    flex-grow: 2; 
+    width: 100%; 
+    padding: 1rem;
+    min-width: 100px; 
+    border:1px solid;
+    border-color: rgb(var(--primary-100)); 
+    border-radius:4px;
+}
+
+
+.textarea1 {
+    font-family: var(--fuenteTexto);
+    width: 100%; 
+    padding: 1rem; 
+    border:1px solid; 
+    border-color: rgb(var(--primary-100)); 
+    border-radius:4px; 
+    box-sizing: border-box; 
+    resize: vertical; 
+    min-height: 120px;
+}
+
+.checkbox1 {
+    width: 20px; 
+    height: 20px; 
+    margin-right: 8px;
+}
+
+
+.filter-bar {
+    display:flex; 
+    flex-wrap:wrap; 
+    align-items:center; 
+    gap:10px; 
+    padding: 15px; 
+    background:#f9f9f9; 
+    border-radius: 8px;
+    max-width: 130rem;
+    margin: 4rem auto;
+
+}
+.filters-group {
+    display:flex; 
+    flex-grow: 10; 
+    gap:10px; 
+    min-width: 300px;
+    align-items: space-between;
+} 
+
+fieldset {
+    
+    border-color: rgb(var(--secondary-200));
+    border-width: 1px;
+    padding: 2.5rem;
+    margin-bottom: 3rem;
+    border-radius: 8px;
+}
 
 
 
 
 
+
+
+
+
+legend {
+    font-family: var(--fuenteHeading);
+    font-size: 2.2rem;
+    color: rgb(var(--primary-600));
+    padding: 0 1rem;
+    font-weight: 700;
+}
+
+label {
+    display: block;
+    font-size: 1.5rem;
+    color: rgb(var(--primary-500));
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
 
 
 
@@ -1023,111 +1151,278 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
 
 
 
-/* ===============================
-   BARRA DE FILTROS (SEARCH.PHP)
-================================ */
 
-/* CONTENEDOR PRINCIPAL */
-.product-filter-bar {
-    width: 90%;
-    max-width: 1300px;
-    margin: 4rem auto 2rem auto;
+
+/* ======================================================================================================================
+   ESTILOS ESPECÍFICOS DE CONTACTO en contacto.php
+===================================================================================================================== */
+
+/* --- 2. Estructura Flex (Formulario + Información) --- */
+
+.contacto-flex {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    gap: 4rem;
+    align-items:flex-start;
+    max-width: 120rem; /* Limite el ancho si es necesario, o usa .container */
+    margin: 0 auto;
+    align-items: flex-start;
+    padding-top: 6rem;
+padding-bottom: 6rem;
 }
 
-/* TÍTULO */
-.filter-title {
+.formulario {
+    flex: 2;
+    padding: 2.5rem;
+    background-color: rgb(var(--primary-50)); /* Fondo muy claro (casi blanco) */
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(var(--black), 0.08);
+}
+
+.info-adicional {
+    flex: 1;
+    padding: 3rem;
+    background-color: rgb(var(--secondary-100)); /* Tono Tierra claro */
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(var(--black), 0.05);
+}
+
+.info-adicional h3 {
     font-family: var(--fuenteHeading);
-    font-size: 3rem;
-    margin: 0;
+    font-size: 2.4rem;
+    margin-bottom: 2rem;
+    color: rgb(var(--primary-600));
+    border-bottom: 2px solid rgb(var(--secondary-500));
+    padding-bottom: 1rem;
 }
 
-/* CONTROLES */
-.filter-controls {
+.info-adicional p {
+    margin-bottom: 1.5rem;
+    font-size: 1.6rem;
+    color: rgb(var(--primary-700));
+}
+
+.info-adicional a {
+    color: rgb(var(--secondary-700)); /* Tono de café o caramelo para enlaces */
+    text-decoration: none;
+    font-weight: 700;
+    transition: color 0.3s ease;
+}
+
+.info-adicional a:hover {
+    color: rgb(var(--secondary-900));
+}
+
+/* CTA de FAQ (Botón destacado) */
+.cta-faq a {
+    display: block;
+    margin-top: 3rem;
+    padding: 1.5rem;
+    background-color: rgb(var(--primary-500)); /* Color de acento oscuro */
+    color: white;
+    text-align: center;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1.6rem;
+    transition: background-color 0.3s ease;
+}
+
+.cta-faq a:hover {
+    background-color: rgb(var(--primary-700));
+}
+
+/* Estilo para el campo de número de pedido condicional */
+#campo-pedido {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background-color: rgba(var(--secondary-200), 0.5); /* Color de tierra semitransparente */
+    border-radius: 8px;
+}
+
+/* Aviso legal y checkbox */
+.aviso-legal {
+    margin-top: 2rem;
+    font-size: 1.4rem;
+    color: rgb(var(--primary-500));
     display: flex;
-    gap: 1.4rem;
     align-items: center;
 }
 
-/* BOTONES */
-.filter-btn {
-    padding: 1rem 2rem;
-    border-radius: 40px;
-    border: transparent;
-    background: rgba(var(--secondary-500), var(--opacidad-barra));
-    
-    letter-spacing: 0.3px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    transition: 0.2s ease;
+.aviso-legal input[type="checkbox"] {
+    width: auto;
+    margin-right: 1rem;
 }
 
-.filter-btn:hover {
-    background: rgba(34,54,74,0.1);
+.aviso-legal a {
+    color: rgb(var(--secondary-700));
+    text-decoration: underline;
 }
 
-/* BOTÓN MÁS LARGO */
-.filter-btn.long {
-    padding-right: 2.6rem;
-    padding-left: 2.6rem;
+
+
+/* --- 4. Estilos de Mensajes de Estado (Alertas PHP) --- */
+
+.alerta {
+    padding: 1.8rem;
+    border-radius: 8px;
+    margin: 0 auto 3rem auto;
+    font-weight: 600;
+    font-size: 1.6rem;
+    text-align: center;
+    max-width: 80rem;
+    box-shadow: 0 2px 4px rgba(var(--black), 0.05);
 }
 
-/* FLECHA */
-.arrow {
-    width: 18px;
-    height: 18px;
-    object-fit: contain;
+.exito {
+    background-color: rgba(7, 24, 43, 0.05); /* Tono primary claro */
+    color: rgb(var(--primary-600));
+    border: 1px solid rgb(var(--primary-500));
 }
 
-/* ICONO CALENDARIO */
-.calendar-icon {
-    width: 18px;
-    height: 18px;
-    object-fit: contain;
+.error {
+    background-color: rgba(162, 87, 52, 0.1); /* Tono secondary claro */
+    color: rgb(var(--secondary-900));
+    border: 1px solid rgb(var(--secondary-800));
 }
 
-/* =====================
-   RESPONSIVE
-===================== */
+.error ul {
+    list-style: disc;
+    padding: 0 2rem;
+    margin-top: 1rem;
+    text-align: left;
+}
 
-/* Tablet */
+
+/* --- 5. Media Queries (Responsividad) --- */
+
 @media (max-width: 900px) {
-    .product-filter-bar {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 2rem;
-    }
-
-    .filter-controls {
-        flex-wrap: wrap;
-        justify-content: flex-start;
+    /* En Tablet, aún podemos mantener algo de la estructura flex */
+    .contacto-flex {
+        flex-direction: column; /* Apila el formulario y la información en móviles */
+        align-items: center;
+        gap: 3rem;
+        /* Permitimos que la info adicional quede a la derecha si hay espacio */
+        margin: 5rem;
     }
 }
 
-/* Móvil */
-@media (max-width: 600px) {
-    .filter-title {
-        font-size: 2.3rem;
+@media (max-width: 768px) {
+    .contacto-flex {
+        
+        gap: 4rem;
+        margin: 2.5rem;
     }
 
-    .filter-controls {
-        gap: 1rem;
+    .formulario {
+        flex: auto;
+        width: 100%;
+        padding: 0;
     }
 
-    .filter-btn {
-        padding: 0.8rem 1.6rem;
-        font-size: 1.3rem;
+    fieldset {
+        padding: 0 1rem;
+        border: none;
     }
 
-    .filter-btn.long {
-        padding-left: 1.6rem;
-        padding-right: 1.6rem;
+    .info-adicional {
+        flex: auto;
+        width: 100%;
+        padding: 3rem;
+    }
+    
+    .contacto-flex h1 {
+        font-size: 3.2rem;
+    }
+    legend {
+        padding: 0 1rem;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==================================================================================================================================
+        CLASES ESPECIFICAS DE LA PAGINA nosotros.php
+   =============================================================================================================================== */
+.hero-ritual-right {
+    /* Mantenemos tus propiedades de Flexbox para centrar el bloque en sí */
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    text-align: center;
+    /* ... otras propiedades ... */
+}
+
+/* CENTRAR EL TÍTULO h3 */
+.hero-ritual-right .ritual-titulo-centrado {
+    text-align: center; /* ¡Aseguramos que el texto esté centrado! */
+    color: #333333;
+    margin-bottom: 3rem;
+}
+
+/* DISPOSICIÓN DE LOS 3 DIVS EN FILA (USANDO GRID) */
+.ritual-puntos-hero {
+    /* === MODIFICACIÓN CLAVE: USAR GRID PARA 3 COLUMNAS === */
+    display: flex; 
+    grid-template-columns: repeat(3, 1fr); /* Crea 3 columnas de igual ancho */
+    gap: 2rem; /* Espacio entre los divs */
+    padding: 5rem;
+    /* El contenedor ahora debe ocupar el ancho completo disponible */
+    width: 100%; 
+}
+
+/* Estilo de los divs individuales (las "celdas" de la tabla) */
+.ritual-item-hero {
+    /* Mantenemos tus estilos de caja (fondo, padding, borde) */
+    background: rgb(var(--secondary-100));
+    padding: 2rem;
+    border-radius: 10px;
+    border-left: 4px solid #7D4F23; 
+    
+    /* Centramos el texto dentro de cada div */
+    text-align: center; 
+}
+
+@media (max-width: 768px) {
+    .ritual-puntos-hero {
+    flex-direction: column;
+    align-items: center;
+    width: auto;
+    padding: 5rem;
+    }
+    .ritual-item-hero {
+    background:rgb(var(--secondary-100));
+    border: none;
+
+    text-align: center;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* =========================================
@@ -1261,6 +1556,20 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
     .cart-item-row { flex-wrap: wrap; }
     .mobile-hide { display: none; }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* =========================================
    SECCION PRODUCTO jorge5dic
@@ -1506,6 +1815,19 @@ body.bg-beige {
         padding: 15px;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* =======================================
     LOGIN: ESTILOS ESPECÍFICOS
 ======================================= */
@@ -1803,47 +2125,20 @@ body.bg-beige {
 .llamada-a-la-accion .boton-primario:hover {
     background-color: #A36B3B; /* Color más claro al pasar el ratón */
 }
-/* -------------------------------------------
-   COLUMNA DERECHA (Ritual de Calidad)
-   ------------------------------------------- */
-.hero-ritual-right {
-    /* Mantenemos tus propiedades de Flexbox para centrar el bloque en sí */
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    text-align: center;
-    /* ... otras propiedades ... */
-}
 
-/* CENTRAR EL TÍTULO h3 */
-.hero-ritual-right .ritual-titulo-centrado {
-    text-align: center; /* ¡Aseguramos que el texto esté centrado! */
-    color: #333333;
-    margin-bottom: 3rem;
-}
 
-/* DISPOSICIÓN DE LOS 3 DIVS EN FILA (USANDO GRID) */
-.ritual-puntos-hero {
-    /* === MODIFICACIÓN CLAVE: USAR GRID PARA 3 COLUMNAS === */
-    display: grid; 
-    grid-template-columns: repeat(3, 1fr); /* Crea 3 columnas de igual ancho */
-    gap: 2rem; /* Espacio entre los divs */
-    
-    /* El contenedor ahora debe ocupar el ancho completo disponible */
-    width: 100%; 
-}
 
-/* Estilo de los divs individuales (las "celdas" de la tabla) */
-.ritual-item-hero {
-    /* Mantenemos tus estilos de caja (fondo, padding, borde) */
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 2rem;
-    border-radius: 10px;
-    border-left: 4px solid #7D4F23; 
-    
-    /* Centramos el texto dentro de cada div */
-    text-align: center; 
-}
+
+
+
+
+
+
+
+
+
+
+
 /* =========================================
    ESTILO PARA EL BOTÓN NEGRO DE CTA
    ========================================= */
@@ -1877,270 +2172,22 @@ body.bg-beige {
 }
 
 
-/* =======================================
-   ESTILOS ESPECÍFICOS DE CONTACTO
-   Archivo: estilos_contacto.css
-======================================= */
-
-/* --- 1. Contenedor y Títulos --- */
-
-/* La clase .container ya está definida en tu CSS base, la reutilizamos para centrar */
-.contenedor.seccion {
-    padding: 6rem 0;
-}
-
-.text-center {
-    text-align: center;
-}
-
-/* Reutilizando la definición de H1 de tu base */
-.contacto-flex h1 {
-    font-size: 4.1rem;
-    line-height: 1.18;
-    color: rgb(var(--primary-600)); /* Texto oscuro */
-    margin-bottom: 0.5rem;
-}
-
-.descripcion-contacto {
-    font-family: var(--fuenteTexto);
-    font-size: 1.8rem;
-    color: rgb(var(--primary-400)); /* Color sutil */
-    margin-bottom: 4rem;
-    max-width: 80rem;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* --- 2. Estructura Flex (Formulario + Información) --- */
-
-.contacto-flex {
-    display: flex;
-    gap: 4rem;
-    align-items: flex-start;
-    max-width: 120rem; /* Limite el ancho si es necesario, o usa .container */
-    margin: 5rem;
-}
-
-.formulario {
-    flex: 2;
-    padding: 3.5rem;
-    background-color: rgb(var(--primary-50)); /* Fondo muy claro (casi blanco) */
-    border-radius: 12px;
-    box-shadow: 0 8px 15px rgba(var(--black), 0.08);
-}
-
-.info-adicional {
-    flex: 1;
-    padding: 3rem;
-    background-color: rgb(var(--secondary-100)); /* Tono Tierra claro */
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(var(--black), 0.05);
-}
-
-.info-adicional h3 {
-    font-family: var(--fuenteHeading);
-    font-size: 2.4rem;
-    margin-bottom: 2rem;
-    color: rgb(var(--primary-600));
-    border-bottom: 2px solid rgb(var(--secondary-500));
-    padding-bottom: 1rem;
-}
-
-.info-adicional p {
-    margin-bottom: 1.5rem;
-    font-size: 1.6rem;
-    color: rgb(var(--primary-700));
-}
-
-.info-adicional a {
-    color: rgb(var(--secondary-700)); /* Tono de café o caramelo para enlaces */
-    text-decoration: none;
-    font-weight: 700;
-    transition: color 0.3s ease;
-}
-
-.info-adicional a:hover {
-    color: rgb(var(--secondary-900));
-}
-
-/* CTA de FAQ (Botón destacado) */
-.cta-faq a {
-    display: block;
-    margin-top: 3rem;
-    padding: 1.5rem;
-    background-color: rgb(var(--primary-500)); /* Color de acento oscuro */
-    color: white;
-    text-align: center;
-    border-radius: 8px;
-    font-weight: 700;
-    font-size: 1.6rem;
-    transition: background-color 0.3s ease;
-}
-
-.cta-faq a:hover {
-    background-color: rgb(var(--primary-700));
-}
 
 
-/* --- 3. Estilos de Formulario y Campos --- */
-
-fieldset {
-    border: 1px solid rgb(var(--primary-200)); /* Borde sutil */
-    padding: 2.5rem;
-    margin-bottom: 3rem;
-    border-radius: 8px;
-}
-
-legend {
-    font-family: var(--fuenteHeading);
-    font-size: 2.2rem;
-    color: rgb(var(--primary-600));
-    padding: 0 1rem;
-    font-weight: 700;
-}
-
-label {
-    display: block;
-    font-size: 1.5rem;
-    color: rgb(var(--primary-500));
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-}
-
-input:not([type="submit"]), 
-textarea, 
-select {
-    width: 100%;
-    padding-right: 1.2rem;
-    padding-left: 1.2rem;
-    border: 1px solid rgb(var(--primary-200));
-    border-radius: 8px;
-    box-sizing: border-box; 
-    font-size: 1.6rem;
-    font-family: var(--fuenteTexto);
-    background-color: white;
-}
-
-textarea {
-    height: 15rem;
-    resize: vertical;
-}
-
-/* Estilo para el campo de número de pedido condicional */
-#campo-pedido {
-    margin-top: 1.5rem;
-    padding: 1.5rem;
-    background-color: rgba(var(--secondary-200), 0.5); /* Color de tierra semitransparente */
-    border-left: 5px solid rgb(var(--secondary-600));
-    border-radius: 8px;
-}
-
-/* Aviso legal y checkbox */
-.aviso-legal {
-    margin-top: 2rem;
-    font-size: 1.4rem;
-    color: rgb(var(--primary-500));
-    display: flex;
-    align-items: center;
-}
-
-.aviso-legal input[type="checkbox"] {
-    width: auto;
-    margin-right: 1rem;
-}
-
-.aviso-legal a {
-    color: rgb(var(--secondary-700));
-    text-decoration: underline;
-}
-
-/* Botón de envío usando el color Tierra/Secondary */
-.boton-verde {
-    background-color: rgb(var(--secondary-700)); /* Marrón oscuro de la marca */
-    color: white;
-    padding: 1.5rem 3rem;
-    border: none;
-    display: block;
-    width: 100%;
-    margin-top: 3.5rem;
-    text-align: center;
-    text-transform: uppercase;
-    font-weight: 700;
-    font-size: 1.8rem;
-    border-radius: 40px; /* Muy redondeado para CTA */
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.boton-verde:hover {
-    background-color: rgb(var(--secondary-800));
-}
-
-/* --- 4. Estilos de Mensajes de Estado (Alertas PHP) --- */
-
-.alerta {
-    padding: 1.8rem;
-    border-radius: 8px;
-    margin: 0 auto 3rem auto;
-    font-weight: 600;
-    font-size: 1.6rem;
-    text-align: center;
-    max-width: 80rem;
-    box-shadow: 0 2px 4px rgba(var(--black), 0.05);
-}
-
-.exito {
-    background-color: rgba(7, 24, 43, 0.05); /* Tono primary claro */
-    color: rgb(var(--primary-600));
-    border: 1px solid rgb(var(--primary-500));
-}
-
-.error {
-    background-color: rgba(162, 87, 52, 0.1); /* Tono secondary claro */
-    color: rgb(var(--secondary-900));
-    border: 1px solid rgb(var(--secondary-800));
-}
-
-.error ul {
-    list-style: disc;
-    padding: 0 2rem;
-    margin-top: 1rem;
-    text-align: left;
-}
 
 
-/* --- 5. Media Queries (Responsividad) --- */
 
-@media (max-width: 900px) {
-    /* En Tablet, aún podemos mantener algo de la estructura flex */
-    .contacto-flex {
-        flex-direction: column; /* Apila el formulario y la información en móviles */
-        align-items: center;
-        gap: 3rem;
-        /* Permitimos que la info adicional quede a la derecha si hay espacio */
-        margin: 5rem;
-    }
-}
 
-@media (max-width: 768px) {
-    .contacto-flex {
-        
-        gap: 4rem;
-        margin: 5rem;
-    }
 
-    .formulario,
-    .info-adicional {
-        flex: auto;
-        width: 100%;
-        padding: 3rem;
-    }
-    
-    .contacto-flex h1 {
-        font-size: 3.2rem;
-    }
-}
+
+
+
+
+
+
+
+
+
 
 /* =======================================
    CHECKOUT
@@ -2517,7 +2564,7 @@ textarea {
     font-size: 2.8rem;
     margin-bottom: 2rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #811313;
 }
 
 /* Tarjetas de Direcciones */
