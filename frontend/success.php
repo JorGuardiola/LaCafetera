@@ -41,6 +41,8 @@ if (!$pedido) {
 $gastos_envio = ($pedido['total'] >= 50) ? 0.00 : 8.00;
 $subtotal = $pedido['total'] - $gastos_envio;
 $nombre_completo = htmlspecialchars($pedido['nombre'] . ' ' . $pedido['apellido']);
+$nombre_solo = htmlspecialchars($pedido['nombre']);
+
 
 // Formato de fecha (Ej: 27 de febrero 2025)
 setlocale(LC_TIME, 'es_ES.UTF-8', 'spanish');
@@ -52,11 +54,15 @@ if(!$fecha_formateada) $fecha_formateada = date('d/m/Y', strtotime($pedido['fech
 
 <?php include __DIR__ . '/templates/header.php'; ?>
 
-<main class="container" style="margin-top: 6rem; margin-bottom: 8rem;">
+<main class="container">
 
     <div class="success-header">
-        <h1 class="success-title">Gracias por su compra!</h1>
-        <p class="success-subtitle">Resumen del pedido nº <?= str_pad($pedido['id_orden'], 5, '0', STR_PAD_LEFT) ?></p>
+        <div>
+            <h1 class="success-title">¡Gracias por tu compra, <?= $nombre_solo ?>!</h1>
+        </div>
+        <div>
+            <p class="success-subtitle">Resumen del pedido nº <?= str_pad($pedido['id_orden'], 5, '0', STR_PAD_LEFT) ?></p>
+        </div>
     </div>
 
     <div class="success-layout">
@@ -112,8 +118,8 @@ if(!$fecha_formateada) $fecha_formateada = date('d/m/Y', strtotime($pedido['fech
                 </div>
             </div>
             
-            <div style="margin-top: 2rem;">
-                 <a href="<?= BASE_URL ?>/frontend/index.php" style="text-decoration:underline; color:#111; font-weight:600;">Volver a la tienda</a>
+            <div class="details-grid">
+                 <a href="<?= BASE_URL ?>/frontend/products.php" class="boton1-btn">Volver a la tienda</a>
             </div>
         </div>
 

@@ -52,6 +52,7 @@ html {
 }
 
 main {
+    margin-top: var(--header-height);
 }
 
 body {
@@ -102,6 +103,7 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
     transition: 0.25s ease;
     margin-top: auto;
     font-weight: bold;
+    text-align: center;
     
 }
 
@@ -135,6 +137,35 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
     border-radius: 4px;
     white-space: nowrap;
 }
+
+
+/* BOTÓN - 4 */
+.boton4-btn {
+    width: 100%;
+    padding: 1.4rem 0;
+    border-radius: 40px;
+    border: 1px solid rgb(var(--primary-500));
+    background-color:rgb(var(--primary-500));
+    cursor: pointer;
+    font-size: 1.6rem;
+    color: white;
+    transition: 0.25s ease;
+    margin-top: auto;
+    font-weight: bold;
+    text-align: center;
+    
+}
+
+
+.boton4-btn:hover {
+    background: rgb(var(--secondary-900));
+    color: white;
+}
+
+
+
+
+
 
 /* BOTÓN - Modificar */
 
@@ -238,14 +269,6 @@ fieldset {
     margin-bottom: 3rem;
     border-radius: 8px;
 }
-
-
-
-
-
-
-
-
 
 legend {
     font-family: var(--fuenteHeading);
@@ -356,6 +379,7 @@ label {
     position: relative;
     align-items: center;
 }
+
 
 .cart-badge-number {
     background-color: rgb(var(--secondary-800));
@@ -1413,28 +1437,23 @@ padding-bottom: 6rem;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-/* =========================================
-   SECCION CARRITO jorge5dic
-   ========================================= */
+/* ===============================================================================================================================
+   Estilos para la pagina de CARRITO cart.php
+   ============================================================================================================================= */
 
 /* Carrito Layout */
+.container h1 {
+    margin-top: 20rem;
+    margin-bottom: 4rem;
+}
+
+
 .cart-layout {
     display: grid;
     grid-template-columns: 2fr 1fr; /* 2 partes lista, 1 parte resumen */
     gap: 40px;
     align-items: start;
+    margin: 4rem auto;
 }
 
 /* Fila de producto */
@@ -1482,6 +1501,22 @@ padding-bottom: 6rem;
     text-transform: uppercase;
 }
 
+.carrito-vacio {
+    display: grid;
+    padding: 4rem; 
+    margin: 4rem auto;
+    background: rgb(var(--secondary-100)); 
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    justify-content: center;
+}
+.carrito-vacio-content {
+    display: grid;
+    justify-content: center;
+    width: auto; 
+}
+
+
 /* Acciones y Precio */
 .qty-selector input {
     width: 60px;
@@ -1491,10 +1526,9 @@ padding-bottom: 6rem;
     border-radius: 4px;
 }
 .btn-delete {
-    color: #d9534f;
-    margin-left: 10px;
-    display: inline-flex;
-    vertical-align: middle;
+    background:none; 
+    border:none; 
+    cursor:pointer;
 }
 .cart-total-line {
     font-weight: 800;
@@ -1506,25 +1540,25 @@ padding-bottom: 6rem;
 
 /* Caja Resumen (Derecha) */
 .cart-summary-box {
-    background: #fcfcfc;
+    background: rgb(var(--secondary-100));
     padding: 30px;
-    border-radius: 8px;
+    border-radius: 10px;
     border: 1px solid #eee;
 }
-.cart-summary-box h2 {
-    font-size: 2rem;
+.cart-summary-box h3 {
     margin-bottom: 20px;
+    margin-top: unset;
 }
 .summary-row {
     display: flex;
     justify-content: space-between;
     margin-bottom: 15px;
-    color: #555;
+    font-size: 1.5rem;
+    font-weight: 600;
 }
 .summary-row.total {
-    color: #000;
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 2rem;
     margin-top: 15px;
 }
 .iva-text {
@@ -1534,21 +1568,7 @@ padding-bottom: 6rem;
     margin-top: -10px;
     margin-bottom: 20px;
 }
-.btn-checkout {
-    width: 100%;
-    background: #F5A623; /* Color mostaza similar a tu imagen */
-    color: #fff;
-    border: none;
-    padding: 15px;
-    border-radius: 50px; /* Bordes redondeados */
-    font-weight: bold;
-    font-size: 1.5rem;
-    cursor: pointer;
-    transition: 0.3s;
-}
-.btn-checkout:hover {
-    background: #e09612;
-}
+
 
 /* Responsivo */
 @media(max-width: 768px) {
@@ -1571,14 +1591,11 @@ padding-bottom: 6rem;
 
 
 
-/* =========================================
-   SECCION PRODUCTO jorge5dic
-   ========================================= */
+/* ===============================================================================================================================
+   Estilos para la pagina de PRODUCTO producto.php
+   ============================================================================================================================= */
 
-/* Fondo general beige */
-body.bg-beige {
-    background-color: #F5EFE5; 
-}
+
 
 /* Layout principal de dos columnas */
 .product-detail-layout {
@@ -1587,17 +1604,65 @@ body.bg-beige {
     padding: 0 20px;
     display: grid;
     grid-template-columns: 1fr 1fr; 
-    gap: 60px;
+    gap: 8rem;
     align-items: center;
     padding-top: var(--header-height);
 }
 
-/* Columna Izquierda */
-@media (min-width: 1024px) {
-    .detail-left {
-        transform: translateX(-80px);
-    }
+/* Columna izquierda - imagen de producto */
+.detail-left {
+    /* va vacio por si lo tenemos que usar mas adeante */
 }
+
+/* Columna Derecha: La Tarjeta */
+.detail-right-card {
+    background-color: rgb(var(--secondary-100)); 
+    padding: 3.5rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+/* Header de la tarjeta */
+.card-header { margin-bottom: 1rem; }
+.reviews-placeholder {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+
+
+.card-title {
+    font-family:var(--fuenteHeading);
+    margin: 0.5rem 0;
+    color: #1A1A1A;
+}
+
+.card-origin {
+    font: var(--fuenteTexto);
+}
+
+/* Precio */
+.card-price {
+    font-family: var(--fuenteTexto);
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin: 1.5rem 0;
+}
+
+
+
+
+
+
+
 .detail-image-container img {
     max-width: 100%;
     height: auto;
@@ -1611,23 +1676,9 @@ body.bg-beige {
     margin-top: 1rem;
    }
 
-/* Columna Derecha: La Tarjeta */
-.detail-right-card {
-    background-color: #FAF7F2; 
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-}
 
-/* Header de la tarjeta */
-.card-header { margin-bottom: 1rem; }
-.reviews-placeholder {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    margin-bottom: 10px;
-    font-size: 0.9rem;
-}
+
+
 .star-icon { color: #C7A17A; font-size: 1.2rem; } 
 .star-icon-half { color: #C7A17A; font-size: 1.2rem; }
 .reviews-link {
@@ -1635,41 +1686,30 @@ body.bg-beige {
     text-decoration: underline;
     margin-left: 5px;
 }
-.card-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.2rem;
-    margin: 0.5rem 0;
-    color: #1A1A1A;
-}
-.card-origin {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    color: #666;
-    font-weight: 500;
-}
 
-/* Precio */
-.card-price {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: #1A1A1A;
-    margin: 1.5rem 0;
-}
+
 
 /* --- SELECTORES TIPO BOTÓN --- */
-.selector-group {
-    margin-bottom: -1rem;
-}
-.selector-label {
+
+
+/* lo dejamos por si acaso usarlo mas adelante*/
+/*.selector-group { 
+}*/
+
+
+/* lo guardamos por si acaso pero no lo usamos*/
+/*.selector-label {
     font-size: 1.5rem !important; 
     font-weight: 700 !important;
     margin-bottom: 0.4rem !important; 
     margin-top: 1.2rem !important;
 }
+*/
+
 .option-buttons {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 1rem;
 }
 /* Ocultamos el radio button real */
 .option-radio {
@@ -1677,29 +1717,41 @@ body.bg-beige {
 }
 /* Estilo del label que parece botón */
 .option-label {
-    display: inline-block;
-    padding: 10px 22px; 
-    border: 1px solid #DDD;
-    border-radius: 30px;
+    font-family: var(--fuenteTexto);
+    padding: 10px 15px;
     cursor: pointer;
-    font-weight: 600;
-    color: #1A1A1A;
-    transition: all 0.2s;
-    font-size: 1.3rem; 
-    text-transform: capitalize;
+    background:rgb(var(--secondary-100));
+    border: 0.4px solid #838383;
+    border-radius: 1.2rem;
+    white-space: nowrap;
 }
 .option-label:hover {
-    border-color: #1A1A1A;
+    color: rgb(var(--secondary-800));
 }
 /* Estilo cuando el radio asociado está checkeado */
 .option-radio:checked + .option-label {
-    background-color: #1A1A1A; 
+    background-color:rgb(var(--secondary-500)); 
     color: #FFF; 
-    border-color: #1A1A1A;
+    border:none;
+}
+/* Info de Stock */
+.stock-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.4rem; 
+    margin: 1.2rem 0;
+    font-weight: 600;
+}
+.stock-dot {
+    width: 1rem;
+    height: 1rem;
+    background-color: #00cf56; 
+    border-radius: 50%;
 }
 
 /* Selector Dropdown Normal (Tueste) */
-.form-select {
+/*.form-select {
     width: 100%;
     padding: 12px 15px;
     border: 1px solid #DDD;
@@ -1708,24 +1760,7 @@ body.bg-beige {
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 1rem;
     cursor: pointer;
-}
-
-/* Info de Stock */
-.stock-info {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 1.5rem; 
-    color: #1A1A1A;
-    margin: 1.2rem 0;
-    font-weight: 600;
-}
-.stock-dot {
-    width: 8px;
-    height: 8px;
-    background-color: #27AE60; 
-    border-radius: 50%;
-}
+}*/
 
 /* --- Fila de Acciones (Cantidad + Botón) --- */
 .card-actions-row {
@@ -1737,9 +1772,8 @@ body.bg-beige {
 .quantity-selector-widget {
     display: flex;
     align-items: center;
-    border: 1px solid #DDD;
+    border: 1.5px solid #636363;
     border-radius: 30px;
-    padding: 4px;
     background: transparent;
     flex-shrink: 0;
     max-width: 200px;
@@ -1748,18 +1782,19 @@ body.bg-beige {
 .qty-btn {
     background: none;
     border: none;
-    font-size: 3rem;
+    font-size: 2.5rem;
     padding: 5px 12px;
     cursor: pointer;
-    color: #1A1A1A;
 }
 .quantity-selector-widget input {
     width: 35px;
+    height: 40px;
     text-align: center;
+    border-radius: 4px;
     border: none;
-    background: transparent;
+    background: white;
     font-weight: 700;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     
 }
 .quantity-selector-widget input::-webkit-outer-spin-button,
@@ -1768,35 +1803,13 @@ body.bg-beige {
     margin: 0;
 }
 
-/* Botón Añadir a la Cesta */
-.btn-add-to-cart-dark {
-    flex: 1; 
-    background-color: #1A1A1A;
-    color: #FFF;
-    border: none;
-    border-radius: 30px;
-    padding: 15px 25px;
-    font-size: 1.8rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background 0.3s;
-    white-space: nowrap;
-    letter-spacing: 0.5px;
-}
-.btn-add-to-cart-dark:hover {
-    background-color: #333;
-}
-.btn-add-to-cart-dark.disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-    opacity: 0.7;
-}
+
 
 /* Responsividad */
 @media (max-width: 900px) {
     .product-detail-layout {
         grid-template-columns: 1fr; /* Una columna en móviles */
-        gap: 30px;
+        gap: 3rem;
     }
     .detail-image-container img {
         max-width: 60%; /* Imagen más pequeña en móvil */
@@ -1815,6 +1828,429 @@ body.bg-beige {
         padding: 15px;
     }
 }
+
+
+/* ===================================================================================================
+   MODAL (POP-UP) despues de hacer click en añadir al carrito
+=================================================================================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: white;
+    width: 90%;
+    max-width: 60rem; /* Ancho similar a la imagen */
+    max-height: 80vh; /* Altura máxima */
+    padding: 3rem;
+    border-radius: 0.8rem;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    position: relative;
+    overflow-y: auto; /* Scroll si el texto es largo */
+    font-family: var(--fuenteTexto);
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #555;
+    line-height: 1;
+}
+
+.modal-title {
+    font-family: var(--fuenteHeading);
+    font-size: 2.4rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.modal-body {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    color: #444;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* =======================================
+   CHECKOUT
+======================================= */
+.checkout-form-section {
+    margin-bottom: 3rem;
+}
+.checkout-heading {
+    font-family: var(--fuenteHeading);
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.checkout-login-link {
+    font-size: 1.4rem;
+    color: #00BFA5; /* Tu color verde */
+    text-decoration: none;
+    font-family: var(--fuenteTexto);
+}
+
+/* Grid de campos */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+.form-group {
+    margin-bottom: 1.5rem;
+}
+.form-group label {
+    display: block;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+.form-group input, 
+.form-group select {
+    width: 100%;
+    padding: 1.2rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1.5rem;
+    font-family: var(--fuenteTexto);
+}
+
+/* Radio buttons de pago como tarjetas */
+.payment-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.payment-option {
+    border: 1px solid #ddd;
+    padding: 1.5rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.payment-option:hover {
+    border-color: #333;
+}
+.payment-option input[type="radio"] {
+    width: 2rem;
+    height: 2rem;
+    accent-color: #111;
+}
+.payment-label {
+    font-size: 1.6rem;
+    font-weight: 600;
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.payment-icons i {
+    font-size: 2rem;
+    margin-left: 10px;
+    color: #555;
+}
+
+/* =======================================
+   ENLACES LEGALES (CHECKOUT FOOTER)
+======================================= */
+.checkout-legal-links {
+    margin-top: 4rem;
+    padding-bottom: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgb(var(--secondary-200));
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: flex-start; 
+}
+
+.legal-link {
+    color: rgb(var(--secondary-700)); 
+    text-decoration: underline;
+    font-size: 1.3rem;
+    cursor: pointer;
+    font-family: var(--fuenteTexto);
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.legal-link:hover {
+    color: rgb(var(--secondary-900));
+    font-weight: bold;
+}
+
+/* =======================================
+   MODAL (POP-UP)
+======================================= */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: white;
+    width: 90%;
+    max-width: 600px; /* Ancho similar a la imagen */
+    max-height: 80vh; /* Altura máxima */
+    padding: 3rem;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    position: relative;
+    overflow-y: auto; /* Scroll si el texto es largo */
+    font-family: var(--fuenteTexto);
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #555;
+    line-height: 1;
+}
+
+.modal-title {
+    font-family: var(--fuenteHeading);
+    font-size: 2.4rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.modal-body {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    color: #444;
+}
+
+
+
+
+
+
+
+
+/* ==========================================================================================================================================
+   PÁGINA SUCCESS (CONFIRMACIÓN/RESUMEN) archivo success.php
+===================================================================================================================================== */
+
+/* Títulos principales */
+.success-header {
+    display: flex;
+    flex-direction: column;
+}
+.success-title {
+    font-family: var(--fuenteHeading);
+    margin: auto;
+}
+.success-subtitle {
+    font-family: var(--fuenteTexto);
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+/* Layout General: Grid de 2 columnas (Izquierda grande, Derecha pequeña) */
+.success-layout {
+    display: grid;
+    grid-template-columns: 1.6fr 0.8fr; /* La izquierda ocupa más */
+    gap: 3rem;
+    align-items: start;
+    margin-bottom: 4rem;
+}
+
+/* Estilos comunes para las tarjetas beige */
+.success-card {
+    background-color: rgb(var(--secondary-100)); /* Color crema de la imagen */
+    border-radius: 12px;
+    padding: 4rem;
+}
+
+/* --- TARJETA IZQUIERDA (Detalles) --- */
+/* Grid interno de la tarjeta izquierda para poner Info y Pago lado a lado */
+.details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas internas */
+    gap: 4rem;
+}
+
+.detail-group {
+    margin-bottom: 3rem;
+}
+
+.detail-group h3 {
+    font-family: var(--fuenteTexto);
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.detail-group p {
+    font-family: var(--fuenteTexto);
+    font-size: 1.5rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* --- TARJETA DERECHA (Resumen Totales) --- */
+.summary-title {
+    font-family: var(--fuenteTexto);
+    font-weight: bold;
+    margin-bottom: 5rem;
+}
+
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.divider {
+    border: 0;
+    border-top: 1px solid rgb(var(--secondary-700));
+    margin: 2rem 0;
+}
+
+.total-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.iva-note {
+    font-size: 1.2rem;
+    color: #646464;
+    font-weight: 400;
+    display: block;
+}
+
+/* Responsivo para móviles */
+@media (max-width: 900px) {
+    .success-layout {
+        grid-template-columns: 1fr; /* Una sola columna */
+    }
+    .details-grid {
+        grid-template-columns: 1fr; /* Una sola columna interna */
+        gap: 2rem;
+    }
+    .success-card {
+        padding: 2rem;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2189,298 +2625,7 @@ body.bg-beige {
 
 
 
-/* =======================================
-   CHECKOUT
-======================================= */
-.checkout-form-section {
-    margin-bottom: 3rem;
-}
-.checkout-heading {
-    font-family: var(--fuenteHeading);
-    font-size: 2.2rem;
-    margin-bottom: 1.5rem;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.checkout-login-link {
-    font-size: 1.4rem;
-    color: #00BFA5; /* Tu color verde */
-    text-decoration: none;
-    font-family: var(--fuenteTexto);
-}
 
-/* Grid de campos */
-.form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-}
-.form-group {
-    margin-bottom: 1.5rem;
-}
-.form-group label {
-    display: block;
-    font-size: 1.3rem;
-    margin-bottom: 0.5rem;
-    color: #555;
-}
-.form-group input, 
-.form-group select {
-    width: 100%;
-    padding: 1.2rem;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 1.5rem;
-    font-family: var(--fuenteTexto);
-}
-
-/* Radio buttons de pago como tarjetas */
-.payment-methods {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-.payment-option {
-    border: 1px solid #ddd;
-    padding: 1.5rem;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    cursor: pointer;
-    transition: 0.2s;
-}
-.payment-option:hover {
-    border-color: #333;
-}
-.payment-option input[type="radio"] {
-    width: 2rem;
-    height: 2rem;
-    accent-color: #111;
-}
-.payment-label {
-    font-size: 1.6rem;
-    font-weight: 600;
-    flex: 1;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.payment-icons i {
-    font-size: 2rem;
-    margin-left: 10px;
-    color: #555;
-}
-
-/* =======================================
-   ENLACES LEGALES (CHECKOUT FOOTER)
-======================================= */
-.checkout-legal-links {
-    margin-top: 4rem;
-    padding-top: 2rem;
-    border-top: 1px solid #eee;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: flex-start; /* Alineado a la izquierda como la foto */
-}
-
-.legal-link {
-    color: #E8A020; /* Color mostaza/dorado de la imagen */
-    text-decoration: underline;
-    font-size: 1.3rem;
-    cursor: pointer;
-    font-family: var(--fuenteTexto);
-    background: none;
-    border: none;
-    padding: 0;
-}
-
-.legal-link:hover {
-    color: #b87b0e;
-}
-
-/* =======================================
-   MODAL (POP-UP)
-======================================= */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease;
-}
-
-.modal-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.modal-content {
-    background: white;
-    width: 90%;
-    max-width: 600px; /* Ancho similar a la imagen */
-    max-height: 80vh; /* Altura máxima */
-    padding: 3rem;
-    border-radius: 8px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    position: relative;
-    overflow-y: auto; /* Scroll si el texto es largo */
-    font-family: var(--fuenteTexto);
-}
-
-.modal-close-btn {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    background: none;
-    border: none;
-    font-size: 2rem;
-    cursor: pointer;
-    color: #555;
-    line-height: 1;
-}
-
-.modal-title {
-    font-family: var(--fuenteHeading);
-    font-size: 2.4rem;
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid #eee;
-}
-
-.modal-body {
-    font-size: 1.4rem;
-    line-height: 1.6;
-    color: #444;
-}
-
-/* =======================================
-   PÁGINA SUCCESS (CONFIRMACIÓN/RESUMEN)
-======================================= */
-
-/* Títulos principales */
-.success-header {
-    margin-bottom: 4rem;
-}
-.success-title {
-    font-family: var(--fuenteHeading);
-    font-size: 4.5rem;
-    color: #1A1A1A;
-    margin-bottom: 0.5rem;
-}
-.success-subtitle {
-    font-family: var(--fuenteTexto);
-    font-size: 1.8rem;
-    color: #333;
-    font-weight: 500;
-}
-
-/* Layout General: Grid de 2 columnas (Izquierda grande, Derecha pequeña) */
-.success-layout {
-    display: grid;
-    grid-template-columns: 1.6fr 0.8fr; /* La izquierda ocupa más */
-    gap: 3rem;
-    align-items: start;
-}
-
-/* Estilos comunes para las tarjetas beige */
-.success-card {
-    background-color: #FAF7F2; /* Color crema de la imagen */
-    border-radius: 12px;
-    padding: 4rem;
-}
-
-/* --- TARJETA IZQUIERDA (Detalles) --- */
-/* Grid interno de la tarjeta izquierda para poner Info y Pago lado a lado */
-.details-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Dos columnas internas */
-    gap: 4rem;
-}
-
-.detail-group {
-    margin-bottom: 3rem;
-}
-
-.detail-group h3 {
-    font-family: var(--fuenteTexto);
-    font-size: 1.6rem;
-    font-weight: 700; /* Negrita */
-    color: #111;
-    margin-bottom: 1rem;
-}
-
-.detail-group p {
-    font-family: var(--fuenteTexto);
-    font-size: 1.5rem;
-    color: #666; /* Gris texto */
-    line-height: 1.6;
-    margin: 0;
-}
-
-/* --- TARJETA DERECHA (Resumen Totales) --- */
-.summary-title {
-    font-family: var(--fuenteTexto);
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 2.5rem;
-}
-
-.summary-line {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 1.5rem;
-    font-size: 1.5rem;
-    color: #333;
-}
-
-.divider {
-    border: 0;
-    border-top: 1px solid #00BFA5; /* Línea separadora verde azulada */
-    margin: 2rem 0;
-}
-
-.total-line {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    font-weight: 700;
-    font-size: 2rem;
-    color: #111;
-}
-
-.iva-note {
-    font-size: 1.2rem;
-    color: #888;
-    font-weight: 400;
-    display: block;
-}
-
-/* Responsivo para móviles */
-@media (max-width: 900px) {
-    .success-layout {
-        grid-template-columns: 1fr; /* Una sola columna */
-    }
-    .details-grid {
-        grid-template-columns: 1fr; /* Una sola columna interna */
-        gap: 2rem;
-    }
-    .success-card {
-        padding: 2rem;
-    }
-}
 
 /* =======================================
    PERFIL DE USUARIO
@@ -2805,14 +2950,7 @@ body.bg-beige {
     cursor: pointer;
 }
 
-.success-header {
-    display: flex; 
-    align-items: center; 
-    gap: 10px;
-    color: #27AE60; 
-    font-weight: 700; 
-    margin-bottom: 20px;
-}
+
 
 .product-preview {
     display: flex; 
