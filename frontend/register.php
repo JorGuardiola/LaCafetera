@@ -92,23 +92,23 @@ ob_start();
         <div class="input-group-row">
             <div class="input-group half-width">
                 <label class="input-label small-label">Nombre</label>
-                <input type="text" name="nombre" class="form-input" required value="<?= htmlspecialchars($nombre) ?>">
+                <input type="text" name="nombre" class="input1" required value="<?= htmlspecialchars($nombre) ?>">
             </div>
 
             <div class="input-group half-width">
                 <label class="input-label small-label">Apellidos</label>
-                <input type="text" name="apellidos" class="form-input" required value="<?= htmlspecialchars($apellidos) ?>">
+                <input type="text" name="apellidos" class="input1" required value="<?= htmlspecialchars($apellidos) ?>">
             </div>
         </div>
 
         <div class="input-group">
             <label class="input-label small-label">Email</label>
-            <input type="email" name="email" class="form-input" required value="<?= htmlspecialchars($email) ?>">
+            <input type="email" name="email" class="input1" required value="<?= htmlspecialchars($email) ?>">
         </div>
 
         <div class="input-group password-field">
             <label class="input-label small-label">Contraseña</label>
-            <input type="password" name="password" class="form-input" required>
+            <input type="password" name="password" class="input1" required>
             <button type="button" class="toggle-password">
                 <i data-lucide="eye"></i>
             </button>
@@ -116,13 +116,13 @@ ob_start();
 
         <div class="input-group password-field">
             <label class="input-label small-label">Confirmar contraseña</label>
-            <input type="password" name="password_confirm" class="form-input" required>
+            <input type="password" name="password_confirm" class="input1" required>
             <button type="button" class="toggle-password">
                 <i data-lucide="eye"></i>
             </button>
         </div>
 
-        <button type="submit" class="btn btn-primary btn-acceder btn-register">
+        <button type="submit" class="boton4-btn">
             Registrarse <span class="arrow-icon">&rarr;</span>
         </button>
 
@@ -165,7 +165,7 @@ if (window.lucide) lucide.createIcons();
 
 document.querySelectorAll('.toggle-password').forEach(btn => {
     btn.addEventListener('click', () => {
-        const input = btn.parentElement.querySelector('.form-input');
+        const input = btn.parentElement.querySelector('.input1');
         const icon = btn.querySelector('[data-lucide]');
         if (!input || !icon) return;
 

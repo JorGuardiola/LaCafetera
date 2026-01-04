@@ -87,7 +87,7 @@ ob_start();
 ?>
 <div class="login-box">
     
-    <h3 class="login-title">Acceso</h3>
+    <h1 class="login-title">Acceso</h1>
     
     <?php if (!empty($error_message)): ?>
         <div class="alert error">
@@ -105,10 +105,11 @@ ob_start();
     <form action="login.php" method="POST" class="login-form">
         
         <div class="input-group">
-            <label for="email" class="input-label small-label">Email</label>
+            <label for="email" class="selector-label">Email</label>
             <input 
+                placeholder="Escriba su email"
                 type="email" 
-                class="form-input"
+                class="input1"
                 id="email" 
                 name="email" 
                 required
@@ -117,13 +118,14 @@ ob_start();
         </div>
 
         <div class="input-group password-field">
-            <label for="password" class="input-label small-label">Contraseña</label>
+            <label for="password" class="selector-label">Contraseña</label>
             <input 
+                placeholder="Escriba su contraseña"
                 type="password" 
                 id="password" 
                 name="password" 
                 required
-                class="form-input"
+                class="input1"
             >
             <button type="button" id="togglePassword" class="toggle-password">
                 <i data-lucide="eye"></i>
@@ -134,7 +136,7 @@ ob_start();
             <a href="<?= BASE_URL ?>/frontend/forgot_password.php">¿Has olvidado la contraseña?</a>
         </div>
 
-        <button type="submit" class="btn btn-primary btn-acceder">
+        <button type="submit" class="boton4-btn">
             Acceder <span class="arrow-icon">&rarr;</span>
         </button>
 
