@@ -19,6 +19,7 @@ if (isset($_SESSION['carrito']) && is_array($_SESSION['carrito'])) {
 // Cargar conexión (para BASE_URL)
 require_once __DIR__ . '/../../db/connection.php';
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>

@@ -136,7 +136,7 @@ $mis_pedidos = $stmt->fetchAll();
                     <div class="form-group">
                         <label>Email</label> <input type="email" class="form-input" value="<?= htmlspecialchars($user_data['email']) ?>" disabled style="background:#f9f9f9; color:#999;">
                     </div>
-                    <button type="submit" class="boton-negro" style="border:none; margin-top:1rem;">Guardar</button>
+                    <button type="submit" class="boton2-btn" style="border:none; margin-top:1rem;">Guardar</button>
                 </form>
             </div>
 
@@ -165,7 +165,7 @@ $mis_pedidos = $stmt->fetchAll();
                 <form method="POST" style="background:#f9f9f9; padding:2rem; border-radius:8px; margin-top:1rem;">
                     <input type="hidden" name="action" value="add_address">
                     <?php include __DIR__ . '/templates/address_form.php'; ?>
-                    <button type="submit" class="boton-negro" style="border:none; margin-top:1.5rem;">Guardar Dirección</button>
+                    <button type="submit" class="boton2-btn" style="border:none; margin-top:1.5rem;">Guardar Dirección</button>
                 </form>
             </div>
 

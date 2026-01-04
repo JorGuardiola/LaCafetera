@@ -1610,9 +1610,9 @@ padding-bottom: 6rem;
 }
 
 /* Columna izquierda - imagen de producto */
+/* va vacio por si lo tenemos que usar mas adeante 
 .detail-left {
-    /* va vacio por si lo tenemos que usar mas adeante */
-}
+}*/
 
 /* Columna Derecha: La Tarjeta */
 .detail-right-card {
@@ -2281,12 +2281,8 @@ padding-bottom: 6rem;
 /* --- La Caja del Formulario (El Panel Transparente) --- */
 .login-box {
     /* Usamos un color base muy claro con opacidad para el fondo */
-    background-color: rgba(var(--white), 0.75); 
-    
+    background-color: rgb(var(--secondary-100)); 
     /* Efecto "Glassmorphism" (Añadimos el prefijo -webkit- para máxima compatibilidad) */
-    -webkit-backdrop-filter: blur(8px); /* ¡Añadido! */
-    backdrop-filter: blur(8px); 
-    
     /* Esquinas redondeadas grandes */
     border-radius: 20px;
     
@@ -2306,9 +2302,7 @@ padding-bottom: 6rem;
 
 /* Título "Acceso" */
 .login-title {
-
     text-align: center;
-
 }
 
 /* --- Inputs y Grupos --- */
@@ -2318,23 +2312,10 @@ padding-bottom: 6rem;
     position: relative; /* Necesario para posicionar la etiqueta pequeña */
 }
 
-/* Etiqueta pequeña (Email, Contraseña) */
-.input-label {
-    display: block;
-    color: rgb(var(--primary-400)); /* Color sutil */
-    margin-bottom: 0.5rem;
-}
-
-/* Estilo del campo de texto/email/password */
-.form-input {
-        
-    width: 100%;
-    padding: 0.5rem
-       
-}
 
 
-.form-input:focus {
+
+.input1:focus {
     border-color: rgb(var(--primary-500));
     outline: none;
     box-shadow: 0 0 5px rgba(var(--primary-500), 0.3);
@@ -2388,36 +2369,14 @@ padding-bottom: 6rem;
 }
 .forgot-link a {
     font-size: 1.4rem;
-    color: rgb(var(--secondary-700));
+    color: rgb(var(--secondary-900));
     transition: color 0.3s;
 }
 .forgot-link a:hover {
     color: rgb(var(--secondary-900));
+    font-weight: bold;
 }
 
-/* Botón de Acceder (Fondo Oscuro) */
-.btn-acceder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    width: 100%;
-    
-    background-color: rgb(var(--primary-900)); /* Fondo negro/oscuro */
-    color: white;
-    
-    border: none;
-    border-radius: 10px; /* Bordes rectangulares suaves */
-    
-    font-size: 1.7rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.btn-acceder:hover {
-    background-color: rgb(var(--primary-700));
-}
 
 .arrow-icon {
     margin-left: 1rem;
@@ -2430,16 +2389,17 @@ padding-bottom: 6rem;
     text-align: center;
     margin-top: 2.5rem;
     font-size: 1.4rem;
-    color: rgb(var(--primary-400));
+    color: rgb(var(--primary-700));
 }
 
 .register-prompt a {
-    color: rgb(var(--secondary-700));
+    color: rgb(var(--secondary-900));
     font-weight: 600;
     transition: color 0.3s;
 }
 .register-prompt a:hover {
     color: rgb(var(--secondary-900));
+    font-weight: bold;
 }
 
 /* --- Mensajes de Alerta --- */
@@ -2575,37 +2535,7 @@ padding-bottom: 6rem;
 
 
 
-/* =========================================
-   ESTILO PARA EL BOTÓN NEGRO DE CTA
-   ========================================= */
 
-.boton-negro {
-    /* 1. Apariencia */
-    display: inline-block; /* Necesario para aplicar padding */
-    background-color: #000000; /* Fondo negro */
-    color: #FFFFFF; /* Letras blancas */
-    text-decoration: none; /* Quitar el subrayado por defecto */
-    
-    /* 2. Tamaño y Forma */
-    padding: 1.5rem 3rem; /* Espacio interno grande */
-    border-radius: 5px; /* Esquinas ligeramente redondeadas */
-    font-size: 1.8rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 0.1rem;
-    cursor: pointer;
-    
-    /* 3. Transición */
-    transition: background-color 0.3s ease;
-    
-    /* Margen para separarlo del párrafo superior */
-    margin-top: 2rem; 
-}
-
-.boton-negro:hover {
-    /* Efecto al pasar el ratón */
-    background-color: #333333; /* Un gris muy oscuro al pasar el ratón */
-}
 
 
 
@@ -2643,13 +2573,27 @@ padding-bottom: 6rem;
     align-items: start;
 }
 
+.profile-layout-admin {
+    display: flex;
+    gap: 4rem;
+    align-items: start;
+}
+
+.profile-menu {
+    display: grid;
+    margin-top: 2rem;
+    gap: 1rem;
+
+}
+
 /* Sidebar (Menú lateral) */
 .profile-sidebar {
-    background: #FAF7F2; /* Beige claro */
+    background: rgb(var(--secondary-100)); /* Beige claro */
     padding: 2rem;
     border-radius: 12px;
     position: sticky;
     top: 2rem;
+    width: 25rem;
 }
 
 .profile-menu-btn {
@@ -2693,16 +2637,12 @@ padding-bottom: 6rem;
 /* Contenido Principal */
 .profile-content-section {
     display: none; /* Ocultos por defecto */
-    animation: fadeIn 0.3s ease;
 }
 .profile-content-section.active {
     display: block; /* Solo el activo se ve */
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(5px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+
 
 .section-title {
     font-family: var(--fuenteHeading);
@@ -2760,7 +2700,7 @@ padding-bottom: 6rem;
 .orders-table th {
     text-align: left;
     padding: 1.5rem;
-    background: #FAF7F2;
+    background: rgb(var(--secondary-100));
     font-weight: 600;
 }
 .orders-table td {
@@ -3039,3 +2979,42 @@ padding-bottom: 6rem;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+.modal {
+    display:none; 
+    position:fixed; 
+    z-index:1000; 
+    left:0; top:0; 
+    width:100%; 
+    height:100%; 
+    background:rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background:#fff; 
+    margin:5% auto; 
+    padding:20px; 
+    width:400px; 
+    border-radius:8px; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.alerta1 {
+    font-size: 1.4rem;
+    background: #d4edda; 
+    color: #0e3717; 
+    padding: 1rem; 
+    margin-bottom: 2rem; 
+    border-radius: 0.5rem; 
+    border: 1px solid #c3e6cb;
+}
