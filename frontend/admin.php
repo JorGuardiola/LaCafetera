@@ -131,15 +131,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             </div>
         <?php endif; ?>
 
-        <div class="profile-layout">
-            <div class="profile-menu">
+        <div class="profile-layout-admin">
+            <aside class="profile-sidebar">
                 <button class="profile-menu-btn" data-tab="usuarios" onclick="openTab('usuarios')">Usuarios</button>
                 <button class="profile-menu-btn" data-tab="productos" onclick="openTab('productos')">Productos</button>
                 <button class="profile-menu-btn" data-tab="pedidos" onclick="openTab('pedidos')">Pedidos</button>
-            </div>
+            </aside>
             <div class="profile-content">
                 <div id="usuarios" class="profile-content-section <?= $tab_activa==='usuarios'?'active':'' ?>">
-                    <div style="display:flex; justify-content:space-between; margin-bottom:20px;">
+                    <div>
                         <h2>Gestión de Usuarios</h2>
                         
                     </div>

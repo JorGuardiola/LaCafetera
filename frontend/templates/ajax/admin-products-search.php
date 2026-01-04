@@ -45,7 +45,7 @@ try {
 
     // 4. Generar el HTML de las filas
     if (empty($productos)) {
-        echo '<tr><td colspan="7" style="text-align:center;">No se encontraron productos con esos filtros.</td></tr>';
+        echo '<tr><td colspan="7">No se encontraron productos con esos filtros.</td></tr>';
         exit;
     }
 
@@ -64,17 +64,16 @@ try {
                 <small><?= htmlspecialchars($prod['molienda']) ?> / <?= htmlspecialchars($prod['tueste']) ?></small>
             </td>
             <td>
-                <button type="button" class="btn-edit" 
-                        onclick="openEditProduct(<?= $prod['id'] ?>)" 
-                        style="background:none; border:none; color:#007bff; cursor:pointer; text-decoration:underline;">
-                    Editar
+                <button type="button" class="modificar-btn" 
+                        onclick="openEditProduct(<?= $prod['id'] ?>)">
+                    Modificar
                 </button>
                 
                 <form method="POST" action="admin.php?tab=productos" style="display:inline;" 
                       onsubmit="return confirm('¿Estás seguro de eliminar este producto? Esto eliminará todas sus variantes.');">
                     <input type="hidden" name="action" value="delete_product">
                     <input type="hidden" name="producto_id" value="<?= $prod['id'] ?>">
-                    <button type="submit" style="background:none; border:none; color:red; cursor:pointer; margin-left:10px;">
+                    <button type="submit" class="eliminar-btn">
                         Eliminar
                     </button>
                 </form>
