@@ -1,92 +1,80 @@
 <?php
 // frontend/templates/search-orders-admin.php
-
-require_once __DIR__ . '/../../db/connection.php';
-
-
-$estados = ['pendiente', 'procesando', 'completado', 'cancelado'];
+// Obtenemos los estados posibles para el selector
+$estados = ['pendiente', 'pagado', 'enviado', 'entregado', 'cancelado'];
 ?>
 
-<h4>Búsqueda de pedidos</h4>
 
-<div class="filter-bar">
-  <div class="filters-group" id="orderFilters">
-
-    <input type="text" id="f-id" placeholder="Nº pedido" class="input1">
-    <input type="date" id="f-fecha" class="input1">
-    <input type="text" id="f-usuario" placeholder="Email usuario" class="input1">
-
-    <select id="f-estado" class="selector1">
-      <option value="">Todos los estados</option>
-      <?php foreach ($estados as $e): ?>
-        <option value="<?= $e ?>"><?= ucfirst($e) ?></option>
-      <?php endforeach; ?>
+<div class="filter-bar" style="display:grid; grid-template-columns: repeat(6, 1fr) auto; gap:10px; margin-bottom:20px;">
+    <input type="text" id="o-id" placeholder="N° pedido" class="input1">
+    <input type="text" id="o-usuario" placeholder="Nombre/Apellido" class="input1">
+    <input type="text" id="o-email" placeholder="Email" class="input1"> 
+    <select id="o-estado" class="selector1">
+        <option value="">Estado</option>
+        <?php foreach ($estados as $est): ?>
+            <option value="<?= $est ?>"><?= ucfirst($est) ?></option>
+        <?php endforeach; ?>
     </select>
-
-    <button type="button" id="clearOrderFilters" class="boton3-btn">
-      Limpiar
-    </button>
-
-  </div>
+    <input type="date" id="o-fecha" class="input1">
+    <div></div> <button type="button" id="clearOrderFilters" class="boton3-btn">Limpiar</button>
 </div>
 
-<div id="ordersTableContainer"></div>
+<table class="orders-table">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Usuario</th>
+            <th>Email</th>
+            <th>Total</th>
+            <th>Estado</th>
+            <th>Fecha</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody id="ordersTableContainer">
+        </tbody>
+</table>
 
 <script>
-(() => {
+document.addEventListener('DOMContentLoaded', () => {
+    const oContainer = document.getElementById('ordersTableContainer');
+    const oFilters = ['o-id', 'o-usuario', 'o-estado', 'o-fecha'];
 
-  const filters = {
-    id:     document.getElementById('f-id'),
-    fecha:  document.getElementById('f-fecha'),
-    estado: document.getElementById('f-estado'),
-    usuario:document.getElementById('f-usuario')
-  };
+    async function loadOrders() {
+        if (!oContainer) return;
 
-  const container = document.getElementById('ordersTableContainer');
-  const clearBtn  = document.getElementById('clearOrderFilters');
+        const params = new URLSearchParams();
+        oFilters.forEach(id => {
+            const el = document.getElementById(id);
+            if (el && el.value) {
+                params.append(id.replace('o-', ''), el.value);
+            }
+        });
 
-  let debounce;
-
-  function buildQuery() {
-    const params = new URLSearchParams();
-    Object.entries(filters).forEach(([key, el]) => {
-      if (el.value.trim() !== '') {
-        params.append(key, el.value.trim());
-      }
-    });
-    return params.toString();
-  }
-
-  async function loadOrders() {
-    const url = "<?= BASE_URL ?>/frontend/templates/ajax/admin-orders-search.php?" + buildQuery();
-
-    try {
-      const res = await fetch(url);
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      container.innerHTML = await res.text();
-    } catch (err) {
-      console.error(err);
-      container.innerHTML = '<p>Error cargando pedidos</p>';
+        try {
+            const response = await fetch('templates/ajax/admin-orders-search.php?' + params.toString());
+            const text = await response.text();
+            oContainer.innerHTML = text;
+        } catch (error) {
+            console.error('Error al cargar pedidos:', error);
+            oContainer.innerHTML = '<tr><td colspan="6">Error al cargar pedidos</td></tr>';
+        }
     }
-  }
 
-  function debounceLoad() {
-    clearTimeout(debounce);
-    debounce = setTimeout(loadOrders, 300);
-  }
+    // Eventos
+    oFilters.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.addEventListener('input', loadOrders);
+            el.addEventListener('change', loadOrders);
+        }
+    });
 
-  Object.values(filters).forEach(el => {
-    el.addEventListener('input', debounceLoad);
-    el.addEventListener('change', loadOrders);
-  });
+    document.getElementById('clearOrderFilters').addEventListener('click', () => {
+        oFilters.forEach(id => document.getElementById(id).value = '');
+        loadOrders();
+    });
 
-  clearBtn.addEventListener('click', () => {
-    Object.values(filters).forEach(el => el.value = '');
-    loadOrders();
-  });
-
-  // carga inicial
-  loadOrders();
-
-})();
+    loadOrders(); // Carga inicial
+});
 </script>

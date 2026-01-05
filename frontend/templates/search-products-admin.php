@@ -2,30 +2,37 @@
 // frontend/templates/search-products-admin.php
 
 // 1. Obtenemos datos para los selectores usando la conexión $pdo existente
+
 try {
     $moliendas = $pdo->query("SELECT DISTINCT molienda FROM producto_variantes WHERE molienda IS NOT NULL")->fetchAll(PDO::FETCH_COLUMN);
     $tuestes   = $pdo->query("SELECT DISTINCT tueste FROM producto_variantes WHERE tueste IS NOT NULL")->fetchAll(PDO::FETCH_COLUMN);
+    $envases   = $pdo->query("SELECT DISTINCT envase FROM producto_variantes WHERE envase IS NOT NULL")->fetchAll(PDO::FETCH_COLUMN); // NUEVO
 } catch (PDOException $e) {
-    // Si falla, inicializamos como arrays vacíos para que no rompa el HTML
-    $moliendas = [];
-    $tuestes = [];
+    $moliendas = []; $tuestes = []; $envases = [];
 }
 ?>
 
-<div class="filter-bar" style="display:grid; grid-template-columns: repeat(4, 1fr) auto; gap:10px; margin-bottom:20px;">
+<div class="filter-bar" style="display:grid; grid-template-columns: repeat(5, 1fr) auto; gap:10px; margin-bottom:20px;">
     <input type="text" id="p-nombre" placeholder="Nombre del café" class="input1">
     
     <select id="p-molienda" class="selector1">
-        <option value="">Todas las moliendas</option>
+        <option value="">Molienda</option>
         <?php foreach ($moliendas as $m): ?>
             <option value="<?= htmlspecialchars($m) ?>"><?= htmlspecialchars($m) ?></option>
         <?php endforeach; ?>
     </select>
 
     <select id="p-tueste" class="selector1">
-        <option value="">Todos los tuestes</option>
+        <option value="">Tuestes</option>
         <?php foreach ($tuestes as $t): ?>
             <option value="<?= htmlspecialchars($t) ?>"><?= htmlspecialchars($t) ?></option>
+        <?php endforeach; ?>
+    </select>
+
+    <select id="p-envase" class="selector1">
+        <option value="">Envases</option>
+        <?php foreach ($envases as $e): ?>
+            <option value="<?= htmlspecialchars($e) ?>"><?= htmlspecialchars($e) ?></option>
         <?php endforeach; ?>
     </select>
 
@@ -42,7 +49,9 @@ try {
             <th>SKU</th>
             <th>Precio</th>
             <th>Stock</th>
-            <th>Molienda/Tueste</th>
+            <th>Molienda</th>
+            <th>Tueste</th>
+            <th>Envase</th>
             <th>Acciones</th>
         </tr>
     </thead>
@@ -54,7 +63,7 @@ try {
 document.addEventListener('DOMContentLoaded', () => {
     const pContainer = document.getElementById('productsTableContainer');
     // IDs de los inputs de filtro
-    const pFilters = ['p-nombre', 'p-molienda', 'p-tueste', 'p-sku'];
+    const pFilters = ['p-nombre', 'p-molienda', 'p-tueste', 'p-sku','p-envase'];
 
     async function loadProducts() {
         if (!pContainer) return;

@@ -45,7 +45,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // BORRAR DIRECCIÓN
     if (isset($_POST['action']) && $_POST['action'] === 'delete_address') {
         $id_dir = (int)$_POST['id_direccion'];
-        $pdo->prepare("DELETE FROM direcciones WHERE id_direccion = ? AND id_usuario = ?")->execute([$id_dir, $user_id]);
+        
+        // Si es admin, borramos sin importar a quién pertenezca. 
+        // Si no es admin, mantenemos la seguridad de id_usuario.
+        if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin') {
+            $sql = "DELETE FROM direcciones WHERE id_direccion = ?";
+            $params = [$id_dir];
+        } else {
+            $sql = "DELETE FROM direcciones WHERE id_direccion = ? AND id_usuario = ?";
+            $params = [$id_dir, $user_id];
+        }
+
+        $pdo->prepare($sql)->execute($params);
         $mensaje = "Dirección eliminada.";
         $tab_activa = 'direcciones';
     }

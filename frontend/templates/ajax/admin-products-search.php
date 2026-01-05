@@ -9,9 +9,10 @@ $nombre   = $_GET['nombre'] ?? '';
 $molienda = $_GET['molienda'] ?? '';
 $tueste   = $_GET['tueste'] ?? '';
 $sku      = $_GET['sku'] ?? '';
+$envase   = $_GET['envase'] ?? '';
 
 // 3. Construir la consulta con JOIN para traer datos del producto y sus variantes
-$sql = "SELECT p.id, p.nombre_cafe, v.sku, v.precio, v.stock, v.molienda, v.tueste 
+$sql = "SELECT p.id, p.nombre_cafe, v.sku, v.precio, v.stock, v.molienda, v.tueste, v.envase 
         FROM productos p
         INNER JOIN producto_variantes v ON p.id = v.producto_id
         WHERE 1=1";
@@ -33,6 +34,10 @@ if ($tueste) {
 if ($sku) {
     $sql .= " AND v.sku LIKE ?";
     $params[] = "%$sku%";
+}
+if ($envase) {
+    $sql .= " AND v.envase = ?";
+    $params[] = $envase;
 }
 
 // Ordenar por ID para mantener coherencia
@@ -61,20 +66,32 @@ try {
                 </span>
             </td>
             <td>
-                <small><?= htmlspecialchars($prod['molienda']) ?> / <?= htmlspecialchars($prod['tueste']) ?></small>
+                <span><?= htmlspecialchars($prod['molienda']) ?></span>
             </td>
             <td>
+                <span><?= htmlspecialchars($prod['tueste']) ?></span>
+            </td>
+            <td><?= htmlspecialchars($prod['envase']) ?></td>
+            <td>
                 <button type="button" class="modificar-btn" 
-                        onclick="openEditProduct(<?= $prod['id'] ?>)">
-                    Modificar
+                    onclick="openEditProduct({
+                    id: <?= $prod['id'] ?>,
+                    nombre: '<?= addslashes($prod['nombre_cafe']) ?>',
+                    sku: '<?= addslashes($prod['sku']) ?>',
+                    precio: <?= $prod['precio'] ?>,
+                    stock: <?= $prod['stock'] ?>,
+                    molienda: '<?= $prod['molienda'] ?>',
+                    tueste: '<?= $prod['tueste'] ?>',
+                    envase: '<?= addslashes($prod['envase']) ?>'
+                    })">Modificar
                 </button>
                 
+                
                 <form method="POST" action="admin.php?tab=productos" style="display:inline;" 
-                      onsubmit="return confirm('¿Estás seguro de eliminar este producto? Esto eliminará todas sus variantes.');">
-                    <input type="hidden" name="action" value="delete_product">
-                    <input type="hidden" name="producto_id" value="<?= $prod['id'] ?>">
+                    onsubmit="return confirm('¿Estás seguro de eliminar esta variante específica?');">
+                    <input type="hidden" name="action" value="delete_variant"> <input type="hidden" name="sku" value="<?= $prod['sku'] ?>"> 
                     <button type="submit" class="eliminar-btn">
-                        Eliminar
+                    Eliminar
                     </button>
                 </form>
             </td>
