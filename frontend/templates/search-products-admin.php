@@ -52,7 +52,10 @@ try {
             <th>Molienda</th>
             <th>Tueste</th>
             <th>Envase</th>
+            <th>Imagen</th>
             <th>Acciones</th>
+
+            
         </tr>
     </thead>
     <tbody id="productsTableContainer">
@@ -84,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
             pContainer.innerHTML = text;
         } catch (error) {
             console.error('Error al cargar productos:', error);
-            pContainer.innerHTML = '<tr><td colspan="7">Error al cargar productos</td></tr>';
+            pContainer.innerHTML = '<tr><td colspan="9">Error al cargar productos</td></tr>';
         }
     }
 

@@ -3195,5 +3195,19 @@ padding-bottom: 6rem;
     }
 }
 
+.orders-table img {
+    display: block;
+    margin: 0 auto;
+    border: 1px solid #ddd;
+}
+
+/* Ajuste para que en móvil la imagen no sea gigante */
+@media (max-width: 768px) {
+    .orders-table td[data-label="Imagen"] {
+        justify-content: center;
+        padding: 10px 0;
+    }
+}
+
 
 
