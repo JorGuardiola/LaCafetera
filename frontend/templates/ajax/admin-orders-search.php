@@ -52,11 +52,11 @@ if (!$pedidos) {
 
 foreach ($pedidos as $p): ?>
     <tr>
-        <td>#<?= $p['id_orden'] ?></td>
-        <td><?= htmlspecialchars($p['nombre'] . ' ' . $p['apellido']) ?></td>
-        <td><?= htmlspecialchars($p['email']) ?></td>
-        <td><?= number_format($p['total'], 2) ?>€</td>
-        <td>
+        <td data-label="ID">#<?= $p['id_orden'] ?></td>
+        <td data-label="Nombre"><?= htmlspecialchars($p['nombre'] . ' ' . $p['apellido']) ?></td>
+        <td data-label="Email"><?= htmlspecialchars($p['email']) ?></td>
+        <td data-label="Total"><?= number_format($p['total'], 2) ?>€</td>
+        <td data-label="Estado">
             <form method="POST" action="admin.php?tab=pedidos">
                 <input type="hidden" name="action" value="update_order_status">
                 <input type="hidden" name="id_orden" value="<?= $p['id_orden'] ?>">
@@ -69,8 +69,8 @@ foreach ($pedidos as $p): ?>
                 </select>
             </form>
         </td>
-        <td><?= date('d/m/Y H:i', strtotime($p['fecha_orden'])) ?></td>
-        <td>
+        <td data-label="Fecha pedido"><?= date('d/m/Y H:i', strtotime($p['fecha_orden'])) ?></td>
+        <td data-label="Acciones">
             <a href="success.php?orden=<?= $p['id_orden'] ?>" class="modificar-btn" style="text-decoration:none;">Ver Detalle</a>
         </td>
     </tr>

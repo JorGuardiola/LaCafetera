@@ -243,11 +243,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     <div class="container profile-container">
         <h1>Panel de Administración</h1>
         
-        <?php if ($mensaje): ?>
-            <div class="alerta1">
-                <?= htmlspecialchars($mensaje) ?>
-            </div>
-        <?php endif; ?>
+        
 
         <div class="profile-layout-admin">
             <aside class="profile-sidebar">
@@ -259,19 +255,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 <div id="usuarios" class="profile-content-section <?= $tab_activa==='usuarios'?'active':'' ?>">
                     <div>
                         <h2>Gestión de Usuarios</h2>
-                        
                     </div>
                     <div class="filter-bar">
                         <button class="boton2-btn" onclick="openUserForm()" >+ Crear usuario</button>
                     </div>
-
                     <?php include __DIR__ . '/templates/search-users-admin.php'; ?>
-                    
-                    
-                    
                 </div>
-            </div>
-            <div class="profile-content">
+            
                 <div id="productos" class="profile-content-section">
                     <h2>Gestión de Productos</h2>
                     <div class="filter-bar">
@@ -282,9 +272,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                     <?php include __DIR__ . '/templates/search-products-admin.php'; ?>
                     
                 </div>
-            </div>
-
-            <div class="profile-content">
+            
                 <div id="pedidos" class="profile-content-section">
                     <h2>Gestión de Pedidos</h2>
                     
