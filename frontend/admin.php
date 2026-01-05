@@ -428,6 +428,7 @@ function openProductForm() {
     document.getElementById('modalProductTitle').innerText = "Nuevo Producto";
     document.getElementById('formProductAction').value = "create_product";
     document.getElementById('productForm').reset();
+    document.getElementById('imagePreview').style.display = "none"; // Ocultar preview
     document.getElementById('formProductId').value = "";
 
     document.getElementById('productModal').style.display = "block";
@@ -446,6 +447,18 @@ function openEditProduct(data) {
     document.getElementById('pInputMolienda').value = data.molienda;
     document.getElementById('pInputTueste').value = data.tueste;
     document.getElementById('pInputEnvase').value = data.envase; // Cargar envase
+
+    //manejo de URL
+    const preview = document.getElementById('imagePreview');
+    const img = document.getElementById('imgTarget');
+    if (data.imagen && data.imagen !== '') {
+        img.src = 'assets/img/' + data.imagen; // <--- AÑADIDO EL PATH
+        preview.style.display = "block";
+    } else {
+        img.src = '';
+        preview.style.display = "none";
+    }
+
 
     document.getElementById('productModal').style.display = "block";
 }
@@ -574,7 +587,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <div id="productModal" class="modal">
     <div class="modal-content">
         <h3 id="modalProductTitle">Modificar Variante</h3>
-        <form id="productForm" action="admin.php?tab=productos" method="POST">
+        <form id="productForm" action="admin.php?tab=productos" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="action" id="formProductAction" value="update_product">
             <input type="hidden" name="producto_id" id="formProductId">
             <input type="hidden" name="sku_original" id="pInputSkuOriginal">
@@ -607,6 +620,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div>
                     <label class="label1">Envase:</label>
                     <input type="text" name="envase" id="pInputEnvase" class="input1" placeholder="Ej: 250g, 1kg...">
+                </div>
+                <div style="grid-column: span 2;">
+                    <label class="label1">Foto del Producto:</label>
+                    <div class="file-upload-wrapper">
+                        <input type="file" name="foto_producto" id="pInputFoto" accept="image/*" class="input1">
+                        <small style="color: #666;">Formatos permitidos: JPG, PNG, WEBP. Máximo 2MB.</small>
+                    </div>
+                    <div id="imagePreview" style="margin-top: 10px; display: none;">
+                        <img id="imgTarget" src="" style="max-width: 100px; border-radius: 5px;">
+                    </div>
                 </div>
             </div>
             
