@@ -83,27 +83,145 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 break;
 
             /*productos*/
-            // Dentro del switch ($_POST['action']) en admin.php
 
-            case 'delete_product':
+            case 'create_product':
+                try {
+                    $pdo->beginTransaction();
+
+                    // 1. Verificamos si el café (nombre_cafe) ya existe en la tabla 'productos'
+                    $stmtCheck = $pdo->prepare("SELECT id FROM productos WHERE nombre_cafe = ?");
+                    $stmtCheck->execute([$_POST['nombre_cafe']]);
+                    $producto_id = $stmtCheck->fetchColumn();
+
+                    // 2. Si no existe, lo creamos primero
+                    if (!$producto_id) {
+                        $stmtNewProd = $pdo->prepare("INSERT INTO productos (nombre_cafe) VALUES (?)");
+                        $stmtNewProd->execute([$_POST['nombre_cafe']]);
+                        $producto_id = $pdo->lastInsertId();
+                    }
+
+                    // 3. Insertamos la variante con el producto_id obtenido
+                    $stmtVar = $pdo->prepare("INSERT INTO producto_variantes (producto_id, sku, precio, stock, molienda, tueste, envase) VALUES (?, ?, ?, ?, ?, ?, ?)");
+                    $stmtVar->execute([
+                        $producto_id,
+                        $_POST['sku'],
+                        $_POST['precio'],
+                        $_POST['stock'],
+                        $_POST['molienda'],
+                        $_POST['tueste'],
+                        $_POST['envase']
+                    ]);
+
+                    $pdo->commit();
+                    $_SESSION['admin_flash'] = "Nueva variante creada correctamente.";
+                } catch (PDOException $e) {
+                    $pdo->rollBack();
+                    if ($e->getCode() == '23000') {
+                        $_SESSION['admin_flash'] = "Error: El SKU ya existe o la variante está duplicada.";
+                    } else {
+                        $_SESSION['admin_flash'] = "Error: " . $e->getMessage();
+                    }
+                }
+                header("Location: admin.php?tab=productos");
+            exit;
+
+
+
+
+            case 'delete_variant':
+                try {
+                    // Borramos únicamente la fila que coincida con el SKU en la tabla de variantes
+                    $stmt = $pdo->prepare("DELETE FROM producto_variantes WHERE sku = ?");
+                    $stmt->execute([$_POST['sku']]);
+                    
+                    $_SESSION['admin_flash'] = "Variante eliminada correctamente.";
+                } catch (Exception $e) {
+                    $_SESSION['admin_flash'] = "Error al eliminar la variante: " . $e->getMessage();
+                }
+            break;
+
+
+            case 'update_product':
                 try {
                     $pdo->beginTransaction();
                     
-                    // 1. Borrar variantes primero (por la clave foránea)
-                    $stmtVar = $pdo->prepare("DELETE FROM producto_variantes WHERE producto_id = ?");
-                    $stmtVar->execute([$_POST['producto_id']]);
+                    // 1. Actualizar nombre del café
+                    $stmt1 = $pdo->prepare("UPDATE productos SET nombre_cafe = ? WHERE id = ?");
+                    $stmt1->execute([$_POST['nombre_cafe'], $_POST['producto_id']]);
                     
-                    // 2. Borrar el producto base
-                    $stmtProd = $pdo->prepare("DELETE FROM productos WHERE id = ?");
-                    $stmtProd->execute([$_POST['producto_id']]);
+                    // 2. Actualizar la variante
+                    $stmt2 = $pdo->prepare("UPDATE producto_variantes SET sku = ?, precio = ?, stock = ?, molienda = ?, tueste = ? WHERE sku = ?");
+                    $stmt2->execute([
+                        $_POST['sku'], 
+                        $_POST['precio'], 
+                        $_POST['stock'], 
+                        $_POST['molienda'], 
+                        $_POST['tueste'], 
+                        $_POST['sku_original'] 
+                    ]);
                     
                     $pdo->commit();
-                    $_SESSION['admin_flash'] = "Producto y variantes eliminados correctamente.";
-                } catch (Exception $e) {
+                    $_SESSION['admin_flash'] = "Variante actualizada correctamente.";
+                } catch (PDOException $e) { // Cambiamos a PDOException para capturar el código
                     $pdo->rollBack();
-                    $_SESSION['admin_flash'] = "Error al eliminar: " . $e->getMessage();
+                    
+                    // El código 23000 con error 1062 es duplicado en MySQL
+                    if ($e->getCode() == '23000') {
+                        $_SESSION['admin_flash'] = "Ya existe un producto con esas características (molienda y tueste).";
+                    } else {
+                        $_SESSION['admin_flash'] = "Error al actualizar: " . $e->getMessage();
+                    }
                 }
-                break;
+            break;
+
+
+            // Caso Crear Producto
+            case 'create_product':
+                $stmt2 = $pdo->prepare("INSERT INTO producto_variantes (producto_id, sku, precio, stock, molienda, tueste, envase) VALUES (?, ?, ?, ?, ?, ?, ?)");
+                $stmt2->execute([$nuevo_id, $_POST['sku'], $_POST['precio'], $_POST['stock'], $_POST['molienda'], $_POST['tueste'], $_POST['envase']]);
+            break;
+
+            // Caso Modificar Producto
+            case 'update_product':
+                $stmt2 = $pdo->prepare("UPDATE producto_variantes SET sku = ?, precio = ?, stock = ?, molienda = ?, tueste = ?, envase = ? WHERE sku = ?");
+                $stmt2->execute([$_POST['sku'], $_POST['precio'], $_POST['stock'], $_POST['molienda'], $_POST['tueste'], $_POST['envase'], $_POST['sku_original']]);
+            break;
+
+
+            /* ========= PEDIDOS ========= */
+            // Dentro del switch ($_POST['action']) en admin.php
+            case 'update_order_status':
+                try {
+                    // Actualizado para usar id_orden
+                    $stmt = $pdo->prepare("UPDATE pedidos SET estado = ? WHERE id_orden = ?");
+                    $stmt->execute([$_POST['nuevo_estado'], $_POST['id_orden']]);
+                    $_SESSION['admin_flash'] = "Estado del pedido #" . $_POST['id_orden'] . " actualizado.";
+                } catch (Exception $e) {
+                    $_SESSION['admin_flash'] = "Error al actualizar: " . $e->getMessage();
+                }
+                header("Location: admin.php?tab=pedidos");
+            exit;
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
         
         // Redirigir para limpiar el POST y mantener la pestaña activa
@@ -157,14 +275,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 <div id="productos" class="profile-content-section">
                     <h2>Gestión de Productos</h2>
                     <div class="filter-bar">
-                        <button class="boton2-btn" onclick="openProductForm()" >+ Crear producto</button>
+                        <button type="button" class="boton2-btn" onclick="openProductForm()">
+                        + Crear producto
+                        </button>
                     </div>
                     <?php include __DIR__ . '/templates/search-products-admin.php'; ?>
                     
                 </div>
             </div>
 
-
+            <div class="profile-content">
+                <div id="pedidos" class="profile-content-section">
+                    <h2>Gestión de Pedidos</h2>
+                    
+                    <?php include __DIR__ . '/templates/search-orders-admin.php'; ?>
+                    
+                </div>
+            </div>
 
 
 
@@ -231,10 +358,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Función para abrir el formulario de producto vacío (Creación)
 function openProductForm() {
-    // Si usas un modal similar al de usuarios:
+    // 1. Cambiamos el título del modal
     document.getElementById('modalProductTitle').innerText = "Nuevo Producto";
+    
+    // 2. Cambiamos la acción a 'create_product' para que el PHP sepa qué hacer
     document.getElementById('formProductAction').value = "create_product";
+    
+    // 3. Reseteamos todos los campos (vacía nombre, sku, precio, etc.)
     document.getElementById('productForm').reset();
+    
+    // 4. Vaciamos los IDs ocultos
+    document.getElementById('formProductId').value = "";
+    document.getElementById('pInputSkuOriginal').value = "";
+    
+    // 5. Mostramos el modal
     document.getElementById('productModal').style.display = "block";
 }
 
@@ -297,6 +434,106 @@ window.onclick = function(event) {
     const modal = document.getElementById('userModal');
     if (event.target == modal) closeUserModal();
 }
+
+/* funciones modal productos */
+function openProductForm() {
+    document.getElementById('modalProductTitle').innerText = "Nuevo Producto";
+    document.getElementById('formProductAction').value = "create_product";
+    document.getElementById('productForm').reset();
+    document.getElementById('formProductId').value = "";
+
+    document.getElementById('productModal').style.display = "block";
+}
+
+function openEditProduct(data) {
+    document.getElementById('modalProductTitle').innerText = "Modificar Variante";
+    document.getElementById('formProductAction').value = "update_product";
+    
+    document.getElementById('formProductId').value = data.id;
+    document.getElementById('pInputNombre').value = data.nombre;
+    document.getElementById('pInputSku').value = data.sku;
+    document.getElementById('pInputSkuOriginal').value = data.sku; // Guardamos el SKU actual
+    document.getElementById('pInputPrecio').value = data.precio;   // Aquí se carga el precio
+    document.getElementById('pInputStock').value = data.stock;
+    document.getElementById('pInputMolienda').value = data.molienda;
+    document.getElementById('pInputTueste').value = data.tueste;
+    document.getElementById('pInputEnvase').value = data.envase; // Cargar envase
+
+    document.getElementById('productModal').style.display = "block";
+}
+
+function closeProductModal() {
+    document.getElementById('productModal').style.display = "none";
+}
+
+// Cerrar al hacer clic fuera (extender el window.onclick que ya tienes)
+window.onclick = function(event) {
+    const userModal = document.getElementById('userModal');
+    const productModal = document.getElementById('productModal');
+    if (event.target == userModal) closeUserModal();
+    if (event.target == productModal) closeProductModal();
+}
+
+
+
+
+/* Funciones de búsqueda y filtrado de pedidos */
+// Función global para pedidos
+async function loadOrders() {
+    const oContainer = document.getElementById('ordersTableContainer');
+    if (!oContainer) return;
+
+    const oFilters = ['o-id', 'o-usuario', 'o-email', 'o-estado', 'o-fecha'];
+    const params = new URLSearchParams();
+
+    oFilters.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && el.value) {
+            params.append(id.replace('o-', ''), el.value);
+        }
+    });
+
+    try {
+        const response = await fetch('templates/ajax/admin-orders-search.php?' + params.toString());
+        const text = await response.text();
+        oContainer.innerHTML = text;
+    } catch (error) {
+        console.error('Error al cargar pedidos:', error);
+        oContainer.innerHTML = '<tr><td colspan="7">Error de conexión</td></tr>';
+    }
+}
+
+// Inicialización de eventos
+document.addEventListener('DOMContentLoaded', () => {
+    const oFilters = ['o-id', 'o-usuario', 'o-estado', 'o-fecha', 'o-email'];
+    
+    oFilters.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.addEventListener('input', loadOrders);
+            el.addEventListener('change', loadOrders);
+        }
+    });
+
+    const btnClearOrders = document.getElementById('clearOrderFilters');
+    if (btnClearOrders) {
+        btnClearOrders.addEventListener('click', () => {
+            oFilters.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.value = '';
+            });
+            loadOrders();
+        });
+    }
+
+    // Si estamos en la pestaña de pedidos, cargar al inicio
+    if (document.getElementById('ordersTableContainer')) {
+        loadOrders();
+    }
+});
+
+
+
 </script>
 
 <div id="userModal" class="modal">
@@ -342,5 +579,58 @@ window.onclick = function(event) {
         </form>
     </div>
 </div>
+
+
+
+
+<div id="productModal" class="modal">
+    <div class="modal-content">
+        <h3 id="modalProductTitle">Modificar Variante</h3>
+        <form id="productForm" action="admin.php?tab=productos" method="POST">
+            <input type="hidden" name="action" id="formProductAction" value="update_product">
+            <input type="hidden" name="producto_id" id="formProductId">
+            <input type="hidden" name="sku_original" id="pInputSkuOriginal">
+            
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                <div>
+                    <label class="label1">Nombre del Café:</label>
+                    <input type="text" name="nombre_cafe" id="pInputNombre" required class="input1">
+                </div>
+                <div>
+                    <label class="label1">SKU:</label>
+                    <input type="text" name="sku" id="pInputSku" required class="input1">
+                </div>
+                <div>
+                    <label class="label1">Precio (€):</label>
+                    <input type="number" step="0.01" name="precio" id="pInputPrecio" required class="input1">
+                </div>
+                <div>
+                    <label class="label1">Stock:</label>
+                    <input type="number" name="stock" id="pInputStock" required class="input1">
+                </div>
+                <div>
+                    <label class="label1">Molienda:</label>
+                    <input type="text" name="molienda" id="pInputMolienda" class="input1">
+                </div>
+                <div>
+                    <label class="label1">Tueste:</label>
+                    <input type="text" name="tueste" id="pInputTueste" class="input1">
+                </div>
+                <div>
+                    <label class="label1">Envase:</label>
+                    <input type="text" name="envase" id="pInputEnvase" class="input1" placeholder="Ej: 250g, 1kg...">
+                </div>
+            </div>
+            
+            <div style="text-align:right; margin-top:20px;">
+                <button type="button" onclick="closeProductModal()" class="boton3-btn">Cancelar</button>
+                <button type="submit" class="boton2-btn">Guardar Producto</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
 
 <?php include __DIR__ . '/templates/footer.php'; ?>

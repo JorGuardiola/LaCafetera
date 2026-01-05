@@ -128,7 +128,7 @@ ob_start();
 
     </form>
 
-    <div class="login-prompt">
+    <div class="register-prompt">
         <span>¿Ya tienes cuenta? <a href="<?= BASE_URL ?>/frontend/login.php">Accede</a></span>
     </div>
 
