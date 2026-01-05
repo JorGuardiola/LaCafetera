@@ -5,7 +5,7 @@ $estados = ['pendiente', 'pagado', 'enviado', 'entregado', 'cancelado'];
 ?>
 
 
-<div class="filter-bar" style="display:grid; grid-template-columns: repeat(6, 1fr) auto; gap:10px; margin-bottom:20px;">
+<div class="filter-bar">
     <input type="text" id="o-id" placeholder="N° pedido" class="input1">
     <input type="text" id="o-usuario" placeholder="Nombre/Apellido" class="input1">
     <input type="text" id="o-email" placeholder="Email" class="input1"> 

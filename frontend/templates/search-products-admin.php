@@ -12,7 +12,7 @@ try {
 }
 ?>
 
-<div class="filter-bar" style="display:grid; grid-template-columns: repeat(5, 1fr) auto; gap:10px; margin-bottom:20px;">
+<div class="filter-bar">
     <input type="text" id="p-nombre" placeholder="Nombre del café" class="input1">
     
     <select id="p-molienda" class="selector1">

@@ -188,11 +188,11 @@ $mis_pedidos = $stmt->fetchAll();
                         <tbody>
                             <?php foreach($mis_pedidos as $p): ?>
                                 <tr>
-                                    <td>#<?= $p['id_orden'] ?></td>
-                                    <td><?= date('d/m/Y', strtotime($p['fecha_orden'])) ?></td>
-                                    <td><?= number_format($p['total'], 2) ?>€</td>
-                                    <td><?= ucfirst($p['estado']) ?></td>
-                                    <td><a href="success.php?orden=<?= $p['id_orden'] ?>">Ver</a></td>
+                                    <td data-label="N° pedido">#<?= $p['id_orden'] ?></td>
+                                    <td data-label="Fecha pedido"><?= date('d/m/Y', strtotime($p['fecha_orden'])) ?></td>
+                                    <td data-label="Importe"><?= number_format($p['total'], 2) ?>€</td>
+                                    <td data-label="Estado"><?= ucfirst($p['estado']) ?></td>
+                                    <td data-label="Acciones"><a href="success.php?orden=<?= $p['id_orden'] ?>">Ver</a></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

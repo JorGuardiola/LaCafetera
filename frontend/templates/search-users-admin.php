@@ -3,7 +3,7 @@
 $roles = $pdo->query("SELECT DISTINCT rol FROM usuarios WHERE rol != ''")->fetchAll(PDO::FETCH_COLUMN);
 ?>
 
-<div class="filter-bar" style="display:grid; grid-template-columns: repeat(5, 1fr) auto; gap:10px; margin-bottom:20px;">
+<div class="filter-bar">
     <input type="text" id="f-nombre" placeholder="Nombre" class="input1">
     <input type="text" id="f-apellido" placeholder="Apellido" class="input1">
     <input type="text" id="f-email" placeholder="Email" class="input1">

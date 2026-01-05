@@ -23,12 +23,12 @@ $usuarios = $stmt->fetchAll();
 
 foreach ($usuarios as $u): ?>
     <tr>
-        <td><?= $u['id_usuario'] ?></td>
-        <td><?= htmlspecialchars($u['nombre']) ?></td>
-        <td><?= htmlspecialchars($u['apellido']) ?></td>
-        <td><?= htmlspecialchars($u['email']) ?></td>
-        <td><?= htmlspecialchars($u['telefono']) ?></td>
-        <td>
+        <td data-label="ID"><?= $u['id_usuario'] ?></td>
+        <td data-label="Nombre"><?= htmlspecialchars($u['nombre']) ?></td>
+        <td data-label="Apellido"><?= htmlspecialchars($u['apellido']) ?></td>
+        <td data-label="Email"><?= htmlspecialchars($u['email']) ?></td>
+        <td data-label="Teléfono"><?= htmlspecialchars($u['telefono']) ?></td>
+        <td data-label="Rol">
             <form action="admin.php?tab=usuarios" method="POST">
                 <input type="hidden" name="id_usuario" value="<?= $u['id_usuario'] ?>">
                 <input type="hidden" name="action" value="change_user_role">
@@ -39,7 +39,7 @@ foreach ($usuarios as $u): ?>
             </form>
         </td>
 
-        <td>
+        <td data-label="Acciones">
             <button class="modificar-btn" onclick="openEditUser(<?= $u['id_usuario'] ?>)">Modificar</button>
 
             <form action="admin.php?tab=usuarios" method="POST"  onsubmit="return confirm('¿Eliminar este usuario?')">

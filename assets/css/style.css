@@ -83,7 +83,10 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
 .no-padding { padding: 0 !important; }
 .center-text { text-align: center !important; }
 
-
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
 
 /* =========================================================================================================================
    BOTONES
@@ -171,8 +174,9 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
 
 .modificar-btn {
     font-family: var(--fuenteTexto);
+    font-weight: bold;
     cursor: pointer;
-    background: white;
+    background: transparent;
     border: none;
     white-space: nowrap;
 }
@@ -181,8 +185,9 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
 
 .eliminar-btn {
     font-family: var(--fuenteTexto);
+    font-weight: bold;
     cursor: pointer;
-    background: white;
+    background: transparent;
     white-space: nowrap;
     color: red;
     border: none;
@@ -222,6 +227,35 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
 }
 
 
+
+/* --- Media Query para Tablet (768px o menos) --- */
+@media (max-width: 768px) {
+    .input1 {
+        flex-grow: 1; /* En tablets le damos la misma prioridad que a otros elementos */
+        min-width: auto; /* Eliminamos el ancho mínimo para que fluya en el grid */
+    }
+    
+    .selector1, .input1 {
+        padding: 1.2rem; /* Aumentamos ligeramente el área táctil */
+    }
+}
+
+/* --- Media Query para Móvil (480px o menos) --- */
+@media (max-width: 480px) {
+    .selector1, .input1 {
+        width: 100% !important; /* Forzamos que ocupen toda la línea */
+        display: block;
+        margin-bottom: 1rem; /* Separación vertical cuando se apilan */
+        font-size: 16px; /* Evita el zoom automático en navegadores móviles al hacer foco */
+        padding: 1.5rem; /* Máximo confort táctil */
+    }
+
+    .input1 {
+        flex-grow: 0; /* Desactivamos el comportamiento flex para que se comporte como bloque */
+    }
+}
+
+
 .textarea1 {
     font-family: var(--fuenteTexto);
     width: 100%; 
@@ -241,7 +275,7 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
 }
 
 
-.filter-bar {
+/*.filter-bar {
     display:flex; 
     flex-wrap:nowrap; 
     align-items:center; 
@@ -252,30 +286,36 @@ p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }
     max-width: 130rem;
     margin: 4rem auto;
 
-}
+}*/
 .filters-group {
-    display:flex; 
-    flex-grow: 10; 
-    gap:10px; 
-    min-width: 300px;
-    align-items: space-between;
+    display: flex; 
+    flex-direction: column; /* Label arriba, Input abajo */
+    gap: 0.5rem; 
+    width: 100%;
 } 
 
 fieldset {
-    
-    border-color: rgb(var(--secondary-200));
-    border-width: 1px;
-    padding: 2.5rem;
-    margin-bottom: 3rem;
+    border: 1px solid rgb(var(--secondary-200));
+    padding: 2rem; /* Reducido de 2.5rem */
+    margin-bottom: 2rem;
     border-radius: 8px;
 }
 
 legend {
     font-family: var(--fuenteHeading);
-    font-size: 2.2rem;
+    font-size: 1.8rem; /* Un poco más pequeño para móvil */
     color: rgb(var(--primary-600));
     padding: 0 1rem;
     font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    fieldset {
+        padding: 1.5rem; /* Más compacto en tablets/móvil */
+    }
+    legend {
+        font-size: 1.6rem;
+    }
 }
 
 label {
@@ -286,6 +326,12 @@ label {
     margin-bottom: 0.5rem;
     font-weight: 600;
 }
+
+form {
+    display: block;
+    unicode-bidi: isolate;
+}
+
 
 
 
@@ -2563,20 +2609,21 @@ padding-bottom: 6rem;
 .profile-container {
     margin-top: 4rem;
     margin-bottom: 6rem;
-    max-width: 1200px;
+    width: 100%;
 }
 
 .profile-layout {
     display: grid;
     grid-template-columns: 250px 1fr;
-    gap: 4rem;
+    gap: 2.5rem;
     align-items: start;
 }
 
 .profile-layout-admin {
     display: flex;
-    gap: 4rem;
-    align-items: start;
+    align-items: flex-start;
+    gap: 25px; /* Espacio fijo entre sidebar y contenido */
+    width: 100%;
 }
 
 .profile-menu {
@@ -2634,11 +2681,24 @@ padding-bottom: 6rem;
 }
 
 /* Contenido Principal */
-.profile-content-section {
-    display: none; /* Ocultos por defecto */
+.profile-content {
+    flex: 1;           /* Ocupa todo el espacio restante */
+    min-width: 0;      /* IMPORTANTE: Permite que el contenido se encoja sin desbordar */
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
+
+
+
+.profile-content-section {
+    width: 100%;
+    display: none; /* Por defecto ocultas */
+}
+
 .profile-content-section.active {
-    display: block; /* Solo el activo se ve */
+    display: block; /* Solo la activa se muestra */
 }
 
 
@@ -2724,16 +2784,35 @@ padding-bottom: 6rem;
     }
     .profile-sidebar {
         position: static;
-        display: flex;
+        display: grid;
         overflow-x: auto;
         padding: 1rem;
         gap: 1rem;
+        width: 100%;
     }
     .profile-menu-btn {
         width: auto;
         white-space: nowrap;
     }
+    .profile-layout-admin {
+        display: flex;
+        flex-direction: column;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* --- TARJETA DE PRODUCTO: DISEÑO FULL IMAGEN --- */
 
 /* 1. Ajuste de la Tarjeta Base */
@@ -3017,3 +3096,104 @@ padding-bottom: 6rem;
     border-radius: 0.5rem; 
     border: 1px solid #c3e6cb;
 }
+
+
+
+
+
+
+/*=======================================
+   ADMIN PANEL RESPONSIVE
+
+/*Panel admin resposive*/
+
+
+/* Contenedor de filtros flexible */
+
+.filter-bar {
+    display: grid;
+    /* "auto-fit" llena el ancho. "minmax(200px, 1fr)" dice: 
+       mínimo 200px por input, si hay espacio sobra, estírate (1fr) */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+    background: #f9f9f9;
+    border-radius: 8px;
+    align-items: end; /* Mantiene inputs y botones alineados abajo */
+}
+
+
+@media (max-width: 768px) {
+    .filter-bar {
+        grid-template-columns: 1fr 1fr; /* 2 columnas en tablets */
+    }
+}
+
+@media (max-width: 480px) {
+    .filter-bar {
+        
+        padding: 1.5rem;
+        margin: 1rem auto;
+    }
+}
+
+
+
+
+
+@media (max-width: 768px) {
+    /* Escondemos el encabezado de la tabla */
+    .orders-table thead {
+        display: none;
+    }
+
+    .orders-table, 
+    .orders-table tbody, 
+    .orders-table tr, 
+    .orders-table td {
+        display: block;
+        width: 100%;
+    }
+
+    
+
+    .orders-table tr {
+        margin-bottom: 15px;
+        border: 1px solid rgb(var(--secondary-400));
+        border-radius: 8px;
+        padding: 10px;
+        background: rgb(var(--secondary-100));
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .orders-table td {
+        padding-left: 50%;
+        position: relative;
+        border-bottom: 1px solid #eee;
+        min-height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    /* Creamos etiquetas usando el atributo data-label (opcional) o simple orden */
+    .orders-table td::before {
+        content: attr(data-label); /* Si añades data-label en el PHP */
+        position: absolute;
+        left: 10px;
+        width: 45%;
+        text-align: left;
+        font-weight: bold;
+        color: var(--primary-500);
+    }
+
+    .orders-table td:last-child {
+        display: inline-block; 
+        border-bottom: 0;
+        justify-content: center;
+        background: #f9f9f9;
+    }
+}
+
+
+

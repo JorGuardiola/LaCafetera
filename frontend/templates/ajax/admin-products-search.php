@@ -56,23 +56,23 @@ try {
 
     foreach ($productos as $prod): ?>
         <tr>
-            <td><?= $prod['id'] ?></td>
-            <td><strong><?= htmlspecialchars($prod['nombre_cafe']) ?></strong></td>
-            <td><code><?= htmlspecialchars($prod['sku']) ?></code></td>
-            <td><?= number_format($prod['precio'], 2) ?>€</td>
-            <td>
+            <td data-label="ID"><?= $prod['id'] ?></td>
+            <td data-label="Nombre"><strong><?= htmlspecialchars($prod['nombre_cafe']) ?></strong></td>
+            <td data-label="SKU"><code><?= htmlspecialchars($prod['sku']) ?></code></td>
+            <td data-label="Precio"><?= number_format($prod['precio'], 2) ?>€</td>
+            <td data-label="Stock">
                 <span class="stock-badge" style="color: <?= $prod['stock'] < 10 ? 'red' : 'green' ?>;">
                     <?= $prod['stock'] ?> uds.
                 </span>
             </td>
-            <td>
+            <td data-label="Molienda">
                 <span><?= htmlspecialchars($prod['molienda']) ?></span>
             </td>
-            <td>
+            <td data-label="Tueste">
                 <span><?= htmlspecialchars($prod['tueste']) ?></span>
             </td>
-            <td><?= htmlspecialchars($prod['envase']) ?></td>
-            <td>
+            <td data-label="Envase"><?= htmlspecialchars($prod['envase']) ?></td>
+            <td data-label="Acciones">
                 <button type="button" class="modificar-btn" 
                     onclick="openEditProduct({
                     id: <?= $prod['id'] ?>,
