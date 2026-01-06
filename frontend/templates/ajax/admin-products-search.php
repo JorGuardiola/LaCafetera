@@ -74,9 +74,9 @@ try {
             <td data-label="Envase"><?= htmlspecialchars($prod['envase']) ?></td>
             <td data-label="Imagen">
                 <?php if (!empty($prod['imagen'])): ?>
-                    <img src="assets/img/<?= htmlspecialchars($prod['imagen']) ?>" alt="Café" style="width: 10rem; height: 10rem; object-fit: cover; border-radius: 4px;">
+                    <img src="../assets/img/imgsproducts/<?= htmlspecialchars($prod['imagen']) ?>" alt="Café">
                 <?php else: ?>
-                    <div style="width: 50px; height: 50px; background: #eee; display: flex; align-items: center; justify-content: center; border-radius: 4px; font-size: 10px; color: #999;">Sin foto</div>
+                    <div class="sin-imagen">Sin imagen</div>
                 <?php endif; ?>
             </td>
             <td data-label="Acciones">
@@ -89,7 +89,7 @@ try {
                     stock: <?= $prod['stock'] ?>,
                     molienda: '<?= $prod['molienda'] ?>',
                     tueste: '<?= $prod['tueste'] ?>',
-                    envase: '<?= addslashes($prod['envase']) ?>'
+                    envase: '<?= addslashes($prod['envase']) ?>',
                     imagen: '<?= isset($prod['imagen']) ? $prod['imagen'] : '' ?>'
                     })">Modificar
                 </button>
