@@ -83,7 +83,7 @@ require_once __DIR__ . '/../../db/connection.php';
                 </button>
 
                 <div class="user-dropdown">
-                    <a href="<?= BASE_URL ?>/frontend/profile.php?tab=perfil">Mi perfil</a>
+                    <a href="<?= BASE_URL ?>/frontend/profile.php?tab=datos">Mi perfil</a>
                     <a href="<?= BASE_URL ?>/frontend/profile.php?tab=direcciones">Mis direcciones</a>
                     <a href="<?= BASE_URL ?>/frontend/profile.php?tab=pedidos">Mis pedidos</a>
 
