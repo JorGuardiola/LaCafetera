@@ -70,8 +70,8 @@ require_once __DIR__ . '/../../db/connection.php';
     <div class="icons-bar">
 
         <!-- Buscar -->
-        <button class="icon-header" aria-label="Buscar">
-            <img src="<?= BASE_URL ?>/assets/img/buscar.png" alt="Buscar">
+        <button class="icon-header" id="openSearchBtn" aria-label="Buscar">
+        <img src="<?= BASE_URL ?>/assets/img/buscar.png" alt="Buscar">
         </button>
 
         <!-- USUARIO -->

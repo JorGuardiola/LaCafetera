@@ -55,6 +55,6 @@
     </div>
   </div>
 </footer>
-
+<?php include __DIR__ . '/search-modal.php'; ?>
 </body>
 </html>
