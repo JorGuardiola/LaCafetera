@@ -3228,3 +3228,123 @@ td img {
     margin: 0 auto;
 }
 
+/* =======================================
+   MODAL DE BÚSQUEDA (SEARCH POP-UP) 
+======================================= */
+.search-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Fondo oscuro */
+    z-index: 2000; /* Por encima del header */
+    display: none; /* Oculto por defecto */
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 5rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.search-modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+.search-modal-content {
+    background: white;
+    width: 60rem;
+    max-width: 90%;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* Cabecera del input */
+.search-header {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+#searchInput {
+    flex: 1;
+    border: none;
+    font-size: 1.8rem;
+    padding: 1rem;
+    font-family: var(--fuenteTexto);
+    outline: none;
+}
+
+.close-search {
+    background: none;
+    border: none;
+    font-size: 3rem;
+    cursor: pointer;
+    color: #666;
+    line-height: 1;
+}
+
+/* Lista de Sugerencias */
+.search-suggestions {
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.search-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    border-bottom: 1px solid #f9f9f9;
+    transition: background 0.2s;
+}
+
+.search-item:hover {
+    background: #f0f0f0;
+}
+
+.search-item img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    margin-right: 1.5rem;
+    border-radius: 4px;
+}
+
+.search-item span {
+    font-size: 1.6rem;
+    color: #333;
+    font-weight: 500;
+}
+
+.search-no-results {
+    padding: 2rem;
+    text-align: center;
+    color: #777;
+    font-size: 1.4rem;
+}
+
+/* --- MÓVIL: OCUPAR TODO EL ANCHO --- */
+@media (max-width: 768px) {
+    .search-modal-overlay {
+        padding-top: 0;
+        background: white; /* En móvil fondo blanco total */
+    }
+    
+    .search-modal-content {
+        width: 100%;
+        max-width: 100%;
+        height: 100%;
+        border-radius: 0;
+        box-shadow: none;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .search-suggestions {
+        flex: 1;
+    }
+}

@@ -3,6 +3,9 @@
 session_start();
 require_once __DIR__ . '/../db/connection.php';
 
+// 1. Recoger búsqueda de la URL (si viene del modal de la lupa)
+$busqueda = isset($_GET['q']) ? trim($_GET['q']) : '';
+
 // Datos del hero
 $bgClass = "bg-productos";
 $heroTitle = "Nuestros productos";
