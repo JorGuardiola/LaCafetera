@@ -210,7 +210,7 @@ include __DIR__ . '/templates/hero.php';
 
             </fieldset>
             
-            <input type="submit" value="Enviar mi Consulta y Tomar un Café" class="boton1-btn">
+            <input type="submit" value="Enviar mi Consulta y Tomar un Café" class="boton4-btn">
         </form>
         
         <div class="info-adicional">

@@ -122,17 +122,28 @@ require_once __DIR__ . '/../../db/connection.php';
 
 </header>
 
+
+
 <!-- JS MENÚ MOBILE -->
 <script>
     const toggle = document.querySelector('.menu-toggle');
     const nav = document.querySelector('.nav-bar');
 
     if (toggle && nav) {
-        toggle.addEventListener('click', () => {
+        toggle.addEventListener('click', (e) => {
+            e.stopPropagation(); // Evita que el clic cierre el menú inmediatamente
             nav.classList.toggle('active');
+        });
+
+        // Cerrar al hacer clic fuera del menú móvil
+        document.addEventListener('click', (e) => {
+            if (!nav.contains(e.target) && !toggle.contains(e.target)) {
+                nav.classList.remove('active');
+            }
         });
     }
 </script>
+
 
 <!-- JS DROPDOWN USUARIO -->
 <script>
@@ -143,10 +154,15 @@ require_once __DIR__ . '/../../db/connection.php';
         userToggle.addEventListener('click', (e) => {
             e.stopPropagation();
             userDropdown.classList.toggle('active');
+            
+            // Cerrar el menú hamburguesa si se abre el de usuario
+            if (nav) nav.classList.remove('active');
         });
 
-        document.addEventListener('click', () => {
-            userDropdown.classList.remove('active');
+        document.addEventListener('click', (e) => {
+            if (!userDropdown.contains(e.target) && !userToggle.contains(e.target)) {
+                userDropdown.classList.remove('active');
+            }
         });
     }
 </script>

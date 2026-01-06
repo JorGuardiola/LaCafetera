@@ -26,21 +26,20 @@ $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <?php include __DIR__ . '/templates/hero.php'; ?>
 
-<main>
-    
-    
-    <?php include __DIR__ . '/templates/search.php'; ?>
+<main> 
+    <div class="profile-content">
+        <?php include __DIR__ . '/templates/search.php'; ?>
 
-    <section class="product-grid" id="results-container">
-        <?php if ($productos): ?>
-            <?php foreach ($productos as $p): ?>
-                <?php include __DIR__ . '/templates/card.php'; ?>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <p style="text-align:center; width:100%;">No hay productos disponibles.</p>
-        <?php endif; ?>
-    </section>
-
+        <section class="product-grid" id="results-container">
+            <?php if ($productos): ?>
+                <?php foreach ($productos as $p): ?>
+                    <?php include __DIR__ . '/templates/card.php'; ?>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p style="text-align:center; width:100%;">No hay productos disponibles.</p>
+            <?php endif; ?>
+        </section>
+    </div>
 </main>
 
 <?php include __DIR__ . "/templates/footer.php"; ?>
