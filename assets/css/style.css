@@ -289,7 +289,7 @@ table {
 }*/
 .filters-group {
     display: flex; 
-    flex-direction: column; /* Label arriba, Input abajo */
+    flex-direction:row;
     gap: 0.5rem; 
     width: 100%;
 } 
@@ -3201,13 +3201,30 @@ padding-bottom: 6rem;
     border: 1px solid #ddd;
 }
 
+td img {
+    max-width: 15rem; 
+    object-fit: cover; 
+    border-radius: 4px;
+}
+
 /* Ajuste para que en móvil la imagen no sea gigante */
 @media (max-width: 768px) {
     .orders-table td[data-label="Imagen"] {
         justify-content: center;
-        padding: 10px 0;
+        display: flex;
     }
 }
 
-
+.sin-imagen {
+    width: 15rem;
+    height: 15rem;
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    font-size: 1.5rem;
+    color: #7d7d7d;
+    margin: 0 auto;
+}
 

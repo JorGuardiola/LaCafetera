@@ -88,16 +88,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 try {
                     $pdo->beginTransaction();
 
-                    // 1. Verificamos si el café (nombre_cafe) ya existe en la tabla 'productos'
+                    // --- 0. PROCESAR LA IMAGEN ---
+                    $nombre_archivo = null;
+                    if (isset($_FILES['foto_producto']) && $_FILES['foto_producto']['error'] === UPLOAD_ERR_OK) {
+                        $fileTmpPath = $_FILES['foto_producto']['tmp_name'];
+                        $fileName = $_FILES['foto_producto']['name'];
+                        
+                        // Generar nombre único para evitar duplicados en la carpeta
+                        $extension = pathinfo($fileName, PATHINFO_EXTENSION);
+                        $nombre_archivo = pathinfo($fileName, PATHINFO_FILENAME) . '_' . time() . '.' . $extension;
+                        
+                        // Ruta física: subir un nivel para salir de /frontend y entrar en /assets/img/
+                        $dest_path = __DIR__ . '/../assets/img/imgsproducts/' . $nombre_archivo;
+
+                        if (!move_uploaded_file($fileTmpPath, $dest_path)) {
+                            throw new Exception("No se pudo guardar la imagen en la carpeta assets/img.");
+                        }
+                    }
+
+                    // 1. Verificamos si el café (nombre_cafe) ya existe
                     $stmtCheck = $pdo->prepare("SELECT id FROM productos WHERE nombre_cafe = ?");
                     $stmtCheck->execute([$_POST['nombre_cafe']]);
                     $producto_id = $stmtCheck->fetchColumn();
 
-                    // 2. Si no existe, lo creamos primero
+                    // 2. Si no existe, lo creamos e insertamos el nombre de la imagen
                     if (!$producto_id) {
-                        $stmtNewProd = $pdo->prepare("INSERT INTO productos (nombre_cafe) VALUES (?)");
-                        $stmtNewProd->execute([$_POST['nombre_cafe']]);
+                        $stmtNewProd = $pdo->prepare("INSERT INTO productos (nombre_cafe, imagen) VALUES (?, ?)");
+                        $stmtNewProd->execute([$_POST['nombre_cafe'], $nombre_archivo]);
                         $producto_id = $pdo->lastInsertId();
+                    } else {
+                        // Opcional: Si el producto ya existe pero subes una foto nueva, actualizamos la foto del producto base
+                        if ($nombre_archivo) {
+                            $stmtUpdateImg = $pdo->prepare("UPDATE productos SET imagen = ? WHERE id = ?");
+                            $stmtUpdateImg->execute([$nombre_archivo, $producto_id]);
+                        }
                     }
 
                     // 3. Insertamos la variante con el producto_id obtenido
@@ -114,9 +138,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 
                     $pdo->commit();
                     $_SESSION['admin_flash'] = "Nueva variante creada correctamente.";
-                } catch (PDOException $e) {
+
+                } catch (Exception $e) {
                     $pdo->rollBack();
-                    if ($e->getCode() == '23000') {
+                    if (isset($e->getCode) && $e->getCode() == '23000') {
                         $_SESSION['admin_flash'] = "Error: El SKU ya existe o la variante está duplicada.";
                     } else {
                         $_SESSION['admin_flash'] = "Error: " . $e->getMessage();
@@ -145,47 +170,60 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 try {
                     $pdo->beginTransaction();
                     
-                    // 1. Actualizar nombre del café
+                    // 1. Procesar nueva imagen si se ha subido una
+                    if (isset($_FILES['foto_producto']) && $_FILES['foto_producto']['error'] === UPLOAD_ERR_OK) {
+                        $fileTmpPath = $_FILES['foto_producto']['tmp_name'];
+                        $fileName = $_FILES['foto_producto']['name'];
+                        
+                        // Generar nombre único
+                        $extension = pathinfo($fileName, PATHINFO_EXTENSION);
+                        $nombre_archivo = pathinfo($fileName, PATHINFO_FILENAME) . '_' . time() . '.' . $extension;
+                        
+                        // Ruta física (subir un nivel desde /frontend a /assets/img/)
+                        $dest_path = __DIR__ . '/../assets/img/imgsproducts/' . $nombre_archivo;
+
+                        if (move_uploaded_file($fileTmpPath, $dest_path)) {
+                            // Si la subida es exitosa, actualizamos el campo imagen_url en la tabla productos
+                            $stmtImg = $pdo->prepare("UPDATE productos SET imagen = ? WHERE id = ?");
+                            $stmtImg->execute([$nombre_archivo, $_POST['producto_id']]);
+                        } else {
+                            throw new Exception("Error al mover la nueva imagen a la carpeta assets/img.");
+                        }
+                    }
+
+                    // 2. Actualizar nombre del café
                     $stmt1 = $pdo->prepare("UPDATE productos SET nombre_cafe = ? WHERE id = ?");
                     $stmt1->execute([$_POST['nombre_cafe'], $_POST['producto_id']]);
                     
-                    // 2. Actualizar la variante
-                    $stmt2 = $pdo->prepare("UPDATE producto_variantes SET sku = ?, precio = ?, stock = ?, molienda = ?, tueste = ? WHERE sku = ?");
+                    // 3. Actualizar la variante (incluyendo el envase que antes faltaba)
+                    $stmt2 = $pdo->prepare("UPDATE producto_variantes SET sku = ?, precio = ?, stock = ?, molienda = ?, tueste = ?, envase = ? WHERE sku = ?");
                     $stmt2->execute([
                         $_POST['sku'], 
                         $_POST['precio'], 
                         $_POST['stock'], 
                         $_POST['molienda'], 
-                        $_POST['tueste'], 
+                        $_POST['tueste'],
+                        $_POST['envase'], // Asegúrate de que el envase se actualice también
                         $_POST['sku_original'] 
                     ]);
                     
                     $pdo->commit();
                     $_SESSION['admin_flash'] = "Variante actualizada correctamente.";
-                } catch (PDOException $e) { // Cambiamos a PDOException para capturar el código
+
+                } catch (Exception $e) { 
                     $pdo->rollBack();
                     
-                    // El código 23000 con error 1062 es duplicado en MySQL
-                    if ($e->getCode() == '23000') {
-                        $_SESSION['admin_flash'] = "Ya existe un producto con esas características (molienda y tueste).";
+                    if (isset($e->getCode) && $e->getCode() == '23000') {
+                        $_SESSION['admin_flash'] = "Error: El SKU ya existe o los datos están duplicados.";
                     } else {
                         $_SESSION['admin_flash'] = "Error al actualizar: " . $e->getMessage();
                     }
                 }
-            break;
+                header("Location: admin.php?tab=productos");
+            exit;
 
 
-            // Caso Crear Producto
-            case 'create_product':
-                $stmt2 = $pdo->prepare("INSERT INTO producto_variantes (producto_id, sku, precio, stock, molienda, tueste, envase) VALUES (?, ?, ?, ?, ?, ?, ?)");
-                $stmt2->execute([$nuevo_id, $_POST['sku'], $_POST['precio'], $_POST['stock'], $_POST['molienda'], $_POST['tueste'], $_POST['envase']]);
-            break;
-
-            // Caso Modificar Producto
-            case 'update_product':
-                $stmt2 = $pdo->prepare("UPDATE producto_variantes SET sku = ?, precio = ?, stock = ?, molienda = ?, tueste = ?, envase = ? WHERE sku = ?");
-                $stmt2->execute([$_POST['sku'], $_POST['precio'], $_POST['stock'], $_POST['molienda'], $_POST['tueste'], $_POST['envase'], $_POST['sku_original']]);
-            break;
+           
 
 
             /* ========= PEDIDOS ========= */
@@ -452,7 +490,7 @@ function openEditProduct(data) {
     const preview = document.getElementById('imagePreview');
     const img = document.getElementById('imgTarget');
     if (data.imagen && data.imagen !== '') {
-        img.src = 'assets/img/' + data.imagen; // <--- AÑADIDO EL PATH
+        img.src = '../assets/img/imgsproducts/' + data.imagen; // <--- AÑADIDO EL PATH
         preview.style.display = "block";
     } else {
         img.src = '';
