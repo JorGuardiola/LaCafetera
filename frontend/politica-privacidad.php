@@ -3,7 +3,8 @@
 include __DIR__ . '/templates/header.php'; 
 ?>
 
-<main style="max-width: 900px; margin: 3rem auto; padding: 0 1rem;">
+<style>main ul, main table { font-size: 1.6rem; }</style>
+<main style="max-width: 900px; margin: 15rem auto 3rem; padding: 0 1rem;">
     <h2>Política de Privacidad de LaCafetera</h2>
     <p>Fecha de última actualización: 7 de Enero de 2026</p>
 
