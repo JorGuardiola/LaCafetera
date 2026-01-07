@@ -451,7 +451,7 @@ const legalTexts = {
 
     'privacidad': `
         <strong>Política de privacidad</strong>
-        <p>Las presentes condiciones se aplican a todas las transacciones en <strong>www.lacafetera.shop</strong>. Para más información, consulte el Aviso Legal.</p>
+        <p>Las presentes condiciones se aplican a todas las transacciones en <strong>www.lacafetera.store</strong>. Para más información, consulte el Aviso Legal.</p>
         <p><strong>1. Identificación:</strong> El Vendedor es La Cafetera 1994 S.L., con domicilio en Avda. de la Molienda, 45, Planta 3, 28005 Madrid (España). Correo: lacaffetera1994@gmail.com.</p>
         <p><strong>2. Información recogida:</strong> Recogemos nombre, info de contacto y dirección para procesar pedidos y facturación.</p>
         <p><strong>3. Cookies:</strong> Utilizamos cookies para análisis estadístico y mejorar la experiencia. Usted puede denegar el uso de cookies en la configuración de su navegador.</p>
