@@ -2531,6 +2531,56 @@ padding-bottom: 6rem;
     color: #111111; /* Texto oscuro */
     max-width: 60rem; /* Limita el ancho del párrafo */
 }
+
+/* =======================================
+   FONDO SOSTENIBILIDAD (Nuevo)
+======================================= */
+
+/* 1. Imagen de fondo */
+.header-hero-simple.bg-sostenibilidad {
+    background-image: url('../img/hero-sostenibilidad.png'); 
+    height: 65rem; /* Misma altura que nosotros.php */
+}
+
+/* 2. Capa semitransparente (Overlay) para que se lea el texto */
+/* Reutilizamos la lógica de .bg-nosotros */
+.header-hero-simple.bg-sostenibilidad::before {
+    content: ''; 
+    position: absolute; 
+    top: 0; right: 0; bottom: 0; left: 0; 
+    z-index: 2;
+    background-color: rgba(255, 255, 255, 1); 
+    opacity: 0.3; 
+}
+
+/* =======================================
+   FONDO PROCESS / ELABORACIÓN
+======================================= */
+
+.header-hero-simple.bg-elaboracion {
+    background-image: url('../img/tarjeta2.jpg'); 
+    height: 65rem;
+}
+
+/* Capa oscura/clara para leer el texto  */
+.header-hero-simple.bg-elaboracion::before {
+    content: ''; 
+    position: absolute; 
+    top: 0; right: 0; bottom: 0; left: 0; 
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.3); 
+}
+
+/* =======================================
+   FONDO INFORMACIÓN / AYUDA
+======================================= */
+
+.header-hero-simple.bg-info {
+    /* Imagen sugerida: Paquete de café, manos entregando caja o textura limpia */
+    background-image: url('../img/hero-info.png'); 
+    height: 60rem;
+}
+
 /* =========================================
    ESTILOS DE LA LLAMADA A LA ACCIÓN (CTA)
    ========================================= */
@@ -2575,35 +2625,6 @@ padding-bottom: 6rem;
 .llamada-a-la-accion .boton-primario:hover {
     background-color: #A36B3B; /* Color más claro al pasar el ratón */
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
