@@ -25,7 +25,7 @@
 
     <!-- Columna 3 -->
     <div class="footer-col">
-      <h4>Productos</h4>
+      <h4><a href="<?= BASE_URL ?>/frontend/products.php">Productos</a></h4>
       <ul>
         <li><a href="<?= BASE_URL ?>/frontend/products.php">Productos</a></li>
         <li><a href="#">Información</a></li>
