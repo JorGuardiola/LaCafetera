@@ -25,7 +25,7 @@
 
     <!-- Columna 3 -->
     <div class="footer-col">
-      <h4>Productos</h4>
+      <h4><a href="<?= BASE_URL ?>/frontend/products.php">Productos</a></h4>
       <ul>
         <li><a href="<?= BASE_URL ?>/frontend/products.php">Productos</a></li>
         <li><a href="#">Información</a></li>
@@ -47,7 +47,7 @@
 
   <!-- Línea inferior -->
   <div class="footer-bottom">
-    <p>© 2025 La Cafetera. Todos los derechos reservados.</p>
+    <p>© 2026 La Cafetera. Todos los derechos reservados.</p>
     <div class="footer-links">
       <a href="<?= BASE_URL ?>/frontend/politica-privacidad.php">Política de privacidad</a>
       <a href="<?= BASE_URL ?>/frontend/terminos-condiciones.php">Términos y condiciones</a>

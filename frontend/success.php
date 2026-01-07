@@ -36,6 +36,21 @@ if (!$pedido) {
     exit;
 }
 
+// 2b. Obtener los productos específicos de este pedido
+$sql_items = "
+    SELECT 
+        pi.cantidad, pi.precio_unitario,
+        v.molienda, v.envase, v.tueste,
+        p.nombre_cafe, p.imagen
+    FROM pedido_items pi
+    JOIN producto_variantes v ON pi.id_variante_sku = v.sku
+    JOIN productos p ON v.producto_id = p.id
+    WHERE pi.id_orden = ?
+";
+$stmt_items = $pdo->prepare($sql_items);
+$stmt_items->execute([$id_orden]);
+$items_comprados = $stmt_items->fetchAll(PDO::FETCH_ASSOC);
+
 // 3. Cálculos visuales
 // Asumimos envío gratis si > 50 (misma lógica que checkout)
 $gastos_envio = ($pedido['total'] >= 50) ? 0.00 : 8.00;
@@ -44,7 +59,7 @@ $nombre_completo = htmlspecialchars($pedido['nombre'] . ' ' . $pedido['apellido'
 $nombre_solo = htmlspecialchars($pedido['nombre']);
 
 
-// Formato de fecha (Ej: 27 de febrero 2025)
+// Formato de fecha (Ej: 27 de febrero 2026)
 setlocale(LC_TIME, 'es_ES.UTF-8', 'spanish');
 $fecha_formateada = strftime('%d de %B %Y', strtotime($pedido['fecha_orden']));
 // Fallback si strftime da problemas en algunos servers:
@@ -125,6 +140,36 @@ if(!$fecha_formateada) $fecha_formateada = date('d/m/Y', strtotime($pedido['fech
 
         <div class="success-card">
             <h3 class="summary-title">Resumen del pedido</h3>
+
+<div class="purchased-items" style="margin-top: 1.5rem; margin-bottom: 1.5rem;">
+        <?php foreach ($items_comprados as $item): ?>
+            <div class="item-row" style="display: flex; gap: 1rem; margin-bottom: 1rem; align-items: center;">
+                <div class="item-img" style="position: relative;">
+                        <img src="<?= BASE_URL ?>/assets/img/imgsproducts/<?= $item['imagen'] ?>"
+                         alt="<?= htmlspecialchars($item['nombre_cafe']) ?>" 
+                         style="width: 55px; height: 55px; object-fit: cover; border-radius: 8px; border: 1px solid #eee;">
+                    <span style="position: absolute; top: -8px; right: -8px; background: #333; color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: bold;">
+                        <?= $item['cantidad'] ?>
+                    </span>
+                </div>
+                
+                <div class="item-info" style="flex: 1;">
+                    <p style="margin: 0; font-weight: 600; font-size: 0.95rem; color: #333;">
+                        <?= htmlspecialchars($item['nombre_cafe']) ?>
+                    </p>
+                    <p style="margin: 0; font-size: 0.8rem; color: #777; text-transform: capitalize;">
+                        <?= htmlspecialchars($item['envase']) ?> | <?= htmlspecialchars($item['molienda']) ?>
+                    </p>
+                </div>
+                
+                <div class="item-price" style="font-weight: 600; color: #333;">
+                    <?= number_format($item['precio_unitario'] * $item['cantidad'], 2) ?>€
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+
+    <hr class="divider" style="border: 0; border-top: 1px solid #eee; margin-bottom: 1.5rem;">
 
             <div class="summary-line">
                 <span>Subtotal</span>
