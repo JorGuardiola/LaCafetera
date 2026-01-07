@@ -18,7 +18,7 @@
       <h4>Cafetera</h4>
       <ul>
         <li><a href="<?= BASE_URL ?>/frontend/nosotros.php">Nosotros</a></li>
-        <li><a href="#">Elaboración</a></li>
+        <li><a href="<?= BASE_URL ?>/frontend/process.php">Elaboración</a></li>
         <li><a href="<?= BASE_URL ?>/frontend/contacto.php">Contacto</a></li>
       </ul>
     </div>
@@ -28,8 +28,8 @@
       <h4><a href="<?= BASE_URL ?>/frontend/products.php">Productos</a></h4>
       <ul>
         <li><a href="<?= BASE_URL ?>/frontend/products.php">Productos</a></li>
-        <li><a href="#">Información</a></li>
-        <li><a href="#">Sostenibilidad</a></li>
+        <li><a href="<?= BASE_URL ?>/frontend/information.php">Información</a></li>
+        <li><a href="<?= BASE_URL ?>/frontend/sustainability.php">Sostenibilidad</a></li>
       </ul>
     </div>
 
