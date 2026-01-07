@@ -5,7 +5,7 @@ include __DIR__ . '/templates/header.php';
 
 <main style="max-width: 900px; margin: 3rem auto; padding: 0 1rem;">
     <h2>Términos y Condiciones de Venta</h2>
-    <p>Fecha de última actualización: 15 de Diciembre de 2025</p>
+    <p>Fecha de última actualización: 7 de Enero de 2026</p>
 
     <p>Estos Términos y Condiciones regulan la compraventa de café de especialidad y productos relacionados (en adelante, los "Productos") a través del sitio web https://lacafetera.shop por parte de los clientes (en adelante, el "Cliente"). Por favor, léalos detenidamente antes de realizar cualquier pedido. Al hacer un pedido, el Cliente acepta íntegramente estos Términos.</p>
 
