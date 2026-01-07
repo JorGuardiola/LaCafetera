@@ -104,6 +104,6 @@
     </li>
 </ul>
 
-    <p class="footer-update">Última actualización: Diciembre 2025</p>
+    <p class="footer-update">Última actualización: Enero 2026</p>
 </div>
 <?php include __DIR__ . '/templates/footer.php'; ?>

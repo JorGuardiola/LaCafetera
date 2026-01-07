@@ -5,7 +5,7 @@ include __DIR__ . '/templates/header.php';
 
 <main style="max-width: 900px; margin: 3rem auto; padding: 0 1rem;">
     <h2>Política de Privacidad de LaCafetera</h2>
-    <p>Fecha de última actualización: 1 de Diciembre de 2025</p>
+    <p>Fecha de última actualización: 7 de Enero de 2026</p>
 
     <p>En LaCafetera, valoramos su privacidad y nos comprometemos a proteger su información personal. Esta política describe cómo recopilamos, utilizamos y protegemos sus datos al utilizar nuestro sitio web https://lacafetera.shop y al realizar compras de café.</p>
 

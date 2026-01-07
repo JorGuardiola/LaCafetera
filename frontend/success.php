@@ -44,7 +44,7 @@ $nombre_completo = htmlspecialchars($pedido['nombre'] . ' ' . $pedido['apellido'
 $nombre_solo = htmlspecialchars($pedido['nombre']);
 
 
-// Formato de fecha (Ej: 27 de febrero 2025)
+// Formato de fecha (Ej: 27 de febrero 2026)
 setlocale(LC_TIME, 'es_ES.UTF-8', 'spanish');
 $fecha_formateada = strftime('%d de %B %Y', strtotime($pedido['fecha_orden']));
 // Fallback si strftime da problemas en algunos servers:
