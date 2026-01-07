@@ -119,7 +119,7 @@ if(!$fecha_formateada) $fecha_formateada = date('d/m/Y', strtotime($pedido['fech
             </div>
             
             <div class="details-grid">
-                 <a href="<?= BASE_URL ?>/frontend/products.php" class="boton1-btn">Volver a la tienda</a>
+                 <a href="<?= BASE_URL ?>/frontend/products.php" class="boton4-btn">Volver a la tienda</a>
             </div>
         </div>
 
