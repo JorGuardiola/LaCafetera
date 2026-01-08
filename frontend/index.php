@@ -127,6 +127,25 @@ $stmt->execute();
 
 </main>
 
+<!-- script pausar CARRUSEL -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const track = document.querySelector('.carousel-track');
+    const cards = document.querySelectorAll('.tag-card');
+
+    cards.forEach(card => {
+        // Al entrar en UNA tarjeta -> Pausar 
+        card.addEventListener('mouseenter', () => {
+            track.style.animationPlayState = 'paused';
+        });
+        // Al salir de esa tarjeta -> Reanudar 
+        card.addEventListener('mouseleave', () => {
+            track.style.animationPlayState = 'running';
+        });
+    });
+});
+</script>
+
 <?php include __DIR__ . '/templates/footer.php'; ?>
 
 

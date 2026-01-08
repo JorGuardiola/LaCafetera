@@ -1013,11 +1013,6 @@ form {
     transition: none; /* Desactivar transiciones que interfieren con la animación */
 }
 
-/* Pausar animación al pasar el ratón */
-.tag-carousel:hover .carousel-track {
-    animation-play-state: paused;
-}
-
 /* Definición de la animación de desplazamiento */
 @keyframes scroll {
     0% { transform: translateX(0); }
