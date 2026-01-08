@@ -1,4 +1,4 @@
-<div class="hero-container <?= $bgClass ?>">
+<div class="hero-container <?= $bgClass ?>" style="<?= $heroInlineStyle ?>">
     <div class="hero-inner">
 
         <!-- IZQUIERDA: textos dinámicos -->
