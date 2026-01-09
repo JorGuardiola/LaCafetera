@@ -287,6 +287,8 @@ table {
     padding: 3rem;
     border-left: 6px solid #4b3621; /* Línea gruesa café */
     margin: 3rem 0;
+    transition: all 0.3s ease; /* Hace que el cambio sea suave, no brusco */
+    cursor: default;
 }
 
 .empresa-box p {
@@ -308,6 +310,196 @@ table {
     line-height: 1.6;
 }
 
+.empresa-box:hover {
+    transform: translateY(-5px); /* La tarjeta sube 5 píxeles */
+    background-color: #f8eee4;   /* El color crema se vuelve un pelín más oscuro */
+    box-shadow: 0 8px 20px rgba(75, 54, 33, 0.1); /* La sombra crece para dar sensación de altura */
+    border-color: var(--acento); /* El borde cambia al color café de la marca */
+}
+
+/* =================================================
+   ESTILO DE POLITICA Y PRIVACIDAD 
+==================================================== */
+:root {
+    --cafe-oscuro: #4b3621;
+    --cafe-suave: #fdf6f0; /* Color crema de la imagen */
+    --texto-color: #3e3e3e;
+    --borde-color: #ede0d4;
+    --acento: #a67c52;
+}
+
+.privacy-container-main {
+    max-width: 850px;
+    margin: 10rem auto 5rem;
+    padding: 4rem;
+    font-family: var(--fuenteTexto), sans-serif;
+    color: var(--texto-color);
+    background-color: #fff;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    border-radius: 8px;
+}
+
+/* Encabezados */
+.privacy-container-main h2 {
+    font-size: 2.8rem;
+    color: var(--cafe-oscuro);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.privacy-container-main h3 {
+    font-size: 2.2rem;
+    color: var(--cafe-oscuro);
+    margin: 4rem 0 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.privacy-container-main h3::before {
+    content: "";
+    width: 4px;
+    height: 25px;
+    background-color: var(--acento);
+    margin-right: 1.2rem;
+    border-radius: 2px;
+}
+
+/* Tarjetas de Contenido (Puntos 1, 2 y 4) */
+.privacy-card-box {
+    background-color: var(--cafe-suave);
+    padding: 3rem;
+    border-radius: 15px;
+    border: 1px solid var(--borde-color);
+    margin: 2rem 0;
+}
+
+.privacy-card-box .box-title {
+    display: block;
+    font-size: 1.8rem;
+    color: #000;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+.privacy-card-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.privacy-card-box li {
+    font-size: 1.6rem;
+    line-height: 1.8;
+    margin-bottom: 1.2rem;
+    color: #333;
+}
+
+.privacy-card-box strong {
+    color: #000;
+}
+.privacy-card-box {
+    transition: all 0.3s ease; /* Hace que el cambio sea suave, no brusco */
+    cursor: default;
+}
+
+.privacy-card-box:hover {
+    transform: translateY(-5px); /* La tarjeta sube 5 píxeles */
+    background-color: #f8eee4;   /* El color crema se vuelve un pelín más oscuro */
+    box-shadow: 0 8px 20px rgba(75, 54, 33, 0.1); /* La sombra crece para dar sensación de altura */
+    border-color: var(--acento); /* El borde cambia al color café de la marca */
+}
+
+/* =================================================
+   ESTILO DE TERMINOS Y CONDICIONES DE VENTA
+==================================================== */
+:root {
+    --cafe-oscuro: #4b3621;
+    --cafe-suave: #fdf6f0; /* Color crema de la imagen */
+    --texto-color: #3e3e3e;
+    --borde-color: #ede0d4;
+    --acento: #a67c52;
+}
+
+.terms-container-main {
+    max-width: 850px;
+    margin: 10rem auto 5rem;
+    padding: 4rem;
+    font-family: var(--fuenteTexto), sans-serif;
+    color: var(--texto-color);
+    background-color: #fff;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    border-radius: 8px;
+}
+
+/* Encabezados */
+.terms-container-main h2 {
+    font-size: 2.8rem;
+    color: var(--cafe-oscuro);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.terms-container-main h3 {
+    font-size: 2.2rem;
+    color: var(--cafe-oscuro);
+    margin: 4rem 0 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.terms-container-main h3::before {
+    content: "";
+    width: 4px;
+    height: 25px;
+    background-color: var(--acento);
+    margin-right: 1.2rem;
+    border-radius: 2px;
+}
+
+/* Tarjetas de Contenido (Puntos 1, 2 y 4) */
+.terms-card-box {
+    background-color: var(--cafe-suave);
+    padding: 3rem;
+    border-radius: 15px;
+    border: 1px solid var(--borde-color);
+    margin: 2rem 0;
+}
+
+.terms-card-box .box-title {
+    display: block;
+    font-size: 1.8rem;
+    color: #000;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+.terms-card-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.terms-card-box li {
+    font-size: 1.6rem;
+    line-height: 1.8;
+    margin-bottom: 1.2rem;
+    color: #333;
+}
+
+.terms-card-box strong {
+    color: #000;
+}
+.terms-card-box {
+    transition: all 0.3s ease; /* Hace que el cambio sea suave, no brusco */
+    cursor: default;
+}
+
+.terms-card-box:hover {
+    transform: translateY(-5px); /* La tarjeta sube 5 píxeles */
+    background-color: #f8eee4;   /* El color crema se vuelve un pelín más oscuro */
+    box-shadow: 0 8px 20px rgba(75, 54, 33, 0.1); /* La sombra crece para dar sensación de altura */
+    border-color: var(--acento); /* El borde cambia al color café de la marca */
+}
 
 /* =========================================================================================================================
    ESTILOS DE FORMULARIO Y CAMPOS
