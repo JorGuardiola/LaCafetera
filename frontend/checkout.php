@@ -169,12 +169,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <?php include __DIR__ . '/templates/header.php'; ?>
 
-<main class="container" style="margin-top: 4rem; margin-bottom: 6rem;">
+<main class="container">
     
-    <h1 style="text-align:center; margin-bottom:4rem;">Finalizar Compra</h1>
+    <h1>Finalizar Compra</h1>
 
     <?php if (!empty($errores)): ?>
-        <div class="alert error" style="background:#ffebee; color:#c62828; padding:1.5rem; border-radius:8px; margin-bottom:2rem;">
+        <div class="alert error">
             <?php foreach($errores as $err) echo "<p>• $err</p>"; ?>
         </div>
     <?php endif; ?>
@@ -355,7 +355,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <div class="iva-text">IVA incluido</div>
 
-            <button type="submit" class="btn-checkout">Proceder con el pago</button>
+            <button type="submit" class="boton4-btn">Proceder con el pago</button>
         </div>
 
     </form>
@@ -451,7 +451,7 @@ const legalTexts = {
 
     'privacidad': `
         <strong>Política de privacidad</strong>
-        <p>Las presentes condiciones se aplican a todas las transacciones en <strong>www.lacafetera.shop</strong>. Para más información, consulte el Aviso Legal.</p>
+        <p>Las presentes condiciones se aplican a todas las transacciones en <strong>www.lacafetera.store</strong>. Para más información, consulte el Aviso Legal.</p>
         <p><strong>1. Identificación:</strong> El Vendedor es La Cafetera 1994 S.L., con domicilio en Avda. de la Molienda, 45, Planta 3, 28005 Madrid (España). Correo: lacaffetera1994@gmail.com.</p>
         <p><strong>2. Información recogida:</strong> Recogemos nombre, info de contacto y dirección para procesar pedidos y facturación.</p>
         <p><strong>3. Cookies:</strong> Utilizamos cookies para análisis estadístico y mejorar la experiencia. Usted puede denegar el uso de cookies en la configuración de su navegador.</p>

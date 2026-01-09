@@ -38,110 +38,113 @@ if (isset($_SESSION['carrito']) && is_array($_SESSION['carrito'])) {
 }
 ?>
 
+
 <?php include __DIR__ . '/templates/header.php'; ?>
 
-<main class="product-detail-layout">
-    
-    <div class="detail-left">
-        <div class="detail-image-container">
-            <img src="<?= BASE_URL ?>/assets/img/imgsproducts/<?= htmlspecialchars($producto['imagen']) ?>" 
-                 alt="<?= htmlspecialchars($producto['nombre_cafe']) ?>">
+<main>
+    <div class="product-detail-layout">
+        <div class="detail-left">
+            <div class="detail-image-container">
+                <img src="<?= BASE_URL ?>/assets/img/imgsproducts/<?= htmlspecialchars($producto['imagen']) ?>" 
+                    alt="<?= htmlspecialchars($producto['nombre_cafe']) ?>">
+            </div>
+            <h1 class="big-product-title"><?= htmlspecialchars($producto['nombre_cafe']) ?></h1>
         </div>
-        <h1 class="big-product-title"><?= htmlspecialchars($producto['nombre_cafe']) ?></h1>
-    </div>
 
-    <div class="detail-right-card">
-        
-        <div class="card-header">
-            <div style="display:flex; justify-content:space-between; align-items:start;">
-                <div>
-                    <div class="reviews-placeholder">
-                        <i class="fa-solid fa-star star-icon"></i>
-                        <i class="fa-solid fa-star star-icon"></i>
-                        <i class="fa-solid fa-star star-icon"></i>
-                        <i class="fa-solid fa-star star-icon"></i>
-                        <i class="fa-solid fa-star-half-stroke star-icon-half"></i>
-                        <a href="#" class="reviews-link">45 valoraciones</a>
+        <div class="detail-right-card">
+            
+            <div class="card-header">
+                <div class="header-flex">
+                    <div>
+                        <div class="reviews-placeholder">
+                            <i class="fa-solid fa-star star-icon"></i>
+                            <i class="fa-solid fa-star star-icon"></i>
+                            <i class="fa-solid fa-star star-icon"></i>
+                            <i class="fa-solid fa-star star-icon"></i>
+                            <i class="fa-solid fa-star-half-stroke star-icon-half"></i>
+                            <a href="#" class="reviews-link">45 valoraciones</a>
+                        </div>
+                        <h3 class="card-title"><?= htmlspecialchars($producto['nombre_cafe']) ?></h3>
+                        <span class="card-origin"><?= htmlspecialchars($producto['region']) ?></span>
                     </div>
-                    <h2 class="card-title"><?= htmlspecialchars($producto['nombre_cafe']) ?></h2>
-                    <span class="card-origin"><?= htmlspecialchars($producto['region']) ?></span>
-                </div>
-                <i class="fa-regular fa-heart" style="font-size:1.5rem; cursor:pointer; color:#1A1A1A;"></i>
-            </div>
-        </div>
-
-        <div class="card-price" id="displayPrice">-- €</div>
-
-        <p class="card-description">
-            <?= nl2br(htmlspecialchars($producto['descripcion'])) ?>
-        </p>
-
-        <form action="cart.php" method="POST" id="addToCartForm">
-            <input type="hidden" name="action" value="add">
-            <input type="hidden" name="product_id" value="<?= $producto['id'] ?>">
-
-            <div class="selector-group">
-                <label class="selector-label">Elija envase:</label>
-                <div class="option-buttons">
-                    <input type="radio" name="envase" id="size-250" value="250g" class="option-radio" checked>
-                    <label for="size-250" class="option-label">250 G</label>
-                    
-                    <input type="radio" name="envase" id="size-1kg" value="1kg" class="option-radio">
-                    <label for="size-1kg" class="option-label">1 KG</label>
-                    
-                    <input type="radio" name="envase" id="size-2kg" value="2kg" class="option-radio">
-                    <label for="size-2kg" class="option-label">2 KG</label>
+                    <i class="fa-regular fa-heart" style="font-size:1.5rem; cursor:pointer; color:#1A1A1A;"></i>
                 </div>
             </div>
 
-            <div class="selector-group">
-                <label class="selector-label">Elija molienda:</label>
-                <div class="option-buttons" style="flex-wrap: wrap; gap: 5px;">
-                    <input type="radio" name="molienda" id="mol-grano" value="grano" class="option-radio" checked>
-                    <label for="mol-grano" class="option-label">Grano</label>
+            <div class="card-price" id="displayPrice">-- €</div>
 
-                    <input type="radio" name="molienda" id="mol-espresso" value="molido espresso" class="option-radio">
-                    <label for="mol-espresso" class="option-label">Molido-Espresso</label>
+            <p>
+                <?= nl2br(htmlspecialchars($producto['descripcion'])) ?>
+            </p>
 
-                    <input type="radio" name="molienda" id="mol-moka" value="molido moka" class="option-radio">
-                    <label for="mol-moka" class="option-label">Molido-Moka</label>
+            <form action="cart.php" method="POST" id="addToCartForm">
+                <input type="hidden" name="action" value="add">
+                <input type="hidden" name="product_id" value="<?= $producto['id'] ?>">
 
-                    <input type="radio" name="molienda" id="mol-goteo" value="molido goteo" class="option-radio">
-                    <label for="mol-goteo" class="option-label">Molido-Goteo</label>
-
-                    <input type="radio" name="molienda" id="mol-francesa" value="molido francesa" class="option-radio">
-                    <label for="mol-francesa" class="option-label">Molido-Francesa</label>
-                </div>
-            </div>
-
-            <div class="selector-group">
-                <label class="selector-label">Elija tueste:</label>
-                <div class="option-buttons">
-                    <input type="radio" name="tueste" id="tueste-medio" value="medio" class="option-radio" checked>
-                    <label for="tueste-medio" class="option-label">Medio</label>
-                    
-                    <input type="radio" name="tueste" id="tueste-oscuro" value="oscuro" class="option-radio">
-                    <label for="tueste-oscuro" class="option-label">Oscuro</label>
-                </div>
-            </div>
-
-            <div class="stock-info">
-                <div class="stock-dot"></div>
-                <span id="stockText">En Stock. Entrega gratuita estimada el lunes.</span>
-            </div>
-
-            <div class="card-actions-row">
-                <div class="quantity-selector-widget">
-                    <button type="button" class="qty-btn" onclick="updateQty(-1)">-</button>
-                    <input type="text" name="cantidad" id="inputQty" value="1" readonly>
-                    <button type="button" class="qty-btn" onclick="updateQty(1)">+</button>
+                <div class="selector-group">
+                    <label class="selector-label">Elija envase:</label>
+                    <div class="option-buttons">
+                        <input type="radio" name="envase" id="size-250" value="250g" class="option-radio" checked>
+                        <label for="size-250" class="option-label">250 G</label>
+                        
+                        <input type="radio" name="envase" id="size-1kg" value="1kg" class="option-radio">
+                        <label for="size-1kg" class="option-label">1 KG</label>
+                        
+                        <input type="radio" name="envase" id="size-2kg" value="2kg" class="option-radio">
+                        <label for="size-2kg" class="option-label">2 KG</label>
+                    </div>
                 </div>
 
-                <button type="submit" class="btn-add-to-cart-dark" id="btnSubmit">
-                    Añadir a la cesta
-                </button>
-            </div>
-        </form>
+                <div class="selector-group">
+                    <label class="selector-label">Elija molienda:</label>
+                    <div class="option-buttons" style="flex-wrap: wrap; gap: 5px;">
+                        <input type="radio" name="molienda" id="mol-grano" value="grano" class="option-radio" checked>
+                        <label for="mol-grano" class="option-label">Grano</label>
+
+                        <input type="radio" name="molienda" id="mol-espresso" value="molido espresso" class="option-radio">
+                        <label for="mol-espresso" class="option-label">Molido-Espresso</label>
+
+                        <input type="radio" name="molienda" id="mol-moka" value="molido moka" class="option-radio">
+                        <label for="mol-moka" class="option-label">Molido-Moka</label>
+
+                        <input type="radio" name="molienda" id="mol-goteo" value="molido goteo" class="option-radio">
+                        <label for="mol-goteo" class="option-label">Molido-Goteo</label>
+
+                        <input type="radio" name="molienda" id="mol-francesa" value="molido francesa" class="option-radio">
+                        <label for="mol-francesa" class="option-label">Molido-Francesa</label>
+                    </div>
+                </div>
+
+                <div class="selector-group">
+                    <label class="selector-label">Elija tueste:</label>
+                    <div class="option-buttons">
+                        <input type="radio" name="tueste" id="tueste-medio" value="medio" class="option-radio" checked>
+                        <label for="tueste-medio" class="option-label">Medio</label>
+                        
+                        <input type="radio" name="tueste" id="tueste-oscuro" value="oscuro" class="option-radio">
+                        <label for="tueste-oscuro" class="option-label">Oscuro</label>
+                    </div>
+                </div>
+
+                <div class="stock-info">
+                    <div class="stock-dot"></div>
+                    <span id="stockText">En Stock. Entrega gratuita estimada el lunes.</span>
+                </div>
+
+                <div class="card-actions-row">
+                    <div class="quantity-selector-widget">
+                        <button type="button" class="qty-btn" onclick="updateQty(-1)">-</button>
+                        <input type="text" name="cantidad" id="inputQty" value="1" readonly>
+                        <button type="button" class="qty-btn" onclick="updateQty(1)">+</button>
+                    </div>
+
+                    <button type="submit" class="boton4-btn" id="btnSubmit">
+                        Añadir a la cesta
+                    </button>
+                </div>
+            </form>
+
+        <div>
 
     </div>
 </main>
@@ -164,10 +167,10 @@ if (isset($_SESSION['carrito']) && is_array($_SESSION['carrito'])) {
             </div>
 
             <div class="modal-actions">
-    <a href="cart.php" class="btn-primary">
+    <a href="cart.php" class="boton4-btn">
         Ver cesta (<span id="cartCount"><?= $totalItems ?></span>)
     </a>
-    <a href="products.php" class="btn-secondary">Seguir comprando</a>
+    <a href="products.php" class="boton1-btn">Seguir comprando</a>
 </div>
         </div>
     </div>

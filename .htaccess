@@ -1,0 +1,7 @@
+# GESTIÓN DE ERRORES 404 (2 opciones)
+
+# --- OPCIÓN A: PARA HOSTINGER ---
+# ErrorDocument 404 /frontend/404.php
+
+# --- OPCIÓN B: PARA LOCALHOST ---
+  ErrorDocument 404 /lacafetera/frontend/404.php

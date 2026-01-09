@@ -1,11 +1,14 @@
 <?php include __DIR__ . '/templates/header.php'; ?>
+
+<style>main ul, main table { font-size: 1.6rem; }</style>
+<main style="max-width: 900px; margin: 15rem auto 3rem ; padding: 0 4rem;">
 <div class="cookies-container">
     <h1>Política de Cookies</h1>
     
-    <p>En La Cafetera, utilizamos cookies para mejorar tu experiencia...</p>
+    <p>En La Cafetera, utilizamos cookies para mejorar tu experiencia.</p>
 
     <div class="empresa-box">
-        <strong>Responsable del tratamiento:</strong>
+        <p><strong>Responsable del tratamiento:</strong><p>
         <ul>
             <li>Identidad: LaCafetera1994 S.L.</li>
             <li>NIF/CIF: B87654321</li>
@@ -104,6 +107,7 @@
     </li>
 </ul>
 
-    <p class="footer-update">Última actualización: Diciembre 2025</p>
+    <p class="footer-update">Última actualización: Enero 2026</p>
 </div>
+</main>
 <?php include __DIR__ . '/templates/footer.php'; ?>

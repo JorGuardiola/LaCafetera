@@ -7,7 +7,7 @@ require_once __DIR__ . '/../db/connection.php';
 if (!isset($_SESSION['user_id'])) { header('Location: ' . BASE_URL . '/frontend/login.php'); exit; }
 $user_id = $_SESSION['user_id'];
 $mensaje = '';
-$tab_activa = 'datos';
+$tab_activa = $_GET['tab'] ?? 'datos';
 
 // 2. LÓGICA POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -45,7 +45,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // BORRAR DIRECCIÓN
     if (isset($_POST['action']) && $_POST['action'] === 'delete_address') {
         $id_dir = (int)$_POST['id_direccion'];
-        $pdo->prepare("DELETE FROM direcciones WHERE id_direccion = ? AND id_usuario = ?")->execute([$id_dir, $user_id]);
+        
+        // Si es admin, borramos sin importar a quién pertenezca. 
+        // Si no es admin, mantenemos la seguridad de id_usuario.
+        if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin') {
+            $sql = "DELETE FROM direcciones WHERE id_direccion = ?";
+            $params = [$id_dir];
+        } else {
+            $sql = "DELETE FROM direcciones WHERE id_direccion = ? AND id_usuario = ?";
+            $params = [$id_dir, $user_id];
+        }
+
+        $pdo->prepare($sql)->execute($params);
         $mensaje = "Dirección eliminada.";
         $tab_activa = 'direcciones';
     }
@@ -79,16 +90,44 @@ $mis_pedidos = $stmt->fetchAll();
 
 <div class="container profile-container">
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
-        <h1>Mi Cuenta</h1>
-        <?php if($mensaje): ?><div style="background:#e8f5e9; color:#2e7d32; padding:1rem; border-radius:8px;"><?= $mensaje ?></div><?php endif; ?>
+        <h1>
+            Mi cuenta
+            <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin'): ?>
+            <span>Administrador</span>
+            <?php endif; ?>
+        </h1>
     </div>
 
     <div class="profile-layout">
         <aside class="profile-sidebar">
-            <button class="profile-menu-btn <?= $tab_activa == 'datos' ? 'active' : '' ?>" onclick="openTab('datos')">Mis Datos</button>
-            <button class="profile-menu-btn <?= $tab_activa == 'direcciones' ? 'active' : '' ?>" onclick="openTab('direcciones')">Mis Direcciones</button>
-            <button class="profile-menu-btn <?= $tab_activa == 'pedidos' ? 'active' : '' ?>" onclick="openTab('pedidos')">Mis Pedidos</button>
-            <a href="logout.php" class="profile-menu-btn btn-logout">Cerrar sesión</a>
+
+            <button class="profile-menu-btn <?= $tab_activa === 'datos' ? 'active' : '' ?>"
+                    onclick="openTab('datos')">
+                Mis datos
+            </button>
+
+            <button class="profile-menu-btn <?= $tab_activa === 'direcciones' ? 'active' : '' ?>"
+                    onclick="openTab('direcciones')">
+                Mis direcciones
+            </button>
+
+            <button class="profile-menu-btn <?= $tab_activa === 'pedidos' ? 'active' : '' ?>"
+                    onclick="openTab('pedidos')">
+                Mis pedidos
+            </button>
+
+            <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin'): ?>
+                <a href="<?= BASE_URL ?>/frontend/admin.php"
+                   class="profile-menu-btn admin-btn">
+                    Panel de administración
+                </a>
+            <?php endif; ?>
+
+            <a href="<?= BASE_URL ?>/frontend/logout.php"
+               class="profile-menu-btn btn-logout">
+                Cerrar sesión
+            </a>
+
         </aside>
 
         <div class="profile-content">
@@ -108,7 +147,7 @@ $mis_pedidos = $stmt->fetchAll();
                     <div class="form-group">
                         <label>Email</label> <input type="email" class="form-input" value="<?= htmlspecialchars($user_data['email']) ?>" disabled style="background:#f9f9f9; color:#999;">
                     </div>
-                    <button type="submit" class="boton-negro" style="border:none; margin-top:1rem;">Guardar</button>
+                    <button type="submit" class="boton2-btn" style="border:none; margin-top:1rem;">Guardar</button>
                 </form>
             </div>
 
@@ -137,7 +176,7 @@ $mis_pedidos = $stmt->fetchAll();
                 <form method="POST" style="background:#f9f9f9; padding:2rem; border-radius:8px; margin-top:1rem;">
                     <input type="hidden" name="action" value="add_address">
                     <?php include __DIR__ . '/templates/address_form.php'; ?>
-                    <button type="submit" class="boton-negro" style="border:none; margin-top:1.5rem;">Guardar Dirección</button>
+                    <button type="submit" class="boton2-btn" style="border:none; margin-top:1.5rem;">Guardar Dirección</button>
                 </form>
             </div>
 
@@ -149,11 +188,11 @@ $mis_pedidos = $stmt->fetchAll();
                         <tbody>
                             <?php foreach($mis_pedidos as $p): ?>
                                 <tr>
-                                    <td>#<?= $p['id_orden'] ?></td>
-                                    <td><?= date('d/m/Y', strtotime($p['fecha_orden'])) ?></td>
-                                    <td><?= number_format($p['total'], 2) ?>€</td>
-                                    <td><?= ucfirst($p['estado']) ?></td>
-                                    <td><a href="success.php?orden=<?= $p['id_orden'] ?>">Ver</a></td>
+                                    <td data-label="N° pedido">#<?= $p['id_orden'] ?></td>
+                                    <td data-label="Fecha pedido"><?= date('d/m/Y', strtotime($p['fecha_orden'])) ?></td>
+                                    <td data-label="Importe"><?= number_format($p['total'], 2) ?>€</td>
+                                    <td data-label="Estado"><?= ucfirst($p['estado']) ?></td>
+                                    <td data-label="Acciones"><a href="success.php?orden=<?= $p['id_orden'] ?>">Ver</a></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
@@ -165,12 +204,24 @@ $mis_pedidos = $stmt->fetchAll();
 </div>
 
 <script>
-function openTab(tabId) {
-    document.querySelectorAll('.profile-content-section').forEach(el => el.classList.remove('active'));
-    document.querySelectorAll('.profile-menu-btn').forEach(el => el.classList.remove('active'));
-    document.getElementById(tabId).classList.add('active');
-    const btns = document.querySelectorAll('.profile-menu-btn');
-    btns.forEach(b => { if(b.onclick.toString().includes(tabId)) b.classList.add('active'); });
-}
+    function openTab(tabId) {
+        const url = new URL(window.location);
+        url.searchParams.set('tab', tabId);
+        window.history.pushState({}, '', url);
+
+        document.querySelectorAll('.profile-content-section')
+            .forEach(el => el.classList.remove('active'));
+
+        document.querySelectorAll('.profile-menu-btn')
+            .forEach(el => el.classList.remove('active'));
+
+        document.getElementById(tabId).classList.add('active');
+
+        document.querySelectorAll('.profile-menu-btn').forEach(btn => {
+            if (btn.getAttribute('onclick')?.includes(tabId)) {
+                btn.classList.add('active');
+            }
+        });
+    }
 </script>
 <?php include __DIR__ . '/templates/footer.php'; ?>

@@ -109,15 +109,16 @@ $total_pagar = $total_carrito + $gastos_envio;
 
 
 <?php include __DIR__ . '/templates/header.php'; ?>
-
-<div class="container" style="margin-top: 4rem; margin-bottom: 4rem;">
+<main>
+<div class="container">
     
-    <h1 style="font-size: 3.5rem; margin-bottom: 3rem;">Mi carrito</h1>
+    <h1>Mi carrito</h1>
 
     <?php if (empty($items_carrito)): ?>
-        <div class="center-text" style="padding: 4rem; background: #f9f9f9; border-radius: 8px;">
-            <p>Tu carrito está vacío.</p>
-            <a href="products.php" class="btn-checkout" style="display:inline-block; width:auto; padding: 10px 30px; margin-top:1rem;">Ir a la tienda</a>
+        <div class="carrito-vacio">
+            
+                <h3>Tu carrito está vacío.</h3>
+                <a href="<?= BASE_URL ?>/frontend/products.php" class="boton4-btn">Ir a la tienda</a>
         </div>
     <?php else: ?>
 
@@ -165,8 +166,8 @@ $total_pagar = $total_carrito + $gastos_envio;
     <form action="cart.php" method="POST" style="margin:0;">
         <input type="hidden" name="action" value="remove">
         <input type="hidden" name="sku_remove" value="<?= $item['sku'] ?>">
-        <button type="submit" style="background:none; border:none; cursor:pointer;" class="btn-delete">
-            <i class="fa-regular fa-trash-can" style="font-size:1.2rem; color:#00BFA5;"></i>
+        <button type="submit"  class="btn-delete">
+            <i class="fa-regular fa-trash-can" style="font-size:1.8rem; color: var(--primary-500);"></i>
         </button>
     </form>
 </div>
@@ -174,7 +175,7 @@ $total_pagar = $total_carrito + $gastos_envio;
         </div>
 
         <div class="cart-summary-box">
-            <h2>Resumen del pedido</h2>
+            <h3>Resumen del pedido</h3>
             
             <div class="summary-row">
     <span>Subtotal</span>
@@ -202,7 +203,7 @@ $total_pagar = $total_carrito + $gastos_envio;
             </div>
             <div class="iva-text">IVA incluido</div>
 
-            <button class="btn-checkout" onclick="window.location.href='<?= BASE_URL ?>/frontend/checkout.php'">Tramitar pedido</button>
+            <button class="boton4-btn" onclick="window.location.href='<?= BASE_URL ?>/frontend/checkout.php'">Tramitar pedido</button>
         </div>
 
     </div>
@@ -215,6 +216,7 @@ $total_pagar = $total_carrito + $gastos_envio;
     <input type="hidden" name="sku" id="sku_update">
     <input type="hidden" name="cantidad" id="qty_update">
 </form>
+</main>
 
 <script>
 // Función para enviar el formulario oculto al hacer clic en + o -
@@ -275,6 +277,5 @@ function updateCartAjax(sku, qty) {
     .catch(error => console.error('Error:', error));
 }
 </script>
-
 <?php include __DIR__ . "/templates/footer.php"; ?>
 

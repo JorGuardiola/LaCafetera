@@ -1,56 +1,40 @@
 <?php
-// Recoger valores enviados
-$f_origen  = $_GET['origen']  ?? '';
-$f_proceso = $_GET['proceso'] ?? '';
-$f_altitud = $_GET['altitud'] ?? '';
-
-// Valores dinámicos para los selects
+// frontend/templates/search.php
 $origenes = ["Brasil","Burundi","Colombia","Etiopía","Guatemala","Honduras","Kenia","Nicaragua","Perú"];
 $procesos = ["Lavado","Natural","Honey"];
-$rangos = [
-    "1000-1500" => "1000m - 1500m",
-    "1500-1800" => "1500m - 1800m",
-    "1800-9999" => "+1800m"
-];
 ?>
 
-<div class="product-filter-bar">
 
-    <h2 class="filter-title">Selecciona tus productos</h2>
 
-    <form method="GET" class="filter-controls">
+<div class="filter-bar">
+        
+        <input type="text" id="ajax-search" placeholder="Buscar café..." class="input1" / 
+               >
 
-        <!-- ORIGEN -->
-        <select name="origen" class="filter-btn">
-            <option value="">ORIGEN</option>
+        <select id="ajax-origin" class="selector1">
+            <option value="">Origen</option>
             <?php foreach ($origenes as $o): ?>
-                <option value="<?= $o ?>" <?= $f_origen === $o ? 'selected' : '' ?>>
-                    <?= $o ?>
-                </option>
+                <option value="<?= $o ?>"><?= $o ?></option>
             <?php endforeach; ?>
         </select>
 
-        <!-- PROCESO -->
-        <select name="proceso" class="filter-btn long">
-            <option value="">MÉTODO DE PROCESAMIENTO</option>
+        <select id="ajax-process" class="selector1">
+            <option value="">Proceso</option>
             <?php foreach ($procesos as $p): ?>
-                <option value="<?= $p ?>" <?= $f_proceso === $p ? 'selected' : '' ?>>
-                    <?= $p ?>
-                </option>
+                <option value="<?= $p ?>"><?= $p ?></option>
             <?php endforeach; ?>
         </select>
+    
+        
+        <button id="btn-sort-name" class="boton3-btn" data-dir="ASC">
+            Nombre <span id="icon-name">A-Z</span>
+        </button>
 
-        <!-- ALTITUD -->
-        <select name="altitud" class="filter-btn">
-            <option value="">ALTITUD</option>
-            <?php foreach ($rangos as $valor => $label): ?>
-                <option value="<?= $valor ?>" <?= $f_altitud === $valor ? 'selected' : '' ?>>
-                    <?= $label ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
+        <button id="btn-sort-price" class="boton3-btn" data-dir="ASC">
+            Precio <span id="icon-price">=</span>
+        </button>
 
-        <button type="submit" class="filter-btn">FILTRAR</button>
-
-    </form>
+        <button id="btn-clear-filters" class="boton2-btn">
+            <i class="fa-solid fa-trash"></i> Borrar filtros
+        </button>
 </div>

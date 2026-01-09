@@ -18,7 +18,8 @@
     --primary-900: 0, 1, 2;
 
     /* Secondary - Tierra (RGB) */
-    --secondary-100: 216, 202, 196;
+    --secundary-50: 255, 221, 200;
+    --secondary-100: 242, 232, 228;
     --secondary-200: 207, 187, 177;
     --secondary-400: 199, 166, 150;
     --secondary-500: 187, 142, 120;
@@ -33,6 +34,9 @@
 
     /* Transparencias */
     --opacidad-barra: 0.15;
+
+    /* Header height */
+    --header-height: 9rem;
 }
 
 
@@ -47,20 +51,32 @@ html {
     box-sizing: inherit;
 }
 
+main {
+    margin-top: var(--header-height);
+}
+
 body {
     font-family: var(--fuenteTexto);
-    font-size: 1.6rem;
-    line-height: 2;
     margin: 0;
 }
 
-img { max-width: 100%; display: block; }
-a { text-decoration: none; color: inherit; }
+img { max-width: 100%; 
+    display: 
+    block; 
+}
+a { text-decoration: none; 
+    color: inherit;
+    font-size: 1.5rem; 
+}
 h1,h2,h3,h4,h5,h6 { font-family: var(--fuenteHeading); }
 
 h1 { font-size: 4.1rem; line-height: 1.18; }
 h2 { font-size: 3.2rem; }
 h3 { font-size: 2.8rem; }
+h4 { font-size: 1.8rem; }
+h5 { font-size: 1.6rem; }
+h6 { font-size: 1.4rem; }
+p { font-size: 1.6rem; line-height: 1.6; margin-bottom: 1.6rem; }   
 
 .container {
     width: 90%;
@@ -73,42 +89,315 @@ h3 { font-size: 2.8rem; }
 .no-padding { padding: 0 !important; }
 .center-text { text-align: center !important; }
 
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* =========================================================================================================================
+   BOTONES
+================================================================================= */
 
 
-/* =======================================
+/* BOTÓN - 1 */
+.boton1-btn {
+    width: 100%;
+    padding: 1.4rem 0;
+    border-radius: 40px;
+    border: 1px solid rgb(var(--primary-400));
+    background-color:rgb(var(--secondary-100));
+    cursor: pointer;
+    font-size: 1.6rem;
+    color: rgb(var(--primary-600));
+    transition: 0.25s ease;
+    margin-top: auto;
+    font-weight: bold;
+    text-align: center;
+    
+}
+
+.boton1-btn:hover {
+    background: rgb(var(--primary-500));
+    color: white;
+}
+
+/* BOTÓN - 2 */
+
+.boton2-btn {
+    font-family: var(--fuenteTexto);
+    padding: 10px 15px;
+    cursor: pointer;
+    background: rgb(var(--primary-500));
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 1.6rem;
+    white-space: nowrap;
+}
+
+/* BOTÓN - 3 */
+
+.boton3-btn {
+    font-family: var(--fuenteTexto);
+    padding: 10px 15px;
+    cursor: pointer;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+
+/* BOTÓN - 4 */
+.boton4-btn {
+    width: 100%;
+    padding: 1.4rem 0;
+    border-radius: 40px;
+    border: 1px solid rgb(var(--primary-500));
+    background-color:rgb(var(--primary-500));
+    cursor: pointer;
+    font-size: 1.6rem;
+    color: white;
+    transition: 0.25s ease;
+    margin-top: auto;
+    font-weight: bold;
+    text-align: center;
+    
+}
+
+
+.boton4-btn:hover {
+    background: rgb(var(--secondary-900));
+    color: white;
+}
+
+
+
+
+
+
+/* BOTÓN - Modificar */
+
+.modificar-btn {
+    font-family: var(--fuenteTexto);
+    font-weight: bold;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    white-space: nowrap;
+}
+
+/* BOTÓN - Eliminar */
+
+.eliminar-btn {
+    font-family: var(--fuenteTexto);
+    font-weight: bold;
+    cursor: pointer;
+    background: transparent;
+    white-space: nowrap;
+    color: red;
+    border: none;
+}
+
+
+
+
+
+
+
+/* =========================================================================================================================
+   ESTILOS DE FORMULARIO Y CAMPOS
+============================================================================================================================ */
+
+/*SELECTOR 1*/
+.selector1 {
+    font-family: var(--fuenteTexto);
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid;
+    border-color: rgb(var(--primary-100));
+    border-radius: 4px;
+    box-sizing: border-box; 
+    background-color: white;
+}
+
+.input1 {
+    font-family: var(--fuenteTexto);
+    flex-grow: 2; 
+    width: 100%; 
+    padding: 1rem;
+    min-width: 100px; 
+    border:1px solid;
+    border-color: rgb(var(--primary-100)); 
+    border-radius:4px;
+}
+
+
+
+/* --- Media Query para Tablet (768px o menos) --- */
+@media (max-width: 768px) {
+    .input1 {
+        flex-grow: 1; /* En tablets le damos la misma prioridad que a otros elementos */
+        min-width: auto; /* Eliminamos el ancho mínimo para que fluya en el grid */
+    }
+    
+    
+}
+
+/* --- Media Query para Móvil (480px o menos) --- */
+@media (max-width: 480px) {
+    .selector1, .input1 {
+        width: 100% !important; /* Forzamos que ocupen toda la línea */
+        display: block;
+        font-size: 16px; /* Evita el zoom automático en navegadores móviles al hacer foco */
+        align-items: center;
+    }
+
+    .input1 {
+        flex-grow: 0; /* Desactivamos el comportamiento flex para que se comporte como bloque */
+        width: 100% !important; /* Forzamos que ocupen toda la línea */
+        display: block;
+        font-size: 16px; /* Evita el zoom automático en navegadores móviles al hacer foco */
+        align-items: center;
+    }
+}
+
+
+.textarea1 {
+    font-family: var(--fuenteTexto);
+    width: 100%; 
+    padding: 1rem; 
+    border:1px solid; 
+    border-color: rgb(var(--primary-100)); 
+    border-radius:4px; 
+    box-sizing: border-box; 
+    resize: vertical; 
+    min-height: 120px;
+}
+
+.checkbox1 {
+    width: 20px; 
+    height: 20px; 
+    margin-right: 8px;
+}
+
+
+/*.filter-bar {
+    display:flex; 
+    flex-wrap:nowrap; 
+    align-items:center; 
+    gap:10px; 
+    padding: 15px; 
+    background:#f9f9f9; 
+    border-radius: 8px;
+    max-width: 130rem;
+    margin: 4rem auto;
+
+}*/
+.filters-group {
+    display: flex; 
+    justify-content: space-between;
+    gap: 0.5rem; 
+    width: 100%;
+} 
+
+fieldset {
+    border: 1px solid rgb(var(--secondary-200));
+    padding: 2rem; /* Reducido de 2.5rem */
+    margin-bottom: 2rem;
+    border-radius: 8px;
+}
+
+legend {
+    font-family: var(--fuenteHeading);
+    font-size: 1.8rem; /* Un poco más pequeño para móvil */
+    color: rgb(var(--primary-600));
+    padding: 0 1rem;
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    fieldset {
+        padding: 1.5rem; /* Más compacto en tablets/móvil */
+    }
+    legend {
+        font-size: 1.6rem;
+    }
+}
+
+label {
+    display: block;
+    font-size: 1.5rem;
+    color: rgb(var(--primary-500));
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+form {
+    display: block;
+    unicode-bidi: isolate;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================================================================================
    HEADER
-======================================= */
+================================================================================= */
 
 .header {
-    position: fixed;
+    height: var(--header-height);
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-
+    position: fixed;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 1.5rem 2rem;
+    background: white;
+}
 
-    padding: 1.5rem 20rem;
-    background: #fff;
+
+/* LOGO */
+.img-logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
 }
 
 .img-logo img {
-    width: 25rem;
+    width: 28rem;     /* tamaño real del logo */
+    height: auto;
+    max-width: none;
+    flex-shrink: 0;
 }
 
-/* BARRAS FLOTANTES */
+/* NAV + ICONS (BARRAS FLOTANTES) */
 .nav-bar,
 .icons-bar {
     height: 35px;
     display: flex;
     align-items: center;
-    background: rgba(var(--secondary-500), var(--opacidad-barra));
+    background:rgb(var(--secondary-100));
     backdrop-filter: blur(6px);
     padding: 0 24px;
     border-radius: 40px;
-    border: none;
+}
+
+.nav-bar a:hover{
+    font-weight: bold;
+    color: rgb(var(--secondary-900));
 }
 
 /* NAV */
@@ -128,62 +417,208 @@ h3 { font-size: 2.8rem; }
 .icons-bar {
     gap: 2rem;
 }
+
 .icon-header {
     background: transparent;
     border: none;
     cursor: pointer;
     padding: 0;
 }
+
 .icon-header img {
     width: 1.8rem;
 }
 
+.cart-wrapper {
+    position: relative;
+    align-items: center;
+}
 
 
-/* =======================================
-   RESPONSIVE HEADER
-======================================= */
+.cart-badge-number {
+    background-color: rgb(var(--secondary-800));
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -8px;
+    right: -10px;
+}
 
-/* ------- MOBILE ------- */
+/*header dropdown*/
+
+.user-menu-wrapper {
+    position: relative;
+}
+
+.user-toggle {
+    cursor: pointer;
+}
+
+.user-toggle i {
+    font-size: 1.8rem;
+    color: rgb(var(--primary-900));
+}
+
+.user-dropdown {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    background:white;
+    border-radius: 12px;
+    min-width: 200px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    display: none;
+    flex-direction: column;
+    padding: 1rem 0;
+    z-index: 1000;
+}
+
+.user-dropdown a {
+    padding: 10px 18px;
+    font-size: 1.5rem;
+}
+
+.user-dropdown a:hover {
+    font-weight: bold;
+    color: rgb(var(--secondary-900));
+}
+
+.user-dropdown a:hover {
+    background: rgba(var(--secondary-500), var(--opacidad-barra));
+}
+
+.user-dropdown hr {
+    border: none;
+    border-top: 1px solid #E5E5E5;
+    margin: 8px 0;
+}
+
+.user-dropdown .admin-link {
+    font-weight: bold;
+}
+
+/* Mostrar menú */
+.user-dropdown.active {
+    display: flex;
+    font-weight: 1.3rem;
+}
+
+/* BOTÓN MENÚ MOBILE */
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.menu-toggle span {
+    width: 22px;
+    height: 2px;
+    background: #1A1A1A;
+    display: block;
+}
+
+/* RESPONSIVE HEADER  */
+
+/* ---------- MOBILE ---------- */
 @media (max-width: 767px) {
 
-    .hero-text-block {
-        margin-top: 8rem;
+    .header {
+        padding: 1.2rem 2rem;
     }
 
-    .hero-text-block h1 {
-        font-size: 2.6rem;
-        max-width: 28rem;
+    .img-logo img {
+        width: 18rem;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav-bar {
+        position: fixed;
+        top: 9rem;
+        left: 0;
+        width: 100%;
+        display: none;
+        justify-content: center;
+        border-radius: 0;
+        padding: 2.5rem 0;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        z-index: 999;
+        background: rgba(rgb(245, 245, 225));
+     }
+
+    .nav-bar ul {
+        flex-direction:row;
+        gap: 5rem;
+        text-align: center;
+        justify-content: center;
+        width: 100%;  
+    }
+
+    .nav-bar.active {
+        display: flex;
+        background: rgba(rgb(245, 245, 225));
+    }
+
+    .nav-bar.active a:hover {
+        font-weight: bold;
+    }
+
+    .icons-bar {
+        padding: 0 16px;
+        gap: 1.2rem;
     }
 }
 
 
-/* ------- TABLET ------- */
+/* ---------- TABLET ---------- */
 @media (min-width: 768px) and (max-width: 1023px) {
 
-    .hero-text-block {
-        margin-top: 13rem;
+    .header {
+        padding: 1.5rem 4rem;
     }
 
-    .hero-text-block h1 {
-        font-size: 3.2rem;
-        max-width: 40rem;
+    .img-logo img {
+        width: 22rem;
+    }
+
+    .nav-bar ul {
+        gap: 1.5rem;
+        
     }
 }
 
-
-/* ------- DESKTOP ------- */
+/* ---------- DESKTOP ---------- */
 @media (min-width: 1024px) {
 
-    .hero-text-block {
-        margin-top: 18rem;
-    }
-
-    .hero-text-block h1 {
-        font-size: 4.1rem;
-        max-width: 60rem;
+    .menu-toggle {
+        display: none;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -194,7 +629,7 @@ h3 { font-size: 2.8rem; }
 ======================================= */
 /* Hero general */
 .hero-container {
-    height: 75rem;
+    height: 60rem;
     display: flex;
     align-items: center;
     background-size: cover;
@@ -214,13 +649,15 @@ h3 { font-size: 2.8rem; }
 }
 .hero-container.bg-login {
     background-image: url('../img/hero-sesion.jpg'); 
-    
 }
 .hero-container.bg-registro {
     background-image: url('../img/hero-registro.jpg');
 }
-.header-hero-simple.bg-nosotros {
-    background-image: url('../img/hero-nosotros2.jpg');
+.hero-container.bg-nosotros {
+    background-image: url('../img/hero-nosotros.jpg');
+}
+.hero-container.bg-contacto {
+    background-image: url('../img/hero-contacto.png');
 }
 
 
@@ -235,25 +672,18 @@ h3 { font-size: 2.8rem; }
 
 /* Columna izquierda */
 .hero-left h1 {
-    font-size: 4.2rem;
-    max-width: 50rem;
+    max-width: 100%;
     color: black;
 }
-.hero-left h2 {
-    font-size: 1.8rem;
-    max-width: 45rem;
+.hero-left h4 {
+    max-width: 50%;
     margin-top: 1rem;
     color: black;
 }
 
-/* Columna derecha (vacía pero estructural) */
+/* Columna derecha (vacía pero para dar estructura) */
 
-
-
-
-/* =======================================
-   RESPONSIVE
-======================================= */
+/* RESPONSIVE HERO */
 
 /* --------- TABLET (768–1023px) -------- */
 @media (max-width: 1023px) {
@@ -270,20 +700,18 @@ h3 { font-size: 2.8rem; }
 
     .hero-left h1 {
         font-size: 3.4rem;
-        max-width: 90%;
+        max-width: 50%;
     }
 
-    .hero-left h2 {
+    .hero-left h4 {
         font-size: 1.7rem;
-        max-width: 90%;
+        max-width: 50%;
     }
 
     .hero-right {
         display: none;
     }
 }
-
-
 
 /* --------- MOBILE (0–767px) -------- */
 @media (max-width: 767px) {
@@ -302,12 +730,12 @@ h3 { font-size: 2.8rem; }
 
     .hero-left h1 {
         font-size: 2.8rem;
-        max-width: 100%;
+        max-width: 50%;
     }
 
-    .hero-left h2 {
+    .hero-left h4 {
         font-size: 1.6rem;
-        max-width: 100%;
+        max-width: 60%;
     }
 
     .hero-btn {
@@ -324,122 +752,24 @@ h3 { font-size: 2.8rem; }
 
 
 
-/* =====================
-   CARRUSEL BASE (MODIFICADO PARA ANIMACIÓN)
-===================== */
-.tag-carousel {
-    position: relative;
-    overflow: hidden; /* Oculta el contenido duplicado que no cabe */
-    width: 100%;
-    padding: 3rem 0;
-}
-
-.carousel-track {
-    display: flex;
-    gap: 2rem;
-    width: max-content; /* Es crucial para que todo el contenido (duplicado) quepa en una línea */
-    animation: scroll 35s linear infinite; /* Aplicar animación: 35s, lineal, infinito */
-    transition: none; /* Desactivar transiciones que interfieren con la animación */
-}
-
-/* Pausar animación al pasar el ratón */
-.tag-carousel:hover .carousel-track {
-    animation-play-state: paused;
-}
-
-/* Definición de la animación de desplazamiento */
-@keyframes scroll {
-    0% { transform: translateX(0); }
-    /* Mueve el 50% de la longitud total, que es la longitud original del contenido */
-    100% { transform: translateX(-50%); }
-}
-
-/* Ya no es necesario ocultar scrollbar en tag-carousel si overflow es hidden */
 
 
-/* =====================
-   TARJETAS
-===================== */
-.tag-card {
-    width: 32rem;
-    height: 48rem;
-    border-radius: 18px;
-    position: relative;
-    padding: 1.2rem;
-    color: rgb(var(--white));
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    background-image: var(--bg);    /* usa la variable definida en el HTML */
-    background-size: cover;
-    background-position: center;
-    box-shadow: 0 8px 18px rgba(0,0,0,0.15);
-    flex-shrink: 0;
-}
-
-/* Mini etiqueta arriba izquierda */
-.tag-card .tag-more {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    font-size: 1.1rem;
-    padding: .3rem .8rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: white;
-}
-
-/* Título h3 abajo izquierda */
-.tag-card h3 {
-    margin: 0;
-    color: white;
-}
 
 
-/* =====================
-   RESPONSIVE CARRUSEL
-===================== */
 
-@media (max-width: 767px) {
-    .carousel-track {
-        gap: 1.4rem;
-    }
 
-    .tag-card {
-        width: 24rem;
-        height: 32rem;
-    }
 
-    .tag-card h3 {
-        font-size: 1.6rem;
-    }
 
-    .tag-card .tag-more {
-        font-size: 1rem;
-    }
-}
 
-/* Cabecera del carrusel */
-.carousel-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.4rem;
-    padding-right: 1rem;
-    padding-left: 3rem;
-}
 
-/* Botones (Ocultar completamente, ya no existen en el HTML) */
-.carousel-btn {
-    display: none;
-}
+
 
 
 /* ============================
-   FOOTER (ACTUALIZADO PARA COINCIDIR CON HTML Y DISEÑO)
+   FOOTER 
 ============================ */
 .footer {
-    background: rgb(var(--primary-800));
+    background: rgb(var(--primary-600));
     color: white;
     padding: 6rem 0 3rem;
     font-size: 1.4rem;
@@ -527,12 +857,12 @@ h3 { font-size: 2.8rem; }
 }
 
 .footer-btn:hover {
-    background: rgba(255,255,255,0.15);
+    background: white;
+    color: black;
+    font-weight: bold;
 }
 
-/* ============================
-   LÍNEA INFERIOR
-============================ */
+/* LÍNEA INFERIOR */
 .footer-bottom {
     width: 90%;
     max-width: 130rem;
@@ -565,9 +895,8 @@ h3 { font-size: 2.8rem; }
     color: white;
 }
 
-/* ============================
-   RESPONSIVE FOOTER
-============================ */
+/* RESPONSIVE FOOTER */
+
 @media (max-width: 767px) {
 
     .footer-container {
@@ -642,9 +971,147 @@ h3 { font-size: 2.8rem; }
     }
 }
 
-/*  ============================
-   SECCION DE PRODUCTOS
-============================ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==================================================================
+   CARRUSEL BASE con animacion en index.php
+================================================================= */
+.tag-carousel {
+    position: relative;
+    overflow: hidden; /* Oculta el contenido duplicado que no cabe */
+    width: 100%;
+    padding: 3rem 0;
+}
+
+.carousel-track {
+    display: flex;
+    gap: 2rem;
+    width: max-content; 
+    animation: scroll 35s linear infinite; /* Aplicar animación: 35s, lineal, infinito */
+    transition: none; /* Desactivar transiciones que interfieren con la animación */
+}
+
+/* Definición de la animación de desplazamiento */
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    /* Mueve el 50% de la longitud total, que es la longitud original del contenido */
+    100% { transform: translateX(-50%); }
+}
+
+/* Ya no es necesario ocultar scrollbar en tag-carousel si overflow es hidden */
+
+
+/*    TARJETAS del carrusel */
+.tag-card {
+    width: 32rem;
+    height: 48rem;
+    border-radius: 18px;
+    position: relative;
+    padding: 1.2rem;
+    color: rgb(var(--white));
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background-image: var(--bg);    /* usa la variable definida en el HTML */
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+    flex-shrink: 0;
+}
+
+/* Mini etiqueta arriba izquierda */
+.tag-card .tag-more {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-size: 1.1rem;
+    padding: .3rem .8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: white;
+}
+
+/* Título h3 abajo izquierda */
+.tag-card h3 {
+    margin: 0;
+    color: white;
+}
+
+/* RESPONSIVE CARRUSEL */
+
+@media (max-width: 767px) {
+    .carousel-track {
+        gap: 1.4rem;
+    }
+
+    .tag-card {
+        width: 24rem;
+        height: 32rem;
+    }
+
+    .tag-card h3 {
+        font-size: 1.6rem;
+    }
+
+    .tag-card .tag-more {
+        font-size: 1rem;
+    }
+}
+
+/* Cabecera del carrusel */
+.carousel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.4rem;
+    padding-right: 1rem;
+    padding-left: 3rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*  ============================================================================================================================
+   Tarjeta tipo producto y grid de productos (usado en index.php para productos destacados y en products.php)
+================================================================================================================================ */
 /* GRID DE PRODUCTOS */
 .product-grid {
     width: 90%;
@@ -657,6 +1124,8 @@ h3 { font-size: 2.8rem; }
 
 /* TARJETA */
 .product-card {
+    display: flex;
+    flex-direction: column;
     height: 50rem;
     background: white;
     padding: 2.5rem;
@@ -664,10 +1133,20 @@ h3 { font-size: 2.8rem; }
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     position: relative;
     transition: .2s ease;
+    height: 100%; /* CLAVE */;
+    
 }
 
 .product-card:hover {
     transform: translateY(-4px);
+}
+
+.product-content {
+    flex: 1;
+}
+
+.product-action {
+    margin-top: auto;
 }
 
 /* FAVORITO */
@@ -724,24 +1203,7 @@ h3 { font-size: 2.8rem; }
     font-weight: 700;
     margin-bottom: 2rem;
     color: rgb(var(--primary-900));
-}
-
-/* BOTÓN */
-.product-btn {
-    width: 100%;
-    padding: 1.4rem 0;
-    border-radius: 40px;
-    border: 2px solid rgb(var(--primary-900));
-    background: white;
-    cursor: pointer;
-    font-size: 1.6rem;
-    color: rgb(var(--primary-900));
-    transition: 0.25s ease;
-}
-
-.product-btn:hover {
-    background: rgb(var(--primary-700));
-    color: white;
+    margin-top: auto;
 }
 
 /* RESPONSIVE */
@@ -762,923 +1224,28 @@ h3 { font-size: 2.8rem; }
 
 
 
-/* ===============================
-   BARRA DE FILTROS (SEARCH.PHP)
-================================ */
 
-/* CONTENEDOR PRINCIPAL */
-.product-filter-bar {
-    width: 90%;
-    max-width: 1300px;
-    margin: 4rem auto 2rem auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 
-/* TÍTULO */
-.filter-title {
-    font-family: var(--fuenteHeading);
-    font-size: 3rem;
-    margin: 0;
-}
-
-/* CONTROLES */
-.filter-controls {
-    display: flex;
-    gap: 1.4rem;
-    align-items: center;
-}
-
-/* BOTONES */
-.filter-btn {
-    padding: 1rem 2rem;
-    border-radius: 40px;
-    border: transparent;
-    background: rgba(var(--secondary-500), var(--opacidad-barra));
-    
-    letter-spacing: 0.3px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    transition: 0.2s ease;
-}
-
-.filter-btn:hover {
-    background: rgba(34,54,74,0.1);
-}
-
-/* BOTÓN MÁS LARGO */
-.filter-btn.long {
-    padding-right: 2.6rem;
-    padding-left: 2.6rem;
-}
-
-/* FLECHA */
-.arrow {
-    width: 18px;
-    height: 18px;
-    object-fit: contain;
-}
-
-/* ICONO CALENDARIO */
-.calendar-icon {
-    width: 18px;
-    height: 18px;
-    object-fit: contain;
-}
-
-/* =====================
-   RESPONSIVE
-===================== */
-
-/* Tablet */
-@media (max-width: 900px) {
-    .product-filter-bar {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 2rem;
-    }
-
-    .filter-controls {
-        flex-wrap: wrap;
-        justify-content: flex-start;
-    }
-}
-
-/* Móvil */
-@media (max-width: 600px) {
-    .filter-title {
-        font-size: 2.3rem;
-    }
-
-    .filter-controls {
-        gap: 1rem;
-    }
-
-    .filter-btn {
-        padding: 0.8rem 1.6rem;
-        font-size: 1.3rem;
-    }
-
-    .filter-btn.long {
-        padding-left: 1.6rem;
-        padding-right: 1.6rem;
-    }
-}
-
-
-/* =========================================
-   SECCION CARRITO jorge5dic
-   ========================================= */
-
-/* Carrito Layout */
-.cart-layout {
-    display: grid;
-    grid-template-columns: 2fr 1fr; /* 2 partes lista, 1 parte resumen */
-    gap: 40px;
-    align-items: start;
-}
-
-/* Fila de producto */
-.cart-item-row {
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #eee;
-    padding: 20px 0;
-    gap: 20px;
-}
-.cart-img img {
-    width: 200px !important; 
-    height: auto;
-    border-radius: 8px;
-    object-fit: contain;
-}
-.cart-info {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* Alinea todo al principio (arriba) */
-    align-self: flex-start;      /* Asegura que el bloque empiece arriba */
-    padding-top: 0;
-}
-.cart-product-name {
-    font-size: 2.2rem !important; /* Mantenemos el título grande */
-    font-weight: 700;
-    margin-bottom: 5px !important; 
-    line-height: 1.1;
-}
-/* Envase: 1kg, Molido espresso... */
-.variant-tag {
-    display: block;
-    font-size: 1.5rem !important; /* Texto bastante más grande */
-    color: #333; /* Un poco más oscuro para que se lea mejor */
-    margin-bottom: 8px !important; /* Separa el Envase de la Molienda */
-    font-weight: 400;
-    line-height: 1.4; /* Da aire entre las líneas de texto */
-}
-.cart-sku {
-    font-size: 1.2rem !important;
-    color: #999;
-    margin-bottom: 5px !important; /* Este margen crea el hueco antes del envase */
-    display: block;
-    text-transform: uppercase;
-}
-
-/* Acciones y Precio */
-.qty-selector input {
-    width: 60px;
-    padding: 5px;
-    text-align: center;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-.btn-delete {
-    color: #d9534f;
-    margin-left: 10px;
-    display: inline-flex;
-    vertical-align: middle;
-}
-.cart-total-line {
-    font-weight: 800;
-    font-size: 1.8rem !important; /* Precio más visible */
-    color: #1A1A1A;
-    min-width: 100px;
-    text-align: right;
-}
-
-/* Caja Resumen (Derecha) */
-.cart-summary-box {
-    background: #fcfcfc;
-    padding: 30px;
-    border-radius: 8px;
-    border: 1px solid #eee;
-}
-.cart-summary-box h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-}
-.summary-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
-    color: #555;
-}
-.summary-row.total {
-    color: #000;
-    font-weight: bold;
-    font-size: 1.5rem;
-    margin-top: 15px;
-}
-.iva-text {
-    font-size: 1.5rem;
-    color: #999;
-    text-align: right;
-    margin-top: -10px;
-    margin-bottom: 20px;
-}
-.btn-checkout {
-    width: 100%;
-    background: #F5A623; /* Color mostaza similar a tu imagen */
-    color: #fff;
-    border: none;
-    padding: 15px;
-    border-radius: 50px; /* Bordes redondeados */
-    font-weight: bold;
-    font-size: 1.5rem;
-    cursor: pointer;
-    transition: 0.3s;
-}
-.btn-checkout:hover {
-    background: #e09612;
-}
-
-/* Responsivo */
-@media(max-width: 768px) {
-    .cart-layout { grid-template-columns: 1fr; }
-    .cart-item-row { flex-wrap: wrap; }
-    .mobile-hide { display: none; }
-}
-
-/* =========================================
-   SECCION PRODUCTO jorge5dic
-   ========================================= */
-
-/* Fondo general beige */
-body.bg-beige {
-    background-color: #F5EFE5; 
-}
-
-/* Layout principal de dos columnas */
-.product-detail-layout {
-    max-width: 1200px;
-    margin: 4rem auto;
-    padding: 0 20px;
-    display: grid;
-    grid-template-columns: 1fr 1fr; 
-    gap: 60px;
-    align-items: center; 
-}
-
-/* Columna Izquierda */
-@media (min-width: 1024px) {
-    .detail-left {
-        transform: translateX(-80px);
-    }
-}
-.detail-image-container img {
-    max-width: 100%;
-    height: auto;
-    /* Sombra suave debajo de la bolsa */
-    filter: drop-shadow(0px 20px 30px rgba(0,0,0,0.15)); 
-}
-.big-product-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 4rem;
-    color: #1A1A1A; /* Casi negro */
-    margin-top: 1rem;
-    text-align: center;
-   }
-
-/* Columna Derecha: La Tarjeta */
-.detail-right-card {
-    background-color: #FAF7F2; 
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-}
-
-/* Header de la tarjeta */
-.card-header { margin-bottom: 1rem; }
-.reviews-placeholder {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    margin-bottom: 10px;
-    font-size: 0.9rem;
-}
-.star-icon { color: #C7A17A; font-size: 1.2rem; } 
-.star-icon-half { color: #C7A17A; font-size: 1.2rem; }
-.reviews-link {
-    color: #1A1A1A;
-    text-decoration: underline;
-    margin-left: 5px;
-}
-.card-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.2rem;
-    margin: 0.5rem 0;
-    color: #1A1A1A;
-}
-.card-origin {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    color: #666;
-    font-weight: 500;
-}
-
-/* Precio */
-.card-price {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: #1A1A1A;
-    margin: 1.5rem 0;
-}
-
-/* Descripción */
-.card-description {
-    color: #555;
-    line-height: 1.6;
-    margin-bottom: 2rem;
-}
-
-
-/* --- SELECTORES TIPO BOTÓN --- */
-.selector-group {
-    margin-bottom: -1rem;
-}
-.selector-label {
-    font-size: 1.5rem !important; 
-    font-weight: 700 !important;
-    margin-bottom: 0.4rem !important; 
-    margin-top: 1.2rem !important;
-}
-.option-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-/* Ocultamos el radio button real */
-.option-radio {
-    display: none;
-}
-/* Estilo del label que parece botón */
-.option-label {
-    display: inline-block;
-    padding: 10px 22px; 
-    border: 1px solid #DDD;
-    border-radius: 30px;
-    cursor: pointer;
-    font-weight: 600;
-    color: #1A1A1A;
-    transition: all 0.2s;
-    font-size: 1.3rem; 
-    text-transform: capitalize;
-}
-.option-label:hover {
-    border-color: #1A1A1A;
-}
-/* Estilo cuando el radio asociado está checkeado */
-.option-radio:checked + .option-label {
-    background-color: #1A1A1A; 
-    color: #FFF; 
-    border-color: #1A1A1A;
-}
-
-/* Selector Dropdown Normal (Tueste) */
-.form-select {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid #DDD;
-    border-radius: 8px;
-    background-color: transparent;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 1rem;
-    cursor: pointer;
-}
-
-/* Info de Stock */
-.stock-info {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 1.5rem; 
-    color: #1A1A1A;
-    margin: 1.2rem 0;
-    font-weight: 600;
-}
-.stock-dot {
-    width: 8px;
-    height: 8px;
-    background-color: #27AE60; 
-    border-radius: 50%;
-}
-
-/* --- Fila de Acciones (Cantidad + Botón) --- */
-.card-actions-row {
-    display: flex;
-    gap: 15px;
-}
-
-/* Widget de Cantidad (- 1 +) */
-.quantity-selector-widget {
-    display: flex;
-    align-items: center;
-    border: 1px solid #DDD;
-    border-radius: 30px;
-    padding: 4px;
-    background: transparent;
-    flex-shrink: 0;
-    max-width: 200px;
-    justify-content: space-around;
-}
-.qty-btn {
-    background: none;
-    border: none;
-    font-size: 3rem;
-    padding: 5px 12px;
-    cursor: pointer;
-    color: #1A1A1A;
-}
-.quantity-selector-widget input {
-    width: 35px;
-    text-align: center;
-    border: none;
-    background: transparent;
-    font-weight: 700;
-    font-size: 1.2rem;
-    
-}
-.quantity-selector-widget input::-webkit-outer-spin-button,
-.quantity-selector-widget input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-/* Botón Añadir a la Cesta */
-.btn-add-to-cart-dark {
-    flex: 1; 
-    background-color: #1A1A1A;
-    color: #FFF;
-    border: none;
-    border-radius: 30px;
-    padding: 15px 25px;
-    font-size: 1.8rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background 0.3s;
-    white-space: nowrap;
-    letter-spacing: 0.5px;
-}
-.btn-add-to-cart-dark:hover {
-    background-color: #333;
-}
-.btn-add-to-cart-dark.disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-    opacity: 0.7;
-}
-
-/* Responsividad */
-@media (max-width: 900px) {
-    .product-detail-layout {
-        grid-template-columns: 1fr; /* Una columna en móviles */
-        gap: 30px;
-    }
-    .detail-image-container img {
-        max-width: 60%; /* Imagen más pequeña en móvil */
-    }
-    .big-product-title {
-        font-size: 2.5rem; /* Título más pequeño */
-    }
-    .card-actions-row {
-        max-width: 420px;
-        gap: 15px;
-    }
-    .quantity-selector-widget {
-        justify-content: center;
-    }
-    .btn-add-to-cart-dark {
-        padding: 15px;
-    }
-}
-/* =======================================
-    LOGIN: ESTILOS ESPECÍFICOS
-======================================= */
-
-/* --- Columna Derecha: Centrado y Estilos Generales --- */
-
-.hero-right {
-    /* Ajusta el flexbox para centrar el contenido vertical y horizontalmente */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem; /* Espacio de seguridad */
-}
-
-/* --- La Caja del Formulario (El Panel Transparente) --- */
-.login-box {
-    /* Usamos un color base muy claro con opacidad para el fondo */
-    background-color: rgba(var(--white), 0.75); 
-    
-    /* Efecto "Glassmorphism" (Añadimos el prefijo -webkit- para máxima compatibilidad) */
-    -webkit-backdrop-filter: blur(8px); /* ¡Añadido! */
-    backdrop-filter: blur(8px); 
-    
-    /* Esquinas redondeadas grandes */
-    border-radius: 20px;
-    
-    /* Sombra muy sutil */
-    box-shadow: 0 10px 30px rgba(var(--black), 0.15); 
-    
-    /* Espacio interno */
-    padding: 2rem 1rem;
-    
-    /* Ancho máximo para que no ocupe toda la mitad derecha */
-    max-width: 36rem;
-    width: 100%;
-    
-    /* Color de texto por defecto dentro de la caja */
-    color: rgb(var(--primary-900)); 
-}
-
-/* Título "Acceso" */
-.login-title {
-    font-family: var(--fuenteHeading);
-    font-size: 4rem; /* Grande y elegante */
-    text-align: center;
-    margin-bottom: 3rem;
-    line-height: 1;
-}
-
-/* --- Inputs y Grupos --- */
-
-.input-group {
-    margin-bottom: 2rem;
-    position: relative; /* Necesario para posicionar la etiqueta pequeña */
-}
-
-/* Etiqueta pequeña (Email, Contraseña) */
-.input-label {
-    display: block;
-    font-size: 1.5rem;
-    font-weight: 500;
-    color: rgb(var(--primary-400)); /* Color sutil */
-    margin-bottom: 0.5rem;
-}
-
-/* Estilo del campo de texto/email/password */
-.form-input {
-        
-    width: 100%;
-    padding: 1.2rem 1.5rem;
-       
-}
-.password-field .form-input {
-    padding: 1.2rem 4rem 1.2rem 1.5rem;
-    
-}
-
-.form-input:focus {
-    border-color: rgb(var(--primary-500));
-    outline: none;
-    box-shadow: 0 0 5px rgba(var(--primary-500), 0.3);
-}
-
-/* --- Campo de Contraseña y Toggle --- */
-.password-field {
-    position: relative;
-    
-}
-
-.toggle-password {
-    /* Posicionamiento */
-   position: absolute;
-    right: 0rem; 
-    top: 72%; 
-    transform: translateY(-50%);
-    
-    /* CRÍTICO: Centrado con Flexbox */
-    display: flex;
-    align-items: center; /* Centrado vertical */
-    justify-content: center; /* Centrado horizontal (opcional, pero buena práctica) */
-
-    /* Estilos base */
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    z-index: 10;
-    /* Asegúrate de que no tenga transform */
-}
-
-
-.toggle-password [data-lucide] {
-    position: absolute;
-    right: 1.5rem;
-    top: 50%; 
-    transform: translateY(-50%);
-    display: flex;
-    align-items: center; 
-    justify-content: center;
-}
-
-
-/* --- Enlaces y Botones --- */
-
-/* Enlace "¿Olvidaste la Contraseña?" */
-.forgot-link {
-    text-align: right;
-    margin-bottom: 3rem;
-}
-.forgot-link a {
-    font-size: 1.4rem;
-    color: rgb(var(--secondary-700));
-    transition: color 0.3s;
-}
-.forgot-link a:hover {
-    color: rgb(var(--secondary-900));
-}
-
-/* Botón de Acceder (Fondo Oscuro) */
-.btn-acceder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    width: 100%;
-    padding: 1.2rem;
-    
-    background-color: rgb(var(--primary-900)); /* Fondo negro/oscuro */
-    color: white;
-    
-    border: none;
-    border-radius: 10px; /* Bordes rectangulares suaves */
-    
-    font-size: 1.7rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.btn-acceder:hover {
-    background-color: rgb(var(--primary-700));
-}
-
-.arrow-icon {
-    margin-left: 1rem;
-    font-size: 2rem;
-    line-height: 1;
-}
-
-/* Enlace de Registro */
-.register-prompt {
-    text-align: center;
-    margin-top: 2.5rem;
-    font-size: 1.4rem;
-    color: rgb(var(--primary-400));
-}
-
-.register-prompt a {
-    color: rgb(var(--secondary-700));
-    font-weight: 600;
-    transition: color 0.3s;
-}
-.register-prompt a:hover {
-    color: rgb(var(--secondary-900));
-}
-
-/* --- Mensajes de Alerta --- */
-.alert.error {
-    /* Aquí puedes usar un color secundario de tu paleta si quieres */
-    background-color: rgba(var(--secondary-100), 0.8); 
-    color: rgb(var(--secondary-800));
-    border: 1px solid rgb(var(--secondary-400));
-    padding: 1rem;
-    border-radius: 8px;
-    margin-bottom: 2rem;
-    display: flex;
-    align-items: center;
-}
-
-.alert.error i[data-lucide] {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-    min-width: 20px;
-    color: rgb(var(--secondary-900));
-}
-/* =========================================
-   NUEVO HERO SIMPLE: SOLUCIÓN AL CONFLICTO DEL HEADER
-   ========================================= */
-
-.header-hero-simple {
-    /* Propiedades de posicionamiento para la imagen de fondo */
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-     
-    /* CRÍTICO: Contexto de posicionamiento para la capa ::before */
-    position: relative; 
-    overflow: hidden; /* Asegura que la capa ::before no se desborde */
-}
-
-/* Aplicar la imagen de fondo solo a la clase específica */
-.header-hero-simple.bg-nosotros {
-    /* **¡AÑADIMOS LA ALTURA AQUÍ PARA QUE SOLO AFECTE A ESTA PÁGINA!** */
-    height: 65rem; 
-    /* El background-image de la imagen de café sigue aquí */
-    
-}
-
-/* 1. Capa Blanca Semitransparente (::before) */
-.header-hero-simple.bg-nosotros::before {
-    content: ''; 
-    position: absolute; 
-    top: 0; right: 0; bottom: 0; left: 0; 
-    z-index: 2;
-    background-color: rgba(255, 255, 255, 1); 
-    opacity: 0.4; 
-}
-
-/* 2. Estilos para el texto centrado */
-.header-hero-simple .hero-texto-centrado {
-    position: relative; 
-    z-index: 3;
-
-    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco casi opaco */
-    padding: 3rem; /* Espacio interno */
-    border-radius: 10px; /* Bordes redondeados */
-    max-width: 80rem;
-    display: flex; 
-    flex-direction: column;
-    justify-content: center;
-    align-items: center; 
-    height: 100%; 
-    text-align: center;
-}
-
-.header-hero-simple p {
-    font-size: 2rem;
-    color: #111111; /* Texto oscuro */
-    max-width: 60rem; /* Limita el ancho del párrafo */
-}
-/* =========================================
-   ESTILOS DE LA LLAMADA A LA ACCIÓN (CTA)
-   ========================================= */
-
-.llamada-a-la-accion {
-    /* 1. Posicionamiento y Centrado */
-    display: flex; /* Usamos flexbox para centrar el contenido interno */
-    flex-direction: column; 
-    align-items: center; /* Centrado horizontal del texto y botón */
-    text-align: center;
-    margin: 5rem auto; /* Margen superior/inferior para separarlo de otros elementos */
-    
-    /* 2. Estilo de Caja */
-    background-color: #FFFFFF; /* Fondo blanco sólido para que destaque */
-    padding: 4rem 2rem; /* Más padding vertical y horizontal */
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Sombra suave para darle profundidad */
-    
-    /* 3. Limitar Ancho */
-    max-width: 80rem; /* Limita el ancho para que no ocupe toda la pantalla */
-}
-
-.llamada-a-la-accion p {
-    font-size: 2.2rem;
-    font-weight: 500; /* Lo hacemos seminegrita para que se lea bien */
-    color: #333333;
-    margin-bottom: 2rem; /* Espacio antes del botón */
-}
-
-/* 4. Estilo del Botón (Ajustar según tu clase 'boton-primario' o 'boton') */
-.llamada-a-la-accion .boton-primario {
-    background-color: #7D4F23; /* Color de acento de café */
-    color: #FFFFFF;
-    text-transform: uppercase;
-    padding: 1.5rem 3rem;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-.llamada-a-la-accion .boton-primario:hover {
-    background-color: #A36B3B; /* Color más claro al pasar el ratón */
-}
-/* -------------------------------------------
-   COLUMNA DERECHA (Ritual de Calidad)
-   ------------------------------------------- */
-.hero-ritual-right {
-    /* Mantenemos tus propiedades de Flexbox para centrar el bloque en sí */
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    text-align: center;
-    /* ... otras propiedades ... */
-}
-
-/* CENTRAR EL TÍTULO h3 */
-.hero-ritual-right .ritual-titulo-centrado {
-    text-align: center; /* ¡Aseguramos que el texto esté centrado! */
-    color: #333333;
-    margin-bottom: 3rem;
-}
-
-/* DISPOSICIÓN DE LOS 3 DIVS EN FILA (USANDO GRID) */
-.ritual-puntos-hero {
-    /* === MODIFICACIÓN CLAVE: USAR GRID PARA 3 COLUMNAS === */
-    display: grid; 
-    grid-template-columns: repeat(3, 1fr); /* Crea 3 columnas de igual ancho */
-    gap: 2rem; /* Espacio entre los divs */
-    
-    /* El contenedor ahora debe ocupar el ancho completo disponible */
-    width: 100%; 
-}
-
-/* Estilo de los divs individuales (las "celdas" de la tabla) */
-.ritual-item-hero {
-    /* Mantenemos tus estilos de caja (fondo, padding, borde) */
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 2rem;
-    border-radius: 10px;
-    border-left: 4px solid #7D4F23; 
-    
-    /* Centramos el texto dentro de cada div */
-    text-align: center; 
-}
-/* =========================================
-   ESTILO PARA EL BOTÓN NEGRO DE CTA
-   ========================================= */
-
-.boton-negro {
-    /* 1. Apariencia */
-    display: inline-block; /* Necesario para aplicar padding */
-    background-color: #000000; /* Fondo negro */
-    color: #FFFFFF; /* Letras blancas */
-    text-decoration: none; /* Quitar el subrayado por defecto */
-    
-    /* 2. Tamaño y Forma */
-    padding: 1.5rem 3rem; /* Espacio interno grande */
-    border-radius: 5px; /* Esquinas ligeramente redondeadas */
-    font-size: 1.8rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 0.1rem;
-    cursor: pointer;
-    
-    /* 3. Transición */
-    transition: background-color 0.3s ease;
-    
-    /* Margen para separarlo del párrafo superior */
-    margin-top: 2rem; 
-}
-
-.boton-negro:hover {
-    /* Efecto al pasar el ratón */
-    background-color: #333333; /* Un gris muy oscuro al pasar el ratón */
-}
-
-
-/* =======================================
-   ESTILOS ESPECÍFICOS DE CONTACTO
-   Archivo: estilos_contacto.css
-======================================= */
-
-/* --- 1. Contenedor y Títulos --- */
-
-/* La clase .container ya está definida en tu CSS base, la reutilizamos para centrar */
-.contenedor.seccion {
-    padding: 6rem 0;
-}
-
-.text-center {
-    text-align: center;
-}
-
-/* Reutilizando la definición de H1 de tu base */
-.contacto-flex h1 {
-    font-size: 4.1rem;
-    line-height: 1.18;
-    color: rgb(var(--primary-600)); /* Texto oscuro */
-    margin-bottom: 0.5rem;
-}
-
-.descripcion-contacto {
-    font-family: var(--fuenteTexto);
-    font-size: 1.8rem;
-    color: rgb(var(--primary-400)); /* Color sutil */
-    margin-bottom: 4rem;
-    max-width: 80rem;
-    margin-left: auto;
-    margin-right: auto;
-}
+/* ======================================================================================================================
+   ESTILOS ESPECÍFICOS DE CONTACTO en contacto.php
+===================================================================================================================== */
 
 /* --- 2. Estructura Flex (Formulario + Información) --- */
 
 .contacto-flex {
     display: flex;
     gap: 4rem;
-    align-items: flex-start;
+    align-items:flex-start;
     max-width: 120rem; /* Limite el ancho si es necesario, o usa .container */
     margin: 0 auto;
+    align-items: flex-start;
+    padding-top: 6rem;
+padding-bottom: 6rem;
 }
 
 .formulario {
     flex: 2;
-    padding: 3.5rem;
+    padding: 2.5rem;
     background-color: rgb(var(--primary-50)); /* Fondo muy claro (casi blanco) */
     border-radius: 12px;
     box-shadow: 0 8px 15px rgba(var(--black), 0.08);
@@ -1736,57 +1303,11 @@ body.bg-beige {
     background-color: rgb(var(--primary-700));
 }
 
-
-/* --- 3. Estilos de Formulario y Campos --- */
-
-fieldset {
-    border: 1px solid rgb(var(--primary-200)); /* Borde sutil */
-    padding: 2.5rem;
-    margin-bottom: 3rem;
-    border-radius: 8px;
-}
-
-legend {
-    font-family: var(--fuenteHeading);
-    font-size: 2.2rem;
-    color: rgb(var(--primary-600));
-    padding: 0 1rem;
-    font-weight: 700;
-}
-
-label {
-    display: block;
-    font-size: 1.5rem;
-    color: rgb(var(--primary-500));
-    margin-top: 1.5rem;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-}
-
-input:not([type="submit"]), 
-textarea, 
-select {
-    width: 100%;
-    padding: 1.2rem;
-    border: 1px solid rgb(var(--primary-200));
-    border-radius: 8px;
-    box-sizing: border-box; 
-    font-size: 1.6rem;
-    font-family: var(--fuenteTexto);
-    background-color: white;
-}
-
-textarea {
-    height: 15rem;
-    resize: vertical;
-}
-
 /* Estilo para el campo de número de pedido condicional */
 #campo-pedido {
     margin-top: 1.5rem;
     padding: 1.5rem;
     background-color: rgba(var(--secondary-200), 0.5); /* Color de tierra semitransparente */
-    border-left: 5px solid rgb(var(--secondary-600));
     border-radius: 8px;
 }
 
@@ -1809,27 +1330,7 @@ textarea {
     text-decoration: underline;
 }
 
-/* Botón de envío usando el color Tierra/Secondary */
-.boton-verde {
-    background-color: rgb(var(--secondary-700)); /* Marrón oscuro de la marca */
-    color: white;
-    padding: 1.5rem 3rem;
-    border: none;
-    display: block;
-    width: 100%;
-    margin-top: 3.5rem;
-    text-align: center;
-    text-transform: uppercase;
-    font-weight: 700;
-    font-size: 1.8rem;
-    border-radius: 40px; /* Muy redondeado para CTA */
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
 
-.boton-verde:hover {
-    background-color: rgb(var(--secondary-800));
-}
 
 /* --- 4. Estilos de Mensajes de Estado (Alertas PHP) --- */
 
@@ -1869,18 +1370,32 @@ textarea {
 @media (max-width: 900px) {
     /* En Tablet, aún podemos mantener algo de la estructura flex */
     .contacto-flex {
+        flex-direction: column; /* Apila el formulario y la información en móviles */
+        align-items: center;
         gap: 3rem;
         /* Permitimos que la info adicional quede a la derecha si hay espacio */
+        margin: 5rem;
     }
 }
 
 @media (max-width: 768px) {
     .contacto-flex {
-        flex-direction: column; /* Apila el formulario y la información en móviles */
+        
         gap: 4rem;
+        margin: 2.5rem;
     }
 
-    .formulario,
+    .formulario {
+        flex: auto;
+        width: 100%;
+        padding: 0;
+    }
+
+    fieldset {
+        padding: 0 1rem;
+        border: none;
+    }
+
     .info-adicional {
         flex: auto;
         width: 100%;
@@ -1890,7 +1405,552 @@ textarea {
     .contacto-flex h1 {
         font-size: 3.2rem;
     }
+    legend {
+        padding: 0 1rem;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==================================================================================================================================
+        CLASES ESPECIFICAS DE LA PAGINA nosotros.php
+   =============================================================================================================================== */
+.hero-ritual-right {
+    /* Mantenemos tus propiedades de Flexbox para centrar el bloque en sí */
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    text-align: center;
+    /* ... otras propiedades ... */
+}
+
+/* CENTRAR EL TÍTULO h3 */
+.hero-ritual-right .ritual-titulo-centrado {
+    text-align: center; /* ¡Aseguramos que el texto esté centrado! */
+    color: #333333;
+    margin-bottom: 3rem;
+}
+
+/* DISPOSICIÓN DE LOS 3 DIVS EN FILA (USANDO GRID) */
+.ritual-puntos-hero {
+    /* === MODIFICACIÓN CLAVE: USAR GRID PARA 3 COLUMNAS === */
+    display: flex; 
+    grid-template-columns: repeat(3, 1fr); /* Crea 3 columnas de igual ancho */
+    gap: 2rem; /* Espacio entre los divs */
+    padding: 5rem;
+    /* El contenedor ahora debe ocupar el ancho completo disponible */
+    width: 100%; 
+}
+
+/* Estilo de los divs individuales (las "celdas" de la tabla) */
+.ritual-item-hero {
+    /* Mantenemos tus estilos de caja (fondo, padding, borde) */
+    background: rgb(var(--secondary-100));
+    padding: 2rem;
+    border-radius: 10px;
+    border-left: 4px solid #7D4F23; 
+    
+    /* Centramos el texto dentro de cada div */
+    text-align: center; 
+}
+
+@media (max-width: 768px) {
+    .ritual-puntos-hero {
+    flex-direction: column;
+    align-items: center;
+    width: auto;
+    padding: 5rem;
+    }
+    .ritual-item-hero {
+    background:rgb(var(--secondary-100));
+    border: none;
+
+    text-align: center;
+    }
+}
+
+
+
+
+
+
+
+
+/* ===============================================================================================================================
+   Estilos para la pagina de CARRITO cart.php
+   ============================================================================================================================= */
+
+/* Carrito Layout */
+.container h1 {
+    margin-top: 20rem;
+    margin-bottom: 4rem;
+}
+
+
+.cart-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* 2 partes lista, 1 parte resumen */
+    gap: 40px;
+    align-items: start;
+    margin: 4rem auto;
+}
+
+/* Fila de producto */
+.cart-item-row {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding: 20px 0;
+    gap: 20px;
+}
+.cart-img img {
+    width: 200px !important; 
+    height: auto;
+    border-radius: 8px;
+    object-fit: contain;
+}
+.cart-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Alinea todo al principio (arriba) */
+    align-self: flex-start;      /* Asegura que el bloque empiece arriba */
+    padding-top: 0;
+}
+.cart-product-name {
+    font-size: 2.2rem !important; /* Mantenemos el título grande */
+    font-weight: 700;
+    margin-bottom: 5px !important; 
+    line-height: 1.1;
+}
+/* Envase: 1kg, Molido espresso... */
+.variant-tag {
+    display: block;
+    font-size: 1.5rem !important; /* Texto bastante más grande */
+    color: #333; /* Un poco más oscuro para que se lea mejor */
+    margin-bottom: 8px !important; /* Separa el Envase de la Molienda */
+    font-weight: 400;
+    line-height: 1.4; /* Da aire entre las líneas de texto */
+}
+.cart-sku {
+    font-size: 1.2rem !important;
+    color: #999;
+    margin-bottom: 5px !important; /* Este margen crea el hueco antes del envase */
+    display: block;
+    text-transform: uppercase;
+}
+
+.carrito-vacio {
+    display: grid;
+    padding: 4rem; 
+    margin: 4rem auto;
+    background: rgb(var(--secondary-100)); 
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    justify-content: center;
+}
+.carrito-vacio-content {
+    display: grid;
+    justify-content: center;
+    width: auto; 
+}
+
+
+/* Acciones y Precio */
+.qty-selector input {
+    width: 60px;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.btn-delete {
+    background:none; 
+    border:none; 
+    cursor:pointer;
+}
+.cart-total-line {
+    font-weight: 800;
+    font-size: 1.8rem !important; /* Precio más visible */
+    color: #1A1A1A;
+    min-width: 100px;
+    text-align: right;
+}
+
+/* Caja Resumen (Derecha) */
+.cart-summary-box {
+    background: rgb(var(--secondary-100));
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid #eee;
+}
+.cart-summary-box h3 {
+    margin-bottom: 20px;
+    margin-top: unset;
+}
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+.summary-row.total {
+    font-weight: bold;
+    font-size: 2rem;
+    margin-top: 15px;
+}
+.iva-text {
+    font-size: 1.5rem;
+    color: #999;
+    text-align: right;
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+
+
+/* Responsivo */
+@media(max-width: 768px) {
+    .cart-layout { grid-template-columns: 1fr; }
+    .cart-item-row { flex-wrap: wrap; }
+    .mobile-hide { display: none; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===============================================================================================================================
+   Estilos para la pagina de PRODUCTO producto.php
+   ============================================================================================================================= */
+
+
+
+/* Layout principal de dos columnas */
+.product-detail-layout {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 8rem;
+    align-items: center;
+    padding-top: var(--header-height);
+}
+
+/* Columna izquierda - imagen de producto */
+/* va vacio por si lo tenemos que usar mas adeante 
+.detail-left {
+}*/
+
+/* Columna Derecha: La Tarjeta */
+.detail-right-card {
+    background-color: rgb(var(--secondary-100)); 
+    padding: 3.5rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+/* Header de la tarjeta */
+.card-header { margin-bottom: 1rem; }
+.reviews-placeholder {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+
+
+.card-title {
+    font-family:var(--fuenteHeading);
+    margin: 0.5rem 0;
+    color: #1A1A1A;
+}
+
+.card-origin {
+    font: var(--fuenteTexto);
+}
+
+/* Precio */
+.card-price {
+    font-family: var(--fuenteTexto);
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin: 1.5rem 0;
+}
+
+
+
+
+
+
+
+.detail-image-container img {
+    max-width: 100%;
+    height: auto;
+    /* Sombra suave debajo de la bolsa */
+    filter: drop-shadow(0px 20px 30px rgba(0,0,0,0.15)); 
+}
+.big-product-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    color: #1A1A1A; /* Casi negro */
+    margin-top: 1rem;
+   }
+
+
+
+
+.star-icon { color: #C7A17A; font-size: 1.2rem; } 
+.star-icon-half { color: #C7A17A; font-size: 1.2rem; }
+.reviews-link {
+    color: #1A1A1A;
+    text-decoration: underline;
+    margin-left: 5px;
+}
+
+
+
+/* --- SELECTORES TIPO BOTÓN --- */
+
+
+/* lo dejamos por si acaso usarlo mas adelante*/
+/*.selector-group { 
+}*/
+
+
+/* lo guardamos por si acaso pero no lo usamos*/
+/*.selector-label {
+    font-size: 1.5rem !important; 
+    font-weight: 700 !important;
+    margin-bottom: 0.4rem !important; 
+    margin-top: 1.2rem !important;
+}
+*/
+
+.option-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+/* Ocultamos el radio button real */
+.option-radio {
+    display: none;
+}
+/* Estilo del label que parece botón */
+.option-label {
+    font-family: var(--fuenteTexto);
+    padding: 10px 15px;
+    cursor: pointer;
+    background:rgb(var(--secondary-100));
+    border: 0.4px solid #838383;
+    border-radius: 1.2rem;
+    white-space: nowrap;
+}
+.option-label:hover {
+    color: rgb(var(--secondary-800));
+}
+/* Estilo cuando el radio asociado está checkeado */
+.option-radio:checked + .option-label {
+    background-color:rgb(var(--secondary-500)); 
+    color: #FFF; 
+    border:none;
+}
+/* Info de Stock */
+.stock-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.4rem; 
+    margin: 1.2rem 0;
+    font-weight: 600;
+}
+.stock-dot {
+    width: 1rem;
+    height: 1rem;
+    background-color: #00cf56; 
+    border-radius: 50%;
+}
+
+/* Selector Dropdown Normal (Tueste) */
+/*.form-select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #DDD;
+    border-radius: 8px;
+    background-color: transparent;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+}*/
+
+/* --- Fila de Acciones (Cantidad + Botón) --- */
+.card-actions-row {
+    display: flex;
+    gap: 15px;
+}
+
+/* Widget de Cantidad (- 1 +) */
+.quantity-selector-widget {
+    display: flex;
+    align-items: center;
+    border: 1.5px solid #636363;
+    border-radius: 30px;
+    background: transparent;
+    flex-shrink: 0;
+    max-width: 200px;
+    justify-content: space-around;
+}
+.qty-btn {
+    background: none;
+    border: none;
+    font-size: 2.5rem;
+    padding: 5px 12px;
+    cursor: pointer;
+}
+.quantity-selector-widget input {
+    width: 35px;
+    height: 40px;
+    text-align: center;
+    border-radius: 4px;
+    border: none;
+    background: white;
+    font-weight: 700;
+    font-size: 1.4rem;
+    
+}
+.quantity-selector-widget input::-webkit-outer-spin-button,
+.quantity-selector-widget input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+
+/* Responsividad */
+@media (max-width: 900px) {
+    .product-detail-layout {
+        grid-template-columns: 1fr; /* Una columna en móviles */
+        gap: 3rem;
+    }
+    .detail-image-container img {
+        max-width: 60%; /* Imagen más pequeña en móvil */
+    }
+    .big-product-title {
+        font-size: 2.5rem; /* Título más pequeño */
+    }
+    .card-actions-row {
+        max-width: 420px;
+        gap: 15px;
+    }
+    .quantity-selector-widget {
+        justify-content: center;
+    }
+    .btn-add-to-cart-dark {
+        padding: 15px;
+    }
+}
+
+
+/* ===================================================================================================
+   MODAL (POP-UP) despues de hacer click en añadir al carrito
+=================================================================================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: white;
+    width: 90%;
+    max-width: 60rem; /* Ancho similar a la imagen */
+    max-height: 80vh; /* Altura máxima */
+    padding: 3rem;
+    border-radius: 0.8rem;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    position: relative;
+    overflow-y: auto; /* Scroll si el texto es largo */
+    font-family: var(--fuenteTexto);
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #555;
+    line-height: 1;
+}
+
+.modal-title {
+    font-family: var(--fuenteHeading);
+    font-size: 2.4rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.modal-body {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    color: #444;
+}
+
+
+
+
+
+
+
+
+
+
 
 /* =======================================
    CHECKOUT
@@ -1983,16 +2043,17 @@ textarea {
 ======================================= */
 .checkout-legal-links {
     margin-top: 4rem;
+    padding-bottom: 2rem;
     padding-top: 2rem;
-    border-top: 1px solid #eee;
+    border-top: 1px solid rgb(var(--secondary-200));
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
-    justify-content: flex-start; /* Alineado a la izquierda como la foto */
+    justify-content: flex-start; 
 }
 
 .legal-link {
-    color: #E8A020; /* Color mostaza/dorado de la imagen */
+    color: rgb(var(--secondary-700)); 
     text-decoration: underline;
     font-size: 1.3rem;
     cursor: pointer;
@@ -2003,7 +2064,8 @@ textarea {
 }
 
 .legal-link:hover {
-    color: #b87b0e;
+    color: rgb(var(--secondary-900));
+    font-weight: bold;
 }
 
 /* =======================================
@@ -2069,24 +2131,29 @@ textarea {
     color: #444;
 }
 
-/* =======================================
-   PÁGINA SUCCESS (CONFIRMACIÓN/RESUMEN)
-======================================= */
+
+
+
+
+
+
+
+/* ==========================================================================================================================================
+   PÁGINA SUCCESS (CONFIRMACIÓN/RESUMEN) archivo success.php
+===================================================================================================================================== */
 
 /* Títulos principales */
 .success-header {
-    margin-bottom: 4rem;
+    display: flex;
+    flex-direction: column;
 }
 .success-title {
     font-family: var(--fuenteHeading);
-    font-size: 4.5rem;
-    color: #1A1A1A;
-    margin-bottom: 0.5rem;
+    margin: auto;
 }
 .success-subtitle {
     font-family: var(--fuenteTexto);
-    font-size: 1.8rem;
-    color: #333;
+    font-size: 2rem;
     font-weight: 500;
 }
 
@@ -2096,11 +2163,12 @@ textarea {
     grid-template-columns: 1.6fr 0.8fr; /* La izquierda ocupa más */
     gap: 3rem;
     align-items: start;
+    margin-bottom: 4rem;
 }
 
 /* Estilos comunes para las tarjetas beige */
 .success-card {
-    background-color: #FAF7F2; /* Color crema de la imagen */
+    background-color: rgb(var(--secondary-100)); /* Color crema de la imagen */
     border-radius: 12px;
     padding: 4rem;
 }
@@ -2120,15 +2188,13 @@ textarea {
 .detail-group h3 {
     font-family: var(--fuenteTexto);
     font-size: 1.6rem;
-    font-weight: 700; /* Negrita */
-    color: #111;
+    font-weight: bold;
     margin-bottom: 1rem;
 }
 
 .detail-group p {
     font-family: var(--fuenteTexto);
     font-size: 1.5rem;
-    color: #666; /* Gris texto */
     line-height: 1.6;
     margin: 0;
 }
@@ -2136,9 +2202,8 @@ textarea {
 /* --- TARJETA DERECHA (Resumen Totales) --- */
 .summary-title {
     font-family: var(--fuenteTexto);
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 5rem;
 }
 
 .summary-line {
@@ -2146,12 +2211,11 @@ textarea {
     justify-content: space-between;
     margin-bottom: 1.5rem;
     font-size: 1.5rem;
-    color: #333;
 }
 
 .divider {
     border: 0;
-    border-top: 1px solid #00BFA5; /* Línea separadora verde azulada */
+    border-top: 1px solid rgb(var(--secondary-700));
     margin: 2rem 0;
 }
 
@@ -2159,14 +2223,13 @@ textarea {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    font-weight: 700;
+    font-weight: bold;
     font-size: 2rem;
-    color: #111;
 }
 
 .iva-note {
     font-size: 1.2rem;
-    color: #888;
+    color: #646464;
     font-weight: 400;
     display: block;
 }
@@ -2185,29 +2248,423 @@ textarea {
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =======================================
+    LOGIN: ESTILOS ESPECÍFICOS
+======================================= */
+
+/* --- Columna Derecha: Centrado y Estilos Generales --- */
+
+.hero-right {
+    /* Ajusta el flexbox para centrar el contenido vertical y horizontalmente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem; /* Espacio de seguridad */
+}
+
+/* --- La Caja del Formulario (El Panel Transparente) --- */
+.login-box {
+    /* Usamos un color base muy claro con opacidad para el fondo */
+    background-color: rgb(var(--secondary-100)); 
+    /* Efecto "Glassmorphism" (Añadimos el prefijo -webkit- para máxima compatibilidad) */
+    /* Esquinas redondeadas grandes */
+    border-radius: 20px;
+    
+    /* Sombra muy sutil */
+    box-shadow: 0 10px 30px rgba(var(--black), 0.15); 
+    
+    /* Espacio interno */
+    padding: 2rem;
+    
+    /* Ancho máximo para que no ocupe toda la mitad derecha */
+    max-width: 36rem;
+    width: 100%;
+    
+    /* Color de texto por defecto dentro de la caja */
+    color: rgb(var(--primary-900)); 
+}
+
+/* Título "Acceso" */
+.login-title {
+    text-align: center;
+}
+
+/* --- Inputs y Grupos --- */
+
+.input-group {
+    margin-bottom: 1rem;
+    position: relative; /* Necesario para posicionar la etiqueta pequeña */
+}
+
+
+
+
+.input1:focus {
+    border-color: rgb(var(--primary-500));
+    outline: none;
+    box-shadow: 0 0 5px rgba(var(--primary-500), 0.3);
+}
+
+/* --- Campo de Contraseña y Toggle --- */
+.password-field {
+    position: relative;
+    
+}
+
+.toggle-password {
+    /* Posicionamiento */
+   position: absolute;
+    right: 0rem; 
+    top: 72%; 
+    transform: translateY(-50%);
+    
+    /* CRÍTICO: Centrado con Flexbox */
+    display: flex;
+    align-items: center; /* Centrado vertical */
+    justify-content: center; /* Centrado horizontal (opcional, pero buena práctica) */
+
+    /* Estilos base */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 10;
+    /* Asegúrate de que no tenga transform */
+}
+
+
+.toggle-password [data-lucide] {
+    position: absolute;
+    right: 1.5rem;
+    top: 50%; 
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+}
+
+
+/* --- Enlaces y Botones --- */
+
+/* Enlace "¿Olvidaste la Contraseña?" */
+.forgot-link {
+    text-align: right;
+    margin-bottom: 3rem;
+}
+.forgot-link a {
+    font-size: 1.4rem;
+    color: rgb(var(--secondary-900));
+    transition: color 0.3s;
+}
+.forgot-link a:hover {
+    color: rgb(var(--secondary-900));
+    font-weight: bold;
+}
+
+
+.arrow-icon {
+    margin-left: 1rem;
+    font-size: 2rem;
+    line-height: 1;
+}
+
+/* Enlace de Registro */
+.register-prompt {
+    text-align: center;
+    margin-top: 2.5rem;
+    font-size: 1.4rem;
+    color: rgb(var(--primary-700));
+}
+
+.register-prompt a {
+    color: rgb(var(--secondary-900));
+    font-weight: 600;
+    transition: color 0.3s;
+}
+.register-prompt a:hover {
+    color: rgb(var(--secondary-900));
+    font-weight: bold;
+}
+
+/* --- Mensajes de Alerta --- */
+.alert.error {
+    /* Aquí puedes usar un color secundario de tu paleta si quieres */
+    background-color: rgba(var(--secondary-100), 0.8); 
+    color: rgb(var(--secondary-800));
+    border: 1px solid rgb(var(--secondary-400));
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+}
+
+.alert.error i[data-lucide] {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    min-width: 20px;
+    color: rgb(var(--secondary-900));
+}
+/* =========================================
+   NUEVO HERO SIMPLE: SOLUCIÓN AL CONFLICTO DEL HEADER
+   ========================================= */
+
+.header-hero-simple {
+    /* Propiedades de posicionamiento para la imagen de fondo */
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+     
+    /* CRÍTICO: Contexto de posicionamiento para la capa ::before */
+    position: relative; 
+    overflow: hidden; /* Asegura que la capa ::before no se desborde */
+}
+
+/* Aplicar la imagen de fondo solo a la clase específica */
+.header-hero-simple.bg-nosotros {
+    /* **¡AÑADIMOS LA ALTURA AQUÍ PARA QUE SOLO AFECTE A ESTA PÁGINA!** */
+    height: 65rem; 
+    /* El background-image de la imagen de café sigue aquí */
+    
+}
+
+/* 1. Capa Blanca Semitransparente (::before) */
+.header-hero-simple.bg-nosotros::before {
+    content: ''; 
+    position: absolute; 
+    top: 0; right: 0; bottom: 0; left: 0; 
+    z-index: 2;
+    background-color: rgba(255, 255, 255, 1); 
+    opacity: 0.4; 
+}
+
+/* 2. Estilos para el texto centrado */
+.header-hero-simple .hero-texto-centrado {
+    position: relative; 
+    z-index: 3;
+
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco casi opaco */
+    padding: 3rem; /* Espacio interno */
+    border-radius: 10px; /* Bordes redondeados */
+    max-width: 80rem;
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    height: 100%; 
+    text-align: center;
+}
+
+.header-hero-simple p {
+    font-size: 2rem;
+    color: #111111; /* Texto oscuro */
+    max-width: 60rem; /* Limita el ancho del párrafo */
+}
+
+/* =======================================
+   FONDO SOSTENIBILIDAD (Nuevo)
+======================================= */
+
+/* 1. Imagen de fondo */
+.header-hero-simple.bg-sostenibilidad {
+    background-image: url('../img/hero-sostenibilidad.png'); 
+    height: 65rem; /* Misma altura que nosotros.php */
+}
+
+/* 2. Capa semitransparente (Overlay) para que se lea el texto */
+/* Reutilizamos la lógica de .bg-nosotros */
+.header-hero-simple.bg-sostenibilidad::before {
+    content: ''; 
+    position: absolute; 
+    top: 0; right: 0; bottom: 0; left: 0; 
+    z-index: 2;
+    background-color: rgba(255, 255, 255, 1); 
+    opacity: 0.3; 
+}
+
+/* =======================================
+   FONDO PROCESS / ELABORACIÓN
+======================================= */
+
+.header-hero-simple.bg-elaboracion {
+    background-image: url('../img/tarjeta2.jpg'); 
+    height: 65rem;
+}
+
+/* Capa oscura/clara para leer el texto  */
+.header-hero-simple.bg-elaboracion::before {
+    content: ''; 
+    position: absolute; 
+    top: 0; right: 0; bottom: 0; left: 0; 
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.3); 
+}
+
+/* =======================================
+   FONDO INFORMACIÓN / AYUDA
+======================================= */
+
+.header-hero-simple.bg-info {
+    /* Imagen sugerida: Paquete de café, manos entregando caja o textura limpia */
+    background-image: url('../img/hero-info.png'); 
+    height: 60rem;
+}
+
+/* =========================================
+   ESTILOS DE LA LLAMADA A LA ACCIÓN (CTA)
+   ========================================= */
+
+.llamada-a-la-accion {
+    /* 1. Posicionamiento y Centrado */
+    display: flex; /* Usamos flexbox para centrar el contenido interno */
+    flex-direction: column; 
+    align-items: center; /* Centrado horizontal del texto y botón */
+    text-align: center;
+    margin: 5rem auto; /* Margen superior/inferior para separarlo de otros elementos */
+    
+    /* 2. Estilo de Caja */
+    background-color: #FFFFFF; /* Fondo blanco sólido para que destaque */
+    padding: 4rem 2rem; /* Más padding vertical y horizontal */
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Sombra suave para darle profundidad */
+    
+    /* 3. Limitar Ancho */
+    max-width: 80rem; /* Limita el ancho para que no ocupe toda la pantalla */
+}
+
+.llamada-a-la-accion p {
+    font-size: 2.2rem;
+    font-weight: 500; /* Lo hacemos seminegrita para que se lea bien */
+    color: #333333;
+    margin-bottom: 2rem; /* Espacio antes del botón */
+}
+
+/* 4. Estilo del Botón (Ajustar según tu clase 'boton-primario' o 'boton') */
+.llamada-a-la-accion .boton-primario {
+    background-color: #7D4F23; /* Color de acento de café */
+    color: #FFFFFF;
+    text-transform: uppercase;
+    padding: 1.5rem 3rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.llamada-a-la-accion .boton-primario:hover {
+    background-color: #A36B3B; /* Color más claro al pasar el ratón */
+}
+
+
+
+
+
+
+
 /* =======================================
    PERFIL DE USUARIO
 ======================================= */
 .profile-container {
     margin-top: 4rem;
     margin-bottom: 6rem;
-    max-width: 1200px;
+    width: 100%;
 }
 
 .profile-layout {
     display: grid;
     grid-template-columns: 250px 1fr;
-    gap: 4rem;
+    gap: 2.5rem;
     align-items: start;
+}
+
+.profile-layout-admin {
+    display: flex;
+    align-items: flex-start;
+    gap: 25px; /* Espacio fijo entre sidebar y contenido */
+    width: 100%;
+}
+
+.profile-menu {
+    display: grid;
+    margin-top: 2rem;
+    gap: 1rem;
+
 }
 
 /* Sidebar (Menú lateral) */
 .profile-sidebar {
-    background: #FAF7F2; /* Beige claro */
+    background: rgb(var(--secondary-100)); /* Beige claro */
     padding: 2rem;
     border-radius: 12px;
     position: sticky;
     top: 2rem;
+    width: 25rem;
 }
 
 .profile-menu-btn {
@@ -2219,7 +2676,6 @@ textarea {
     padding: 1.2rem;
     font-family: var(--fuenteTexto);
     font-size: 1.6rem;
-    color: #555;
     cursor: pointer;
     border-radius: 8px;
     transition: all 0.2s;
@@ -2227,12 +2683,12 @@ textarea {
 }
 
 .profile-menu-btn:hover {
-    background: rgba(0,0,0,0.05);
-    color: #000;
+    background: rgb(var(--secondary-600));
+    color: white;
 }
 
 .profile-menu-btn.active {
-    background: #1A1A1A;
+    background: rgb(var(--secondary-600));
     color: white;
     font-weight: 600;
 }
@@ -2249,25 +2705,34 @@ textarea {
 }
 
 /* Contenido Principal */
-.profile-content-section {
-    display: none; /* Ocultos por defecto */
-    animation: fadeIn 0.3s ease;
-}
-.profile-content-section.active {
-    display: block; /* Solo el activo se ve */
+.profile-content {
+    flex: 1;           /* Ocupa todo el espacio restante */
+    min-width: 0;      /* IMPORTANTE: Permite que el contenido se encoja sin desbordar */
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(5px); }
-    to { opacity: 1; transform: translateY(0); }
+
+
+.profile-content-section {
+    width: 100%;
+    display: none; /* Por defecto ocultas */
 }
+
+.profile-content-section.active {
+    display: block; /* Solo la activa se muestra */
+}
+
+
 
 .section-title {
     font-family: var(--fuenteHeading);
     font-size: 2.8rem;
     margin-bottom: 2rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #811313;
 }
 
 /* Tarjetas de Direcciones */
@@ -2318,7 +2783,7 @@ textarea {
 .orders-table th {
     text-align: left;
     padding: 1.5rem;
-    background: #FAF7F2;
+    background: rgb(var(--secondary-100));
     font-weight: 600;
 }
 .orders-table td {
@@ -2343,16 +2808,35 @@ textarea {
     }
     .profile-sidebar {
         position: static;
-        display: flex;
+        display: grid;
         overflow-x: auto;
         padding: 1rem;
         gap: 1rem;
+        width: 100%;
     }
     .profile-menu-btn {
         width: auto;
         white-space: nowrap;
     }
+    .profile-layout-admin {
+        display: flex;
+        flex-direction: column;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* --- TARJETA DE PRODUCTO: DISEÑO FULL IMAGEN --- */
 
 /* 1. Ajuste de la Tarjeta Base */
@@ -2508,14 +2992,7 @@ textarea {
     cursor: pointer;
 }
 
-.success-header {
-    display: flex; 
-    align-items: center; 
-    gap: 10px;
-    color: #27AE60; 
-    font-weight: 700; 
-    margin-bottom: 20px;
-}
+
 
 .product-preview {
     display: flex; 
@@ -2578,7 +3055,7 @@ textarea {
 .btn-primary, .btn-secondary { 
     display: block; 
     text-align: center; 
-    padding: 18px; 
+    padding: 1.2rem; 
     border-radius: 35px; 
     text-decoration: none; 
     font-weight: 700;
@@ -2601,55 +3078,145 @@ textarea {
     border-color: #1A1A1A;
     background-color: #f9f9f9;
 }
-/* ESTILO POLITICA DE COOKIES */
-/* --- ESTILOS PARA POLÍTICA DE COOKIES --- */
 
-:root {
-    --color-cafe-oscuro: #4e342e;
-    --color-cafe-claro: #795548;
-    --color-fondo-suave: #f9f4f2;
-    --color-borde: #d7ccc8;
+
+
+
+
+
+
+
+
+
+
+
+
+
+.modal {
+    display:none; 
+    position:fixed; 
+    z-index:1000; 
+    left:0; top:0; 
+    width:100%; 
+    height:100%; 
+    background:rgba(0,0,0,0.5);
 }
 
-.cookies-container {
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 20px;
-    line-height: 1.8;
-    color: #333;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.modal-content {
+    background:#fff; 
+    margin:5% auto; 
+    padding:20px; 
+    width:400px; 
+    border-radius:8px; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
-.cookies-container h1 {
-    color: var(--color-cafe-oscuro);
-    border-bottom: 2px solid var(--color-cafe-oscuro);
-    padding-bottom: 10px;
-    font-size: 2.2rem;
+.alerta1 {
+    font-size: 1.4rem;
+    background: #d4edda; 
+    color: #0e3717; 
+    padding: 1rem; 
+    margin-bottom: 2rem; 
+    border-radius: 0.5rem; 
+    border: 1px solid #c3e6cb;
 }
 
-.cookies-container h2 {
-    color: var(--color-cafe-claro);
-    margin-top: 30px;
-    font-size: 1.5rem;
+
+
+
+
+
+/*=======================================
+   ADMIN PANEL RESPONSIVE
+
+/*Panel admin resposive*/
+
+
+/* Contenedor de filtros flexible */
+
+.filter-bar {
+    display: grid;
+    /* "auto-fit" llena el ancho. "minmax(200px, 1fr)" dice: 
+       mínimo 200px por input, si hay espacio sobra, estírate (1fr) */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+    background: #f9f9f9;
+    border-radius: 8px;
+    align-items: center
 }
 
-/* Bloque de datos de empresa */
-.empresa-box {
-    background-color: var(--color-fondo-suave);
-    border-left: 6px solid var(--color-cafe-oscuro);
-    padding: 20px;
-    margin: 20px 0;
-    border-radius: 4px;
+
+@media (max-width: 768px) {
+    .filter-bar {
+        grid-template-columns: 1fr 1fr; /* 2 columnas en tablets */
+    }
 }
 
-.empresa-box ul {
-    list-style: none;
-    padding: 0;
-    margin: 10px 0 0 0;
+@media (max-width: 480px) {
+    .filter-bar {
+        
+        padding: 1.5rem;
+        margin: 1rem auto;
+    }
 }
 
-.empresa-box li {
-    margin-bottom: 8px;
+
+
+
+
+@media (max-width: 768px) {
+    /* Escondemos el encabezado de la tabla */
+    .orders-table thead {
+        display: none;
+    }
+
+    .orders-table, 
+    .orders-table tbody, 
+    .orders-table tr, 
+    .orders-table td {
+        display: block;
+        width: 100%;
+    }
+
+    
+
+    .orders-table tr {
+        margin-bottom: 15px;
+        border: 1px solid rgb(var(--secondary-400));
+        border-radius: 8px;
+        padding: 10px;
+        background: rgb(var(--secondary-100));
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .orders-table td {
+        padding-left: 50%;
+        position: relative;
+        border-bottom: 1px solid #eee;
+        min-height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    /* Creamos etiquetas usando el atributo data-label (opcional) o simple orden */
+    .orders-table td::before {
+        content: attr(data-label); /* Si añades data-label en el PHP */
+        position: absolute;
+        left: 10px;
+        width: 45%;
+        text-align: left;
+        font-weight: bold;
+        color: var(--primary-500);
+    }
+
+    .orders-table td:last-child {
+        display: inline-block; 
+        border-bottom: 0;
+        justify-content: center;
+        background: #f9f9f9;
+    }
 }
 
 /* Tabla de cookies */
@@ -2712,58 +3279,104 @@ textarea {
     border-bottom: none;
 }
 
-/* Enlaces de navegadores */
-.links-navegadores {
+.search-modal-overlay.active {
     display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    padding: 0;
-    list-style: none;
-    margin-top: 20px;
+    opacity: 1;
 }
 
-.links-navegadores li a {
+.search-modal-content {
+    background: white;
+    width: 60rem;
+    max-width: 90%;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* Cabecera del input */
+.search-header {
     display: flex;
     align-items: center;
-    gap: 8px; /* Espacio entre el icono y el texto */
-    padding: 10px 20px;
-    background: #fff;
-    border: 1px solid var(--color-cafe-claro);
-    color: var(--color-cafe-claro);
-    text-decoration: none;
-    border-radius: 30px;
-    transition: all 0.3s ease;
-    font-size: 1.4rem;
-    font-weight: 500;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    padding: 1.5rem;
+    border-bottom: 1px solid #eee;
 }
 
-.links-navegadores li a i {
-    font-size: 1.1rem;
+#searchInput {
+    flex: 1;
+    border: none;
+    font-size: 1.8rem;
+    padding: 1rem;
+    font-family: var(--fuenteTexto);
+    outline: none;
 }
 
-.links-navegadores li a:hover {
-    background: var(--color-cafe-claro);
-    color: #fff;
-    transform: translateY(-2px); /* Efecto sutil de levante */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-
-.cookies-table td:last-child {
-    font-size: 1.6rem;
+.close-search {
+    background: none;
+    border: none;
+    font-size: 3rem;
+    cursor: pointer;
     color: #666;
-}
-.cookies-container {
-    /* Sumamos los 94px del header + 40px de espacio extra */
-    margin-top: 135px !important; 
-    
-    /* Aseguramos que el contenido tenga un buen margen lateral en móviles */
-    padding: 20px;
-    box-sizing: border-box;
+    line-height: 1;
 }
 
-/* Si usas anclas o enlaces internos, esto evita que el header tape el título al saltar */
-html {
-    scroll-padding-top: 110px;
+/* Lista de Sugerencias */
+.search-suggestions {
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.search-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    border-bottom: 1px solid #f9f9f9;
+    transition: background 0.2s;
+}
+
+.search-item:hover {
+    background: #f0f0f0;
+}
+
+.search-item img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    margin-right: 1.5rem;
+    border-radius: 4px;
+}
+
+.search-item span {
+    font-size: 1.6rem;
+    color: #333;
+    font-weight: 500;
+}
+
+.search-no-results {
+    padding: 2rem;
+    text-align: center;
+    color: #777;
+    font-size: 1.4rem;
+}
+
+/* --- MÓVIL: OCUPAR TODO EL ANCHO --- */
+@media (max-width: 768px) {
+    .search-modal-overlay {
+        padding-top: 0;
+        background: white; /* En móvil fondo blanco total */
+    }
+    
+    .search-modal-content {
+        width: 100%;
+        max-width: 100%;
+        height: 100%;
+        border-radius: 0;
+        box-shadow: none;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .search-suggestions {
+        flex: 1;
+    }
 }
