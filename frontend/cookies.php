@@ -108,4 +108,5 @@
     <p class="footer-update">Última actualización: Enero 2026</p>
 </div>
 </main>
+
 <?php include __DIR__ . '/templates/footer.php'; ?>
