@@ -200,7 +200,113 @@ table {
     border: none;
 }
 
+/* =======================================
+   ESTILO POLÍTICA DE COOKIES 
+======================================= */
 
+.cookies-container-main {
+    max-width: 900px;
+    margin: 15rem auto 3rem;
+    padding: 0 4rem;
+    font-family: var(--fuenteTexto);
+}
+
+/* --- TABLA ESTILO IMAGEN --- */
+.cookies-table-wrapper {
+    overflow-x: auto;
+    margin: 3rem 0;
+}
+
+.cookies-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #d1d1d1; /* Borde exterior sutil */
+}
+
+/* Cabecera Café Oscuro */
+.cookies-table thead th {
+    background-color: #4b3621; /* El tono café de tu imagen */
+    color: #ffffff;
+    padding: 1.5rem;
+    font-size: 1.5rem;
+    text-align: left;
+    font-weight: bold;
+    border: 1px solid #d1d1d1;
+}
+
+/* Celdas de la tabla */
+.cookies-table td {
+    padding: 1.5rem;
+    border: 1px solid #d1d1d1;
+    vertical-align: top;
+    font-size: 1.5rem;
+    line-height: 1.4;
+}
+
+/* Primera columna en negrita */
+.cookies-table td:first-child {
+    font-weight: bold;
+    background-color: #fdfdfd; 
+}
+
+/* --- BOTONES DE NAVEGADORES (PILL STYLE) --- */
+.links-navegadores {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0;
+}
+
+.links-navegadores li a {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.8rem 2rem;
+    border: 1px solid #4b3621;
+    border-radius: 50px; /* Forma de pastilla */
+    text-decoration: none;
+    color: #4b3621;
+    font-size: 1.4rem;
+    transition: all 0.3s ease;
+}
+
+.links-navegadores li a:hover {
+    background-color: #4b3621;
+    color: #ffffff;
+}
+
+.links-navegadores i {
+    font-size: 1.6rem;
+}
+
+/* Caja de responsable */
+.empresa-box {
+    background-color: #fcf7f2; /* Color crema de fondo */
+    padding: 3rem;
+    border-left: 6px solid #4b3621; /* Línea gruesa café */
+    margin: 3rem 0;
+}
+
+.empresa-box p {
+    font-size: 1.8rem; /* Letras más grandes para el título */
+    font-weight: bold;
+    margin-bottom: 2rem;
+    color: #000;
+}
+
+.empresa-box ul {
+    list-style: none;
+    padding: 0;
+}
+
+.empresa-box li {
+    font-size: 1.6rem; /* Subimos el tamaño de los datos */
+    margin-bottom: 1rem;
+    color: #333;
+    line-height: 1.6;
+}
 
 
 
