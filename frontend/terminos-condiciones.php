@@ -7,7 +7,7 @@ include __DIR__ . '/templates/header.php';
     <h2>Términos y Condiciones de Venta</h2>
     <p style="text-align: center;">Fecha de última actualización: 7 de Enero de 2026</p>
 
-    <p>Estos Términos y Condiciones regulan la compraventa de café de especialidad y productos relacionados a través del sitio web https://lacafetera.store. Al hacer un pedido, el Cliente acepta íntegramente estos Términos.</p>
+    <p>Estos Términos y Condiciones regulan la compraventa de café de especialidad y productos relacionados a través del sitio web <a href="https://lacafetera.store" target="_blank">https://lacafetera.store</a>. Al hacer un pedido, el Cliente acepta íntegramente estos Términos.</p>
 
     <h3>1. Información General y Contacto</h3>
     <div class="terms-card-box">
@@ -16,8 +16,7 @@ include __DIR__ . '/templates/header.php';
             <li><strong>Vendedor:</strong> LaCafetera1994 S.L.</li>
             <li><strong>NIF/CIF:</strong> B87654321</li>
             <li><strong>Dirección Fiscal:</strong> Avda. de la Molienda, 45, Planta 3, 28005 Madrid (España)</li>
-            <li><strong>Email:</strong> lacaffetera1994@gmail.com</li>
-        </ul>
+            <li>Contacto: <a href="mailto:lacaffetera1994@gmail.com?subject=Consulta%20de%20Prensa%20o%20Colaboracion" target="_blank">lacaffetera1994@gmail.com</a></li>        </ul>
     </div>
 
     <h3>2. Objeto y Productos</h3>
