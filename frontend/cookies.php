@@ -1,8 +1,5 @@
 <?php include __DIR__ . '/templates/header.php'; ?>
-
-<style>main ul, main table { font-size: 1.6rem; }</style>
-<main style="max-width: 900px; margin: 15rem auto 3rem ; padding: 0 4rem;">
-<div class="cookies-container">
+<main class ="cookies-container-main">
     <h1>Política de Cookies</h1>
     
     <p>En La Cafetera, utilizamos cookies para mejorar tu experiencia.</p>
