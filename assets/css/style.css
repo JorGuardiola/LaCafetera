@@ -3219,64 +3219,56 @@ padding-bottom: 6rem;
     }
 }
 
-/* Tabla de cookies */
-.cookies-table-wrapper {
-    overflow-x: auto;
-    margin: 4rem 0;
+.orders-table img {
+    display: block;
+    margin: 0 auto;
+    border: 1px solid #ddd;
 }
 
-.cookies-table {
-    width: 100%;
-    /* Esto es clave para que las líneas se vean continuas */
-    border-collapse: collapse; 
-    background-color: #fff;
-    font-family: var(--fuenteTexto);
+td img {
+    max-width: 15rem; 
+    object-fit: cover; 
+    border-radius: 4px;
 }
 
-.cookies-table th, 
-.cookies-table td {
-    /* Quitamos el border: 1px que tenías antes */
-    border: none; 
-    padding: 1.8rem 1.5rem;
-    text-align: left;
-    vertical-align: top; /* Importante para que el texto no flote en el centro */
+/* Ajuste para que en móvil la imagen no sea gigante */
+@media (max-width: 768px) {
+    .orders-table td[data-label="Imagen"] {
+        justify-content: center;
+        display: flex;
+    }
 }
 
-/* El "palito" principal (línea gruesa bajo el encabezado) */
-.cookies-table thead th {
-    border-bottom: 2px solid rgb(var(--black)); 
-    color: rgb(var(--primary-900));
-    font-weight: bold;
-    font-size: 1.6rem;
-}
-
-/* Los "palitos" finos entre filas (opcional, pero ayuda a la lectura) */
-.cookies-table tbody td {
-    border-bottom: 1px solid #eee;
+.sin-imagen {
+    width: 15rem;
+    height: 15rem;
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
     font-size: 1.5rem;
-    color: rgb(var(--primary-700));
+    color: #7d7d7d;
+    margin: 0 auto;
 }
 
-/* Para que la primera columna sea negrita como en tu imagen */
-.cookies-table td:first-child {
-    font-weight: bold;
-    color: rgb(var(--primary-900));
-    width: 20%;
-}
-
-/* Ajuste de anchos para que la finalidad tenga más espacio */
-.cookies-table td:nth-child(2) {
-    width: 50%;
-}
-
-/* Quitamos el color de fondo de las filas pares para que sea igual a la foto */
-.cookies-table tr:nth-child(even) {
-    background-color: transparent;
-}
-
-/* Quitamos el último palito de la tabla para que quede abierta */
-.cookies-table tr:last-child td {
-    border-bottom: none;
+/* =======================================
+   MODAL DE BÚSQUEDA (SEARCH POP-UP) 
+======================================= */
+.search-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Fondo oscuro */
+    z-index: 2000; /* Por encima del header */
+    display: none; /* Oculto por defecto */
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 5rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .search-modal-overlay.active {
