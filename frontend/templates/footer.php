@@ -37,7 +37,7 @@
     <div class="footer-col footer-right">
       <div class="footer-social">
         <a href="https://www.instagram.com/lacafetera1994/" target="_blank"><img src="<?= BASE_URL ?>/assets/img/instagram.svg" alt="Instagram"></a>
-        <a href="#"><img src="<?= BASE_URL ?>/assets/img/facebook.svg" alt="Facebook"></a>
+        <a href="https://www.facebook.com/profile.php?id=61586169395711"><img src="<?= BASE_URL ?>/assets/img/facebook.svg" alt="Facebook"></a>
         <a href="#"><img src="<?= BASE_URL ?>/assets/img/whatsapp.svg" alt="WhatsApp"></a>
       </div>
         <a href="<?= BASE_URL ?>/frontend/contacto.php" class="footer-btn">Contacto</a>    
