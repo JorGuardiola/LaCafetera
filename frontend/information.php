@@ -62,7 +62,7 @@ include __DIR__ . '/templates/header.php';
                 <div class="ritual-item-hero">
                     <i class="fas fa-shipping-fast icon-info"></i>
                     <h4>Envíos 24/48h</h4> 
-                    <p>Sabemos que la cafeína urge. Preparamos tu pedido el mismo día (si es antes de las 14:00) para que lo recibas volando. Envío GRATIS en pedidos superiores a 40€.</p>
+                    <p>Sabemos que la cafeína urge. Preparamos tu pedido el mismo día (si es antes de las 14:00) para que lo recibas volando. Envío GRATIS en pedidos superiores a 50€.</p>
                 </div>
                 
                 <div class="ritual-item-hero">
