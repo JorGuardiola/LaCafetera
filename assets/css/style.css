@@ -3667,3 +3667,94 @@ td img {
         flex: 1;
     }
 }
+/* Contenedor que flota en la esquina de la pantalla */
+#ai-chat-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px; 
+    width: 380px;
+    z-index: 9999;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Caja del chat (la que se abre) */
+.chat-content {
+    display: none;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    background: white;
+    border: 1px solid #ddd;
+}
+
+/* Encabezado */
+.chat-header {
+    background: #6F4E37;
+    color: white;
+    padding: 15px;
+    font-weight: bold;
+    font-size: 18px; /* Título grande */
+}
+
+/* Ventana de conversación */
+.chat-window {
+    height: 350px;
+    background: #f9f9f9;
+    padding: 20px;
+    overflow-y: auto;
+    font-size: 16px; /* Texto de mensajes grande */
+    line-height: 1.6;
+}
+
+/* Área inferior de escritura */
+.chat-input-area {
+    display: flex;
+    background: white;
+    border-top: 1px solid #eee;
+}
+
+.chat-input-area input {
+    flex: 1;
+    border: none;
+    padding: 15px;
+    outline: none;
+    font-size: 16px;
+}
+
+.chat-input-area button {
+    background: #6F4E37;
+    color: white;
+    border: none;
+    padding: 0 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.chat-input-area button:hover {
+    background: #5a3e2b;
+}
+
+/* Botón flotante para abrir el chat */
+.button-container {
+    text-align: right; 
+}
+
+.chat-toggle-button {
+    padding: 12px 25px;
+    background: #6F4E37;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    font-weight: bold;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.chat-toggle-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}

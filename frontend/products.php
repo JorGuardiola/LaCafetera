@@ -23,6 +23,8 @@ $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <?php include __DIR__ . '/templates/header.php'; ?>
+<?php include __DIR__ . '/templates/chatbot_component.php'; ?>
+
 
 <?php include __DIR__ . '/templates/hero.php'; ?>
 

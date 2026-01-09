@@ -20,7 +20,8 @@ include __DIR__ . '/templates/header.php';
 <main>
         
     <?php include __DIR__ . '/templates/hero.php'; ?>   
-    
+    <?php include __DIR__ . '/templates/chatbot_component.php'; ?>
+
 
     <section>
         
