@@ -239,27 +239,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 }
                 header("Location: admin.php?tab=pedidos");
             exit;
-
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         }
         
         // Redirigir para limpiar el POST y mantener la pestaña activa
@@ -280,7 +259,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 
     <div class="container profile-container">
         <h1>Panel de Administración</h1>
-        
+
+            <?php if ($mensaje): ?>
+            <div class="alerta1">
+                <?= htmlspecialchars($mensaje) ?>
+            </div>
+            <?php endif; ?>
         
 
         <div class="profile-layout-admin">
