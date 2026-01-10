@@ -3434,10 +3434,10 @@ padding-bottom: 6rem;
 
 
 
-/*=======================================
+/*============================================================================================================
    ADMIN PANEL RESPONSIVE
 
-/*Panel admin resposive*/
+=============================================================================================================*/
 
 
 /* Contenedor de filtros flexible */
@@ -3470,9 +3470,6 @@ padding-bottom: 6rem;
 }
 
 
-
-
-
 @media (max-width: 768px) {
     /* Escondemos el encabezado de la tabla */
     .orders-table thead {
@@ -3488,7 +3485,6 @@ padding-bottom: 6rem;
     }
 
     
-
     .orders-table tr {
         margin-bottom: 15px;
         border: 1px solid rgb(var(--secondary-400));

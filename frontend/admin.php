@@ -373,7 +373,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             exit;
         }
         
-        // Redirigir para limpiar el POST y mantener la pestaña activa
+        // Redirigir para limpiar el POST y mantener la pestaña activa 
         header("Location: admin.php?tab=" . $tab_activa);
         exit;
 
