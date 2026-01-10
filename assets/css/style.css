@@ -3796,8 +3796,8 @@ td img {
     }
 
     .chat-toggle-button {
-        width: 50px;     /* Botón un poco más pequeño en móvil */
-        height: 50px;
+        width: 35px;     /* Botón un poco más pequeño en móvil */
+        height: 35px;
     }
 
     .chat-window {
