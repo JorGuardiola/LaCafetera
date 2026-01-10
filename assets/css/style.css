@@ -3681,14 +3681,15 @@ td img {
     position: fixed;
     bottom: 20px;
     right: 20px; 
-    width: 380px;
     z-index: 9999;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
 }
 
 /* Caja del chat (la que se abre) */
 .chat-content {
     display: none;
+    width: 380px; 
     box-shadow: 0 8px 30px rgba(0,0,0,0.3);
     border-radius: 12px;
     overflow: hidden;
@@ -3749,6 +3750,7 @@ td img {
 .button-container {
     display: flex;
     justify-content: flex-end;
+    width: auto;               
 }
 
 .chat-toggle-button {
@@ -3782,9 +3784,11 @@ td img {
 /* --- CONFIGURACIÓN PARA MÓVILES (Pantallas de menos de 480px) --- */
 @media screen and (max-width: 480px) {
     #ai-chat-container {
-        width: 90%;      /* El chat ocupa casi todo el ancho del móvil */
-        right: 5%;       /* Lo centramos un poco más */
-        bottom: 10px;
+        width: 90%; /* En móvil sí necesitamos que el padre mande sobre el ancho */
+        right: 5%;
+    }
+    .chat-content {
+        width: 100%; /* La caja ocupa todo el ancho del padre (90%) */
     }
 
     .chat-toggle-button {
@@ -3817,7 +3821,10 @@ td img {
 
 /* --- CONFIGURACIÓN PARA PC (Pantallas de más de 769px) --- */
 @media screen and (min-width: 769px) {
+    .chat-content {
+        width: 380px;
+    }
     #ai-chat-container {
-        width: 380px;    /* Tu ancho actual para que el correo no se corte */
+        width: auto; 
     }
 }
