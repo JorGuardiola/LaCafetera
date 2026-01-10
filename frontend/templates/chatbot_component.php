@@ -17,18 +17,18 @@
 
     <div class="button-container">
         <button onclick="toggleChat()" class="chat-toggle-button">
-            Habla con nuestro Barista
+            <img src="/LaCafetera/assets/img/chatbot-logo.png" alt="Barista IA">
         </button>
     </div>
 </div>
 
 <script>
-function toggleChat() {
-    const chat = document.getElementById('chat-content');
-    chat.style.display = (chat.style.display === 'none' || chat.style.display === '') ? 'block' : 'none';
-}
+    function toggleChat() {
+        const chat = document.getElementById('chat-content');
+        chat.style.display = (chat.style.display === 'none' || chat.style.display === '') ? 'block' : 'none';
+    }
 
-async function askAI() {
+    async function askAI() {
     const input = document.getElementById('user-input');
     const windowChat = document.getElementById('chat-window');
     const text = input.value.trim();
