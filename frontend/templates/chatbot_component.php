@@ -17,7 +17,7 @@
 
     <div class="button-container">
         <button onclick="toggleChat()" class="chat-toggle-button">
-            <img src="/LaCafetera/assets/img/chatbot-logo.png" alt="Barista IA">
+            <img src="/assets/img/chatbot-logo.png" alt="Barista IA">
         </button>
     </div>
 </div>
