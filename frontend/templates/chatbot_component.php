@@ -1,3 +1,8 @@
+<?php
+$rutaHandler = (strpos($_SERVER['REQUEST_URI'], '/frontend/') !== false) ? 'chat_handler.php' : 'frontend/chat_handler.php';
+?>
+
+
 <div id="ai-chat-container">
     
     <div id="chat-content" class="chat-content">
