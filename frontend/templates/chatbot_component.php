@@ -22,7 +22,7 @@ $rutaHandler = (strpos($_SERVER['REQUEST_URI'], '/frontend/') !== false) ? 'chat
 
     <div class="button-container">
         <button onclick="toggleChat()" class="chat-toggle-button">
-            <img src="/assets/img/chatbot-logo.png" alt="Barista IA">
+            <img src="<?= BASE_URL ?>/assets/img/chatbot-logo.png" alt="Barista IA">
         </button>
     </div>
 </div>
