@@ -1,15 +1,15 @@
 <?php
-// Bloqueamos cualquier error de texto para que no rompa el JSON
+//chat_handler.php
 error_reporting(0);
 ini_set('display_errors', 0);
 header('Content-Type: application/json; charset=utf-8');
 
 // 1. Conexión
-$conn = new mysqli("localhost", "root", "", "cafeteria_db");
-$conn->set_charset("utf8mb4");
+require_once __DIR__ . '/../db/connection.php';
 
-if ($conn->connect_error) {
-    die(json_encode(["choices" => [["message" => ["content" => "Error de conexión"]]]]));
+if (!isset($pdo)) {
+    echo json_encode(["choices" => [["message" => ["content" => "Error interno: No se pudo conectar a la base de datos."]]]]);
+    exit;
 }
 
 $input = json_decode(file_get_contents('php://input'), true);
@@ -28,42 +28,45 @@ if ($msg == 'horario' || strpos($msg, 'abierto') !== false || strpos($msg, 'hora
 // --- SECCIÓN: UBICACIÓN ---
 elseif ($msg == 'donde' || strpos($msg, 'ubicacion') !== false || strpos($msg, 'donde estan') !== false) {
     $respuesta = "¿Dónde estamos?<br><br>";
-    $respuesta .= "Nos encontramos en la Avda. de la Molienda, 45, Planta 3, 28005 Madrid (España)<br>";
+    $respuesta .= "Nos encontramos en la Avda. de la Molienda 45, Planta 3, 28005 Madrid (España)<br>";
     $respuesta .= "¡Ven a disfrutar del mejor café recién tostado!";
 }
 
-// --- SECCIÓN: LISTA (Tu código que funciona) ---
+// --- SECCIÓN: LISTA  ---
 elseif ($msg == 'lista' || strpos($msg, 'carta') !== false) {
-    $sql = "SELECT p.nombre_cafe, v.precio 
-            FROM productos p 
-            INNER JOIN producto_variantes v ON p.id = v.producto_id 
-            WHERE v.envase = '250g'
-            ORDER BY p.nombre_cafe ASC";
-
-    $res = $conn->query($sql);
-
-    if ($res && $res->num_rows > 0) {
-        $respuesta = "Nuestros Cafés (250g):<br><br>";
+    try {
+        $sql = "SELECT p.nombre_cafe, v.precio 
+                FROM productos p 
+                INNER JOIN producto_variantes v ON p.id = v.producto_id 
+                WHERE v.envase = '250g'
+                ORDER BY p.nombre_cafe ASC";
         
-        $cafes_vistos = [];
+        // Usamos $pdo en lugar de $conn
+        $stmt = $pdo->query($sql);
         
-        while($row = $res->fetch_assoc()) {
-            $nombre = $row['nombre_cafe'];
+        if ($stmt && $stmt->rowCount() > 0) {
+            $respuesta = "Nuestros Cafés (250g):<br><br>";
+            $cafes_vistos = [];
             
-            if (!in_array($nombre, $cafes_vistos)) {
-                $precio = number_format($row['precio'], 2);
-                $respuesta .= "•" . htmlspecialchars($nombre) . ": " . $precio . "€<br>";
-                $cafes_vistos[] = $nombre;
+            while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $nombre = $row['nombre_cafe'];
+                if (!in_array($nombre, $cafes_vistos)) {
+                    $precio = number_format($row['precio'], 2);
+                    $respuesta .= "• " . htmlspecialchars($nombre) . ": " . $precio . "€<br>";
+                    $cafes_vistos[] = $nombre;
+                }
             }
+        } else {
+            $respuesta = "No hay productos disponibles en este momento.";
         }
-    } else {
-        $respuesta = "No hay productos disponibles en este momento.";
+    } catch (Exception $e) {
+        $respuesta = "Error al consultar los productos.";
     }
-} 
+}
 
 // --- RESPUESTA POR DEFECTO ---
 else {
-    $respuesta = "¡Hola! Soy tu Barista IA.<br>Escribe'lista'para ver los precios,'horario'o'ubicacion'.";
+    $respuesta = "¡Hola! Soy tu Barista IA.<br>Escribe 'lista' para ver los precios, 'horario' o 'ubicación'.";
 }
 
 // 2. Respuesta final
