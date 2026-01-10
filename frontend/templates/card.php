@@ -5,11 +5,7 @@
 ?>
 
 <div class="product-card">
-
-
     <div class="product-content">
-        <!-- todo menos el botón -->
-
             <button class="fav-btn">
             <img src="<?= BASE_URL ?>/assets/img/icon-heart.png" alt="Fav">
             </button>
