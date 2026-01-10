@@ -3779,16 +3779,20 @@ td img {
 }
 
 #ai-chat-container {
-    width: 380px; 
+    width: auto; 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
 /* --- CONFIGURACIÓN PARA MÓVILES (Pantallas de menos de 480px) --- */
 @media screen and (max-width: 480px) {
     #ai-chat-container {
-        width: 90%; /* En móvil sí necesitamos que el padre mande sobre el ancho */
+        width: auto;
         right: 5%;
     }
     .chat-content {
-        width: 100%; /* La caja ocupa todo el ancho del padre (90%) */
+    width: 85vw; /* El ancho ahora lo define la caja, no el contenedor */
+    max-width: 350px; /* Para que no sea enorme */
     }
 
     .chat-toggle-button {
@@ -3810,7 +3814,7 @@ td img {
 /* --- CONFIGURACIÓN PARA TABLETS (Pantallas entre 481px y 768px) --- */
 @media screen and (min-width: 481px) and (max-width: 768px) {
     #ai-chat-container {
-        width: 320px;    /* Ancho intermedio */
+        width: auto;  
     }
 
     .chat-toggle-button {
