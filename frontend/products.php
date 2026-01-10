@@ -13,11 +13,11 @@ $heroSubtitle = "Nuestra Selección reúne cafés de especialidad de fincas úni
 $heroButtonText = "";
 $heroButtonLink = "";
 
-// Carga inicial simple (solo los primeros 12 para que no salga vacío al entrar)
+// Carga inicial simple (solo los primeros 19 para que no salga vacío al entrar)
 // Usamos una subconsulta para sacar el precio de '250g' y mostrarlo correctamente en la tarjeta inicial
 $sqlInicial = "SELECT p.*, 
                (SELECT precio FROM producto_variantes pv WHERE pv.producto_id = p.id AND pv.envase = '250g' LIMIT 1) as precio
-               FROM productos p WHERE p.disponible = 1 ORDER BY p.id ASC LIMIT 12";
+               FROM productos p WHERE p.disponible = 1 ORDER BY p.id ASC LIMIT 19";
 $stmt = $pdo->query($sqlInicial);
 $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
