@@ -20,7 +20,9 @@ if ($stmt->fetchColumn() !== 'admin') {
 }
 
 $tab_activa = $_GET['tab'] ?? 'usuarios';
-$mensaje = $_SESSION['admin_flash'] ?? '';
+
+// Aqui abajo definimos la sesion para capturar los mensajes de error
+$flash = $_SESSION['admin_flash'] ?? null;
 unset($_SESSION['admin_flash']);
 
 /* =========================
@@ -31,58 +33,142 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     try {
         switch ($_POST['action']) {
             
+            /* ========= USUARIOS ========= */
+
             case 'create_user':
-                $stmt = $pdo->prepare("INSERT INTO usuarios (nombre, apellido, email, password_hash, telefono, rol) VALUES (?, ?, ?, ?, ?, ?)");
-                $stmt->execute([
-                    $_POST['nombre'],
-                    $_POST['apellido'],
-                    $_POST['email'],
-                    password_hash($_POST['password'], PASSWORD_DEFAULT),
-                    $_POST['telefono'],
-                    $_POST['rol']
-                ]);
-                $_SESSION['admin_flash'] = "Usuario creado con éxito.";
-                break;
+                try {
+                    $stmt = $pdo->prepare("INSERT INTO usuarios (nombre, apellido, email, password_hash, telefono, rol) VALUES (?, ?, ?, ?, ?, ?)");
+                    $stmt->execute([
+                        $_POST['nombre'],
+                        $_POST['apellido'],
+                        $_POST['email'],
+                        password_hash($_POST['password'], PASSWORD_DEFAULT),
+                        $_POST['telefono'],
+                        $_POST['rol']
+                    ]);
+
+                    // Mensaje de éxito (Verde)
+                    $_SESSION['admin_flash'] = [
+                        'texto' => "Usuario creado con éxito.",
+                        'tipo'  => 'success'
+                    ];
+                } catch (PDOException $e) {
+                    // Error 23000 suele ser por duplicado (email ya existe)
+                    if ($e->getCode() == '23000') {
+                        $msg = "El correo electrónico ya está registrado.";
+                    } else {
+                        $msg = "Error al crear el usuario: " . $e->getMessage();
+                    }
+
+                    // Mensaje de error (Rojo)
+                    $_SESSION['admin_flash'] = [
+                        'texto' => $msg,
+                        'tipo'  => 'error'
+                    ];
+                }
+                // Opcional: break o redirección manual para limpiar el POST
+                header("Location: admin.php?tab=usuarios");
+            exit;
 
             case 'update_user':
-                $stmt = $pdo->prepare("UPDATE usuarios SET nombre=?, apellido=?, email=?, telefono=?, rol=? WHERE id_usuario=?");
-                $stmt->execute([
-                    $_POST['nombre'], $_POST['apellido'], $_POST['email'], 
-                    $_POST['telefono'], $_POST['rol'], $_POST['id_usuario']
-                ]);
-                
-                if (!empty($_POST['password'])) {
-                    $stmt = $pdo->prepare("UPDATE usuarios SET password_hash=? WHERE id_usuario=?");
-                    $stmt->execute([password_hash($_POST['password'], PASSWORD_DEFAULT), $_POST['id_usuario']]);
-                }
-                $_SESSION['admin_flash'] = "Usuario actualizado.";
-                break;
+                try {
+                    // 1. Actualización de datos generales
+                    $stmt = $pdo->prepare("UPDATE usuarios SET nombre=?, apellido=?, email=?, telefono=?, rol=? WHERE id_usuario=?");
+                    $stmt->execute([
+                        $_POST['nombre'], 
+                        $_POST['apellido'], 
+                        $_POST['email'], 
+                        $_POST['telefono'], 
+                        $_POST['rol'], 
+                        $_POST['id_usuario']
+                    ]);
+                    
+                    // 2. Actualización de contraseña (solo si el campo no está vacío)
+                    if (!empty($_POST['password'])) {
+                        $stmt = $pdo->prepare("UPDATE usuarios SET password_hash=? WHERE id_usuario=?");
+                        $stmt->execute([
+                            password_hash($_POST['password'], PASSWORD_DEFAULT), 
+                            $_POST['id_usuario']
+                        ]);
+                    }
 
-            /* ========= USUARIOS ========= */
+                    // Mensaje de éxito
+                    $_SESSION['admin_flash'] = [
+                        'texto' => "Usuario actualizado correctamente.",
+                        'tipo'  => 'success'
+                    ];
+
+                } catch (PDOException $e) {
+                    // Error 23000: El email nuevo ya lo tiene otro usuario
+                    if ($e->getCode() == '23000') {
+                        $msg = "Error: El email ya está en uso por otro usuario.";
+                    } else {
+                        $msg = "Error al actualizar: " . $e->getMessage();
+                    }
+
+                    $_SESSION['admin_flash'] = [
+                        'texto' => $msg,
+                        'tipo'  => 'error'
+                    ];
+                }
+                header("Location: admin.php?tab=usuarios");
+            exit;
+
+            
             case 'delete_user':
                 try {
                     $stmt = $pdo->prepare("DELETE FROM usuarios WHERE id_usuario = ?");
                     $stmt->execute([$_POST['id_usuario']]);
-                    $_SESSION['admin_flash'] = 'Usuario eliminado correctamente';
+                    
+                    // Mensaje de éxito (Verde)
+                    $_SESSION['admin_flash'] = [
+                        'texto' => 'Usuario eliminado correctamente.',
+                        'tipo'  => 'success'
+                    ];
                 } catch (PDOException $e) {
-                    // El código 23000 es para violaciones de integridad, 
-                    // y el 1451 es específicamente para restricciones de llave foránea (parent row)
+                    // El código 23000 es para violaciones de integridad
                     if ($e->getCode() == '23000' || strpos($e->getMessage(), '1451') !== false) {
-                        $_SESSION['admin_flash'] = "No se puede eliminar. Existen pedidos o carritos asociados a este usuario.";
+                        $msg = "No se puede eliminar. Existen pedidos o carritos asociados a este usuario.";
                     } else {
-                        $_SESSION['admin_flash'] = "Error inesperado: " . $e->getMessage();
+                        $msg = "Error inesperado: " . $e->getMessage();
                     }
+
+                    // Mensaje de error (Rojo)
+                    $_SESSION['admin_flash'] = [
+                        'texto' => $msg,
+                        'tipo'  => 'error'
+                    ];
                 }
                 header('Location: admin.php?tab=usuarios');
-                exit;
+            exit;
 
             case 'change_user_role':
-                $stmt = $pdo->prepare("UPDATE usuarios SET rol=? WHERE id_usuario=?");
-                $stmt->execute([$_POST['rol'], $_POST['id_usuario']]);
-                $_SESSION['admin_flash'] = "Rol actualizado.";
-                break;
+                try {
+                    // Validación de seguridad: Evitar que el admin se degrade a sí mismo
+                    if ($_POST['id_usuario'] == $_SESSION['user_id'] && $_POST['rol'] !== 'admin') {
+                        $_SESSION['admin_flash'] = [
+                            'texto' => "No puedes quitarte el rol de administrador a ti mismo por seguridad.",
+                            'tipo'  => 'error'
+                        ];
+                    } else {
+                        $stmt = $pdo->prepare("UPDATE usuarios SET rol = ? WHERE id_usuario = ?");
+                        $stmt->execute([$_POST['rol'], $_POST['id_usuario']]);
 
-            /*productos*/
+                        $_SESSION['admin_flash'] = [
+                            'texto' => "Rol actualizado correctamente.",
+                            'tipo'  => 'success'
+                        ];
+                    }
+                } catch (PDOException $e) {
+                    $_SESSION['admin_flash'] = [
+                        'texto' => "Error al cambiar el rol: " . $e->getMessage(),
+                        'tipo'  => 'error'
+                    ];
+                }
+                header("Location: admin.php?tab=usuarios");
+            exit;
+
+            /* ========= PRODUCTOS ========= */
 
             case 'create_product':
                 try {
@@ -93,38 +179,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                     if (isset($_FILES['foto_producto']) && $_FILES['foto_producto']['error'] === UPLOAD_ERR_OK) {
                         $fileTmpPath = $_FILES['foto_producto']['tmp_name'];
                         $fileName = $_FILES['foto_producto']['name'];
-                        
-                        // Generar nombre único para evitar duplicados en la carpeta
                         $extension = pathinfo($fileName, PATHINFO_EXTENSION);
                         $nombre_archivo = pathinfo($fileName, PATHINFO_FILENAME) . '_' . time() . '.' . $extension;
-                        
-                        // Ruta física: subir un nivel para salir de /frontend y entrar en /assets/img/
                         $dest_path = __DIR__ . '/../assets/img/imgsproducts/' . $nombre_archivo;
 
                         if (!move_uploaded_file($fileTmpPath, $dest_path)) {
-                            throw new Exception("No se pudo guardar la imagen en la carpeta assets/img.");
+                            throw new Exception("No se pudo guardar la imagen en el servidor.");
                         }
                     }
 
-                    // 1. Verificamos si el café (nombre_cafe) ya existe
+                    // 1. Verificamos si el café ya existe
                     $stmtCheck = $pdo->prepare("SELECT id FROM productos WHERE nombre_cafe = ?");
                     $stmtCheck->execute([$_POST['nombre_cafe']]);
                     $producto_id = $stmtCheck->fetchColumn();
 
-                    // 2. Si no existe, lo creamos e insertamos el nombre de la imagen
+                    // 2. Si no existe, lo creamos
                     if (!$producto_id) {
                         $stmtNewProd = $pdo->prepare("INSERT INTO productos (nombre_cafe, imagen) VALUES (?, ?)");
                         $stmtNewProd->execute([$_POST['nombre_cafe'], $nombre_archivo]);
                         $producto_id = $pdo->lastInsertId();
                     } else {
-                        // Opcional: Si el producto ya existe pero subes una foto nueva, actualizamos la foto del producto base
                         if ($nombre_archivo) {
                             $stmtUpdateImg = $pdo->prepare("UPDATE productos SET imagen = ? WHERE id = ?");
                             $stmtUpdateImg->execute([$nombre_archivo, $producto_id]);
                         }
                     }
 
-                    // 3. Insertamos la variante con el producto_id obtenido
+                    // 3. Insertamos la variante
                     $stmtVar = $pdo->prepare("INSERT INTO producto_variantes (producto_id, sku, precio, stock, molienda, tueste, envase) VALUES (?, ?, ?, ?, ?, ?, ?)");
                     $stmtVar->execute([
                         $producto_id,
@@ -137,15 +218,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                     ]);
 
                     $pdo->commit();
-                    $_SESSION['admin_flash'] = "Nueva variante creada correctamente.";
+
+                    // MENSAJE DE ÉXITO (ARRAY)
+                    $_SESSION['admin_flash'] = [
+                        'texto' => "Nueva variante creada correctamente.",
+                        'tipo'  => 'success'
+                    ];
 
                 } catch (Exception $e) {
-                    $pdo->rollBack();
-                    if (isset($e->getCode) && $e->getCode() == '23000') {
-                        $_SESSION['admin_flash'] = "Error: El SKU ya existe o la variante está duplicada.";
-                    } else {
-                        $_SESSION['admin_flash'] = "Error: " . $e->getMessage();
+                    if ($pdo->inTransaction()) {
+                        $pdo->rollBack();
                     }
+                    
+                    // Corregido: $e->getCode() es un método
+                    $code = $e->getCode();
+                    if ($code == '23000') {
+                        $msg = "Error: El SKU ya existe o la variante está duplicada.";
+                    } else {
+                        $msg = "Error: " . $e->getMessage();
+                    }
+
+                    // MENSAJE DE ERROR (ARRAY)
+                    $_SESSION['admin_flash'] = [
+                        'texto' => $msg,
+                        'tipo'  => 'error'
+                    ];
                 }
                 header("Location: admin.php?tab=productos");
             exit;
@@ -159,11 +256,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                     $stmt = $pdo->prepare("DELETE FROM producto_variantes WHERE sku = ?");
                     $stmt->execute([$_POST['sku']]);
                     
-                    $_SESSION['admin_flash'] = "Variante eliminada correctamente.";
+                    // Mensaje de éxito
+                    $_SESSION['admin_flash'] = [
+                        'texto' => "Variante eliminada correctamente.",
+                        'tipo'  => 'success'
+                    ];
                 } catch (Exception $e) {
-                    $_SESSION['admin_flash'] = "Error al eliminar la variante: " . $e->getMessage();
+                    // Verificamos si es un error de integridad (variante usada en pedidos)
+                    if ($e->getCode() == '23000') {
+                        $msg = "No se puede eliminar: Esta variante ya forma parte de algún pedido realizado.";
+                    } else {
+                        $msg = "Error al eliminar la variante: " . $e->getMessage();
+                    }
+
+                    // Mensaje de error
+                    $_SESSION['admin_flash'] = [
+                        'texto' => $msg,
+                        'tipo'  => 'error'
+                    ];
                 }
-            break;
+                // Redirigir siempre a la pestaña de productos
+                header("Location: admin.php?tab=productos");
+            exit;
 
 
             case 'update_product':
@@ -174,16 +288,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                     if (isset($_FILES['foto_producto']) && $_FILES['foto_producto']['error'] === UPLOAD_ERR_OK) {
                         $fileTmpPath = $_FILES['foto_producto']['tmp_name'];
                         $fileName = $_FILES['foto_producto']['name'];
-                        
-                        // Generar nombre único
                         $extension = pathinfo($fileName, PATHINFO_EXTENSION);
                         $nombre_archivo = pathinfo($fileName, PATHINFO_FILENAME) . '_' . time() . '.' . $extension;
-                        
-                        // Ruta física (subir un nivel desde /frontend a /assets/img/)
                         $dest_path = __DIR__ . '/../assets/img/imgsproducts/' . $nombre_archivo;
 
                         if (move_uploaded_file($fileTmpPath, $dest_path)) {
-                            // Si la subida es exitosa, actualizamos el campo imagen_url en la tabla productos
                             $stmtImg = $pdo->prepare("UPDATE productos SET imagen = ? WHERE id = ?");
                             $stmtImg->execute([$nombre_archivo, $_POST['producto_id']]);
                         } else {
@@ -195,7 +304,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                     $stmt1 = $pdo->prepare("UPDATE productos SET nombre_cafe = ? WHERE id = ?");
                     $stmt1->execute([$_POST['nombre_cafe'], $_POST['producto_id']]);
                     
-                    // 3. Actualizar la variante (incluyendo el envase que antes faltaba)
+                    // 3. Actualizar la variante
                     $stmt2 = $pdo->prepare("UPDATE producto_variantes SET sku = ?, precio = ?, stock = ?, molienda = ?, tueste = ?, envase = ? WHERE sku = ?");
                     $stmt2->execute([
                         $_POST['sku'], 
@@ -203,39 +312,62 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                         $_POST['stock'], 
                         $_POST['molienda'], 
                         $_POST['tueste'],
-                        $_POST['envase'], // Asegúrate de que el envase se actualice también
+                        $_POST['envase'],
                         $_POST['sku_original'] 
                     ]);
                     
                     $pdo->commit();
-                    $_SESSION['admin_flash'] = "Variante actualizada correctamente.";
+
+                    // MENSAJE DE ÉXITO (ARRAY)
+                    $_SESSION['admin_flash'] = [
+                        'texto' => "Variante actualizada correctamente.",
+                        'tipo'  => 'success'
+                    ];
 
                 } catch (Exception $e) { 
-                    $pdo->rollBack();
-                    
-                    if (isset($e->getCode) && $e->getCode() == '23000') {
-                        $_SESSION['admin_flash'] = "Error: El SKU ya existe o los datos están duplicados.";
-                    } else {
-                        $_SESSION['admin_flash'] = "Error al actualizar: " . $e->getMessage();
+                    if ($pdo->inTransaction()) {
+                        $pdo->rollBack();
                     }
+                    
+                    // Corregido: getCode() es un método
+                    if ($e->getCode() == '23000') {
+                        $msg = "Error: El SKU ya existe o los datos están duplicados.";
+                    } else {
+                        $msg = "Error al actualizar: " . $e->getMessage();
+                    }
+
+                    // MENSAJE DE ERROR (ARRAY)
+                    $_SESSION['admin_flash'] = [
+                        'texto' => $msg,
+                        'tipo'  => 'error'
+                    ];
                 }
                 header("Location: admin.php?tab=productos");
             exit;
 
 
            
-
-
             /* ========= PEDIDOS ========= */
+
+            
             // Dentro del switch ($_POST['action']) en admin.php
             case 'update_order_status':
                 try {
                     // Actualizado para usar id_orden
                     $stmt = $pdo->prepare("UPDATE pedidos SET estado = ? WHERE id_orden = ?");
                     $stmt->execute([$_POST['nuevo_estado'], $_POST['id_orden']]);
-                    $_SESSION['admin_flash'] = "Estado del pedido #" . $_POST['id_orden'] . " actualizado.";
+
+                    // Mensaje de éxito (Verde)
+                    $_SESSION['admin_flash'] = [
+                        'texto' => "Estado del pedido #" . $_POST['id_orden'] . " actualizado a " . $_POST['nuevo_estado'] . ".",
+                        'tipo'  => 'success'
+                    ];
                 } catch (Exception $e) {
-                    $_SESSION['admin_flash'] = "Error al actualizar: " . $e->getMessage();
+                    // Mensaje de error (Rojo)
+                    $_SESSION['admin_flash'] = [
+                        'texto' => "Error al actualizar el pedido: " . $e->getMessage(),
+                        'tipo'  => 'error'
+                    ];
                 }
                 header("Location: admin.php?tab=pedidos");
             exit;
@@ -260,10 +392,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     <div class="container profile-container">
         <h1>Panel de Administración</h1>
 
-            <?php if ($mensaje): ?>
-            <div class="alerta1">
-                <?= htmlspecialchars($mensaje) ?>
-            </div>
+            <?php if ($flash): ?>
+                <div class="alert alert-<?= htmlspecialchars($flash['tipo']) ?>">
+                <?= htmlspecialchars($flash['texto']) ?>
+                </div>
             <?php endif; ?>
         
 
