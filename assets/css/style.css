@@ -28,6 +28,13 @@
     --secondary-800: 162, 87, 52;
     --secondary-900: 122, 63, 35;
 
+    /* Others colors */
+    --cafe-oscuro: #4b3621;
+    --cafe-suave: #fdf6f0;
+    --texto-color: #3e3e3e;
+    --borde-color: #ede0d4;
+    --acento: #a67c52;
+
     /* Basics */
     --black: 0, 0, 0;
     --white: 255, 255, 255;
@@ -173,10 +180,6 @@ table {
 }
 
 
-
-
-
-
 /* BOTÓN - Modificar */
 
 .modificar-btn {
@@ -200,9 +203,11 @@ table {
     border: none;
 }
 
-/* =======================================
-   ESTILO POLÍTICA DE COOKIES 
-======================================= */
+
+
+/* ==========================================================================================
+   ESTILOS POLÍTICA DE COOKIES 
+============================================================================================= */
 
 .cookies-container-main {
     max-width: 900px;
@@ -220,12 +225,12 @@ table {
 .cookies-table {
     width: 100%;
     border-collapse: collapse;
-    border: 1px solid #d1d1d1; /* Borde exterior sutil */
+    border: 1px solid #d1d1d1;
 }
 
 /* Cabecera Café Oscuro */
 .cookies-table thead th {
-    background-color: #4b3621; /* El tono café de tu imagen */
+    background-color: #4b3621;
     color: #ffffff;
     padding: 1.5rem;
     font-size: 1.5rem;
@@ -249,7 +254,7 @@ table {
     background-color: #fdfdfd; 
 }
 
-/* --- BOTONES DE NAVEGADORES (PILL STYLE) --- */
+/* --- BOTONES DE NAVEGADORES --- */
 .links-navegadores {
     display: flex;
     flex-wrap: wrap;
@@ -265,7 +270,7 @@ table {
     gap: 0.8rem;
     padding: 0.8rem 2rem;
     border: 1px solid #4b3621;
-    border-radius: 50px; /* Forma de pastilla */
+    border-radius: 50px;
     text-decoration: none;
     color: #4b3621;
     font-size: 1.4rem;
@@ -281,18 +286,17 @@ table {
     font-size: 1.6rem;
 }
 
-/* Caja de responsable */
 .empresa-box {
-    background-color: #fcf7f2; /* Color crema de fondo */
+    background-color: #fcf7f2;
     padding: 3rem;
-    border-left: 6px solid #4b3621; /* Línea gruesa café */
+    border-left: 6px solid #4b3621;
     margin: 3rem 0;
-    transition: all 0.3s ease; /* Hace que el cambio sea suave, no brusco */
+    transition: all 0.3s ease;
     cursor: default;
 }
 
 .empresa-box p {
-    font-size: 1.8rem; /* Letras más grandes para el título */
+    font-size: 1.8rem;
     font-weight: bold;
     margin-bottom: 2rem;
     color: #000;
@@ -304,29 +308,22 @@ table {
 }
 
 .empresa-box li {
-    font-size: 1.6rem; /* Subimos el tamaño de los datos */
+    font-size: 1.6rem;
     margin-bottom: 1rem;
     color: #333;
     line-height: 1.6;
 }
 
 .empresa-box:hover {
-    transform: translateY(-5px); /* La tarjeta sube 5 píxeles */
-    background-color: #f8eee4;   /* El color crema se vuelve un pelín más oscuro */
-    box-shadow: 0 8px 20px rgba(75, 54, 33, 0.1); /* La sombra crece para dar sensación de altura */
-    border-color: var(--acento); /* El borde cambia al color café de la marca */
+    transform: translateY(-5px);
+    background-color: #f8eee4;
+    box-shadow: 0 8px 20px rgba(75, 54, 33, 0.1);
+    border-color: var(--acento);
 }
 
 /* =================================================
-   ESTILO DE POLITICA Y PRIVACIDAD 
+   ESTILOS PAGINA DE POLITICA Y PRIVACIDAD 
 ==================================================== */
-:root {
-    --cafe-oscuro: #4b3621;
-    --cafe-suave: #fdf6f0; /* Color crema de la imagen */
-    --texto-color: #3e3e3e;
-    --borde-color: #ede0d4;
-    --acento: #a67c52;
-}
 
 .privacy-container-main {
     max-width: 850px;
@@ -398,27 +395,21 @@ table {
     color: #000;
 }
 .privacy-card-box {
-    transition: all 0.3s ease; /* Hace que el cambio sea suave, no brusco */
+    transition: all 0.3s ease;
     cursor: default;
 }
 
 .privacy-card-box:hover {
-    transform: translateY(-5px); /* La tarjeta sube 5 píxeles */
-    background-color: #f8eee4;   /* El color crema se vuelve un pelín más oscuro */
-    box-shadow: 0 8px 20px rgba(75, 54, 33, 0.1); /* La sombra crece para dar sensación de altura */
-    border-color: var(--acento); /* El borde cambia al color café de la marca */
+    transform: translateY(-5px);
+    background-color: #f8eee4;
+    box-shadow: 0 8px 20px rgba(75, 54, 33, 0.1);
+    border-color: var(--acento);
 }
 
-/* =================================================
+/* =====================================================================================================
    ESTILO DE TERMINOS Y CONDICIONES DE VENTA
-==================================================== */
-:root {
-    --cafe-oscuro: #4b3621;
-    --cafe-suave: #fdf6f0; /* Color crema de la imagen */
-    --texto-color: #3e3e3e;
-    --borde-color: #ede0d4;
-    --acento: #a67c52;
-}
+======================================================================================================== */
+
 
 .terms-container-main {
     max-width: 850px;
@@ -490,15 +481,15 @@ table {
     color: #000;
 }
 .terms-card-box {
-    transition: all 0.3s ease; /* Hace que el cambio sea suave, no brusco */
+    transition: all 0.3s ease;
     cursor: default;
 }
 
 .terms-card-box:hover {
-    transform: translateY(-5px); /* La tarjeta sube 5 píxeles */
-    background-color: #f8eee4;   /* El color crema se vuelve un pelín más oscuro */
-    box-shadow: 0 8px 20px rgba(75, 54, 33, 0.1); /* La sombra crece para dar sensación de altura */
-    border-color: var(--acento); /* El borde cambia al color café de la marca */
+    transform: translateY(-5px);
+    background-color: #f8eee4;
+    box-shadow: 0 8px 20px rgba(75, 54, 33, 0.1);
+    border-color: var(--acento);
 }
 
 /* =========================================================================================================================
@@ -529,31 +520,29 @@ table {
 }
 
 
-
-/* --- Media Query para Tablet (768px o menos) --- */
 @media (max-width: 768px) {
     .input1 {
-        flex-grow: 1; /* En tablets le damos la misma prioridad que a otros elementos */
-        min-width: auto; /* Eliminamos el ancho mínimo para que fluya en el grid */
+        flex-grow: 1;
+        min-width: auto;
     }
     
     
 }
 
-/* --- Media Query para Móvil (480px o menos) --- */
+
 @media (max-width: 480px) {
     .selector1, .input1 {
-        width: 100% !important; /* Forzamos que ocupen toda la línea */
+        width: 100% !important;
         display: block;
-        font-size: 16px; /* Evita el zoom automático en navegadores móviles al hacer foco */
+        font-size: 16px;
         align-items: center;
     }
 
     .input1 {
-        flex-grow: 0; /* Desactivamos el comportamiento flex para que se comporte como bloque */
-        width: 100% !important; /* Forzamos que ocupen toda la línea */
+        flex-grow: 0;
+        width: 100% !important;
         display: block;
-        font-size: 16px; /* Evita el zoom automático en navegadores móviles al hacer foco */
+        font-size: 16px;
         align-items: center;
     }
 }
@@ -578,18 +567,6 @@ table {
 }
 
 
-/*.filter-bar {
-    display:flex; 
-    flex-wrap:nowrap; 
-    align-items:center; 
-    gap:10px; 
-    padding: 15px; 
-    background:#f9f9f9; 
-    border-radius: 8px;
-    max-width: 130rem;
-    margin: 4rem auto;
-
-}*/
 .filters-group {
     display: flex; 
     justify-content: space-between;
@@ -599,14 +576,14 @@ table {
 
 fieldset {
     border: 1px solid rgb(var(--secondary-200));
-    padding: 2rem; /* Reducido de 2.5rem */
+    padding: 2rem;
     margin-bottom: 2rem;
     border-radius: 8px;
 }
 
 legend {
     font-family: var(--fuenteHeading);
-    font-size: 1.8rem; /* Un poco más pequeño para móvil */
+    font-size: 1.8rem;
     color: rgb(var(--primary-600));
     padding: 0 1rem;
     font-weight: 700;
@@ -614,7 +591,7 @@ legend {
 
 @media (max-width: 768px) {
     fieldset {
-        padding: 1.5rem; /* Más compacto en tablets/móvil */
+        padding: 1.5rem;
     }
     legend {
         font-size: 1.6rem;
@@ -672,7 +649,7 @@ form {
 }
 
 .img-logo img {
-    width: 28rem;     /* tamaño real del logo */
+    width: 28rem;
     height: auto;
     max-width: none;
     flex-shrink: 0;
@@ -976,7 +953,7 @@ form {
     color: black;
 }
 
-/* Columna derecha (vacía pero para dar estructura) */
+/* Columna derecha la dejamos vacia para dar estructura) */
 
 /* RESPONSIVE HERO */
 
@@ -1014,7 +991,7 @@ form {
     .hero-container {
         padding: 3rem 2rem;
         height: auto;
-        padding-top: 8rem; /* más espacio bajo el header */
+        padding-top: 8rem;
         padding-bottom: 8rem;
     }
 
@@ -1060,9 +1037,9 @@ form {
 
 
 
-/* ============================
+/* =============================================================================================================================
    FOOTER 
-============================ */
+================================================================================================================================ */
 .footer {
     background: rgb(var(--primary-600));
     color: white;
@@ -1290,12 +1267,12 @@ form {
 
 
 
-/* ==================================================================
+/* ========================================================================================================================
    CARRUSEL BASE con animacion en index.php
-================================================================= */
+=========================================================================================================================== */
 .tag-carousel {
     position: relative;
-    overflow: hidden; /* Oculta el contenido duplicado que no cabe */
+    overflow: hidden;
     width: 100%;
     padding: 3rem 0;
 }
@@ -1304,8 +1281,8 @@ form {
     display: flex;
     gap: 2rem;
     width: max-content; 
-    animation: scroll 35s linear infinite; /* Aplicar animación: 35s, lineal, infinito */
-    transition: none; /* Desactivar transiciones que interfieren con la animación */
+    animation: scroll 35s linear infinite;
+    transition: none;
 }
 
 /* Definición de la animación de desplazamiento */
@@ -1314,9 +1291,6 @@ form {
     /* Mueve el 50% de la longitud total, que es la longitud original del contenido */
     100% { transform: translateX(-50%); }
 }
-
-/* Ya no es necesario ocultar scrollbar en tag-carousel si overflow es hidden */
-
 
 /*    TARJETAS del carrusel */
 .tag-card {
@@ -1329,7 +1303,7 @@ form {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    background-image: var(--bg);    /* usa la variable definida en el HTML */
+    background-image: var(--bg);/* usamos la variable definida en el HTML */
     background-size: cover;
     background-position: center;
     box-shadow: 0 8px 18px rgba(0,0,0,0.15);
@@ -1428,7 +1402,7 @@ form {
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     position: relative;
     transition: .2s ease;
-    height: 100%; /* CLAVE */;
+    height: 100%;
     
 }
 
@@ -1525,23 +1499,23 @@ form {
    ESTILOS ESPECÍFICOS DE CONTACTO en contacto.php
 ===================================================================================================================== */
 
-/* --- 2. Estructura Flex (Formulario + Información) --- */
+/* --- Estructura Flex (Formulario + Información) --- */
 
 .contacto-flex {
     display: flex;
     gap: 4rem;
     align-items:flex-start;
-    max-width: 120rem; /* Limite el ancho si es necesario, o usa .container */
+    max-width: 120rem;
     margin: 0 auto;
     align-items: flex-start;
     padding-top: 6rem;
-padding-bottom: 6rem;
+    padding-bottom: 6rem;
 }
 
 .formulario {
     flex: 2;
     padding: 2.5rem;
-    background-color: rgb(var(--primary-50)); /* Fondo muy claro (casi blanco) */
+    background-color: rgb(var(--primary-50));
     border-radius: 12px;
     box-shadow: 0 8px 15px rgba(var(--black), 0.08);
 }
@@ -1549,7 +1523,7 @@ padding-bottom: 6rem;
 .info-adicional {
     flex: 1;
     padding: 3rem;
-    background-color: rgb(var(--secondary-100)); /* Tono Tierra claro */
+    background-color: rgb(var(--secondary-100));
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(var(--black), 0.05);
 }
@@ -1570,7 +1544,7 @@ padding-bottom: 6rem;
 }
 
 .info-adicional a {
-    color: rgb(var(--secondary-700)); /* Tono de café o caramelo para enlaces */
+    color: rgb(var(--secondary-700));
     text-decoration: none;
     font-weight: 700;
     transition: color 0.3s ease;
@@ -1580,12 +1554,12 @@ padding-bottom: 6rem;
     color: rgb(var(--secondary-900));
 }
 
-/* CTA de FAQ (Botón destacado) */
+
 .cta-faq a {
     display: block;
     margin-top: 3rem;
     padding: 1.5rem;
-    background-color: rgb(var(--primary-500)); /* Color de acento oscuro */
+    background-color: rgb(var(--primary-500));
     color: white;
     text-align: center;
     border-radius: 8px;
@@ -1602,7 +1576,7 @@ padding-bottom: 6rem;
 #campo-pedido {
     margin-top: 1.5rem;
     padding: 1.5rem;
-    background-color: rgba(var(--secondary-200), 0.5); /* Color de tierra semitransparente */
+    background-color: rgba(var(--secondary-200), 0.5);
     border-radius: 8px;
 }
 
@@ -1627,7 +1601,7 @@ padding-bottom: 6rem;
 
 
 
-/* --- 4. Estilos de Mensajes de Estado (Alertas PHP) --- */
+/* --- Estilos de Mensajes de Estado (Alertas PHP) --- */
 
 .alerta {
     padding: 1.8rem;
@@ -1660,22 +1634,19 @@ padding-bottom: 6rem;
 }
 
 
-/* --- 5. Media Queries (Responsividad) --- */
+/* ---- Media Queries (Responsividad) --- */
 
 @media (max-width: 900px) {
-    /* En Tablet, aún podemos mantener algo de la estructura flex */
     .contacto-flex {
-        flex-direction: column; /* Apila el formulario y la información en móviles */
+        flex-direction: column;
         align-items: center;
         gap: 3rem;
-        /* Permitimos que la info adicional quede a la derecha si hay espacio */
         margin: 5rem;
     }
 }
 
 @media (max-width: 768px) {
     .contacto-flex {
-        
         gap: 4rem;
         margin: 2.5rem;
     }
@@ -1721,41 +1692,31 @@ padding-bottom: 6rem;
         CLASES ESPECIFICAS DE LA PAGINA nosotros.php
    =============================================================================================================================== */
 .hero-ritual-right {
-    /* Mantenemos tus propiedades de Flexbox para centrar el bloque en sí */
     display: flex;
     flex-direction: column;
     align-items: center; 
     text-align: center;
-    /* ... otras propiedades ... */
 }
 
-/* CENTRAR EL TÍTULO h3 */
 .hero-ritual-right .ritual-titulo-centrado {
-    text-align: center; /* ¡Aseguramos que el texto esté centrado! */
+    text-align: center;
     color: #333333;
     margin-bottom: 3rem;
 }
 
-/* DISPOSICIÓN DE LOS 3 DIVS EN FILA (USANDO GRID) */
 .ritual-puntos-hero {
-    /* === MODIFICACIÓN CLAVE: USAR GRID PARA 3 COLUMNAS === */
     display: flex; 
-    grid-template-columns: repeat(3, 1fr); /* Crea 3 columnas de igual ancho */
-    gap: 2rem; /* Espacio entre los divs */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
     padding: 5rem;
-    /* El contenedor ahora debe ocupar el ancho completo disponible */
     width: 100%; 
 }
 
-/* Estilo de los divs individuales (las "celdas" de la tabla) */
 .ritual-item-hero {
-    /* Mantenemos tus estilos de caja (fondo, padding, borde) */
     background: rgb(var(--secondary-100));
     padding: 2rem;
     border-radius: 10px;
     border-left: 4px solid #7D4F23; 
-    
-    /* Centramos el texto dentro de cada div */
     text-align: center; 
 }
 
@@ -1766,10 +1727,10 @@ padding-bottom: 6rem;
     width: auto;
     padding: 5rem;
     }
+
     .ritual-item-hero {
     background:rgb(var(--secondary-100));
     border: none;
-
     text-align: center;
     }
 }
@@ -1818,29 +1779,29 @@ padding-bottom: 6rem;
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Alinea todo al principio (arriba) */
-    align-self: flex-start;      /* Asegura que el bloque empiece arriba */
+    justify-content: flex-start;
+    align-self: flex-start;
     padding-top: 0;
 }
 .cart-product-name {
-    font-size: 2.2rem !important; /* Mantenemos el título grande */
+    font-size: 2.2rem !important;
     font-weight: 700;
     margin-bottom: 5px !important; 
     line-height: 1.1;
 }
-/* Envase: 1kg, Molido espresso... */
+
 .variant-tag {
     display: block;
-    font-size: 1.5rem !important; /* Texto bastante más grande */
-    color: #333; /* Un poco más oscuro para que se lea mejor */
-    margin-bottom: 8px !important; /* Separa el Envase de la Molienda */
+    font-size: 1.5rem !important;
+    color: #333;
+    margin-bottom: 8px !important;
     font-weight: 400;
-    line-height: 1.4; /* Da aire entre las líneas de texto */
+    line-height: 1.4;
 }
 .cart-sku {
     font-size: 1.2rem !important;
     color: #999;
-    margin-bottom: 5px !important; /* Este margen crea el hueco antes del envase */
+    margin-bottom: 5px !important;
     display: block;
     text-transform: uppercase;
 }
@@ -1876,7 +1837,7 @@ padding-bottom: 6rem;
 }
 .cart-total-line {
     font-weight: 800;
-    font-size: 1.8rem !important; /* Precio más visible */
+    font-size: 1.8rem !important;
     color: #1A1A1A;
     min-width: 100px;
     text-align: right;
@@ -2001,27 +1962,17 @@ padding-bottom: 6rem;
     margin: 1.5rem 0;
 }
 
-
-
-
-
-
-
 .detail-image-container img {
     max-width: 100%;
     height: auto;
-    /* Sombra suave debajo de la bolsa */
     filter: drop-shadow(0px 20px 30px rgba(0,0,0,0.15)); 
 }
 .big-product-title {
     font-family: 'Playfair Display', serif;
     font-size: 4rem;
-    color: #1A1A1A; /* Casi negro */
+    color: #1A1A1A;
     margin-top: 1rem;
    }
-
-
-
 
 .star-icon { color: #C7A17A; font-size: 1.2rem; } 
 .star-icon-half { color: #C7A17A; font-size: 1.2rem; }
@@ -2031,35 +1982,16 @@ padding-bottom: 6rem;
     margin-left: 5px;
 }
 
-
-
-/* --- SELECTORES TIPO BOTÓN --- */
-
-
-/* lo dejamos por si acaso usarlo mas adelante*/
-/*.selector-group { 
-}*/
-
-
-/* lo guardamos por si acaso pero no lo usamos*/
-/*.selector-label {
-    font-size: 1.5rem !important; 
-    font-weight: 700 !important;
-    margin-bottom: 0.4rem !important; 
-    margin-top: 1.2rem !important;
-}
-*/
-
 .option-buttons {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
 }
-/* Ocultamos el radio button real */
+
 .option-radio {
     display: none;
 }
-/* Estilo del label que parece botón */
+
 .option-label {
     font-family: var(--fuenteTexto);
     padding: 10px 15px;
@@ -2093,18 +2025,6 @@ padding-bottom: 6rem;
     background-color: #00cf56; 
     border-radius: 50%;
 }
-
-/* Selector Dropdown Normal (Tueste) */
-/*.form-select {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid #DDD;
-    border-radius: 8px;
-    background-color: transparent;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 1rem;
-    cursor: pointer;
-}*/
 
 /* --- Fila de Acciones (Cantidad + Botón) --- */
 .card-actions-row {
@@ -2152,14 +2072,14 @@ padding-bottom: 6rem;
 /* Responsividad */
 @media (max-width: 900px) {
     .product-detail-layout {
-        grid-template-columns: 1fr; /* Una columna en móviles */
+        grid-template-columns: 1fr;
         gap: 3rem;
     }
     .detail-image-container img {
-        max-width: 60%; /* Imagen más pequeña en móvil */
+        max-width: 60%;
     }
     .big-product-title {
-        font-size: 2.5rem; /* Título más pequeño */
+        font-size: 2.5rem;
     }
     .card-actions-row {
         max-width: 420px;
@@ -2201,8 +2121,8 @@ padding-bottom: 6rem;
 .modal-content {
     background: white;
     width: 90%;
-    max-width: 60rem; /* Ancho similar a la imagen */
-    max-height: 80vh; /* Altura máxima */
+    max-width: 60rem;
+    max-height: 80vh;
     padding: 3rem;
     border-radius: 0.8rem;
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
@@ -2247,9 +2167,9 @@ padding-bottom: 6rem;
 
 
 
-/* =======================================
+/* ===============================================================================================================
    CHECKOUT
-======================================= */
+===================================================================================================================== */
 .checkout-form-section {
     margin-bottom: 3rem;
 }
@@ -2265,7 +2185,7 @@ padding-bottom: 6rem;
 }
 .checkout-login-link {
     font-size: 1.4rem;
-    color: #00BFA5; /* Tu color verde */
+    color: #00BFA5;
     text-decoration: none;
     font-family: var(--fuenteTexto);
 }
@@ -2333,9 +2253,9 @@ padding-bottom: 6rem;
     color: #555;
 }
 
-/* =======================================
+/* ===============================================================================================================================
    ENLACES LEGALES (CHECKOUT FOOTER)
-======================================= */
+=================================================================================================================================== */
 .checkout-legal-links {
     margin-top: 4rem;
     padding-bottom: 2rem;
@@ -2363,9 +2283,9 @@ padding-bottom: 6rem;
     font-weight: bold;
 }
 
-/* =======================================
-   MODAL (POP-UP)
-======================================= */
+/* =============================================================================================================
+   MODAL (POP-UP) Ver cesta o seguir comprando
+=============================================================================================================== */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -2390,13 +2310,13 @@ padding-bottom: 6rem;
 .modal-content {
     background: white;
     width: 90%;
-    max-width: 600px; /* Ancho similar a la imagen */
-    max-height: 80vh; /* Altura máxima */
+    max-width: 600px;
+    max-height: 80vh;
     padding: 3rem;
     border-radius: 8px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     position: relative;
-    overflow-y: auto; /* Scroll si el texto es largo */
+    overflow-y: auto;
     font-family: var(--fuenteTexto);
 }
 
@@ -2463,13 +2383,13 @@ padding-bottom: 6rem;
 
 /* Estilos comunes para las tarjetas beige */
 .success-card {
-    background-color: rgb(var(--secondary-100)); /* Color crema de la imagen */
+    background-color: rgb(var(--secondary-100));
     border-radius: 12px;
     padding: 4rem;
 }
 
 /* --- TARJETA IZQUIERDA (Detalles) --- */
-/* Grid interno de la tarjeta izquierda para poner Info y Pago lado a lado */
+
 .details-grid {
     display: grid;
     grid-template-columns: 1fr 1fr; /* Dos columnas internas */
@@ -2532,10 +2452,10 @@ padding-bottom: 6rem;
 /* Responsivo para móviles */
 @media (max-width: 900px) {
     .success-layout {
-        grid-template-columns: 1fr; /* Una sola columna */
+        grid-template-columns: 1fr;
     }
     .details-grid {
-        grid-template-columns: 1fr; /* Una sola columna interna */
+        grid-template-columns: 1fr;
         gap: 2rem;
     }
     .success-card {
@@ -2550,97 +2470,27 @@ padding-bottom: 6rem;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* =======================================
-    LOGIN: ESTILOS ESPECÍFICOS
+    ESTILOS ESPECÍFICOS PAGINA LOGIN
 ======================================= */
 
 /* --- Columna Derecha: Centrado y Estilos Generales --- */
 
 .hero-right {
-    /* Ajusta el flexbox para centrar el contenido vertical y horizontalmente */
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 2rem; /* Espacio de seguridad */
+    padding: 2rem;
 }
 
 /* --- La Caja del Formulario (El Panel Transparente) --- */
 .login-box {
-    /* Usamos un color base muy claro con opacidad para el fondo */
     background-color: rgb(var(--secondary-100)); 
-    /* Efecto "Glassmorphism" (Añadimos el prefijo -webkit- para máxima compatibilidad) */
-    /* Esquinas redondeadas grandes */
     border-radius: 20px;
-    
-    /* Sombra muy sutil */
     box-shadow: 0 10px 30px rgba(var(--black), 0.15); 
-    
-    /* Espacio interno */
     padding: 2rem;
-    
-    /* Ancho máximo para que no ocupe toda la mitad derecha */
     max-width: 36rem;
     width: 100%;
-    
-    /* Color de texto por defecto dentro de la caja */
     color: rgb(var(--primary-900)); 
 }
 
@@ -2653,11 +2503,8 @@ padding-bottom: 6rem;
 
 .input-group {
     margin-bottom: 1rem;
-    position: relative; /* Necesario para posicionar la etiqueta pequeña */
+    position: relative;
 }
-
-
-
 
 .input1:focus {
     border-color: rgb(var(--primary-500));
@@ -2668,28 +2515,22 @@ padding-bottom: 6rem;
 /* --- Campo de Contraseña y Toggle --- */
 .password-field {
     position: relative;
-    
 }
 
 .toggle-password {
     /* Posicionamiento */
-   position: absolute;
+    position: absolute;
     right: 0rem; 
     top: 72%; 
     transform: translateY(-50%);
-    
-    /* CRÍTICO: Centrado con Flexbox */
     display: flex;
-    align-items: center; /* Centrado vertical */
-    justify-content: center; /* Centrado horizontal (opcional, pero buena práctica) */
-
-    /* Estilos base */
+    align-items: center;
+    justify-content: center;
     background: none;
     border: none;
     cursor: pointer;
     padding: 0;
     z-index: 10;
-    /* Asegúrate de que no tenga transform */
 }
 
 
@@ -2706,7 +2547,6 @@ padding-bottom: 6rem;
 
 /* --- Enlaces y Botones --- */
 
-/* Enlace "¿Olvidaste la Contraseña?" */
 .forgot-link {
     text-align: right;
     margin-bottom: 3rem;
@@ -2720,7 +2560,6 @@ padding-bottom: 6rem;
     color: rgb(var(--secondary-900));
     font-weight: bold;
 }
-
 
 .arrow-icon {
     margin-left: 1rem;
@@ -2748,7 +2587,6 @@ padding-bottom: 6rem;
 
 /* --- Mensajes de Alerta --- */
 .alert.error {
-    /* Aquí puedes usar un color secundario de tu paleta si quieres */
     background-color: rgba(var(--secondary-100), 0.8); 
     color: rgb(var(--secondary-800));
     border: 1px solid rgb(var(--secondary-400));
@@ -2766,30 +2604,31 @@ padding-bottom: 6rem;
     min-width: 20px;
     color: rgb(var(--secondary-900));
 }
+
+
+
+
+
+
+
 /* =========================================
    NUEVO HERO SIMPLE: SOLUCIÓN AL CONFLICTO DEL HEADER
    ========================================= */
 
 .header-hero-simple {
-    /* Propiedades de posicionamiento para la imagen de fondo */
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-     
-    /* CRÍTICO: Contexto de posicionamiento para la capa ::before */
     position: relative; 
-    overflow: hidden; /* Asegura que la capa ::before no se desborde */
+    overflow: hidden;
 }
 
 /* Aplicar la imagen de fondo solo a la clase específica */
 .header-hero-simple.bg-nosotros {
-    /* **¡AÑADIMOS LA ALTURA AQUÍ PARA QUE SOLO AFECTE A ESTA PÁGINA!** */
-    height: 65rem; 
-    /* El background-image de la imagen de café sigue aquí */
-    
+    height: 65rem;     
 }
 
-/* 1. Capa Blanca Semitransparente (::before) */
+/* Capa Blanca Semitransparente (::before) */
 .header-hero-simple.bg-nosotros::before {
     content: ''; 
     position: absolute; 
@@ -2799,14 +2638,13 @@ padding-bottom: 6rem;
     opacity: 0.4; 
 }
 
-/* 2. Estilos para el texto centrado */
+/* Estilos para el texto centrado */
 .header-hero-simple .hero-texto-centrado {
     position: relative; 
     z-index: 3;
-
-    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco casi opaco */
-    padding: 3rem; /* Espacio interno */
-    border-radius: 10px; /* Bordes redondeados */
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 3rem;
+    border-radius: 10px;
     max-width: 80rem;
     display: flex; 
     flex-direction: column;
@@ -2818,22 +2656,22 @@ padding-bottom: 6rem;
 
 .header-hero-simple p {
     font-size: 2rem;
-    color: #111111; /* Texto oscuro */
-    max-width: 60rem; /* Limita el ancho del párrafo */
+    color: #111111;
+    max-width: 60rem;
 }
 
-/* =======================================
+
+
+/* ============================================================================================================================
    FONDO SOSTENIBILIDAD (Nuevo)
-======================================= */
+============================================================================================================================== */
 
 /* 1. Imagen de fondo */
 .header-hero-simple.bg-sostenibilidad {
     background-image: url('../img/hero-sostenibilidad.png'); 
-    height: 65rem; /* Misma altura que nosotros.php */
 }
 
 /* 2. Capa semitransparente (Overlay) para que se lea el texto */
-/* Reutilizamos la lógica de .bg-nosotros */
 .header-hero-simple.bg-sostenibilidad::before {
     content: ''; 
     position: absolute; 
@@ -2843,9 +2681,9 @@ padding-bottom: 6rem;
     opacity: 0.3; 
 }
 
-/* =======================================
-   FONDO PROCESS / ELABORACIÓN
-======================================= */
+/* ============================================================================================================================
+   FONDO ELABORACIÓN
+============================================================================================================================== */
 
 .header-hero-simple.bg-elaboracion {
     background-image: url('../img/tarjeta2.jpg'); 
@@ -2861,48 +2699,47 @@ padding-bottom: 6rem;
     background-color: rgba(0, 0, 0, 0.3); 
 }
 
-/* =======================================
+/* ==============================================================================================================================
    FONDO INFORMACIÓN / AYUDA
-======================================= */
+======================================= =========================================================================================*/
 
 .header-hero-simple.bg-info {
-    /* Imagen sugerida: Paquete de café, manos entregando caja o textura limpia */
     background-image: url('../img/hero-info.png'); 
     height: 60rem;
 }
 
-/* =========================================
-   ESTILOS DE LA LLAMADA A LA ACCIÓN (CTA)
-   ========================================= */
+/* ============================================================================================================================
+   ESTILOS DE LA LLAMADA A LA ACCIÓN
+   =============================================================================================================================== */
 
 .llamada-a-la-accion {
     /* 1. Posicionamiento y Centrado */
-    display: flex; /* Usamos flexbox para centrar el contenido interno */
+    display: flex;
     flex-direction: column; 
-    align-items: center; /* Centrado horizontal del texto y botón */
+    align-items: center;
     text-align: center;
-    margin: 5rem auto; /* Margen superior/inferior para separarlo de otros elementos */
+    margin: 5rem auto;
     
     /* 2. Estilo de Caja */
-    background-color: #FFFFFF; /* Fondo blanco sólido para que destaque */
-    padding: 4rem 2rem; /* Más padding vertical y horizontal */
+    background-color: #FFFFFF;
+    padding: 4rem 2rem;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Sombra suave para darle profundidad */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     
     /* 3. Limitar Ancho */
-    max-width: 80rem; /* Limita el ancho para que no ocupe toda la pantalla */
+    max-width: 80rem;
 }
 
 .llamada-a-la-accion p {
     font-size: 2.2rem;
-    font-weight: 500; /* Lo hacemos seminegrita para que se lea bien */
+    font-weight: 500;
     color: #333333;
-    margin-bottom: 2rem; /* Espacio antes del botón */
+    margin-bottom: 2rem;
 }
 
-/* 4. Estilo del Botón (Ajustar según tu clase 'boton-primario' o 'boton') */
+/* 4. Estilo del Botón */
 .llamada-a-la-accion .boton-primario {
-    background-color: #7D4F23; /* Color de acento de café */
+    background-color: #7D4F23;
     color: #FFFFFF;
     text-transform: uppercase;
     padding: 1.5rem 3rem;
@@ -2913,7 +2750,7 @@ padding-bottom: 6rem;
 }
 
 .llamada-a-la-accion .boton-primario:hover {
-    background-color: #A36B3B; /* Color más claro al pasar el ratón */
+    background-color: #A36B3B;
 }
 
 
@@ -2922,9 +2759,9 @@ padding-bottom: 6rem;
 
 
 
-/* =======================================
+/* ===============================================================================================================================
    PERFIL DE USUARIO
-======================================= */
+================================================================================================================================ */
 .profile-container {
     margin-top: 4rem;
     margin-bottom: 6rem;
@@ -2954,7 +2791,7 @@ padding-bottom: 6rem;
 
 /* Sidebar (Menú lateral) */
 .profile-sidebar {
-    background: rgb(var(--secondary-100)); /* Beige claro */
+    background: rgb(var(--secondary-100));
     padding: 2rem;
     border-radius: 12px;
     position: sticky;
@@ -3001,26 +2838,22 @@ padding-bottom: 6rem;
 
 /* Contenido Principal */
 .profile-content {
-    flex: 1;           /* Ocupa todo el espacio restante */
-    min-width: 0;      /* IMPORTANTE: Permite que el contenido se encoja sin desbordar */
+    flex: 1;
+    min-width: 0;
     background: #fff;
     padding: 25px;
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
 
-
-
 .profile-content-section {
     width: 100%;
-    display: none; /* Por defecto ocultas */
+    display: none;
 }
 
 .profile-content-section.active {
-    display: block; /* Solo la activa se muestra */
+    display: block;
 }
-
-
 
 .section-title {
     font-family: var(--fuenteHeading);
@@ -3123,105 +2956,92 @@ padding-bottom: 6rem;
 
 
 
-
-
-
-
-
-
-
-
-
 /* --- TARJETA DE PRODUCTO: DISEÑO FULL IMAGEN --- */
 
 /* 1. Ajuste de la Tarjeta Base */
 .product-card {
-    /* Quitamos el height fijo de 50rem para que la tarjeta crezca según la imagen */
     height: auto; 
-    min-height: 52rem; /* Altura mínima para mantener uniformidad */
-    padding: 2.5rem;   /* Mantenemos el padding para el texto */
-    position: relative; /* Necesario para posicionar el corazón */
-    overflow: hidden;  /* Para que nada se salga de los bordes redondeados */
+    min-height: 52rem;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
 }
 
-/* 2. Contenedor de la Imagen (Efecto "A sangre") */
+/* 2. Contenedor de la Imagen */
 .product-image {
-    /* MÁRGENES NEGATIVOS: Esto anula el padding de la tarjeta */
     margin-top: -2.5rem;
     margin-left: -2.5rem;
     margin-right: -2.5rem;
-    margin-bottom: 2rem; /* Espacio entre foto y estrellas */
-
-    /* Importante para el enlace */
+    margin-bottom: 2rem;
     display: block;
-    width: calc(100% + 5rem); /* Aseguramos que cubra el ancho + padding */
+    width: calc(100% + 5rem);
 }
 
-/* 3. La Imagen en sí (Más grande) */
+/* 3. La Imagen */
 .product-image img {
     width: 100%;
     height: 330px;      
     display: block;
-    transition: transform 0.5s ease; /* Efecto suave al pasar el ratón */
+    transition: transform 0.5s ease;
 }
 
 /* Efecto Zoom al pasar el ratón por la tarjeta */
 .product-card:hover .product-image img {
-    transform: scale(1.05); /* La imagen crece un poquito */
+    transform: scale(1.05);
 }
 
-/* 4. El Corazón (Fusionado) */
+/* 4. Corazon de lista de deseos */
 .fav-btn {
     position: absolute;
     top: 1.5rem;
     right: 1.5rem;
-    z-index: 10;        /* FLOTA SOBRE LA IMAGEN */
+    z-index: 10;
     
-    background: rgba(255, 255, 255, 0.9); /* Fondo blanco casi opaco */
+    background: rgba(255, 255, 255, 0.9);
     width: 40px;
     height: 40px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Sombra suave para destacar */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     border: none;
     cursor: pointer;
     transition: 0.3s;
 }
 
 .fav-btn img {
-    width: 20px; /* Ajusta el tamaño del icono dentro del círculo */
+    width: 20px;
     height: auto;
 }
 
 .fav-btn:hover {
     background: white;
-    transform: scale(1.1); /* Efecto pop al pasar el ratón sobre el corazón */
+    transform: scale(1.1);
 }
 
-/* =======================================
+/* ================================================================================================================================
    PAGINACIÓN (NUEVOS ESTILOS)
-======================================= */
+=================================================================================================================================== */
 
 /* 1. Contenedor principal que usa Flexbox para distribuir IZQUIERDA vs DERECHA */
 .pagination-flex {
     display: flex;
-    justify-content: space-between; /* Clave para poner Anterior a la izquierda y los números/Siguiente a la derecha */
+    justify-content: space-between; 
     align-items: center;
-    width: 90%; /* Ajusta esto al ancho de tu contenedor principal de contenido */
+    width: 90%; 
     max-width: 1300px;
     padding: 0; 
 }
 
-/* 2. Contenedor de la derecha (para agrupar los números y Siguiente) */
+/* 2. Contenedor de la derecha */
 .pagination-right {
     display: flex;
     align-items: center;
-    gap: 10px; /* Espacio entre los números [1], [2] y el botón [Siguiente >] */
+    gap: 10px;
 }
 
-/* 3. Estilo base de los botones (Números y Navegación) */
+/* 3. Estilo base de los botones */
 .pagination .page-btn {
     display: inline-flex;
     align-items: center; 
@@ -3229,16 +3049,16 @@ padding-bottom: 6rem;
     padding: 10px 18px;
     border: 1px solid #ccc; 
     border-radius: 40px;
-    margin: 0; /* Aseguramos que no hay márgenes extra */
+    margin: 0;
     color: rgb(var(--primary-700));
     font-size: 1.6rem;
     transition: background-color 0.2s, color 0.2s;
     font-weight: 500;
 }
 
-/* 4. Estilo de la página activa (el número donde estamos) */
+/* 4. Estilo de la página activa */
 .pagination .page-btn.active {
-    background-color: rgb(var(--primary-900)); /* Fondo lleno para destacar */
+    background-color: rgb(var(--primary-900));
     color: white;
     border-color: rgb(var(--primary-900));
     font-weight: 700;
@@ -3250,7 +3070,7 @@ padding-bottom: 6rem;
     border-color: rgba(var(--primary-900), 0.3);
 }
 
-/* 6. Estilo específico para los botones de navegación (Anterior/Siguiente) si quieres diferenciarlos visualmente */
+/* 6. Estilo específico para los botones de navegación */
 .pagination .page-btn.page-nav {
     border-color: rgb(var(--primary-400));
     font-weight: 600;
@@ -3374,19 +3194,6 @@ padding-bottom: 6rem;
     background-color: #f9f9f9;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 .modal {
     display:none; 
     position:fixed; 
@@ -3444,8 +3251,6 @@ padding-bottom: 6rem;
 
 .filter-bar {
     display: grid;
-    /* "auto-fit" llena el ancho. "minmax(200px, 1fr)" dice: 
-       mínimo 200px por input, si hay espacio sobra, estírate (1fr) */
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1.5rem;
     padding: 2rem;
@@ -3457,13 +3262,12 @@ padding-bottom: 6rem;
 
 @media (max-width: 768px) {
     .filter-bar {
-        grid-template-columns: 1fr 1fr; /* 2 columnas en tablets */
+        grid-template-columns: 1fr 1fr;
     }
 }
 
 @media (max-width: 480px) {
     .filter-bar {
-        
         padding: 1.5rem;
         margin: 1rem auto;
     }
@@ -3471,7 +3275,6 @@ padding-bottom: 6rem;
 
 
 @media (max-width: 768px) {
-    /* Escondemos el encabezado de la tabla */
     .orders-table thead {
         display: none;
     }
@@ -3504,9 +3307,9 @@ padding-bottom: 6rem;
         justify-content: space-between;
     }
 
-    /* Creamos etiquetas usando el atributo data-label (opcional) o simple orden */
+    /* Uso de etiquetas con el data-label */
     .orders-table td::before {
-        content: attr(data-label); /* Si añades data-label en el PHP */
+        content: attr(data-label);
         position: absolute;
         left: 10px;
         width: 45%;
@@ -3535,7 +3338,7 @@ td img {
     border-radius: 4px;
 }
 
-/* Ajuste para que en móvil la imagen no sea gigante */
+/* Ajuste de la imagen en movil */
 @media (max-width: 768px) {
     .orders-table td[data-label="Imagen"] {
         justify-content: center;
@@ -3556,18 +3359,18 @@ td img {
     margin: 0 auto;
 }
 
-/* =======================================
+/* ================================================================================================================================
    MODAL DE BÚSQUEDA (SEARCH POP-UP) 
-======================================= */
+================================================================================================================================= */
 .search-modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8); /* Fondo oscuro */
-    z-index: 2000; /* Por encima del header */
-    display: none; /* Oculto por defecto */
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 2000;
+    display: none;
     justify-content: center;
     align-items: flex-start;
     padding-top: 5rem;
@@ -3659,7 +3462,7 @@ td img {
 @media (max-width: 768px) {
     .search-modal-overlay {
         padding-top: 0;
-        background: white; /* En móvil fondo blanco total */
+        background: white;
     }
     
     .search-modal-content {
@@ -3676,17 +3479,30 @@ td img {
         flex: 1;
     }
 }
-/* Contenedor que flota en la esquina de la pantalla */
+
+
+
+
+
+
+
+/* ===========================================================================================================================
+
+Contenedor que flota en la esquina de la pantalla 
+
+================================================================================================================================*/
+
+
 #ai-chat-container {
     position: fixed;
     bottom: 20px;
     right: 20px; 
     z-index: 9999;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: var(--fuenteTexto)
     
 }
 
-/* Caja del chat (la que se abre) */
+/* Caja del chat */
 .chat-content {
     display: none;
     width: 380px; 
@@ -3698,13 +3514,13 @@ td img {
     border: 1px solid #ddd;
 }
 
-/* Encabezado */
+/* Encabezado de la caja */
 .chat-header {
     background: #6F4E37;
     color: white;
     padding: 15px;
     font-weight: bold;
-    font-size: 18px; /* Título grande */
+    font-size: 18px;
 }
 
 /* Ventana de conversación */
@@ -3713,7 +3529,7 @@ td img {
     background: #f9f9f9;
     padding: 20px;
     overflow-y: auto;
-    font-size: 16px; /* Texto de mensajes grande */
+    font-size: 16px;
     line-height: 1.6;
 }
 
@@ -3784,25 +3600,25 @@ td img {
     flex-direction: column;
     align-items: flex-end;
 }
-/* --- CONFIGURACIÓN PARA MÓVILES (Pantallas de menos de 480px) --- */
+
 @media screen and (max-width: 480px) {
     #ai-chat-container {
         width: auto;
         right: 5%;
     }
     .chat-content {
-    width: 85vw; /* El ancho ahora lo define la caja, no el contenedor */
-    max-width: 350px; /* Para que no sea enorme */
+    width: 85vw;
+    max-width: 350px;
     }
 
     .chat-toggle-button {
-        width: 35px;     /* Botón un poco más pequeño en móvil */
+        width: 35px;
         height: 35px;
     }
 
     .chat-window {
-        height: 250px;   /* Ventana más corta para que quepa el teclado */
-        font-size: 14px; /* Letra un poco más pequeña */
+        height: 250px;
+        font-size: 14px;
     }
 
     .chat-header {
@@ -3811,7 +3627,7 @@ td img {
     }
 }
 
-/* --- CONFIGURACIÓN PARA TABLETS (Pantallas entre 481px y 768px) --- */
+
 @media screen and (min-width: 481px) and (max-width: 768px) {
     #ai-chat-container {
         width: auto;  
@@ -3823,7 +3639,6 @@ td img {
     }
 }
 
-/* --- CONFIGURACIÓN PARA PC (Pantallas de más de 769px) --- */
 @media screen and (min-width: 769px) {
     .chat-content {
         width: 380px;
