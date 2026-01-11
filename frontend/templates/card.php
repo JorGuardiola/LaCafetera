@@ -35,12 +35,7 @@
             </p>
     </div>
 
-
     <a href="<?= BASE_URL ?>/frontend/product.php?id=<?= (int)$p['id'] ?>" class="product-action">
         <button class="boton1-btn">Ver detalles</button>
     </a>
-
-    
-
-
 </div>
