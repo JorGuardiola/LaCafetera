@@ -9,7 +9,7 @@ Incluye gestión de usuarios, catálogo de productos con variantes, carrito de c
     * Registro y Login de usuarios.
     * Catálogo con filtros (origen, tueste, molienda).
     * Carrito de compras (guardado en sesión).
-    * Checkout con simulación de pago (Tarjeta, Bizum, PayPal).
+    * Checkout con simulación de pago (Tarjeta, Bizum, PayPal, GPay).
     * Perfil de usuario con historial de pedidos.
     * Buscador de productos en tiempo real (AJAX).
 * **Administración:**
