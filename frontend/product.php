@@ -25,6 +25,7 @@ $stmtVar = $pdo->prepare("SELECT sku, precio, stock, molienda, tueste, envase FR
 $stmtVar->execute([$id]);
 $variantes = $stmtVar->fetchAll(PDO::FETCH_ASSOC);
 $variantesJson = json_encode($variantes);
+
 // 4. Calcular total de items en el carrito 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -62,7 +63,7 @@ if (isset($_SESSION['carrito']) && is_array($_SESSION['carrito'])) {
                             <i class="fa-solid fa-star star-icon"></i>
                             <i class="fa-solid fa-star star-icon"></i>
                             <i class="fa-solid fa-star-half-stroke star-icon-half"></i>
-                            <a href="#" class="reviews-link">45 valoraciones</a>
+                            <a href="#" class="reviews-link">45 valoraciones</a> 
                         </div>
                         <h3 class="card-title"><?= htmlspecialchars($producto['nombre_cafe']) ?></h3>
                         <span class="card-origin"><?= htmlspecialchars($producto['region']) ?></span>

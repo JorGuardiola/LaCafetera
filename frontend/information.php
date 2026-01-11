@@ -11,10 +11,10 @@ include __DIR__ . '/templates/header.php';
 ?>
 
 <style>
-    /* Iconos de confianza: Azul Petróleo (Primary-500 aprox) */
+    /* Iconos Azul */
     .icon-info {
         font-size: 4rem;
-        color: #22364A; /* Tu color corporativo oscuro */
+        color: #22364A; 
         margin-bottom: 2rem;
         display: block;
     }
@@ -108,7 +108,7 @@ include __DIR__ . '/templates/header.php';
     
     <div style="text-align: center; margin-bottom: 6rem;">
         <p style="font-size: 1.6rem; margin-bottom: 2rem;">¿Tienes más dudas?</p>
-        <a href="contacto.php" class="boton-negro">Ir a Contacto</a>
+        <a href="contacto.php" class="boton-negro"><strong>Ir a Contacto</strong></a>
     </div>
 
 </main>

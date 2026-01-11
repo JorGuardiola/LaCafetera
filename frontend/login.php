@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // 4. Login Exitoso: Iniciar sesión y Redirigir
                     $_SESSION['user_id']  = $user['id_usuario']; 
                     $_SESSION['email']    = $user['email'];
-                    $_SESSION['rol']      = $user['rol'];   // 👈 ESTA ES LA CLAVE
+                    $_SESSION['rol']      = $user['rol'];  
                     $_SESSION['logged_in'] = true;
                     
                     // === REDIRECCIÓN FINAL  ===
@@ -60,16 +60,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
             } else {
                 // 5. Email NO encontrado en la base de datos
-                // Puedes usar un mensaje genérico o el que solicitaste para orientar:
+                // Mensaje para orientar:
                 $error_message = "Email no registrado, por favor regístrate.";
-                // O el más seguro y genérico: $error_message = "Email o contraseña incorrectos.";
             }
-            // --- FIN DEL CAMBIO DE LÓGICA DE VERIFICACIÓN ---
 
         } catch (PDOException $e) {
             // Error de consulta o base de datos
             $error_message = "Ocurrió un error en el servidor. Inténtelo de nuevo.";
-            // DESCOMENTA ESTO TEMPORALMENTE para ver el detalle: $error_message .= " Error: " . $e->getMessage(); 
         }
     }
 }
@@ -166,7 +163,7 @@ include __DIR__ . '/templates/header.php';
 </script>
 
 <script>
-    // 1. INICIALIZACIÓN DE ICONOS DE LUCIDE (Se debe ejecutar tan pronto como sea posible)
+    // 1. INICIALIZACIÓN DE ICONOS DE LUCIDE AL CARGAR LA PÁGINA
     if (window.lucide && typeof window.lucide.createIcons === 'function') {
         window.lucide.createIcons();
     }

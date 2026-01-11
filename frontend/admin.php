@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-// Opcional: Verificar rol admin aquí si no lo hace tu connection.php
+// Opcional: Verificar rol admin aquí si no lo hace connection.php
 $stmt = $pdo->prepare("SELECT rol FROM usuarios WHERE id_usuario = ?");
 $stmt->execute([$_SESSION['user_id']]);
 if ($stmt->fetchColumn() !== 'admin') {
@@ -27,7 +27,6 @@ unset($_SESSION['admin_flash']);
 
 /* =========================
    2. PROCESAMIENTO DE ACCIONES (POST)
-   Esta es la parte que te faltaba
 ========================= */
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     try {
@@ -520,7 +519,7 @@ function openProductForm() {
 // Función para abrir el formulario con datos (Edición)
 // Se llama desde el botón "Editar" que pusimos en el AJAX
 function openEditProduct(id) {
-    // Aquí podrías hacer un fetch para obtener los datos del producto
+    // Aquí hacemos un fetch para obtener los datos del producto
     // o redirigir a una página de edición dedicada:
     window.location.href = 'edit-product.php?id=' + id;
 }
@@ -606,7 +605,7 @@ function openEditProduct(data) {
     const preview = document.getElementById('imagePreview');
     const img = document.getElementById('imgTarget');
     if (data.imagen && data.imagen !== '') {
-        img.src = '../assets/img/imgsproducts/' + data.imagen; // <--- AÑADIDO EL PATH
+        img.src = '../assets/img/imgsproducts/' + data.imagen; 
         preview.style.display = "block";
     } else {
         img.src = '';
@@ -621,7 +620,7 @@ function closeProductModal() {
     document.getElementById('productModal').style.display = "none";
 }
 
-// Cerrar al hacer clic fuera (extender el window.onclick que ya tienes)
+// Cerrar al hacer clic fuera 
 window.onclick = function(event) {
     const userModal = document.getElementById('userModal');
     const productModal = document.getElementById('productModal');

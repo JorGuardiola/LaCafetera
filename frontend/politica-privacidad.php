@@ -7,7 +7,7 @@ include __DIR__ . '/templates/header.php';
     <h2>Política de Privacidad de LaCafetera</h2>
     <p style="text-align: center;">Fecha de última actualización: 7 de Enero de 2026</p>
 
-    <p>En LaCafetera, valoramos su privacidad y nos comprometemos a proteger su información personal. Esta política describe cómo recopilamos, utilizamos y protegemos sus datos al utilizar nuestro sitio web <a href="https://lacafetera.store" target="_blank">https://lacafetera.store</a> y al realizar compras de café.</p>
+    <p>En LaCafetera, valoramos su privacidad y nos comprometemos a proteger su información personal. Esta política describe cómo recopilamos, utilizamos y protegemos sus datos al utilizar nuestro sitio web <a href="https://lacafetera.store" target="_blank">www.lacafetera.store</a> y al realizar compras de café.</p>
 
     <h3>1. Responsable del Tratamiento de sus Datos</h3>
     <div class="privacy-card-box">

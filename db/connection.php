@@ -3,7 +3,7 @@
 
 // 1. Configuración de Base de Datos LOCAL (XAMPP)
 $host = 'localhost';
-$db   = 'cafeteria_db';  // <--- que este nombre coincida con tu phpMyAdmin local
+$db   = 'cafeteria_db';  // <--- que este nombre coincida con phpMyAdmin local
 $user = 'root';
 $pass = '';              // En XAMPP por defecto está vacía
 $charset = 'utf8mb4';
@@ -11,6 +11,7 @@ $charset = 'utf8mb4';
 // 2. Definición automática de BASE_URL (Para que carguen CSS e imágenes)
 $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
 $server = $_SERVER['HTTP_HOST'];
+
 // Detecta la carpeta del proyecto eliminando subcarpetas conocidas
 $path = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
 $base_path = str_replace(['/frontend', '/backend', '/db'], '', $path);

@@ -11,10 +11,10 @@ include __DIR__ . '/templates/header.php';
 ?>
 
 <style>
-    /* Iconos personalizados: Color Tostado/Caldera */
+    /* Iconos personalizados por color */
     .icon-process {
         font-size: 4rem;
-        color: #D35400; /* Tono naranja oscuro / fuego */
+        color: #D35400; 
         margin-bottom: 2rem;
         display: block;
     }

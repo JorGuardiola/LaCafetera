@@ -1,5 +1,5 @@
 <?php
-// frontend/success.php
+// frontend/success.php (Resumen del pedido tras la compra)
 require_once __DIR__ . '/../db/connection.php';
 
 // 1. VALIDACIÓN PRIMERO (Antes de mostrar nada de HTML)
@@ -52,7 +52,7 @@ $stmt_items->execute([$id_orden]);
 $items_comprados = $stmt_items->fetchAll(PDO::FETCH_ASSOC);
 
 // 3. Cálculos visuales
-// Asumimos envío gratis si > 50 (misma lógica que checkout)
+//  envío gratis si > 50 (misma lógica que checkout)
 $gastos_envio = ($pedido['total'] >= 50) ? 0.00 : 8.00;
 $subtotal = $pedido['total'] - $gastos_envio;
 $nombre_completo = htmlspecialchars($pedido['nombre'] . ' ' . $pedido['apellido']);

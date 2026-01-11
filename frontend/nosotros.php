@@ -1,7 +1,6 @@
 <?php
 
-
-// ==============================================================================
+// nosotros.php
 // Contenido del hero
 $bgClass = "bg-nosotros";
 $heroTitle = "La Cafetera 1994: Más que café, una tradición";
@@ -26,29 +25,29 @@ include __DIR__ . '/templates/header.php';
     <section>
         
         <div class="hero-ritual-right contenedor"> 
-    
-    <h3 class="ritual-titulo-centrado">Nuestro Ritual de Calidad</h3>
-    
-    <div class="ritual-puntos-hero"> 
         
-        <div class="ritual-item-hero">
-            <h4>1. Origen Ético y Selecto</h4> 
-            <p>Seleccionamos personalmente nuestros granos de cultivos de altura en regiones legendarias. Nos aseguramos de trabajar bajo un modelo de comercio directo y justo, garantizando una calidad excepcional para ti y un trato digno para los agricultores.</p>
+        <h3 class="ritual-titulo-centrado">Nuestro Ritual de Calidad</h3>
+        
+        <div class="ritual-puntos-hero"> 
+            
+            <div class="ritual-item-hero">
+                <h4>1. Origen Ético y Selecto</h4> 
+                <p>Seleccionamos personalmente nuestros granos de cultivos de altura en regiones legendarias. Nos aseguramos de trabajar bajo un modelo de comercio directo y justo, garantizando una calidad excepcional para ti y un trato digno para los agricultores.</p>
+            </div>
+            
+            <div class="ritual-item-hero">
+                <h4>2. El Arte del Tostado Lento</h4>
+                <p>Rechazamos los procesos industriales. Tostamos cada variedad de forma artesanal, en pequeños lotes, utilizando el método tradicional de tostado lento. Este ritual nos permite liberar el perfil de sabor completo y complejo de cada grano.</p>
+            </div>
+            
+            <div class="ritual-item-hero">
+                <h4>3. Frescura Inigualable</h4>
+                <p>Para garantizar ese aroma irresistible, solo tostamos bajo pedido. Tu café se tuesta y se envía en un plazo de 24 a 72 horas desde el tueste. ¡Abre la bolsa y comprueba la frescura!</p>
+            </div>
+            
         </div>
         
-        <div class="ritual-item-hero">
-            <h4>2. El Arte del Tostado Lento</h4>
-            <p>Rechazamos los procesos industriales. Tostamos cada variedad de forma artesanal, en pequeños lotes, utilizando el método tradicional de tostado lento. Este ritual nos permite liberar el perfil de sabor completo y complejo de cada grano.</p>
         </div>
-        
-        <div class="ritual-item-hero">
-            <h4>3. Frescura Inigualable</h4>
-            <p>Para garantizar ese aroma irresistible, solo tostamos bajo pedido. Tu café se tuesta y se envía en un plazo de 24 a 72 horas desde el tueste. ¡Abre la bolsa y comprueba la frescura!</p>
-        </div>
-        
-    </div>
-    
-</div>
         
     </section>
 

@@ -30,7 +30,7 @@ if ($msg == 'horario' || strpos($msg, 'abierto') !== false || strpos($msg, 'hora
 } 
 
 // --- SECCIÓN 2: UBICACIÓN ---
-elseif ($msg == 'donde' || strpos($msg, 'ubicacion') !== false || strpos($msg, 'donde estan') !== false) {
+elseif ($msg == 'donde' || strpos($msg, 'ubicacion') !== false || strpos($msg, 'donde estan') !== false || strpos($msg, 'ubicación') !== false) {
     $respuesta = "¿Dónde estamos?<br><br>";
     $respuesta .= "Nos encontramos en la Avda. de la Molienda 45, Planta 3, 28005 Madrid (España)<br>";
     $respuesta .= "¡Ven a disfrutar del mejor café recién tostado!";

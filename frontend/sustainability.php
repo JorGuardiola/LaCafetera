@@ -13,7 +13,7 @@ include __DIR__ . '/templates/header.php';
 <style>
     .icon-sost {
         font-size: 4rem;
-        color: #2E7D32; /* Verde bosque */
+        color: #2E7D32; /* Verde */
         margin-bottom: 2rem;
         display: block;
     }
@@ -73,7 +73,7 @@ include __DIR__ . '/templates/header.php';
             <p style="font-size: 1.6rem; margin-top: -1rem; margin-bottom: 3rem; max-width: 600px;">
                 Cada vez que eliges nuestros granos, estás invirtiendo en agricultura regenerativa y comunidades prósperas.
             </p>
-            <a href="products.php" class="boton-negro">Ver Cafés Sostenibles</a>
+            <a href="products.php" class="boton-negro"><strong>Ver Cafés Sostenibles</strong></a>
         </div>
     </section>
         
@@ -84,7 +84,7 @@ include __DIR__ . '/templates/header.php';
                 La sostenibilidad es un ciclo. Nosotros ponemos el café ético, tú cierras el círculo.<br>
             <strong>Tip:</strong> Usa los posos de café como abono natural para tus plantas, ¡les encanta el nitrógeno!
             </p>
-            <a href="products.php" class="boton-negro">Ver Cafés Sostenibles</a>
+            <a href="products.php" class="boton-negro"><strong>Ver Cafés Sostenibles</strong></a>
         </div>
     </section>
 

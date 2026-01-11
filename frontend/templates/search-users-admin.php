@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         try {
-            // RUTA SEGÚN TU IMAGEN: templates/ajax/admin-users-search.php
+            // RUTA SEGÚN IMAGEN: templates/ajax/admin-users-search.php
             const response = await fetch('templates/ajax/admin-users-search.php?' + params.toString());
             const text = await response.text();
             container.innerHTML = text;
