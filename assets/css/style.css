@@ -2669,6 +2669,7 @@ form {
 /* 1. Imagen de fondo */
 .header-hero-simple.bg-sostenibilidad {
     background-image: url('../img/hero-sostenibilidad.png'); 
+    height: 65rem; /* Misma altura que nosotros.php */
 }
 
 /* 2. Capa semitransparente (Overlay) para que se lea el texto */
