@@ -1,10 +1,10 @@
 <div id="searchModalOverlay" class="search-modal-overlay">
     <div class="search-modal-content">
-        <div class="search-header">
-            <input type="text" id="searchInput" placeholder="Busca tu café favorito (Ej: Brasil...)" autocomplete="off">
-            <button id="closeSearchBtn" class="close-search" aria-label="Cerrar búsqueda">&times;</button>
-        </div>
-        
+        <form class="search-header" action="products.php" method="GET">
+            <input type="text" name="q" id="searchInput" placeholder="Busca tu café favorito (Ej: Brasil...)" autocomplete="off">
+            <button type="button" id="closeSearchBtn" class="close-search" aria-label="Cerrar búsqueda">&times;</button>
+        </form>
+
         <div id="searchSuggestions" class="search-suggestions">
             </div>
     </div>
@@ -17,12 +17,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const suggestionsBox = document.getElementById('searchSuggestions');
     const closeBtn = document.getElementById('closeSearchBtn');
     
-    // Este ID debe coincidir con el botón de la lupa en tu header.php
+    // Este ID debe coincidir con el botón de la lupa de header.php
     const openBtn = document.getElementById('openSearchBtn'); 
 
     // --- FUNCIÓN PRINCIPAL DE BÚSQUEDA ---
     const searchProducts = (query) => {
-        // Llamamos al PHP (asegúrate de que la ruta sea correcta desde donde estás)
+        // Llamamos al PHP que devuelve sugerencias
         fetch(`ajax_search_bar.php?q=${encodeURIComponent(query)}`)
             .then(res => res.json())
             .then(data => {
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // Si es la sugerencia inicial (query vacío), ponemos un titulillo
                 if (query === '' && data.length > 0) {
-                    html += '<div style="padding:10px; color:#999; font-size:0.9rem;">Sugerencias para ti:</div>';
+                    html += '<div style="padding:10px; color:#999; font-size:1.2rem;">Sugerencias para ti:</div>';
                 }
 
                 if (data.length > 0) {
@@ -56,46 +56,59 @@ document.addEventListener('DOMContentLoaded', () => {
     if(openBtn) {
         openBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            if(modal) {
-                modal.classList.add('active');
-                
-                if(input) {
-                    input.value = ''; // Limpiamos el input
-                    input.focus();    // Ponemos el foco
-                    searchProducts(''); // <--- ¡ESTO CARGA LAS 5 SUGERENCIAS AL INSTANTE!
-                }
-            }
+            modal.classList.add('active');
+            input.value = '';
+            // Retraso para asegurar el foco
+            setTimeout(() => { input.focus(); }, 100);
+            searchProducts(''); 
         });
     }
 
     // 2. CERRAR EL MODAL
     const closeModal = () => {
-        if(modal) modal.classList.remove('active');
-        if(suggestionsBox) suggestionsBox.innerHTML = '';
+        modal.classList.remove('active');
+        suggestionsBox.innerHTML = '';
     };
 
     if(closeBtn) closeBtn.addEventListener('click', closeModal);
-    if(modal) {
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) closeModal();
-        });
-    }
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
 
     // 3. BUSCAR MIENTRAS ESCRIBES
-    let timeout = null;
     if(input) {
-        input.addEventListener('keyup', (e) => {
-            // Si pulsa Enter, ir a la página de resultados completa
+        
+        // A) DETECTAR ENTER (Usamos keydown)
+        input.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
-                const val = input.value.trim();
-                if (val.length > 0) window.location.href = 'products.php?q=' + encodeURIComponent(val);
-                return;
-            }
+                e.preventDefault(); // Evitamos que el formulario se envíe solo
+                
+                // Miramos si hay alguna sugerencia visible
+                const firstResult = suggestionsBox.querySelector('.search-item');
 
-            // Búsqueda AJAX con retardo (debounce)
+                if (firstResult) {
+                    // Si hay sugerencias -> Clic en la primera (simulado)
+                    firstResult.click(); 
+                } else {
+                    // Si NO hay sugerencias -> Vamos a la página de resultados
+                    const val = input.value.trim();
+                    if (val.length > 0) {
+                        window.location.href = 'products.php?q=' + encodeURIComponent(val);
+                    }
+                }
+            }
+        });
+
+        // B) DETECTAR ESCRITURA (Usamos keyup)
+        let timeout = null;
+        input.addEventListener('keyup', (e) => {
+            // Ignoramos el Enter aquí porque ya lo maneja el evento de arriba
+            if (e.key === 'Enter') return; 
+
             clearTimeout(timeout);
             const val = input.value.trim();
             
+            // Esperamos 300ms antes de llamar al servidor
             timeout = setTimeout(() => {
                 searchProducts(val);
             }, 300); 

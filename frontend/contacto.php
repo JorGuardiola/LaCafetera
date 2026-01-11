@@ -1,8 +1,8 @@
 <?php
 // ==============================================================================
 // 0. INICIO DE SESIÓN PARA EL PATRÓN PRG (Post-Redirect-Get)
-// Esto es crucial para que el mensaje de éxito no se quede fijo.
-// ¡Debe ser la primera línea!
+// Ppara que el mensaje de éxito no se quede fijo.
+// 
 // ==============================================================================
 session_start();
 
@@ -15,16 +15,12 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
-// ¡RUTAS CORREGIDAS! Quitamos el '../' porque 'vendor' está dentro de 'frontend'.
+// RUTAS , 'vendor' está dentro de 'frontend'.
 require __DIR__ . '/vendor/phpmailer/src/Exception.php';
 require __DIR__ . '/vendor/phpmailer/src/PHPMailer.php';
 require __DIR__ . '/vendor/phpmailer/src/SMTP.php';
 
-
 $bgClass = 'bg-contacto'; 
-// Asumiendo que templates está al mismo nivel que contacto.php (dentro de frontend/)
-
-
 
 // Define una variable para almacenar mensajes de estado
 $mensaje_estado = '';
@@ -34,8 +30,6 @@ if (isset($_SESSION['mensaje_contacto'])) {
     $mensaje_estado = $_SESSION['mensaje_contacto']; // Asignar el mensaje guardado
     unset($_SESSION['mensaje_contacto']);           // ¡Limpiar la sesión inmediatamente!
 }
-// *******************************************************
-
 
 // ==============================================================================
 // 2. LÓGICA DE PROCESAMIENTO Y ENVÍO DEL FORMULARIO
@@ -81,8 +75,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mail->Host       = 'smtp.gmail.com';  // El Host SMTP de Gmail
             $mail->SMTPAuth   = true;
             
-            // !!! REEMPLAZA ESTOS VALORES CON TUS CREDENCIALES !!!
-            $mail->Username   = 'lacaffetera1994@gmail.com'; // Tu dirección de Gmail
+            //  CREDENCIALES 
+            $mail->Username   = 'lacaffetera1994@gmail.com'; // Dirección de Gmail
             $mail->Password   = 'vryz vqby njse wnez'; // Contraseña de Aplicación
             
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // Usar SMTPS 
@@ -125,8 +119,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['mensaje_contacto'] = "<p class='alerta exito'>¡Gracias! Hemos recibido tu mensaje y te responderemos pronto.</p>";
             header('Location: contacto.php');
             exit;
-            // ********************************************************
-
 
         } catch (Exception $e) {
             // Error de envío
@@ -144,7 +136,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// ==============================================================================
 // Contenido del hero
 $bgClass = "bg-contacto";
 $heroTitle = "Hablemos de Café";
@@ -152,10 +143,6 @@ $heroSubtitle = "Si tienes preguntas sobre un pedido, necesitas consejos de prep
 $heroButtonText = ""; // vacío → no aparece botón
 $heroButtonLink = "";
 ?>
-
-
-
-
 
 
 <?php 
