@@ -28,4 +28,3 @@ try {
 } catch (PDOException $e) {
     die('Error Conexión Local: ' . $e->getMessage());
 }
-?>

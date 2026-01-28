@@ -1,5 +1,6 @@
 <?php
 // frontend/cart.php
+ob_start();
 session_start();
 require_once __DIR__ . '/../db/connection.php';
 
@@ -59,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Redirigir para evitar reenvío de formulario
+    ob_end_clean();
     header('Location:' . BASE_URL . '/frontend/cart.php');
     exit;
 }
@@ -143,9 +145,7 @@ $total_pagar = $total_carrito + $gastos_envio;
     </div>
 
     <div class="mobile-hide cart-total-line">
-        <span id="subtotal-<?= $item['sku'] ?>">
-            <?= number_format($item['precio'], 2) ?>€
-        </span>€
+        <span id="subtotal-<?= $item['sku'] ?>"><?= number_format($item['subtotal'], 2) ?>€</span>
     </div>
 
     <div class="quantity-selector-widget">
@@ -242,7 +242,7 @@ function updateCartAjax(sku, qty) {
             
             // 2. Actualiza el subtotal de esa línea (producto)
             const subRow = document.getElementById('subtotal-' + sku);
-            if(subRow) subRow.innerText = data.nuevoSubtotalItem.replace('€', ''); 
+            if(subRow) subRow.innerText = data.nuevoSubtotalItem; 
 
             // 3. Actualiza el Resumen (Subtotal)
             const sumSub = document.getElementById('summary-subtotal');
@@ -277,5 +277,7 @@ function updateCartAjax(sku, qty) {
     .catch(error => console.error('Error:', error));
 }
 </script>
-<?php include __DIR__ . "/templates/footer.php"; ?>
+<?php include __DIR__ . "/templates/footer.php"; 
+ob_end_flush();
+?>
 
